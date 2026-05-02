@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games People Play — A Practical Reference</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --bg-card: #ffffff;
+    --bg-accent: #f3efe9;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-mute: #7a7a7a;
+    --line: #e6e0d6;
+    --gold: #b8893f;
+    --gold-soft: #d9b97a;
+    --red: #a8492e;
+    --green: #4a7a4a;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Charter', 'Iowan Old Style', 'Source Serif Pro', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 60px 28px 80px; }
+  .hero {
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .lede {
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 700px;
+  }
+  h2 {
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 64px 0 20px;
+    padding-top: 16px;
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+  h4 {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 14px; color: var(--ink-soft); }
+  p.lead { color: var(--ink); font-size: 18px; }
+  strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; }
+
+  /* Theory blocks */
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .theory-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .theory-card .label {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .theory-card .title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .theory-card .desc { font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  @media (max-width: 720px) {
+    .theory-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Formula */
+  .formula {
+    background: var(--bg-accent);
+    border-left: 3px solid var(--gold);
+    padding: 28px 32px;
+    margin: 28px 0;
+    border-radius: 4px;
+  }
+  .formula-line {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 17px;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .formula-explain { font-size: 15px; color: var(--ink-soft); margin-top: 12px; }
+
+  /* TOC */
+  .toc {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 32px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-title {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .toc-cat {
+    margin-bottom: 14px;
+    font-size: 15px;
+  }
+  .toc-cat:last-child { margin-bottom: 0; }
+  .toc-cat-name {
+    font-weight: 700;
+    color: var(--ink);
+    margin-right: 10px;
+  }
+  .toc a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dotted var(--line); }
+  .toc a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* Game cards */
+  .category-header {
+    margin: 64px 0 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .category-header h2 { margin: 0; padding: 0; font-size: 28px; }
+  .category-blurb {
+    font-size: 15px;
+    color: var(--ink-mute);
+    margin: 8px 0 28px;
+    font-style: italic;
+  }
+
+  .game {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .game:target {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184, 137, 63, 0.15), var(--shadow);
+  }
+  .game-num {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .game-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 4px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .game-tagline {
+    font-size: 15px;
+    color: var(--ink-mute);
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+  .game-row {
+    margin-bottom: 14px;
+    padding-left: 0;
+  }
+  .game-row:last-child { margin-bottom: 0; }
+  .game-row-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .game-row-text {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .game-row.script .game-row-label { color: var(--green); }
+  .game-row.script .game-row-text {
+    background: #f0f5ee;
+    border-left: 3px solid var(--green);
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .game-row.example .game-row-text {
+    background: #f7f3eb;
+    padding: 10px 14px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  /* Drama Triangle visual */
+  .triangle-section {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px;
+    margin: 24px 0;
+    box-shadow: var(--shadow);
+  }
+  .triangle-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .role {
+    padding: 18px;
+    border-radius: 6px;
+    background: var(--bg-accent);
+  }
+  .role-name {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .role-says { font-style: italic; color: var(--gold); margin-bottom: 8px; font-size: 15px; }
+  .role-shift {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .role-shift strong { color: var(--green); }
+  .switch-note {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* misc */
+  .note {
+    background: #fff8e8;
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-radius: 0 4px 4px 0;
+  }
+  .note strong { color: var(--ink); }
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  a.back-to-top {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: -apple-system, sans-serif;
+  }
+  a.back-to-top:hover { text-decoration: underline; }
+
+  ul.plain { padding-left: 20px; color: var(--ink-soft); }
+  ul.plain li { margin-bottom: 6px; }
+
+  /* ====================== STICKY NAVIGATOR ====================== */
+  #sticky-nav {
+    position: fixed;
+    top: 60px;
+    right: 16px;
+    width: 210px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    z-index: 1000;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  #sticky-nav::-webkit-scrollbar { width: 4px; }
+  #sticky-nav::-webkit-scrollbar-track { background: transparent; }
+  #sticky-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+  .snav-header {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    padding: 4px 14px 8px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .snav-cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 14px;
+    text-align: left;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .snav-cat-btn:hover { color: var(--gold); }
+  .snav-cat-btn.active { color: var(--gold); }
+  .snav-arrow {
+    font-size: 9px;
+    flex-shrink: 0;
+    color: var(--ink-mute);
+    transition: transform 0.15s;
+  }
+  .snav-games {
+    display: none;
+    padding: 2px 0 4px 26px;
+  }
+  .snav-games.open { display: block; }
+  .snav-game-link {
+    display: block;
+    padding: 3px 14px 3px 0;
+    color: var(--ink-mute);
+    text-decoration: none;
+    font-size: 11px;
+    line-height: 1.4;
+    transition: color 0.15s;
+    border-radius: 3px;
+  }
+  .snav-game-link:hover { color: var(--gold); }
+  .snav-game-link.active { color: var(--gold); font-weight: 600; }
+
+  /* Mobile: collapsible top bar */
+  #sticky-nav-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--line);
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  #mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+  }
+  #mobile-nav-toggle span { color: var(--gold); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  #mobile-nav-toggle .toggle-arrow { font-size: 11px; color: var(--ink-mute); transition: transform 0.2s; }
+  #mobile-nav-panel {
+    display: none;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding: 6px 0 10px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-card);
+  }
+  #mobile-nav-panel.open { display: block; }
+  .mnav-cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 16px;
+    text-align: left;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .mnav-cat-btn .snav-arrow { font-size: 9px; flex-shrink: 0; color: var(--ink-mute); }
+  .mnav-games {
+    display: none;
+    padding: 2px 16px 4px 32px;
+  }
+  .mnav-games.open { display: block; }
+  .mnav-game-link {
+    display: block;
+    padding: 3px 0;
+    color: var(--ink-mute);
+    text-decoration: none;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .mnav-game-link:hover { color: var(--gold); }
+
+  @media (min-width: 721px) {
+    #sticky-nav { display: block; }
+    #sticky-nav-mobile { display: none !important; }
+    /* Push container slightly to make room for nav */
+    .container { padding-right: 240px; }
+  }
+  @media (max-width: 720px) {
+    #sticky-nav { display: none !important; }
+    #sticky-nav-mobile { display: block; }
+    body { padding-top: 44px; }
+    .container { padding-top: 24px; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================== STICKY NAVIGATOR (DESKTOP) ====================== -->
+<nav id="sticky-nav" aria-label="Page navigator">
+  <div class="snav-header">Navigate</div>
+
+  <a class="snav-game-link" href="#top" style="display:block; padding:5px 14px; font-weight:700; color:var(--ink); font-size:12px;">Games People Play</a>
+
+  <button class="snav-cat-btn" data-cat="theory" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> How Games Work
+  </button>
+  <div class="snav-games" id="snav-theory">
+    <a class="snav-game-link" href="#mechanics">The mechanics</a>
+    <a class="snav-game-link" href="#ego-states">The three ego states</a>
+    <a class="snav-game-link" href="#stroke-economy">The stroke economy</a>
+    <a class="snav-game-link" href="#game-formula">The game formula</a>
+    <a class="snav-game-link" href="#three-degrees">Three degrees of severity</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="life" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Life Games
+  </button>
+  <div class="snav-games" id="snav-life">
+    <a class="snav-game-link" href="#g1">Alcoholic</a>
+    <a class="snav-game-link" href="#g2">Debtor</a>
+    <a class="snav-game-link" href="#g3">Kick Me</a>
+    <a class="snav-game-link" href="#g4">Now I've Got You</a>
+    <a class="snav-game-link" href="#g5">See What You Made Me Do</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="marital" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Marital Games
+  </button>
+  <div class="snav-games" id="snav-marital">
+    <a class="snav-game-link" href="#g6">Corner</a>
+    <a class="snav-game-link" href="#g7">Courtroom</a>
+    <a class="snav-game-link" href="#g8">Frigid Woman / Frigid Man</a>
+    <a class="snav-game-link" href="#g9">Harried</a>
+    <a class="snav-game-link" href="#g10">If It Weren't For You</a>
+    <a class="snav-game-link" href="#g11">Look How Hard I've Tried</a>
+    <a class="snav-game-link" href="#g12">Sweetheart</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="party" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Party Games
+  </button>
+  <div class="snav-games" id="snav-party">
+    <a class="snav-game-link" href="#g13">Ain't It Awful</a>
+    <a class="snav-game-link" href="#g14">Blemish</a>
+    <a class="snav-game-link" href="#g15">Schlemiel</a>
+    <a class="snav-game-link" href="#g16">Why Don't You — Yes But</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="intimacy" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Attraction
+  </button>
+  <div class="snav-games" id="snav-intimacy">
+    <a class="snav-game-link" href="#g17">Let's You and Him Fight</a>
+    <a class="snav-game-link" href="#g18">Perversion</a>
+    <a class="snav-game-link" href="#g19">Rapo</a>
+    <a class="snav-game-link" href="#g20">The Stocking Game</a>
+    <a class="snav-game-link" href="#g21">Uproar</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="underworld" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Underworld Games
+  </button>
+  <div class="snav-games" id="snav-underworld">
+    <a class="snav-game-link" href="#g22">Cops and Robbers</a>
+    <a class="snav-game-link" href="#g23">How Do You Get Out of Here</a>
+    <a class="snav-game-link" href="#g24">Let's Pull a Fast One on Joey</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="consulting" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Consulting Room
+  </button>
+  <div class="snav-games" id="snav-consulting">
+    <a class="snav-game-link" href="#g25">Greenhouse</a>
+    <a class="snav-game-link" href="#g26">I'm Only Trying to Help You</a>
+    <a class="snav-game-link" href="#g27">Indigence</a>
+    <a class="snav-game-link" href="#g28">Peasant</a>
+    <a class="snav-game-link" href="#g29">Psychiatry</a>
+    <a class="snav-game-link" href="#g30">Stupid</a>
+    <a class="snav-game-link" href="#g31">Wooden Leg</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="good" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Good Games
+  </button>
+  <div class="snav-games" id="snav-good">
+    <a class="snav-game-link" href="#g32">Busman's Holiday</a>
+    <a class="snav-game-link" href="#g33">Cavalier</a>
+    <a class="snav-game-link" href="#g34">Happy to Help</a>
+    <a class="snav-game-link" href="#g35">Homely Sage</a>
+    <a class="snav-game-link" href="#g36">They'll Be Glad They Knew Me</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="drama" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> Drama Triangle
+  </button>
+  <div class="snav-games" id="snav-drama">
+    <a class="snav-game-link" href="#drama-triangle">The Drama Triangle</a>
+    <a class="snav-game-link" href="#winners-triangle">The Winner's Triangle</a>
+  </div>
+
+  <button class="snav-cat-btn" data-cat="escape" onclick="toggleSnavCat(this)">
+    <span class="snav-arrow">▸</span> The Way Out
+  </button>
+  <div class="snav-games" id="snav-escape">
+    <a class="snav-game-link" href="#awareness">Awareness, Spontaneity, Intimacy</a>
+  </div>
+</nav>
+
+<!-- ====================== STICKY NAVIGATOR (MOBILE) ====================== -->
+<nav id="sticky-nav-mobile" aria-label="Page navigator mobile">
+  <button id="mobile-nav-toggle" onclick="toggleMobileNav()">
+    <span>Navigate — Games People Play</span>
+    <span class="toggle-arrow" id="mobile-toggle-arrow">▾</span>
+  </button>
+  <div id="mobile-nav-panel">
+
+    <a class="mnav-game-link" href="#top" onclick="closeMobileNav()" style="display:block; padding:6px 16px; font-weight:700; color:var(--ink);">Games People Play ↑</a>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-theory')">
+      <span class="snav-arrow">▸</span> How Games Work
+    </button>
+    <div class="mnav-games" id="mnav-theory">
+      <a class="mnav-game-link" href="#mechanics" onclick="closeMobileNav()">The mechanics</a>
+      <a class="mnav-game-link" href="#ego-states" onclick="closeMobileNav()">The three ego states</a>
+      <a class="mnav-game-link" href="#stroke-economy" onclick="closeMobileNav()">The stroke economy</a>
+      <a class="mnav-game-link" href="#game-formula" onclick="closeMobileNav()">The game formula</a>
+      <a class="mnav-game-link" href="#three-degrees" onclick="closeMobileNav()">Three degrees of severity</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-life')">
+      <span class="snav-arrow">▸</span> Life Games
+    </button>
+    <div class="mnav-games" id="mnav-life">
+      <a class="mnav-game-link" href="#g1" onclick="closeMobileNav()">Alcoholic</a>
+      <a class="mnav-game-link" href="#g2" onclick="closeMobileNav()">Debtor</a>
+      <a class="mnav-game-link" href="#g3" onclick="closeMobileNav()">Kick Me</a>
+      <a class="mnav-game-link" href="#g4" onclick="closeMobileNav()">Now I've Got You</a>
+      <a class="mnav-game-link" href="#g5" onclick="closeMobileNav()">See What You Made Me Do</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-marital')">
+      <span class="snav-arrow">▸</span> Marital Games
+    </button>
+    <div class="mnav-games" id="mnav-marital">
+      <a class="mnav-game-link" href="#g6" onclick="closeMobileNav()">Corner</a>
+      <a class="mnav-game-link" href="#g7" onclick="closeMobileNav()">Courtroom</a>
+      <a class="mnav-game-link" href="#g8" onclick="closeMobileNav()">Frigid Woman / Frigid Man</a>
+      <a class="mnav-game-link" href="#g9" onclick="closeMobileNav()">Harried</a>
+      <a class="mnav-game-link" href="#g10" onclick="closeMobileNav()">If It Weren't For You</a>
+      <a class="mnav-game-link" href="#g11" onclick="closeMobileNav()">Look How Hard I've Tried</a>
+      <a class="mnav-game-link" href="#g12" onclick="closeMobileNav()">Sweetheart</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-party')">
+      <span class="snav-arrow">▸</span> Party Games
+    </button>
+    <div class="mnav-games" id="mnav-party">
+      <a class="mnav-game-link" href="#g13" onclick="closeMobileNav()">Ain't It Awful</a>
+      <a class="mnav-game-link" href="#g14" onclick="closeMobileNav()">Blemish</a>
+      <a class="mnav-game-link" href="#g15" onclick="closeMobileNav()">Schlemiel</a>
+      <a class="mnav-game-link" href="#g16" onclick="closeMobileNav()">Why Don't You — Yes But</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-intimacy')">
+      <span class="snav-arrow">▸</span> Attraction Games
+    </button>
+    <div class="mnav-games" id="mnav-intimacy">
+      <a class="mnav-game-link" href="#g17" onclick="closeMobileNav()">Let's You and Him Fight</a>
+      <a class="mnav-game-link" href="#g18" onclick="closeMobileNav()">Perversion</a>
+      <a class="mnav-game-link" href="#g19" onclick="closeMobileNav()">Rapo</a>
+      <a class="mnav-game-link" href="#g20" onclick="closeMobileNav()">The Stocking Game</a>
+      <a class="mnav-game-link" href="#g21" onclick="closeMobileNav()">Uproar</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-underworld')">
+      <span class="snav-arrow">▸</span> Underworld Games
+    </button>
+    <div class="mnav-games" id="mnav-underworld">
+      <a class="mnav-game-link" href="#g22" onclick="closeMobileNav()">Cops and Robbers</a>
+      <a class="mnav-game-link" href="#g23" onclick="closeMobileNav()">How Do You Get Out of Here</a>
+      <a class="mnav-game-link" href="#g24" onclick="closeMobileNav()">Let's Pull a Fast One on Joey</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-consulting')">
+      <span class="snav-arrow">▸</span> Consulting Room Games
+    </button>
+    <div class="mnav-games" id="mnav-consulting">
+      <a class="mnav-game-link" href="#g25" onclick="closeMobileNav()">Greenhouse</a>
+      <a class="mnav-game-link" href="#g26" onclick="closeMobileNav()">I'm Only Trying to Help You</a>
+      <a class="mnav-game-link" href="#g27" onclick="closeMobileNav()">Indigence</a>
+      <a class="mnav-game-link" href="#g28" onclick="closeMobileNav()">Peasant</a>
+      <a class="mnav-game-link" href="#g29" onclick="closeMobileNav()">Psychiatry</a>
+      <a class="mnav-game-link" href="#g30" onclick="closeMobileNav()">Stupid</a>
+      <a class="mnav-game-link" href="#g31" onclick="closeMobileNav()">Wooden Leg</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-good')">
+      <span class="snav-arrow">▸</span> Good Games
+    </button>
+    <div class="mnav-games" id="mnav-good">
+      <a class="mnav-game-link" href="#g32" onclick="closeMobileNav()">Busman's Holiday</a>
+      <a class="mnav-game-link" href="#g33" onclick="closeMobileNav()">Cavalier</a>
+      <a class="mnav-game-link" href="#g34" onclick="closeMobileNav()">Happy to Help</a>
+      <a class="mnav-game-link" href="#g35" onclick="closeMobileNav()">Homely Sage</a>
+      <a class="mnav-game-link" href="#g36" onclick="closeMobileNav()">They'll Be Glad They Knew Me</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-drama')">
+      <span class="snav-arrow">▸</span> Drama Triangle
+    </button>
+    <div class="mnav-games" id="mnav-drama">
+      <a class="mnav-game-link" href="#drama-triangle" onclick="closeMobileNav()">The Drama Triangle</a>
+      <a class="mnav-game-link" href="#winners-triangle" onclick="closeMobileNav()">The Winner's Triangle</a>
+    </div>
+
+    <button class="mnav-cat-btn" onclick="toggleMnavCat(this, 'mnav-escape')">
+      <span class="snav-arrow">▸</span> The Way Out
+    </button>
+    <div class="mnav-games" id="mnav-escape">
+      <a class="mnav-game-link" href="#awareness" onclick="closeMobileNav()">Awareness, Spontaneity, Intimacy</a>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container" id="top">
+
+<!-- ====================== HERO ====================== -->
+<header class="hero">
+  <div class="eyebrow">A practical reference · Eric Berne, 1964</div>
+  <h1>Games People Play</h1>
+  <p class="lede">A field guide to the 36 hidden patterns that quietly run most human conflict — what each one sounds like, why people play it, and exactly what to say to step out.</p>
+</header>
+
+<!-- ====================== CORE THEORY ====================== -->
+<section>
+<h2 id="mechanics">The mechanics, in one page</h2>
+<p class="lead">Berne, a Canadian-American psychiatrist, argued that almost every recurring conflict you have follows a hidden script. The script has predictable parts. Once you can name the parts, you stop being a player and start being a witness — which is the only known way out.</p>
+
+<h3 id="ego-states">The three ego states</h3>
+<p>At any moment you are speaking from one of three internal voices. Most fights happen because two people think they are talking adult-to-adult when they are not.</p>
+
+<div class="theory-grid">
+  <div class="theory-card">
+    <div class="label">Voice 1</div>
+    <div class="title">Parent</div>
+    <div class="desc">Inherited rules and shoulds. The voice of authority figures from your past. Can be nurturing or critical, but it is always borrowed.</div>
+  </div>
+  <div class="theory-card">
+    <div class="label">Voice 2</div>
+    <div class="title">Adult</div>
+    <div class="desc">Present-tense, fact-based, calm. Assesses what is actually in front of you. The only voice that can stop a game.</div>
+  </div>
+  <div class="theory-card">
+    <div class="label">Voice 3</div>
+    <div class="title">Child</div>
+    <div class="desc">Emotional core. Playful, creative, intuitive — and also wounded, scared, reactive. Where most game-playing originates.</div>
+  </div>
+</div>
+
+<h3 id="stroke-economy">Why people play games at all: the stroke economy</h3>
+<p>Berne's most original idea, often missed: humans are starved for recognition. He called units of recognition <strong>strokes</strong> — drawing on infant research showing babies who were fed but not held literally failed to thrive. Adults, he argued, never lose this hunger; we just substitute eye contact, attention, gossip, even arguments for physical touch.</p>
+<p><strong>The punchline: people would rather get negative strokes than no strokes at all.</strong> A bitter fight at midnight is not a failure of relationship — it is a successful harvest of attention by two people who don't know how to ask for it directly. This is why games persist even when everyone is miserable. Going unnoticed is worse.</p>
+
+<h3 id="game-formula">The Game Formula (Formula G)</h3>
+<p>Berne said every real psychological game runs through six precise steps. If you can spot the fourth step in real time, you're free.</p>
+
+<div class="formula">
+  <div class="formula-line"><strong>C + G = R → S → X → P</strong></div>
+  <div class="formula-line">Con + Gimmick = Response → Switch → Crossup → Payoff</div>
+  <div class="formula-explain">
+    <strong>Con</strong> — the surface bait ("I have this awful problem at work").<br>
+    <strong>Gimmick</strong> — your weak spot that takes the bait (need to feel helpful, smart, needed, right).<br>
+    <strong>Response</strong> — the predictable back-and-forth. Looks like a normal conversation.<br>
+    <strong>Switch</strong> — the moment one person abruptly flips roles. <em>This is the tell.</em><br>
+    <strong>Crossup</strong> — your few seconds of "what just happened?"<br>
+    <strong>Payoff</strong> — the bad feeling both walk away with — which both, unconsciously, came to collect.
+  </div>
+</div>
+
+<h3 id="three-degrees">Three degrees of severity</h3>
+<p>Berne classified games by how much damage they do. Same psychological structure, vastly different stakes.</p>
+<ul class="plain">
+  <li><strong>First degree</strong> — socially acceptable. Office gossip, mild complaining, the rant at a dinner party. Annoying but harmless.</li>
+  <li><strong>Second degree</strong> — real damage, kept private. Slow-burn marital warfare. The boss who keeps "forgetting" to promote you.</li>
+  <li><strong>Third degree</strong> — in Berne's chilling phrase, "ends in the surgery, the courtroom, or the morgue." Domestic violence. Suicide. Lawsuits. Same machinery as the petty office stuff, played for keeps.</li>
+</ul>
+
+</section>
+
+<!-- ====================== TOC ====================== -->
+<div class="toc">
+  <div class="toc-title">The 36 games — by category</div>
+  <div class="toc-cat"><span class="toc-cat-name">Life Games (5):</span>
+    <a href="#g1">Alcoholic</a> ·
+    <a href="#g2">Debtor</a> ·
+    <a href="#g3">Kick Me</a> ·
+    <a href="#g4">Now I've Got You</a> ·
+    <a href="#g5">See What You Made Me Do</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Marital Games (7):</span>
+    <a href="#g6">Corner</a> ·
+    <a href="#g7">Courtroom</a> ·
+    <a href="#g8">Frigid Woman / Frigid Man</a> ·
+    <a href="#g9">Harried</a> ·
+    <a href="#g10">If It Weren't For You</a> ·
+    <a href="#g11">Look How Hard I've Tried</a> ·
+    <a href="#g12">Sweetheart</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Party Games (4):</span>
+    <a href="#g13">Ain't It Awful</a> ·
+    <a href="#g14">Blemish</a> ·
+    <a href="#g15">Schlemiel</a> ·
+    <a href="#g16">Why Don't You — Yes But</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Attraction Games (5):</span>
+    <a href="#g17">Let's You and Him Fight</a> ·
+    <a href="#g18">Perversion</a> ·
+    <a href="#g19">Rapo</a> ·
+    <a href="#g20">The Stocking Game</a> ·
+    <a href="#g21">Uproar</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Underworld Games (3):</span>
+    <a href="#g22">Cops and Robbers</a> ·
+    <a href="#g23">How Do You Get Out of Here</a> ·
+    <a href="#g24">Let's Pull a Fast One on Joey</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Consulting Room Games (7):</span>
+    <a href="#g25">Greenhouse</a> ·
+    <a href="#g26">I'm Only Trying to Help You</a> ·
+    <a href="#g27">Indigence</a> ·
+    <a href="#g28">Peasant</a> ·
+    <a href="#g29">Psychiatry</a> ·
+    <a href="#g30">Stupid</a> ·
+    <a href="#g31">Wooden Leg</a>
+  </div>
+  <div class="toc-cat"><span class="toc-cat-name">Good Games (5):</span>
+    <a href="#g32">Busman's Holiday</a> ·
+    <a href="#g33">Cavalier</a> ·
+    <a href="#g34">Happy to Help</a> ·
+    <a href="#g35">Homely Sage</a> ·
+    <a href="#g36">They'll Be Glad They Knew Me</a>
+  </div>
+</div>
+
+<div class="note">
+  <strong>How to use the cards.</strong> Each game has five fields. <em>Thesis</em> = what's secretly happening underneath. <em>Sounds like</em> = a real example you'd hear. <em>Payoff</em> = the bad feeling each player came to collect. <em>Antithesis</em> = the move that breaks the game. <em>Try saying</em> = literal words to use. Berne's own prescription was harsh and simple: <em>"The only way to stop playing a game is to stop playing."</em>
+</div>
+
+<!-- ====================== LIFE GAMES ====================== -->
+<div class="category-header"><h2>Life Games</h2></div>
+<p class="category-blurb">Played out over years, often a whole career, and pull innocent bystanders in.</p>
+
+<div class="game" id="g1">
+  <div class="game-num">01 · LIFE GAME</div>
+  <div class="game-name">Alcoholic</div>
+  <div class="game-tagline">A five-handed game where everyone has a role — and the drinking is almost the least of it.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Not really about alcohol. It's a structured group game with five roles: the Alcoholic, the Persecutor (usually a spouse), the Rescuer (often a doctor or AA peer), the Patsy (gives money or sympathy), and the Connection (supplier). Each gets predictable strokes. The alcoholic gets self-punishment and attention; the persecutor gets righteousness; the rescuer gets to feel virtuous.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Drinks heavily on Friday → wife rages on Saturday → friend lectures on Sunday → boss covers on Monday → repeats the next weekend. Everyone is exhausted; no one steps out.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Self-flagellation for the alcoholic; moral high ground for the persecutor; usefulness for the rescuer. The drinking is the engine that keeps the system running.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Refuse all five roles. The first move is for would-be rescuers and persecutors to step out — the alcoholic plays alone until the system collapses or they seek real help.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I love you, and I'm not going to manage this for you anymore. When you're ready to get help, I'll support that."</div></div>
+</div>
+
+<div class="game" id="g2">
+  <div class="game-num">02 · LIFE GAME</div>
+  <div class="game-name">Debtor</div>
+  <div class="game-tagline">Owing money is the structure that holds a life together.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Debt as a way to give life a plot. The person isn't trying hard to pay it off — the debt is the whole point. Variants: <em>"Try and Collect"</em> (let creditors chase you for the entertainment), <em>"Creditor"</em> (lend with strings so you can play injured later).</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I'll pay you back next month, definitely" — for the third year. Or buying a house at the edge of affordability so the next 20 years of struggle become the story.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">A ready-made narrative. Suffering as identity. Avoidance of facing what you actually want from life.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the lender: insist on terms in writing and enforce them as you would with a stranger. Don't enter the friend-loan game at all.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I can lend you [amount], due back by [date]. After that I'll have to ask formally, and it will affect things between us. Is that okay with you?"</div></div>
+</div>
+
+<div class="game" id="g3">
+  <div class="game-num">03 · LIFE GAME</div>
+  <div class="game-name">Kick Me</div>
+  <div class="game-tagline">Walks around with an invisible sign that says "please don't kick me" — provoking exactly that.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Sets oneself up to be mistreated, dismissed, or rejected, then collects the predictable hurt as proof: "See, this always happens to me." Often learned in childhood where mistreatment was the form attention took.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Constantly self-deprecating in meetings, then crushed when nobody pushes back. Stays late helping everyone, then bitter that no one notices. Picks partners who go cold, every time.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Confirmation of the inner story ("the world treats me badly"). Strokes from being hurt, even negative ones. Avoids the harder work of asking directly.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the player: notice when you're shrinking. Ask directly for what you want and tolerate the discomfort. If you're around one: don't kick, but also don't over-rescue. Treat them as capable.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(To yourself, when you catch the urge to put yourself down): "What do I actually want here? Let me ask for that instead."</div></div>
+</div>
+
+<div class="game" id="g4">
+  <div class="game-num">04 · LIFE GAME</div>
+  <div class="game-name">Now I've Got You, You Son of a Bitch</div>
+  <div class="game-tagline">Friendly until the second you slip — then the whole bill comes due.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A long, quiet wait for you to make a small mistake — a late reply, a forgotten errand, a misspoken word — followed by an outsized eruption. The "case" was being built the whole time. The mistake is just the trigger to release stored grievance.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Contractor overcharges by a small amount → client doesn't say "this is wrong, please fix it" but goes nuclear: lawsuit, social media, refuses all future work. The reaction is 50× the offense.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Righteous fury — the cleanest, most satisfying emotion. Vindication of a pre-existing belief ("all men are…", "all bosses are…"). No need to negotiate.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Acknowledge the small thing matter-of-factly. Don't apologize disproportionately, don't defend disproportionately. Refuse to be the fuel for their stored anger.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"You're right, I missed that. Here's what I'll do. — But the size of your reaction tells me there's something else going on. I'm not going to engage with that part."</div></div>
+</div>
+
+<div class="game" id="g5">
+  <div class="game-num">05 · LIFE GAME</div>
+  <div class="game-name">See What You Made Me Do</div>
+  <div class="game-tagline">Acts out, then bills you for the consequences.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Person makes a mess — yells, cheats, breaks something, makes a bad decision — then blames the very person they hurt. Variants: <em>"You Got Me Into This"</em> (lets you decide, then blames you when it goes wrong).</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I wouldn't have yelled if you weren't being so cold." "I wouldn't have had to lie if you didn't ask." "We wouldn't have lost the money if you hadn't said to invest." Decision-by-default followed by blame-by-design.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">No accountability. Permission to keep doing the thing. You leave the conversation second-guessing your own behavior.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Refuse the redirect. Name what just happened in flat language and return to the actual issue. Don't argue about who started it.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"You yelled. That's something you chose. We can talk about whatever I did, but separately. I'm not going to take responsibility for your reaction."</div></div>
+</div>
+
+<!-- ====================== MARITAL GAMES ====================== -->
+<div class="category-header"><h2>Marital Games</h2></div>
+<p class="category-blurb">Almost any game can scaffold a marriage, but these flourish under "the legal force of contractual intimacy."</p>
+
+<div class="game" id="g6">
+  <div class="game-num">06 · MARITAL GAME</div>
+  <div class="game-name">Corner</div>
+  <div class="game-tagline">A disingenuous refusal to play the other person's game — used to avoid intimacy.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">One spouse takes the other's words too literally to get out of something they're uncomfortable with — usually intimacy. She suggests a movie; he agrees but then mentions a money worry; she withdraws "fine, we won't go"; he leaves alone, blaming her. Both end up cornered into not connecting, which is the point.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Wife: "Want to go to dinner?" Husband: "Sure — oh wait, you said the bill from last week was tight. Should we?" Wife: "Fine, forget it." Husband (relieved): "If you're going to be like that, I'll just eat at home."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Avoidance of closeness. Each can blame the other for the lost evening. The real fear — that closeness will go badly — is never tested.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Don't take the bait literally. Restate the original wish.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I hear the money concern. I still want to spend the evening with you. Let's go anyway, or pick something cheaper, but let's go."</div></div>
+</div>
+
+<div class="game" id="g7">
+  <div class="game-num">07 · MARITAL GAME</div>
+  <div class="game-name">Courtroom</div>
+  <div class="game-tagline">Three-handed game requiring a Plaintiff, a Defendant, and a Judge.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">One spouse recruits a third party — therapist, friend, parent — to "ask them, they'll tell you I'm right." The point isn't resolution; it's a verdict. The recruited party is meant to validate, not arbitrate.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Tell my husband — isn't it normal to want our anniversary noticed? Just tell him." Or dragging a parent or therapist into a fight to issue a ruling.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Public vindication. The other spouse becomes defendant rather than partner.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're recruited as judge: refuse the role. Send them back to talk to each other. If you're the defendant: don't argue your case to the third party.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(As the recruited judge): "I'm not going to take sides on this — that won't help either of you. Sounds like the two of you need to talk it out directly."</div></div>
+</div>
+
+<div class="game" id="g8">
+  <div class="game-num">08 · MARITAL GAME</div>
+  <div class="game-name">Frigid Woman / Frigid Man</div>
+  <div class="game-tagline">The intimacy ladder where rungs are systematically removed.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A 1960s Berne framing, but the underlying pattern is real and gender-neutral: one partner withholds intimacy, then accuses the other of being interested only in sex/affection when they pursue, and accuses them of being uninterested when they stop. The bind is total.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Approached → "is that all you ever think about?" Distant → "you don't even try anymore." Both states get punished. Neither gets praised.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Moral high ground. Avoidance of vulnerability. Confirmation that the partner is the problem.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Name the pattern openly without blame. Stop oscillating between pursuit and retreat.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I notice that when I move toward you it's wrong, and when I don't it's also wrong. I'm not going to keep guessing. Tell me what you actually want, and we can talk about whether I can give it."</div></div>
+</div>
+
+<div class="game" id="g9">
+  <div class="game-num">09 · MARITAL GAME</div>
+  <div class="game-name">Harried</div>
+  <div class="game-tagline">"I'm doing everything for everyone" — until the inevitable collapse.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Person takes on far too much — work, kids, household, parents, side projects — until they break down (illness, depression, dramatic outburst). The breakdown is the point. It produces sympathy, attention, and time off without the guilt of asking for it.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I'll do it, don't worry, I've got it." Said for years, while quietly accumulating resentment, until the person collapses spectacularly and everyone has to rally.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Validation through collapse. Permission to stop. Moral credit ("look how much they were doing").</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Set down loads <em>before</em> the breakdown. Ask for help while still functional.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I'm at capacity. I need to drop X or Y this week. Which would you prefer?"</div></div>
+</div>
+
+<div class="game" id="g10">
+  <div class="game-num">10 · MARITAL GAME</div>
+  <div class="game-name">If It Weren't For You (IWFY)</div>
+  <div class="game-tagline">Berne's original example. The partner is the alibi for a life unlived.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">"If it weren't for my husband, I'd be dancing." But here's what Berne found: when the husband relented, the wife discovered she was actually afraid of dancing. The marriage's restrictiveness was protecting her from her own fears. Each unconsciously chose the other for exactly this — a perfect external excuse.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"If it weren't for my partner, I'd start the business / move abroad / write the book." Always the same partner, always the same unstarted thing.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Avoidance of risk. A villain to point at. The fantasy of the other life remains intact and untested.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're hearing it: stop arguing the obstacle. Ask what they'd actually do tomorrow if it disappeared. If you're playing it: try one small thing this week that the partner supposedly prevents.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Imagine I fully supported it tomorrow — what's the first concrete step you'd take?" (Watch what happens to the energy.)</div></div>
+</div>
+
+<div class="game" id="g11">
+  <div class="game-num">11 · MARITAL GAME</div>
+  <div class="game-name">Look How Hard I've Tried</div>
+  <div class="game-tagline">Effort as performance, not pursuit.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">The visibly trying spouse — going to therapy, reading the books, doing the exercises — but trying in a way that builds an evidentiary record for later. When the marriage fails, they have proof. The trying is for the lawyers, not the marriage.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I've been to six counselors. I've read every book. What more can I do?" — said in a voice that already knows the answer is "nothing, you've done your part."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Permission to leave (or stay miserable) without guilt. The other person carries the failure.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Examine whether your "trying" is engaging or documenting. Honest trying changes you. Performative trying produces a record.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(To yourself): "Am I doing this to actually shift things, or to be able to say I tried? Honest answer."</div></div>
+</div>
+
+<div class="game" id="g12">
+  <div class="game-num">12 · MARITAL GAME</div>
+  <div class="game-name">Sweetheart</div>
+  <div class="game-tagline">A public put-down dressed in a term of endearment.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">One spouse tells a story at a dinner party that mildly humiliates the other, ending with "isn't that right, sweetheart?" The endearment makes a direct rebuke socially impossible. The spouse is trapped — agree and accept the slight, or push back and look like they can't take a joke.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"My wife tried to do our taxes last year — what a disaster, right honey?" (Laughs all around. She smiles tightly.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">One-up status, expressed publicly, with plausible deniability.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Don't fight it in public — that gives them the "see, no humor" win. Address it privately, calmly, and don't let it become a pattern.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(In private, later): "When you tell those stories with 'right, sweetheart' at the end, it's not funny to me. I'd like that to stop." (No drama. Stated as fact.)</div></div>
+</div>
+
+<!-- ====================== PARTY GAMES ====================== -->
+<div class="category-header"><h2>Party Games</h2></div>
+<p class="category-blurb">Played among acquaintances. Time-fillers that look like conversation.</p>
+
+<div class="game" id="g13">
+  <div class="game-num">13 · PARTY GAME</div>
+  <div class="game-name">Ain't It Awful</div>
+  <div class="game-tagline">Group bonding through shared complaint.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Endless lamenting about politics, the youth, the traffic, the price of vegetables, the office. Nobody actually wants anything to change — the complaint is the social glue. Variants: <em>Nowadays</em> (parental: "kids these days"), <em>Broken Skin</em> (medical drama: "what a pity"), <em>Watercooler</em> (rebellious: "look what they're doing to us").</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"The traffic is unbelievable now." "Don't even start me on the commute." "And the rents! Did I tell you what they wanted for that flat near the office?"</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Group bonding. Shared identity. A way to fill time without risking real disclosure.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Either enjoy it as harmless pastime, or shift toward something real. The danger is when it becomes the whole relationship.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"You know what, putting all that aside — how are <em>you</em> actually doing?" (Watch them either light up or change the subject.)</div></div>
+</div>
+
+<div class="game" id="g14">
+  <div class="game-num">14 · PARTY GAME</div>
+  <div class="game-name">Blemish</div>
+  <div class="game-tagline">Can't relax with a new person until you've found something wrong with them.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Played from the secret position "I am not okay" — protectively flipped to "they are not okay." The player scans every new acquaintance for a flaw (their accent, their school, their views, their clothes), and only relaxes once one is found. In its hardest political form, it becomes prejudice.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Nice guy, but did you notice his shoes?" "She's smart, sure — but where did she actually do her MBA?" Endless small downgrades.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Negative reassurance. "I'm okay because they're not." Avoids the vulnerability of seeing someone clearly.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the player: notice when you're scanning for the flaw. Try sitting with the discomfort of not having one yet. If you're around one: don't validate the downgrade.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I think she's pretty good actually. What's making you look for the catch?"</div></div>
+</div>
+
+<div class="game" id="g15">
+  <div class="game-num">15 · PARTY GAME</div>
+  <div class="game-name">Schlemiel</div>
+  <div class="game-tagline">Spills the wine, breaks the glass, then demands forgiveness with disarming charm.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">From Yiddish — a clumsy, charming bumbler. Player makes "innocent" small messes (stains the carpet, knocks over the vase, drops sauce on your couch) and then offers a delighted, big-eyed apology. The host is trapped — refuse forgiveness and look petty; accept it and the cycle continues.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Oh no, I've spilled red wine on your white sofa! I'm <em>so</em> sorry, I'm hopeless!" (Big smile.) Host (gritted teeth): "Don't worry about it."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Permission to be destructive while extracting affection ("forgiveness"). Hostility expressed under the mask of clumsiness.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Berne's prescription: <strong>do not offer the demanded absolution.</strong> Don't accept the apology. Don't reassure. Treat the damage as actual damage.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Yeah, that one's going to stain. There's a dry cleaner nearby — would you mind taking it tomorrow?" (Polite, level, expects the cost to land where it belongs.)</div></div>
+</div>
+
+<div class="game" id="g16">
+  <div class="game-num">16 · PARTY GAME</div>
+  <div class="game-name">Why Don't You — Yes But (YDYB)</div>
+  <div class="game-tagline">The original game. The one that started Berne's whole framework.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Player presents a problem and invites suggestions. Each suggestion is rejected with "yes, but…" Eventually the helpers fall silent. Player wins. The point was never to solve the problem — it was to prove the problem is unsolvable, and to harvest attention along the way.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"My boss is impossible." "Have you tried talking to HR?" "Yes, but HR is in his pocket." "Could you transfer?" "Yes, but the other team is worse." "Leave the company?" "Yes, but the market is bad." (Long pause. Game won.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Confirmation that the situation is impossible — therefore, no action required. Plenty of strokes from concerned friends. The Adult is dethroned and replaced with the helpless Child.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text"><strong>Don't offer suggestions.</strong> That's the gimmick. Hand the problem back.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"That sounds genuinely hard. What are <em>you</em> thinking of doing?" (And then stop talking. Let them sit with it.)</div></div>
+</div>
+
+<!-- ====================== ATTRACTION GAMES ====================== -->
+<div class="category-header"><h2>Attraction Games</h2></div>
+<p class="category-blurb">Berne's framing here is dated and at points sexist. The patterns themselves — manipulation around attraction, jealousy, and rejection — are still recognizable in modern life, including online dating, workplace dynamics, and influencer culture.</p>
+
+<div class="game" id="g17">
+  <div class="game-num">17 · ATTRACTION GAME</div>
+  <div class="game-name">Let's You and Him Fight</div>
+  <div class="game-tagline">Sets up two people to clash so the instigator can watch from the sidelines.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A third party — out of jealousy, insecurity, or the simple thrill of drama — engineers a conflict between two others. Tells A what B "really thinks" of them, then tells B the reverse. Watches them fight; collects no risk and full entertainment.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I shouldn't say this, but Rohit was telling everyone you took credit for his idea." (Then to Rohit): "Aman has been bad-mouthing you to leadership." Watches the meltdown.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Excitement, drama, importance — without skin in the game. Often a sense of control or revenge.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Verify directly with the other party before reacting. Trace the source. Cut out the middleman.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(To the gossip): "Interesting — let me check with him directly." (To the third party): "Hey, I heard X. Did you actually say that, or is something else going on?"</div></div>
+</div>
+
+<div class="game" id="g18">
+  <div class="game-num">18 · ATTRACTION GAME</div>
+  <div class="game-name">Perversion</div>
+  <div class="game-tagline">"What do you expect from someone as strongly sexed as I am?" — sexual behavior used as alibi.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Berne's framing here is the most clinically dated in the book. The transferable pattern: using sexual or impulse-based "needs" as a permanent excuse for behavior that hurts others. A close relative of <em>Wooden Leg</em>: "you can't expect me to act differently — I'm wired this way."</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"You knew what I was like when you married me." "I can't help it, I have a high libido / a temper / an addictive personality."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Permanent permission. The "wiring" defense pre-empts all accountability.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Reject the determinism. Hold the behavior, not the trait, accountable.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Whatever your wiring, you still chose what to do on Tuesday. Let's talk about Tuesday."</div></div>
+</div>
+
+<div class="game" id="g19">
+  <div class="game-num">19 · ATTRACTION GAME</div>
+  <div class="game-name">Rapo</div>
+  <div class="game-tagline">A 1960s name for what we'd now call deliberate signaling, then sudden withdrawal.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A flirtation game with three degrees. <strong>First degree</strong> ("Kiss-Off"): mild flirting that's withdrawn the moment the other person commits — pure ego boost. <strong>Second degree</strong>: the longer con, draws someone in further, more humiliating exit. <strong>Third degree</strong>: actively cries foul afterwards (false accusation, blackmail, the "Badger Game"). Modern parallel: dating-app dynamics where matching is the goal and meeting is incidental.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Intense interest for two weeks, deep messages, plans made — and then "actually I just realized I'm not in the right headspace." Repeat with someone new.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Power. Validation that one is desirable. Avoidance of actual intimacy.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Berne: distinguish genuine signals from game moves. If a pattern of high-intensity-then-withdrawal repeats, it's the game, not you.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(Internal): "I'm noticing this is the third time this has happened with this person. Pattern, not coincidence." Then disengage early.</div></div>
+</div>
+
+<div class="game" id="g20">
+  <div class="game-num">20 · ATTRACTION GAME</div>
+  <div class="game-name">The Stocking Game</div>
+  <div class="game-tagline">A staged "accident" of sexual exposure with disclaimable intent.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A small, deliberate sexualizing move — Berne's example was a woman drawing attention to a "run in her stocking" in mixed company — that is performed as if accidental. It scrambles the room and tests reactions while remaining technically deniable. Modern equivalents: the "oh I didn't realize that photo was so revealing" post; the casually-suggestive comment in the office Slack.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Oh god, did this dress get really see-through? I had no idea." (At a work event.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Attention. Power over the room. Plausible deniability if challenged.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Don't react with shock or moralizing — that's the desired response. Stay neutral. If genuinely problematic in a workplace, address structurally rather than emotionally.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(Bland): "Bathroom's down the hall if you want to check." Then continue your conversation.</div></div>
+</div>
+
+<div class="game" id="g21">
+  <div class="game-num">21 · ATTRACTION GAME</div>
+  <div class="game-name">Uproar</div>
+  <div class="game-tagline">A spectacular fight engineered to avoid intimacy.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">When closeness threatens — bedtime, a vacation, a big anniversary, a deep conversation — one party manufactures a fight. Doors slam. Tears. Both retreat to separate rooms. The intimacy is averted. Berne's classic case: father and teenage daughter who fight every night to avoid the tension of growing closeness.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Couple finally has a free Saturday. By 11 AM, they're having "the talk about the dishwasher" and the day is ruined.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Avoidance of intimacy. Strong feelings (anger) substituted for vulnerable feelings (love, fear, longing).</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Notice the timing. When a fight erupts <em>at the moment</em> closeness is on offer, name the timing.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"It's interesting that we're fighting right when we finally have time alone. I think one of us is scared, maybe both. Can we slow down?"</div></div>
+</div>
+
+<!-- ====================== UNDERWORLD GAMES ====================== -->
+<div class="category-header"><h2>Underworld Games</h2></div>
+<p class="category-blurb">Played in and out of prison — but also, in milder forms, in everyday rule-bending.</p>
+
+<div class="game" id="g22">
+  <div class="game-num">22 · UNDERWORLD GAME</div>
+  <div class="game-name">Cops and Robbers</div>
+  <div class="game-tagline">"I'm slick. Catch me if you can."</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">The thrill is not in the gain but in the chase. Player commits petty rule-breaking — tax fudging, expense fraud, lane-jumping, plagiarism, affairs — in ways that almost demand to be caught. Success without near-capture feels empty. Berne included some kleptomania in this category: people who steal things they don't even want.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Brags about how he's been "managing" his tax returns. Tells stories about close calls. Gets bored when not under suspicion.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">The adrenaline of risk. The identity of the outlaw. Confirmation that they're cleverer than the system.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the player: notice that the gain isn't worth what you're risking; what you actually want is the thrill, which can be sourced legally. If you're around one: don't be the audience for the stories.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"That's a lot of risk for a small win. What's the part you're actually getting out of this?"</div></div>
+</div>
+
+<div class="game" id="g23">
+  <div class="game-num">23 · UNDERWORLD GAME</div>
+  <div class="game-name">How Do You Get Out of Here</div>
+  <div class="game-tagline">Asking for the exit while ensuring you're never granted it.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Originally about prisoners who plead for release while sabotaging every chance at parole. Generalizes to anyone who says they want to leave — a job, a marriage, a city, a habit — but acts in ways that make leaving impossible. The complaint is louder than the action.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I want to quit this job so badly." Then misses the application deadline for a better one. Twice.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Avoidance of the actual leap. Permission to keep complaining. Identity as the trapped one.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Match talk to action. One concrete step this week. If you can't take a step, you don't actually want to leave — own that instead.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(To yourself): "If I were really leaving, what would I do this week? Do <em>that</em>." (Or stop saying you're leaving.)</div></div>
+</div>
+
+<div class="game" id="g24">
+  <div class="game-num">24 · UNDERWORLD GAME</div>
+  <div class="game-name">Let's Pull a Fast One on Joey</div>
+  <div class="game-tagline">The con. Two players team up to fool a third — the "mark."</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A confidence game in the literal sense: the mark's own desire to "get ahead" or "get a deal" is what hooks them. The con works only because the mark wants to believe they're getting one over. Modern variants: investment scams, MLM schemes, "exclusive" insider deals, romance scams.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I shouldn't be telling you this, but I have a guy on the inside. Returns of 30%, guaranteed. But you have to act today."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">For the cons: money, ego, the win. For the mark (after): the strange comfort of "I knew it was too good to be true" — confirmation of a pre-existing suspicion that the world cheats them.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If something requires you to act before you can think, treat that as the warning sign itself. Real opportunities can survive a 24-hour pause.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Let me think about it for two days." (If they pressure: "If two days breaks the deal, then I don't want it.")</div></div>
+</div>
+
+<!-- ====================== CONSULTING ROOM GAMES ====================== -->
+<div class="category-header"><h2>Consulting Room Games</h2></div>
+<p class="category-blurb">Originally observed by Berne in therapy and clinical settings. Translates directly to coaching, mentoring, management — any helping role.</p>
+
+<div class="game" id="g25">
+  <div class="game-num">25 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Greenhouse</div>
+  <div class="game-tagline">Treating one's own emotions like rare botanical specimens.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Played by people fluent in psychological language — therapists, coaches, well-read patients, the chronically self-aware. Every passing feeling is examined, named, "honored," processed in public, treated as a hothouse orchid. The self-analysis is performance, not insight.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I'm sitting with the discomfort of my activated nervous system right now, holding space for what my inner child is presenting." (Said about the dishwasher being broken.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Status as the most enlightened person in the room. Avoidance of just dealing with the thing.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Redirect from the emotion's curatorship to its content. What's the actual situation, what do you actually need?</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Got it — what would help right now? Concretely."</div></div>
+</div>
+
+<div class="game" id="g26">
+  <div class="game-num">26 · CONSULTING ROOM GAME</div>
+  <div class="game-name">I'm Only Trying to Help You (ITHY)</div>
+  <div class="game-tagline">The complement of "Why Don't You — Yes, But." The two games lock together perfectly.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">The professional (or self-appointed) helper who keeps offering help that fails — and then is wounded by the ingratitude. The hidden purpose isn't to actually help; it's to <em>prove</em> that people are disappointing and cannot be helped, which justifies the helper's worldview and superiority.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I gave you the perfect career advice last year and you didn't take it. I gave you the dating advice and you didn't take it. I'm only trying to help — at this point I don't know why I bother."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Martyrdom. Vindicated cynicism. Permission to never be helped <em>themselves</em>, since they're so busy helping.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're around one: ask whether you actually wanted help. Don't accept advice you didn't ask for. If you're playing it: notice that "helping" people who reliably reject your help is your role, not their failure.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(Receiving): "I appreciate the thought, but I haven't actually asked for advice on this. I'll come to you if I do." (Giving): "Are you asking me, or just venting? I'll do whichever you want."</div></div>
+</div>
+
+<div class="game" id="g27">
+  <div class="game-num">27 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Indigence</div>
+  <div class="game-tagline">"Looking for a job without the slightest intention of taking one."</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Berne's framing: the welfare-system version of <em>Wooden Leg</em>. Person presents themselves as a help-seeker (job-seeker, advice-seeker, support-seeker) without any actual intent to use what's offered. The seeking <em>is</em> the activity; the receiving would end it.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Goes to four career counselors in a year. Each visit is intense, "transformative." Never applies for the suggested role. Books a fifth.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">All the strokes of being-helped without any of the risk of being-changed. Identity as the seeker preserved indefinitely.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the helper: stop providing the strokes. Make the next session conditional on the previous advice being acted on.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"Last time we talked about three steps. Which one did you take? — Let's not book the next session until you've done at least one."</div></div>
+</div>
+
+<div class="game" id="g28">
+  <div class="game-num">28 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Peasant</div>
+  <div class="game-tagline">"Gee, you're wonderful, Professor!" — flattery that traps the expert.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Patient/client/mentee adoringly flatters the expert. The expert basks in it. The patient subtly demands that the expert remain wonderful, which means never delivering the unwelcome truth that real change requires. As long as flattery is the currency, no real work happens.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"You changed my life. Nobody understands me like you do. Everyone else has been useless. You're the only one." (Said in session three. About a coach who hasn't said anything substantive yet.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Patient avoids hard work. Expert avoids the discomfort of being challenging. Mutual cuddle, no movement.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">If you're the expert: refuse the pedestal early. Be ordinary, even slightly disappointing. Real help requires not being adored.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I appreciate that, but let's set it aside. The real test isn't how this conversation feels — it's what's different in your life two months from now."</div></div>
+</div>
+
+<div class="game" id="g29">
+  <div class="game-num">29 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Psychiatry</div>
+  <div class="game-tagline">"I came here to be cured, but I will defeat any cure offered."</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Patient who has been to many therapists, learned all the language, and uses each new therapist to confirm that they cannot be cured. Each round is a chance to hone their argument.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"I've tried CBT, IFS, somatic, EMDR, psychoanalysis. Nothing works. You're probably my last hope. Though my last therapist also said that."</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Confirmation of unfixability. Avoidance of the moment when the symptom would have to be set down.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Berne quoted the 16th-century surgeon Ambroise Paré: <em>"I treat them, but God cures them."</em> The professional offers tools; the patient does the curing or doesn't.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">(As helper): "I can offer you what I know. Whether it works depends on what you do with it between sessions, not what happens in the room."</div></div>
+</div>
+
+<div class="game" id="g30">
+  <div class="game-num">30 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Stupid</div>
+  <div class="game-tagline">"I'm just dumb. What can you do?"</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Played from a depressive position. Person performs incompetence — at work, in relationships, with their own life — and gets others to confirm "you're not stupid, you're fine." The reassurance is the goal. If you actually try to teach them the thing, they get uncomfortable, because that threatens the position. (Distinguished from <em>Schlemiel</em>, which seeks forgiveness, and <em>Clown</em>, which is just being funny.)</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Oh I could never understand spreadsheets, I'm hopeless with numbers." (Refuses every offer to learn. Asks the same person to do it for them every quarter.)</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Permanent excuse from competence. Reliable strokes from rescuers. Confirmation of low self-image (which is oddly stabilizing).</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Don't supply the reassurance. Don't take over the task. Treat them as capable, even when they protest.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"You're not stupid. You haven't learned this yet. Want me to show you once, or do you want to figure it out?"</div></div>
+</div>
+
+<div class="game" id="g31">
+  <div class="game-num">31 · CONSULTING ROOM GAME</div>
+  <div class="game-name">Wooden Leg</div>
+  <div class="game-tagline">"What do you expect from a man with a wooden leg?"</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">A real or invented disadvantage — a diagnosis, a trauma, a difficult childhood, a chronic condition — used as a permanent ceiling on what one will attempt. The condition becomes identity. The most extreme legal version is the insanity plea. Berne's point: real disability is real, but using disability as a totalizing alibi is a game.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">"Of course I'm late — I have ADHD." "I can't keep promises, that's just my anxiety." "What do you expect from someone with attachment trauma?" The condition explains everything, forever, in advance.</div></div>
+  <div class="game-row"><div class="game-row-label">Payoff</div><div class="game-row-text">Pre-emptive forgiveness. No one can ask more, because the limit is medical/existential.</div></div>
+  <div class="game-row"><div class="game-row-label">Antithesis</div><div class="game-row-text">Take the condition seriously <em>and</em> hold the behavior accountable. Both, not either.</div></div>
+  <div class="game-row script"><div class="game-row-label">Try Saying</div><div class="game-row-text">"I take that seriously, and I also know plenty of people with that condition who manage [the specific behavior]. So what's the actual plan here?"</div></div>
+</div>
+
+<!-- ====================== GOOD GAMES ====================== -->
+<div class="category-header"><h2>Good Games</h2></div>
+<p class="category-blurb">Berne admitted these were thin. A "good game" is one whose social contribution outweighs its hidden motivations. Even healthy people structure time with rituals — these are the least toxic of them.</p>
+
+<div class="game" id="g32">
+  <div class="game-num">32 · GOOD GAME</div>
+  <div class="game-name">Busman's Holiday</div>
+  <div class="game-tagline">A doctor on vacation who happens to set up a clinic in the village.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Using your professional skills usefully in an off-duty context — engineer fixing the village water pump on holiday, designer redoing the school's signage. There's some ego in it, but the contribution is real and the motives mostly clean.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">A retired architect who volunteers to redesign the local school's signage during a trip abroad. Useful to them, satisfying to her, no strings attached.</div></div>
+  <div class="game-row"><div class="game-row-label">Why It's Good</div><div class="game-row-text">Both parties get value. The "game" element (need to feel useful, identity tied to skill) is mild and outweighed by actual contribution.</div></div>
+</div>
+
+<div class="game" id="g33">
+  <div class="game-num">33 · GOOD GAME</div>
+  <div class="game-name">Cavalier</div>
+  <div class="game-tagline">Mutual admiration without sexual pressure. Old-school courtship as art.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Affectionate appreciation, charm, and flirtation conducted within agreed limits — between any two people who enjoy each other but aren't acting on it. When done with taste it generates energy, creativity, mutual elevation.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">A long, warm friendship across the workplace where both partners are lifted by the other's mind, conducted entirely above the table.</div></div>
+  <div class="game-row"><div class="game-row-label">Why It's Good</div><div class="game-row-text">The strokes are genuine, the energy released is creative, and intimacy is honored without being demanded.</div></div>
+</div>
+
+<div class="game" id="g34">
+  <div class="game-num">34 · GOOD GAME</div>
+  <div class="game-name">Happy to Help</div>
+  <div class="game-tagline">Helping others in a way that helps you too — without resentment.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">The helper has an ulterior motive — feeling useful, being liked, building reputation — but unlike <em>I'm Only Trying to Help You</em>, the help is real, the gratitude is accepted graciously, and the helper isn't keeping score.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">Senior person mentoring juniors freely, enjoying the role, not requiring constant praise but quietly pleased when it comes.</div></div>
+  <div class="game-row"><div class="game-row-label">Why It's Good</div><div class="game-row-text">Mutual benefit. Acknowledged motives. No setup for collapse into resentment.</div></div>
+</div>
+
+<div class="game" id="g35">
+  <div class="game-num">35 · GOOD GAME</div>
+  <div class="game-name">Homely Sage</div>
+  <div class="game-tagline">The wise listener at the village square.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">An older person who has earned wisdom and offers it sparingly — listens more than speaks, gives advice when asked, doesn't insist on being right. The role provides identity and meaning; the village gets a useful function.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">The uncle, the old colleague, the long-tenured neighbor who somehow knows when to listen, when to ask one good question, and when to recommend nothing at all.</div></div>
+  <div class="game-row"><div class="game-row-label">Why It's Good</div><div class="game-row-text">The motive (being valued for wisdom) is healthy, the contribution is real, and the listener doesn't try to fix.</div></div>
+</div>
+
+<div class="game" id="g36">
+  <div class="game-num">36 · GOOD GAME</div>
+  <div class="game-name">They'll Be Glad They Knew Me</div>
+  <div class="game-tagline">Striving for genuine accomplishment so that those around you benefit.</div>
+  <div class="game-row"><div class="game-row-label">Thesis</div><div class="game-row-text">Working hard, building something real — a career, a body of work, a family — partly so that the people in your life will be better for having known you. There's ego in it (legacy, recognition), but the work is real and others genuinely benefit.</div></div>
+  <div class="game-row example"><div class="game-row-label">Sounds Like</div><div class="game-row-text">The professional who builds a reputation by doing excellent work, mentors others on the way up, and at retirement is genuinely missed — not for the title, but for the substance.</div></div>
+  <div class="game-row"><div class="game-row-label">Why It's Good</div><div class="game-row-text">Berne was honest about why even this is mildly a game: there's a hidden hope of being remembered. But the contribution is real and the hidden motive is benign.</div></div>
+</div>
+
+<!-- ====================== DRAMA TRIANGLE ====================== -->
+<h2 id="drama-triangle">The Drama Triangle (Karpman, 1968)</h2>
+<p class="lead">Stephen Karpman, one of Berne's students, mapped almost every dysfunctional pattern onto three roles arranged in a triangle. The most useful single tool to come out of Transactional Analysis.</p>
+<p style="font-size: 15px; color: var(--ink-mute); font-style: italic; margin-bottom: 8px;">Note: Karpman developed this framework independently from Berne's 36 games. It is not a map of the games — it is a separate model, rooted in the same tradition, that works well alongside them.</p>
+
+<div class="triangle-section">
+  <h3>The three roles</h3>
+  <div class="triangle-stack">
+    <div class="role">
+      <div class="role-name">Victim</div>
+      <div class="role-says">"Poor me."</div>
+      <div>Feels powerless. Cannot act. Needs rescuing. Notes: this is the role someone <em>plays</em>, not actual victims of harm — those are different.</div>
+    </div>
+    <div class="role">
+      <div class="role-name">Rescuer</div>
+      <div class="role-says">"Let me help you."</div>
+      <div>Gets identity from saving others. Often secretly resents them. Neglects own needs. Ultimately keeps the Victim dependent.</div>
+    </div>
+    <div class="role">
+      <div class="role-name">Persecutor</div>
+      <div class="role-says">"It's all your fault."</div>
+      <div>Blames, criticizes, controls. Greatest fear is powerlessness. Projects own inadequacy outward.</div>
+    </div>
+  </div>
+  <p class="switch-note">The Switch is what keeps the triangle moving. Players don't stay locked into one role — they rotate. A Rescuer who isn't thanked flips to Persecutor ("after all I've done for you"). A Persecutor who is challenged flips to Victim ("why is everyone attacking me?"). The triangle never stops moving, which is why stepping out of any one role is rarely enough — the whole system has to be refused.</p>
+</div>
+
+<h3 id="winners-triangle">The Winner's Triangle (Acey Choy, 1990) — the way out</h3>
+<p>Choy mapped a healthy alternative for each role. The shift is from the toxic version to the functional version.</p>
+
+<div class="triangle-section">
+  <div class="triangle-stack">
+    <div class="role">
+      <div class="role-name">Victim → <strong style="color: var(--green);">Vulnerable</strong></div>
+      <div>Acknowledges feelings honestly. Asks for help directly. Problem-solves. Accepts that pain is real but doesn't equal helplessness.</div>
+    </div>
+    <div class="role">
+      <div class="role-name">Rescuer → <strong style="color: var(--green);">Caring</strong></div>
+      <div>Offers help only when asked. Has limits. Trusts the other person's competence. Doesn't take over.</div>
+    </div>
+    <div class="role">
+      <div class="role-name">Persecutor → <strong style="color: var(--green);">Assertive</strong></div>
+      <div>States needs and concerns clearly without blame. Holds boundaries. Doesn't attack the person.</div>
+    </div>
+  </div>
+  <p class="switch-note">In all three roles, the first move is the same: <strong>refuse the role</strong> before doing anything else. Berne: <em>"The only way to stop playing a game is to stop playing."</em></p>
+</div>
+
+<!-- ====================== ESCAPE ====================== -->
+<h2 id="awareness">The way out: awareness, spontaneity, intimacy</h2>
+<p>Berne's prescription for a game-free life rested on three capacities. He thought most people never developed all three.</p>
+
+<div class="theory-grid">
+  <div class="theory-card">
+    <div class="label">Capacity 1</div>
+    <div class="title">Awareness</div>
+    <div class="desc">Seeing what's actually happening in front of you, not what you were taught is happening. Noticing the Switch when it occurs. Recognizing your own gimmicks.</div>
+  </div>
+  <div class="theory-card">
+    <div class="label">Capacity 2</div>
+    <div class="title">Spontaneity</div>
+    <div class="desc">Acting from your real feelings, in the present, rather than from the script. Choosing your response rather than performing the role.</div>
+  </div>
+  <div class="theory-card">
+    <div class="label">Capacity 3</div>
+    <div class="title">Intimacy</div>
+    <div class="desc">Genuine, unguarded contact with another person, without ulterior motive. Berne's view: most people would rather have a familiar fight with their spouse than five minutes of honest conversation, because the fight is rehearsed and intimacy is a free fall.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Source: <em>Games People Play</em>, Eric Berne, 1964. Drama Triangle from Stephen Karpman, 1968. Winner's Triangle from Acey Choy, 1990. Some game framings — particularly in the Attraction Games section — reflect 1960s clinical assumptions and have been reframed here in current language without changing the underlying patterns Berne identified.</p>
+  <a href="#top" class="back-to-top">↑ Back to top</a>
+</div>
+
+</div>
+
+<script>
+  // ====================== DESKTOP STICKY NAV ======================
+  function toggleSnavCat(btn) {
+    const catId = 'snav-' + btn.getAttribute('data-cat');
+    const panel = document.getElementById(catId);
+    const arrow = btn.querySelector('.snav-arrow');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    arrow.textContent = isOpen ? '▸' : '▾';
+  }
+
+  // ====================== MOBILE NAV ======================
+  function toggleMobileNav() {
+    const panel = document.getElementById('mobile-nav-panel');
+    const arrow = document.getElementById('mobile-toggle-arrow');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    arrow.textContent = isOpen ? '▾' : '▴';
+  }
+
+  function closeMobileNav() {
+    const panel = document.getElementById('mobile-nav-panel');
+    const arrow = document.getElementById('mobile-toggle-arrow');
+    panel.classList.remove('open');
+    arrow.textContent = '▾';
+  }
+
+  function toggleMnavCat(btn, panelId) {
+    const panel = document.getElementById(panelId);
+    const arrow = btn.querySelector('.snav-arrow');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    arrow.textContent = isOpen ? '▸' : '▾';
+  }
+
+  // ====================== SCROLL SPY ======================
+  // Map game IDs to their category keys
+  const gameCatMap = {
+    'mechanics':'theory', 'ego-states':'theory', 'stroke-economy':'theory', 'game-formula':'theory', 'three-degrees':'theory',
+    g1:'life', g2:'life', g3:'life', g4:'life', g5:'life',
+    g6:'marital', g7:'marital', g8:'marital', g9:'marital', g10:'marital', g11:'marital', g12:'marital',
+    g13:'party', g14:'party', g15:'party', g16:'party',
+    g17:'intimacy', g18:'intimacy', g19:'intimacy', g20:'intimacy', g21:'intimacy',
+    g22:'underworld', g23:'underworld', g24:'underworld',
+    g25:'consulting', g26:'consulting', g27:'consulting', g28:'consulting', g29:'consulting', g30:'consulting', g31:'consulting',
+    g32:'good', g33:'good', g34:'good', g35:'good', g36:'good',
+    'drama-triangle':'drama', 'winners-triangle':'drama',
+    'awareness':'escape'
+  };
+
+  const allSectionIds = [
+    'mechanics','ego-states','stroke-economy','game-formula','three-degrees',
+    'g1','g2','g3','g4','g5',
+    'g6','g7','g8','g9','g10','g11','g12',
+    'g13','g14','g15','g16',
+    'g17','g18','g19','g20','g21',
+    'g22','g23','g24',
+    'g25','g26','g27','g28','g29','g30','g31',
+    'g32','g33','g34','g35','g36',
+    'drama-triangle','winners-triangle','awareness'
+  ];
+
+  let currentActiveSection = null;
+  let currentActiveCat = null;
+
+  function updateScrollSpy() {
+    const scrollY = window.scrollY + 120;
+    let activeId = null;
+
+    for (const id of allSectionIds) {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) {
+        activeId = id;
+      }
+    }
+
+    if (activeId === currentActiveSection) return;
+    currentActiveSection = activeId;
+
+    // Update game/section links
+    document.querySelectorAll('.snav-game-link').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + activeId);
+    });
+
+    // Update category buttons and auto-expand active category
+    if (activeId) {
+      const cat = gameCatMap[activeId];
+      if (cat && cat !== currentActiveCat) {
+        currentActiveCat = cat;
+        document.querySelectorAll('.snav-cat-btn').forEach(btn => {
+          const isCat = btn.getAttribute('data-cat') === cat;
+          btn.classList.toggle('active', isCat);
+          if (isCat) {
+            const panel = document.getElementById('snav-' + cat);
+            const arrow = btn.querySelector('.snav-arrow');
+            if (panel && !panel.classList.contains('open')) {
+              panel.classList.add('open');
+              arrow.textContent = '▾';
+            }
+          }
+        });
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateScrollSpy, { passive: true });
+  updateScrollSpy();
+</script>
+</body>
+</html>
