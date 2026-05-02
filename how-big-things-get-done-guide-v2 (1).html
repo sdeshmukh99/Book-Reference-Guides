@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Big Things Get Done — Learning Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --bg-warm: #f4efe6;
+    --bg-card: #ffffff;
+    --gold: #b8943a;
+    --gold-light: #d4aa55;
+    --gold-pale: #f5ecd7;
+    --gold-rule: #d4aa5540;
+    --text: #2a2318;
+    --text-mid: #4a3f30;
+    --text-soft: #7a6e5f;
+    --accent: #8b2e12;
+    --nav-bg: #f9f5ee;
+    --nav-border: #e0d5c1;
+    --nav-text: #5a4e3a;
+    --nav-active: #b8943a;
+    --card-shadow: 0 2px 16px rgba(42,35,24,0.08);
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'Source Serif 4', Georgia, serif;
+    --nav-width: 230px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  /* ─── LAYOUT ─────────────────────────────── */
+  .main-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2.5rem 6rem;
+  }
+
+  @media (min-width: 1120px) {
+    body { padding-right: calc(var(--nav-width) + 2rem); }
+    .main-wrap { max-width: 820px; }
+  }
+
+  /* ─── HERO ────────────────────────────────── */
+  .hero {
+    background: var(--text);
+    color: var(--bg-warm);
+    padding: 4.5rem 2.5rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(184,148,58,0.04) 60px,
+        rgba(184,148,58,0.04) 61px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(184,148,58,0.04) 60px,
+        rgba(184,148,58,0.04) 61px
+      );
+    pointer-events: none;
+  }
+
+  .hero-inner { max-width: 700px; position: relative; }
+
+  .hero-label {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero h1 span { color: var(--gold-light); }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #c8bfad;
+    margin-bottom: 1.8rem;
+    font-weight: 300;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: #a89880;
+    border-top: 1px solid rgba(184,148,58,0.3);
+    padding-top: 1.2rem;
+    max-width: 540px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ─── TYPOGRAPHY ─────────────────────────── */
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 3.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold-rule);
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2.2rem 0 0.7rem;
+  }
+
+  p { margin-bottom: 1.1rem; color: var(--text-mid); }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--text); font-weight: 600; }
+
+  blockquote {
+    margin: 1.8rem 0;
+    padding: 1.2rem 1.5rem;
+    border-left: 3px solid var(--gold);
+    background: var(--gold-pale);
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 0.98rem;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── TOC ────────────────────────────────── */
+  .toc-section {
+    background: var(--bg-warm);
+    border: 1px solid var(--nav-border);
+    border-radius: 6px;
+    padding: 2rem 2.2rem;
+    margin: 2.5rem 0;
+  }
+
+  .toc-section h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom-color: var(--gold-rule);
+  }
+
+  .toc-group { margin-bottom: 1.2rem; }
+
+  .toc-group-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-family: var(--body);
+  }
+
+  .toc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .toc-links a {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .toc-links a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ─── CARDS ──────────────────────────────── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    border-top: 3px solid var(--gold);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 1.4rem 1.6rem 1rem;
+    border-bottom: 1px solid #f0ebe0;
+  }
+
+  .card-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    font-family: var(--body);
+  }
+
+  .card-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-tagline {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    font-family: var(--body);
+  }
+
+  .card-rows { padding: 0; }
+
+  .card-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    border-bottom: 1px solid #f5f0e8;
+    padding: 0.8rem 1.6rem;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .card-row:last-child { border-bottom: none; }
+
+  .card-row-key {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 600;
+    font-family: var(--body);
+    padding-top: 0.1rem;
+  }
+
+  .card-row-val {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* ─── SUPPLEMENTARY ──────────────────────── */
+  .supp-card {
+    background: var(--bg-warm);
+    border-left: 4px solid var(--accent);
+    padding: 1.4rem 1.8rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .supp-card h4 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .supp-card p { font-size: 0.93rem; }
+
+  /* ─── CLOSING / HEURISTICS ───────────────── */
+  .heuristic-list {
+    counter-reset: heur;
+    list-style: none;
+    margin: 1.2rem 0;
+  }
+
+  .heuristic-list li {
+    counter-increment: heur;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .heuristic-list li::before {
+    content: counter(heur, decimal-leading-zero);
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+    min-width: 24px;
+  }
+
+  .heuristic-list li span {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  .heuristic-list li strong { display: block; color: var(--text); margin-bottom: 0.15rem; }
+
+  /* ─── RETELL SECTION ──────────────────────── */
+  .retell {
+    background: var(--text);
+    color: #e8e0d0;
+    padding: 2.5rem 2.5rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+  }
+
+  .retell h2 {
+    color: var(--gold-light);
+    border-bottom-color: rgba(184,148,58,0.35);
+    font-size: 1.4rem;
+    margin-top: 0;
+  }
+
+  .retell-item {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: #c8c0b0;
+  }
+
+  .retell-item:last-child { border-bottom: none; }
+  .retell-item strong { color: #f0e8d0; }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    background: var(--bg-warm);
+    border-top: 1px solid var(--nav-border);
+    padding: 2rem 2.5rem;
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  footer strong { color: var(--text-mid); }
+
+  /* ─── DIVIDER ─────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-rule), transparent);
+    margin: 2.5rem 0;
+  }
+
+  /* ─── SECTION PADDING ─────────────────────── */
+  section { padding-top: 1rem; }
+
+  /* ─── NAVIGATOR — DESKTOP ────────────────── */
+  #site-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--nav-bg);
+    border-left: 1px solid var(--nav-border);
+    padding: 1.4rem 0 2rem;
+    font-family: var(--body);
+    font-size: 0.77rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--nav-border) transparent;
+  }
+
+  #site-nav::-webkit-scrollbar { width: 4px; }
+  #site-nav::-webkit-scrollbar-track { background: transparent; }
+  #site-nav::-webkit-scrollbar-thumb { background: var(--nav-border); border-radius: 2px; }
+
+  .nav-brand {
+    padding: 0 1.2rem 1rem;
+    border-bottom: 1px solid var(--nav-border);
+    margin-bottom: 0.8rem;
+  }
+
+  .nav-brand-title {
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--nav-text);
+    line-height: 1.3;
+  }
+
+  .nav-brand-sub {
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    margin-top: 0.2rem;
+  }
+
+  .nav-group { margin-bottom: 0.2rem; }
+
+  .nav-group-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--nav-text);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--body);
+    text-align: left;
+  }
+
+  .nav-group-toggle:hover { color: var(--gold); }
+
+  .nav-toggle-arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+    color: var(--gold);
+    font-size: 0.6rem;
+  }
+
+  .nav-group.open .nav-toggle-arrow { transform: rotate(90deg); }
+
+  .nav-group-items {
+    display: none;
+    flex-direction: column;
+    padding: 0.1rem 0 0.4rem;
+  }
+
+  .nav-group.open .nav-group-items { display: flex; }
+
+  .nav-link {
+    display: block;
+    padding: 0.3rem 1.2rem 0.3rem 1.8rem;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 0.76rem;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+
+  .nav-link:hover { color: var(--gold); background: rgba(184,148,58,0.06); }
+
+  .nav-link.active {
+    color: var(--nav-active);
+    border-left-color: var(--nav-active);
+    background: rgba(184,148,58,0.08);
+    font-weight: 600;
+  }
+
+  /* ─── NAVIGATOR — MOBILE ─────────────────── */
+  #mobile-nav-toggle {
+    display: none;
+  }
+
+  @media (max-width: 719px) {
+    body { padding-right: 0; }
+
+    #site-nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: auto;
+      max-height: none;
+      border-left: none;
+      border-bottom: 1px solid var(--nav-border);
+      flex-direction: column;
+      overflow: visible;
+      padding: 0;
+      z-index: 200;
+    }
+
+    #mobile-nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.7rem 1.2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--nav-text);
+    }
+
+    .mobile-toggle-icon {
+      font-size: 1.1rem;
+      color: var(--gold);
+      transition: transform 0.2s;
+    }
+
+    #site-nav.mobile-open .mobile-toggle-icon { transform: rotate(45deg); }
+
+    .nav-body {
+      display: none;
+      overflow-y: auto;
+      max-height: 70vh;
+      padding-bottom: 1rem;
+      background: var(--nav-bg);
+    }
+
+    #site-nav.mobile-open .nav-body { display: block; }
+
+    .nav-brand { display: none; }
+
+    /* ── Card rows stack vertically on mobile ── */
+    .card-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .card-row-key {
+      font-size: 0.68rem;
+      color: var(--gold);
+    }
+
+    .card-row-val {
+      font-size: 0.9rem;
+    }
+
+    .card-header {
+      padding: 1rem 1rem 0.8rem;
+    }
+
+    .main-wrap {
+      padding: 0 1rem 4rem;
+    }
+
+    h2 { font-size: 1.4rem; }
+
+    .hero { padding: 2.5rem 1rem 2rem; }
+
+    .toc-section { padding: 1.2rem 1rem; }
+
+    .supp-card { padding: 1rem 1.2rem; }
+
+    .retell { padding: 1.5rem 1rem; }
+  }
+
+  @media (min-width: 720px) and (max-width: 1119px) {
+    body { padding-right: 0; }
+    #site-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATOR ════════════════════════════════════════ -->
+<nav id="site-nav" role="navigation" aria-label="Page navigation">
+  <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="nav-body-inner">
+    How Big Things Get Done — Guide
+    <span class="mobile-toggle-icon">☰</span>
+  </button>
+
+  <div class="nav-body" id="nav-body-inner">
+    <div class="nav-brand">
+      <div class="nav-brand-title">How Big Things Get Done</div>
+      <div class="nav-brand-sub">Flyvbjerg &amp; Gardner · 2023</div>
+    </div>
+
+    <div class="nav-group open" id="navg-intro">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-intro">
+        <span class="nav-toggle-arrow">▶</span> Overview
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#hero">Title &amp; Guide</a>
+        <a class="nav-link" href="#core-theory">Core Theory</a>
+        <a class="nav-link" href="#toc">Table of Contents</a>
+      </div>
+    </div>
+
+    <div class="nav-group open" id="navg-biases">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-biases">
+        <span class="nav-toggle-arrow">▶</span> Biases &amp; Traps
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#optimism-bias">Optimism Bias</a>
+        <a class="nav-link" href="#planning-fallacy">Planning Fallacy</a>
+        <a class="nav-link" href="#uniqueness-bias">Uniqueness Bias</a>
+        <a class="nav-link" href="#wysiati">WYSIATI</a>
+        <a class="nav-link" href="#system1-system2">System 1 vs System 2</a>
+        <a class="nav-link" href="#strategic-misrep">Strategic Misrepresentation</a>
+        <a class="nav-link" href="#commitment-fallacy">The Commitment Fallacy</a>
+        <a class="nav-link" href="#lock-in">Lock-In &amp; Escalation</a>
+        <a class="nav-link" href="#sunk-cost">Sunk-Cost Trap</a>
+        <a class="nav-link" href="#fat-tails">Fat Tails &amp; Black Swans</a>
+        <a class="nav-link" href="#survivorship-bias">Survivorship Bias</a>
+        <a class="nav-link" href="#hiding-hand">Hirschman's Hiding Hand</a>
+        <a class="nav-link" href="#eternal-beginner">Eternal Beginner Syndrome</a>
+      </div>
+    </div>
+
+    <div class="nav-group open" id="navg-frameworks">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-frameworks">
+        <span class="nav-toggle-arrow">▶</span> Frameworks
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#iron-law">Iron Law of Megaprojects</a>
+        <a class="nav-link" href="#window-of-doom">Window of Doom</a>
+        <a class="nav-link" href="#think-slow-act-fast">Think Slow, Act Fast</a>
+        <a class="nav-link" href="#right-to-left">Right-to-Left Thinking</a>
+        <a class="nav-link" href="#pixar-planning">Pixar Planning</a>
+        <a class="nav-link" href="#frozen-experience">Frozen Experience</a>
+        <a class="nav-link" href="#rcf">Reference-Class Forecasting</a>
+        <a class="nav-link" href="#anchoring">Anchoring &amp; Adjustment</a>
+        <a class="nav-link" href="#black-swan-mgmt">Black Swan Management</a>
+        <a class="nav-link" href="#modularity">What's Your Lego?</a>
+        <a class="nav-link" href="#single-organism">Single Organism</a>
+        <a class="nav-link" href="#psych-safety">Psychological Safety</a>
+      </div>
+    </div>
+
+    <div class="nav-group open" id="navg-cases">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-cases">
+        <span class="nav-toggle-arrow">▶</span> Case Studies
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#case-empire-state">Empire State Building</a>
+        <a class="nav-link" href="#case-sydney-opera">Sydney Opera House</a>
+        <a class="nav-link" href="#case-guggenheim">Guggenheim Bilbao</a>
+        <a class="nav-link" href="#case-nepal">Nepal Schools</a>
+        <a class="nav-link" href="#case-pentagon">The Pentagon</a>
+        <a class="nav-link" href="#case-brooklyn">Brooklyn Renovation</a>
+        <a class="nav-link" href="#case-t5">Heathrow Terminal 5</a>
+        <a class="nav-link" href="#case-xrl">Hong Kong XRL</a>
+        <a class="nav-link" href="#case-electric-lady">Electric Lady Studios</a>
+        <a class="nav-link" href="#case-montreal">Montreal Olympics</a>
+        <a class="nav-link" href="#case-solar">Solar &amp; Wind / Ørsted</a>
+      </div>
+    </div>
+
+    <div class="nav-group open" id="navg-supp">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-supp">
+        <span class="nav-toggle-arrow">▶</span> Related Thinkers
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#kahneman">Kahneman: Inside vs Outside</a>
+        <a class="nav-link" href="#taleb">Taleb: Black Swans</a>
+        <a class="nav-link" href="#phronesis">Aristotle: Phronesis</a>
+      </div>
+    </div>
+
+    <div class="nav-group open" id="navg-close">
+      <button class="nav-group-toggle" aria-expanded="true" data-group="navg-close">
+        <span class="nav-toggle-arrow">▶</span> Closing
+      </button>
+      <div class="nav-group-items">
+        <a class="nav-link" href="#eleven-heuristics">Eleven Heuristics</a>
+        <a class="nav-link" href="#retell">Worth Retelling</a>
+        <a class="nav-link" href="#footer">Source</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════════════════ -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Learning Reference Guide</p>
+    <h1>How <span>Big Things</span><br>Get Done</h1>
+    <p class="hero-subtitle">The Surprising Factors Behind Every Successful Project,<br>from Home Renovations to Space Exploration</p>
+    <p class="hero-desc">A structured companion to the book by Bent Flyvbjerg &amp; Dan Gardner — covering every core concept, bias, framework, and case study so you can understand, explain, and apply the ideas without re-reading the book.</p>
+  </div>
+</header>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════ -->
+<main class="main-wrap">
+
+  <!-- ── CORE THEORY ─────────────────────────────────────── -->
+  <section id="core-theory">
+    <h2>Core Theory</h2>
+
+    <h3 id="ct-pattern">The Two Patterns: Think Fast Act Slow vs. Think Slow Act Fast</h3>
+    <p>Flyvbjerg's central observation is deceptively simple: most big projects fail because they do the planning phase too quickly and then stumble through delivery for years, sometimes decades. He calls this "Think Fast, Act Slow" — the pattern behind California's high-speed rail, the Sydney Opera House's construction crisis, and countless others that started with a rush of enthusiasm and then dragged on expensively into disaster.</p>
+    <p>Successful projects do the opposite. They invest serious time and effort in planning — testing ideas, stress-testing assumptions, asking hard questions, iterating on design — before a single shovel hits the ground. Then, once everything is worked out, they move fast through delivery. The Empire State Building was designed and built in under 18 months. The first iPod went from approved concept to shipping product in eight months. The common thread is not speed itself, but <strong>speed in the right phase</strong>.</p>
+    <p>The reason this matters so much is that mistakes in planning are cheap — you can erase a whiteboard. Mistakes in delivery are catastrophically expensive — you might have to dynamite months of tunnel work, or restart a nuclear power station, or walk away from a half-built Olympic stadium. Flyvbjerg calls the period of active delivery the "window of doom": you want it open as briefly as possible, which means being fully ready before you open it.</p>
+
+    <h3 id="ct-psychology-power">Psychology and Power as the Root Causes</h3>
+    <p>Two forces drive most project failures. The first is psychology — specifically optimism bias and uniqueness bias, which cause people to underestimate cost and time while overestimating what makes their project different from all the previous ones that failed. The second is power — the interests of politicians, executives, architects, and promoters who benefit from getting a project approved, regardless of whether it will succeed. These two forces combine in what Flyvbjerg calls the "iron law of megaprojects": over budget, over time, over and over again.</p>
+    <p>What makes this particularly insidious is that the people responsible for these failures are not necessarily lying or incompetent. Optimism bias is wired into human cognition. And strategic misrepresentation — deliberately underestimating costs to get a project approved — is so common in public infrastructure that even insiders treat it as a routine part of the game.</p>
+
+    <h3 id="ct-masterbuilder">The Masterbuilder Ideal</h3>
+    <p>Flyvbjerg argues that the single most important factor in project success is having the right leader — someone who combines deep technical knowledge, managerial skill, a bias toward delivery, and what Aristotle called <em>phronesis</em>: practical wisdom, the ability to know what is good and to actually get it done. He calls this person the "masterbuilder," drawing on the ancient tradition of individuals like the builders of Gothic cathedrals who understood every aspect of their project from stone to sky. Frank Gehry, who designed the Guggenheim Museum Bilbao, is his modern example: a creative genius who was also obsessively detail-oriented and iterative in his planning process.</p>
+    <p>The second-best option, when you cannot get a masterbuilder, is to get the masterbuilder's team — people who have done this specific kind of work many times before and whose experience is effectively frozen into their muscle memory and judgment.</p>
+
+    <h3 id="ct-experience">Experience as the Most Undervalued Asset</h3>
+    <p>Flyvbjerg distinguishes between two kinds of experience. "Frozen experience" is experience embedded in things: proven designs, standard components, off-the-shelf technology, and processes that have been refined over many repetitions. "Unfrozen experience" is the living knowledge that comes from doing something yourself. Both matter enormously, and both are routinely undervalued in big projects where novelty and uniqueness are treated as virtues rather than risks.</p>
+    <p>The single clearest predictor of project success, in his data, is the number of times a team has done a similar project before. Solar and wind power projects consistently come in on budget because the same basic technology is repeated at scale. Custom, one-of-a-kind infrastructure projects consistently fail because every decision is being made for the first time, with no prior experience to draw on.</p>
+
+    <h3 id="ct-modularity">Modularity as a Scaling Principle</h3>
+    <p>The most reliable way to build very large things is to build the same small thing many times. Flyvbjerg calls this "building with Lego." A solar farm is just thousands of identical solar panels. A server farm is thousands of identical servers. A modular housing project is the same unit, repeated. The key insight is that each repetition makes you faster, cheaper, and better, while each custom decision makes you slower, more expensive, and more error-prone. The projects that scale without breaking down are almost always built from modular, repeatable components — not custom-designed behemoths.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── TABLE OF CONTENTS ───────────────────────────────── -->
+  <section id="toc">
+    <div class="toc-section">
+      <h2>What's in This Guide</h2>
+
+      <div class="toc-group">
+        <p class="toc-group-label">Biases &amp; Cognitive Traps</p>
+        <div class="toc-links">
+          <a href="#optimism-bias">Optimism Bias</a>
+          <a href="#planning-fallacy">Planning Fallacy</a>
+          <a href="#uniqueness-bias">Uniqueness Bias</a>
+          <a href="#wysiati">WYSIATI</a>
+          <a href="#system1-system2">System 1 vs System 2</a>
+          <a href="#strategic-misrep">Strategic Misrepresentation</a>
+          <a href="#commitment-fallacy">The Commitment Fallacy</a>
+          <a href="#lock-in">Lock-In &amp; Escalation</a>
+          <a href="#sunk-cost">Sunk-Cost Trap</a>
+          <a href="#fat-tails">Fat Tails &amp; Black Swans</a>
+          <a href="#survivorship-bias">Survivorship Bias</a>
+          <a href="#hiding-hand">Hirschman's Hiding Hand</a>
+          <a href="#eternal-beginner">Eternal Beginner Syndrome</a>
+        </div>
+      </div>
+
+      <div class="toc-group">
+        <p class="toc-group-label">Frameworks &amp; Methods</p>
+        <div class="toc-links">
+          <a href="#iron-law">Iron Law of Megaprojects</a>
+          <a href="#window-of-doom">Window of Doom</a>
+          <a href="#think-slow-act-fast">Think Slow, Act Fast</a>
+          <a href="#right-to-left">Right-to-Left Thinking</a>
+          <a href="#pixar-planning">Pixar Planning</a>
+          <a href="#frozen-experience">Frozen Experience</a>
+          <a href="#rcf">Reference-Class Forecasting</a>
+          <a href="#anchoring">Anchoring &amp; Adjustment</a>
+          <a href="#black-swan-mgmt">Black Swan Management</a>
+          <a href="#modularity">What's Your Lego?</a>
+          <a href="#single-organism">Single Organism</a>
+          <a href="#psych-safety">Psychological Safety</a>
+        </div>
+      </div>
+
+      <div class="toc-group">
+        <p class="toc-group-label">Case Studies</p>
+        <div class="toc-links">
+          <a href="#case-empire-state">Empire State Building</a>
+          <a href="#case-sydney-opera">Sydney Opera House</a>
+          <a href="#case-guggenheim">Guggenheim Bilbao</a>
+          <a href="#case-nepal">Nepal Schools</a>
+          <a href="#case-pentagon">The Pentagon</a>
+          <a href="#case-brooklyn">Brooklyn Renovation</a>
+          <a href="#case-t5">Heathrow Terminal 5</a>
+          <a href="#case-xrl">Hong Kong XRL</a>
+          <a href="#case-electric-lady">Electric Lady Studios</a>
+          <a href="#case-montreal">Montreal Olympics</a>
+          <a href="#case-solar">Solar &amp; Wind / Ørsted</a>
+        </div>
+      </div>
+
+      <div class="toc-group">
+        <p class="toc-group-label">Related Thinkers</p>
+        <div class="toc-links">
+          <a href="#kahneman">Kahneman: Inside vs Outside View</a>
+          <a href="#taleb">Taleb: Black Swans &amp; Fat Tails</a>
+          <a href="#phronesis">Aristotle: Phronesis</a>
+        </div>
+      </div>
+
+      <div class="toc-group">
+        <p class="toc-group-label">Closing</p>
+        <div class="toc-links">
+          <a href="#eleven-heuristics">Eleven Heuristics</a>
+          <a href="#retell">Worth Retelling</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BIASES & TRAPS ──────────────────────────────────── -->
+  <section>
+    <h2>Biases &amp; Cognitive Traps</h2>
+    <p>These are the recurring failure modes that Flyvbjerg documents across thousands of projects. They operate whether the project is a kitchen renovation or a national railway. Understanding them is the first step to countering them.</p>
+
+    <div class="cards-grid">
+
+      <!-- OPTIMISM BIAS -->
+      <article class="card" id="optimism-bias">
+        <div class="card-header">
+          <div class="card-label">Cognitive Bias</div>
+          <div class="card-name">Optimism Bias</div>
+          <div class="card-tagline">We imagine the best-case future and call it the most likely one</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">When asked to estimate time or cost, people construct a mental image of the project going smoothly. That image excludes all the things that could go wrong — which are numerous — so the estimate reflects only the most favourable possible outcome, not the most probable one.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"If everything goes to plan, we can have this done in six months for $2 million." The phrase "if everything goes to plan" is doing enormous hidden work here — it's smuggling in the entire assumption that the best case will be the actual case.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">Projects approved on optimistic estimates are set up to fail from day one. The budget is too small, the timeline too short, and there is no room for any of the surprises that are statistically near-certain to occur. Cost overruns then look like bad management rather than bad forecasting.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Use reference-class forecasting — anchor your estimate to what similar projects actually cost, not what this one ideally should cost. The outside view systematically corrects for optimism bias because it is based on real outcomes, not imagined scenarios.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Before we finalize this estimate, let's find out what the last ten comparable projects actually cost when they were done — not what they were budgeted at."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- UNIQUENESS BIAS -->
+      <article class="card" id="uniqueness-bias">
+        <div class="card-header">
+          <div class="card-label">Cognitive Bias</div>
+          <div class="card-name">Uniqueness Bias</div>
+          <div class="card-tagline">We love our project too much to learn from other people's failures</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Every project has some genuinely unique features, but people systematically overestimate how much uniqueness matters. They use it as a reason to dismiss data from similar past projects — "this time is different" — which is exactly the moment the data becomes most necessary.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"I know other rail projects have overrun, but ours has a different team, a different region, a different technology. You can't compare them directly." The more clauses in that sentence, the more uniqueness bias is at work.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">When you refuse to see your project as "one of those," you forfeit all the hard-won knowledge embedded in the historical record. Even Daniel Kahneman — the world's foremost expert on cognitive bias — was unable to recognize it in himself when his textbook took eight years instead of the two he estimated.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Deliberately take the "outside view." Define the broadest reasonable class your project belongs to. Resist the urge to narrow the class definition to make your project seem special enough to justify adjusting the average upward.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What class of project does this belong to? And what does the data say about that class — not about our specific situation?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- STRATEGIC MISREPRESENTATION -->
+      <article class="card" id="strategic-misrep">
+        <div class="card-header">
+          <div class="card-label">Deliberate Bias</div>
+          <div class="card-name">Strategic Misrepresentation</div>
+          <div class="card-tagline">The first budget is a down payment, not a real estimate</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Promoters, politicians, and contractors deliberately underestimate costs and overestimate benefits to get approval for projects they want built. This is not incompetence — it is strategy. As one politician put it: "If people knew the real cost from the start, nothing would ever be approved."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"This is a once-in-a-generation opportunity. Based on current estimates, the total investment will be X." The word "estimates" is hiding the fact that the number was chosen for political palatability, not technical accuracy.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">Once a project is underway and the true costs emerge, it is almost always too late to walk away. The public has been misled into supporting something it never would have approved at the real price. The costs then spiral as the "start digging a hole" strategy kicks in.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Require reference-class forecasts as a condition of approval. Make it legally or contractually consequential to submit unrealistic estimates. Independent review bodies with teeth — and data — can catch strategic lowballing before commitments are made.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Before we vote on this, I want to see an independent reference-class analysis showing what this type of project has actually cost historically — not the promoter's projection."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- COMMITMENT FALLACY -->
+      <article class="card" id="commitment-fallacy">
+        <div class="card-header">
+          <div class="card-label">Trap</div>
+          <div class="card-name">The Commitment Fallacy</div>
+          <div class="card-tagline">Committing early to a vision before you understand the means is not boldness — it's recklessness</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">There is cultural pressure to commit early to a project — to signal confidence, to satisfy sponsors, to appear decisive. But Flyvbjerg argues that commitment should come after deep planning, not before it. Committing before you understand what you're committing to is the trap.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"We've made the decision. Now we need to make it work." The problem is that the decision was made with insufficient information, so "making it work" means constantly discovering that the original vision was unrealistic and improvising expensive solutions on the fly.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">Early commitment locks in a scope before it is properly understood. When reality bites — and it always does — the project either fails to deliver what was promised, or it delivers it at three times the original cost and years late, or both.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Treat planning as a phase with real budget, real time, and real deliverables. Make commitment to delivery contingent on completion of a thorough planning phase — with stress-tested budgets, a clear end-goal definition, and reference-class forecasts in hand.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"I'm committed to the goal. I am not yet committed to a specific approach or timeline — that comes after we've done the planning properly."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SUNK COST -->
+      <article class="card" id="sunk-cost">
+        <div class="card-header">
+          <div class="card-label">Trap</div>
+          <div class="card-name">The Sunk-Cost Trap</div>
+          <div class="card-tagline">Money already spent should never be the reason to keep spending more</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Sunk costs are money, time, and effort already spent. Logically, they are irrelevant to future decisions — you cannot get them back. But people are deeply reluctant to feel that those investments were "wasted," so they keep pouring resources into failing projects to justify the past expenditure.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"We've already put so much into this. We can't walk away now." This is the sunk-cost fallacy in its purest form — "driving into the blizzard" in Flyvbjerg's phrase, because you already paid for the tickets.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">Projects that should be stopped or radically restructured are instead kept alive indefinitely, consuming more and more resources, because stopping them feels like admitting the original decision was wrong. California's high-speed rail is Flyvbjerg's textbook example of escalated commitment driven by sunk costs.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">When evaluating whether to continue a troubled project, deliberately set aside what has been spent. Ask only: if we were starting fresh today, with what we now know, would we approve this project at the cost it would take to complete it? If the answer is no, that is the answer.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Let's run a fresh appraisal as if we had not started yet. What would we decide, based only on where we are and what it will cost to finish?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- FAT TAILS -->
+      <article class="card" id="fat-tails">
+        <div class="card-header">
+          <div class="card-label">Risk Concept</div>
+          <div class="card-name">Fat Tails &amp; Black Swans</div>
+          <div class="card-tagline">The worst-case scenario in most big projects is far worse than the word "overrun" suggests</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Most project risks are not normally distributed. They have "fat tails" — meaning catastrophically bad outcomes occur far more often than a standard bell curve would predict. IT projects can overrun by 400–500%. Nuclear storage can cost 238% more than budgeted. The Olympics have a 76% chance of landing in the tail. These aren't edge cases — they're base rates.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"There's always some risk of overrun, but we've planned for a 20% contingency." A 20% contingency sounds prudent until you realise that the reference class for this type of project has a mean overrun of 80% and a tail mean of 250%.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The damage</div>
+            <div class="card-row-val">Fat-tailed risk means that the expected outcome of a project — the average you'd get if you could run it many times — is much worse than the most likely single outcome. Because the bad outcomes are so extremely bad, they drag the average far up. Projects planned to "normal" contingency levels are systematically underprepared.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">For fat-tailed projects, don't just forecast risk — mitigate it. Identify the conditions that lead to tail outcomes and eliminate or reduce them before delivery begins. The Formula 1 pit-stop approach: have engineers and spare parts on hand before you need them, not after.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What's the tail risk here? Not the most likely outcome — what happened to the worst 25% of comparable projects? And what specific conditions drove those outcomes?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PLANNING FALLACY / HOFSTADTER'S LAW -->
+      <article class="card" id="planning-fallacy">
+        <div class="card-header">
+          <div class="card-label">Cognitive Bias</div>
+          <div class="card-name">The Planning Fallacy</div>
+          <div class="card-tagline">We systematically underestimate how long tasks take — even when we know we always underestimate</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Kahneman and Tversky coined this term to describe the universal tendency to underestimate the time, cost, and difficulty of future tasks while overestimating benefits. It applies to everyone — not just promoters with incentives to lowball. In one study, when people said they were 99% confident they would finish a task by a deadline, only 45% actually did. Douglas Hofstadter's Law captures this: "It always takes longer than you expect, even when you take into account Hofstadter's Law." The bias is self-aware and persists anyway.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it sounds</div>
+            <div class="card-row-val">"We'll have this done in six months." Followed, six months later, by "we're almost there — just a few more months." Followed by the same thing again. This is not lying. The estimates feel genuinely accurate when made. The problem is how they are constructed — always from a best-case mental scenario.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The root cause</div>
+            <div class="card-row-val">When people estimate, they construct a mental image of the project going smoothly and treat that as the most likely scenario. Because the image excludes every specific thing that could go wrong — and there are always many — the result is a best-case estimate presented as a central estimate. Reference-class forecasting directly addresses this by grounding estimates in what actually happened, not in mental simulations.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Never estimate a project solely by breaking it into tasks and adding them up. That method systematically produces best-case scenarios. Use reference-class data from comparable completed projects as your anchor instead.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Put the scenario aside. What did the last five projects like this actually cost and take? Start from there."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- WYSIATI -->
+      <article class="card" id="wysiati">
+        <div class="card-header">
+          <div class="card-label">Cognitive Bias</div>
+          <div class="card-name">WYSIATI — What You See Is All There Is</div>
+          <div class="card-tagline">The mind treats whatever information is currently in front of it as if it were all the information that exists</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Kahneman coined this phrase to describe the brain's default mode: building confident judgments from only the information currently available, without pausing to ask what might be missing. When planning a project, WYSIATI means focusing on what is visible — known tasks, current team, obvious costs — and treating that picture as complete, when it is not.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it matters for projects</div>
+            <div class="card-row-val">WYSIATI explains why optimism bias and uniqueness bias are so difficult to overcome. The information that supports a cautious view — reference-class data, failure statistics, comparable project histories — is not naturally in the room when project decisions are made. The information that is in the room — the exciting vision, the capable team, the backing stakeholders — all points toward optimism. The mind builds its case from what is present, not what is absent.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">Deliberately bring absent information into the room. Require reference-class data before any approval discussion. Assign someone to ask "what are we not looking at?" before any major commitment. Frank Gehry's habit of asking "why are you doing this project?" forces information to surface that instinct tends to skip.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Before we finalise this, what information are we not looking at that we probably should be?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SYSTEM 1 VS SYSTEM 2 -->
+      <article class="card" id="system1-system2">
+        <div class="card-header">
+          <div class="card-label">Psychology Framework</div>
+          <div class="card-name">System 1 vs System 2</div>
+          <div class="card-tagline">Fast, intuitive judgment is the default. Slow, careful analysis requires deliberate effort — and is easily skipped.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Psychologists Stanovich and West (made famous by Kahneman) distinguished two modes of thinking. System 1 is fast, automatic, intuitive — it delivers snap judgments that feel true without requiring effort. System 2 is slow, deliberate, analytical — it requires concentration. System 1 always delivers first, and System 2 often just endorses whatever System 1 concluded rather than checking it. Overconfident project estimates are System 1 working unopposed.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it matters for projects</div>
+            <div class="card-row-val">Most project failures start with System 1 decisions: a quick commitment to a site, a cost estimate that feels right, a lock-in to a technology before alternatives are explored. These don't feel like snap judgments. They feel thoroughly considered. But they are System 1 delivering confident results dressed up as analysis. Brehon Somervell's disastrous first Pentagon site selection is a pure example: first suitable option found, approved instantly, no alternatives explored.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The practical implication</div>
+            <div class="card-row-val">Never make irreversible project commitments — site, scope, technology, budget, timeline — on the basis of initial intuitive judgment alone. Design processes that require System 2 engagement: structured questioning, independent review, reference-class data. The countermeasures Flyvbjerg recommends are all, essentially, System 2 forcing functions.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"This feels right — which is exactly why we should slow down and check it against the data before committing."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- LOCK-IN AND ESCALATION OF COMMITMENT -->
+      <article class="card" id="lock-in">
+        <div class="card-header">
+          <div class="card-label">Trap</div>
+          <div class="card-name">Lock-In &amp; Escalation of Commitment</div>
+          <div class="card-tagline">Once the hole is dug, stopping feels more expensive than continuing — even when it isn't</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Lock-in is the point at which a project — regardless of its merits — becomes psychologically and politically impossible to stop. Strategic misrepresentation often aims deliberately at this point: get a small amount of work started, spend enough that stopping feels wasteful, then announce the true cost when walking away is no longer a real option. The film director Elia Kazan described the strategy bluntly: "Get the work rolling, involve actors contractually, build sets, collect props — once money in some significant amount has been spent, it will be difficult to do anything except scream and holler."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How it compounds</div>
+            <div class="card-row-val">Once locked in, decisions shift from "is this the best use of resources?" to "what do we need to do to protect what we've already invested?" This escalation of commitment turns a bad project into a catastrophically bad one. California's High-Speed Rail has been in this state for over a decade — no one will stop it because too much has been spent, even though completing it will cost far more than was ever approved.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Distinction from sunk cost</div>
+            <div class="card-row-val">Sunk cost is the cognitive bias that makes individuals feel they must continue. Escalation of commitment is the organisational and political phenomenon that results. Both stem from the same root, but escalation operates at the level of institutions, coalitions, and public opinion — not just individual psychology.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">The only reliable counter is serious independent scrutiny before lock-in. This is why thorough planning before commitment matters so much: problems surface when they can still be fixed, not when stopping means destroying careers and admitting public failure.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Are we continuing because the project makes sense, or because we've already spent money on it? Those are different questions."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SURVIVORSHIP BIAS -->
+      <article class="card" id="survivorship-bias">
+        <div class="card-header">
+          <div class="card-label">Cognitive Bias</div>
+          <div class="card-name">Survivorship Bias</div>
+          <div class="card-tagline">We celebrate projects that overcame chaos and succeeded — and forget the identical projects that simply failed</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What's happening</div>
+            <div class="card-row-val">Stories of projects that stumbled through chaos and succeeded — Jaws, the Sydney Opera House, Electric Lady Studios — are remembered precisely because they succeeded. Projects that stumbled through the same chaos and failed are forgotten. The result is a distorted picture in which "just start and figure it out" appears to work far more often than it actually does.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The data</div>
+            <div class="card-row-val">Flyvbjerg tested Hirschman's theory — which claimed that creative chaos typically leads to better-than-expected outcomes — against data from 2,062 projects. Only one in five produced a benefit overrun large enough to exceed the cost overrun, which is what Hirschman's theory predicts. Four out of five produced the opposite: costs exceeded expectations and benefits fell short. The stories that made Hirschman's argument look compelling were the 20%, not the 80%.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Dennis Hopper's second film</div>
+            <div class="card-row-val">Flyvbjerg's most pointed illustration: Hopper's first film — Easy Rider — was a global success made with an improvisational, chaotic approach. His second film, made the same way, was a disaster. No one remembers the title. Survivorship bias is why Easy Rider gets cited as evidence of chaos working, not as one data point in a distribution where chaos mostly fails.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to counter it</div>
+            <div class="card-row-val">When someone cites a famous success story to argue planning isn't necessary, ask about the base rate. For every project that overcame chaos and succeeded, how many tried the same approach and simply failed? The data almost always demolishes the argument.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"That's a compelling story. But before we use it as a model, how many projects took the same approach and didn't make it into the history books?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HIRSCHMAN'S HIDING HAND -->
+      <article class="card" id="hiding-hand">
+        <div class="card-header">
+          <div class="card-label">Contested Idea</div>
+          <div class="card-name">Hirschman's Hiding Hand — and Why It's Wrong</div>
+          <div class="card-tagline">The famous argument that ignorance unlocks creativity is a survivorship-bias story dressed up as social theory</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">The argument</div>
+            <div class="card-row-val">Economist Albert O. Hirschman argued in 1967 that ignorance of a project's real difficulties is a gift. If planners knew how hard it would be, they would never start. Instead they underestimate the difficulties, begin anyway, and then — backed against the wall — discover a creativity they didn't know they had. The project ends up better than originally planned. He called this the "Hiding Hand" — a providential force that conceals difficulty in order to enable progress. Malcolm Gladwell and Cass Sunstein celebrated the idea. The Brookings Institution reissued the book containing it as a classic in 2015.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why Flyvbjerg disagrees</div>
+            <div class="card-row-val">Hirschman based his entire argument on eleven case studies, all selected because they succeeded despite adversity. He had no data on projects that encountered the same adversity and simply failed. This is survivorship bias as the foundation of a social theory. When Flyvbjerg tested Hirschman's predictions against 2,062 projects, the results contradicted the theory at every turn. The typical project goes over budget and under-delivers on benefits — the exact opposite of what the Hiding Hand predicts.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The hidden cost of chaos</div>
+            <div class="card-row-val">Flyvbjerg illustrates the true cost with Jørn Utzon. Sydney got its opera house, but Utzon was fired mid-construction and never received another major commission. All the masterpieces he might have built were never built. These losses never appear on any spreadsheet. The "costs" of chaotic projects extend far beyond budget overruns, into careers ruined, opportunities lost, and projects never attempted because earlier failures used up all the goodwill and capital.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Where creativity actually belongs</div>
+            <div class="card-row-val">Hirschman was right that creativity is valuable. He was wrong about when it is most available. Stress, loss of control, and public scrutiny are conditions hostile to creativity. Projects in crisis are exactly where you want creativity least. Pixar's breakthroughs happen in the planning process — in safe, low-stakes iteration. Frank Gehry plans meticulously precisely to avoid desperate situations. Good planning doesn't obstruct creativity; it gives creativity a safe place to work.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ETERNAL BEGINNER SYNDROME -->
+      <article class="card" id="eternal-beginner">
+        <div class="card-header">
+          <div class="card-label">Structural Problem</div>
+          <div class="card-name">Eternal Beginner Syndrome</div>
+          <div class="card-tagline">When institutions are structurally designed to keep starting over from scratch, experience never accumulates</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Flyvbjerg coined this phrase to describe the Olympics. Because the Games rotate to a new host city every four years, and because the people who delivered the last Games are long gone — retired, in different roles, or dead — every new host city starts from zero. All the hard-won lessons from previous Games are not available to the current hosts. They are beginners, by institutional design. And they will always be beginners.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why the Olympics are the model case</div>
+            <div class="card-row-val">Every Olympic Games since 1960 for which data exists has gone over budget. The average overrun is 157% in real terms. The distribution is fat-tailed, meaning catastrophic overruns are common — Montreal 1976 went 720% over. This is not bad luck; it is the predictable outcome of a structure that eliminates experience at every cycle and combines it with pride, ambition for superlatives, and political pressure to spend lavishly.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it matters beyond sport</div>
+            <div class="card-row-val">Any organisation that routinely restructures, rotates leaders, or brings in new teams for each major project faces a version of the same problem. Experience is discarded. Projects that should get easier keep being treated as first-time challenges. The informal knowledge of what works, the personal networks, the refined judgment — all lost. Organisations that prize novelty over experience pay a recurring price.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The fix</div>
+            <div class="card-row-val">Deliberately preserve and transfer experience across projects. Build project databases. Keep experienced people engaged across multiple delivery cycles, not just within one. For the Olympics, Flyvbjerg suggests a permanent or small rotating host arrangement. Politics prevents it. Taxpayers pay for the alternative.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── FRAMEWORKS ──────────────────────────────────────── -->
+  <section>
+    <h2>Frameworks &amp; Methods</h2>
+    <p>These are the tools Flyvbjerg recommends. Each one is a direct counterweight to one or more of the biases above.</p>
+
+    <div class="cards-grid">
+
+      <!-- THINK SLOW ACT FAST -->
+      <article class="card" id="think-slow-act-fast">
+        <div class="card-header">
+          <div class="card-label">Core Framework</div>
+          <div class="card-name">Think Slow, Act Fast</div>
+          <div class="card-tagline">Invest heavily in planning. Then sprint through delivery.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Planning is not the annoying delay before the "real" work starts — it is the real work. Every hour spent stress-testing a plan is worth many hours of expensive, irreversible action in delivery. Once you are confident the plan is right, move fast: a long delivery phase accumulates risk, changes in personnel, political interference, and external shocks.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The model</div>
+            <div class="card-row-val">The Empire State Building: 18 months from first sketch to opening ceremony. Before any construction began, the architects knew every beam length, rivet count, and limestone block. They built it entirely on paper first. The physical construction was almost anti-climactic — it went exactly as planned, and came in 17% under budget.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">Keeps the "window of doom" — the period of active delivery, when expensive surprises can occur — as short as possible. Reduces the opportunity for political interference, scope creep, and external shocks to derail the project.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The test</div>
+            <div class="card-row-val">Before starting delivery, ask: if the worst happened tomorrow — key person leaves, supplier fails, major site discovery — do we have a clear plan for that? If the answer is no for any critical dependency, you are not done planning.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"We are not starting construction until the plan is complete enough that we can answer any question about any phase without improvising."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- RIGHT TO LEFT -->
+      <article class="card" id="right-to-left">
+        <div class="card-header">
+          <div class="card-label">Planning Method</div>
+          <div class="card-name">Right-to-Left Thinking</div>
+          <div class="card-tagline">Start by defining the end — then work backwards to decide if the means are right</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Most planning is done left-to-right: here's what we want to do, now let's figure out how. Flyvbjerg argues this is backwards. The first question should be: what specific outcome do we actually want at the end? Only when that is precisely defined — placed "in the box on the right" — can you evaluate whether any given approach will actually get you there.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The model</div>
+            <div class="card-row-val">Frank Gehry begins every architecture project with long conversations about what the client actually wants to experience or achieve — not what the building should look like. The design emerges from that understanding. He also asks: what makes you want to build anything at all? Strip away the assumptions until you reach the real goal.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">Prevents the most common and expensive form of scope creep: mid-project discovery that the original plan does not actually achieve the desired outcome. When the goal is clearly defined upfront, every subsequent decision — spend more, scope change, delay — can be evaluated against it.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The test</div>
+            <div class="card-row-val">Can you write the goal in a single, unambiguous sentence that everyone on the project agrees on? If not, the "why" has not been resolved. Keep asking "why?" until the answer is concrete enough to evaluate.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Before we discuss how, let's get very precise about what we are actually trying to achieve — and why that specific outcome matters."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PIXAR PLANNING -->
+      <article class="card" id="pixar-planning">
+        <div class="card-header">
+          <div class="card-label">Planning Method</div>
+          <div class="card-name">Pixar Planning</div>
+          <div class="card-tagline">Try, learn, adjust. Don't try to get it right — try to get it less wrong, faster.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Humans are bad at getting things right the first time, but excellent at iterating. Pixar makes animated films that often run over budget and timeline — but all of that happens in the planning phase, using sketches, storyboards, and rough cuts that are cheap to discard. By the time production begins, everything has been tested many times. The expensive phase is never where the learning happens.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The contrast</div>
+            <div class="card-row-val">The Sydney Opera House did the opposite: construction began before the structural engineering had been worked out. The iconic roof shells were designed before anyone knew how to build them. The result was years of expensive demolition and rework — learning that should have happened on paper, done instead in concrete and steel.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">By making iteration cheap during planning — through models, simulations, prototypes, and minimum viable tests — you discover what doesn't work before it is expensive to change. The plan that reaches delivery is one that has already failed many times in safe conditions.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to apply it</div>
+            <div class="card-row-val">Ask: what is the cheapest way to test whether this idea actually works? Use that method first, at every stage. A physical model before an architectural drawing. A paper prototype before a software build. A pilot project before a national rollout.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Before we build this at full scale, how do we test the riskiest assumption at the smallest possible cost?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- REFERENCE CLASS FORECASTING -->
+      <article class="card" id="rcf">
+        <div class="card-header">
+          <div class="card-label">Forecasting Method</div>
+          <div class="card-name">Reference-Class Forecasting</div>
+          <div class="card-tagline">Your project is "one of those." Use what those cost to estimate what yours will.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Instead of estimating a project by breaking it into tasks and adding them up (which just produces a sophisticated best-case scenario), identify the class of projects yours belongs to and use the historical average actual cost as your starting anchor. Adjust up or down only when there are clear, data-backed reasons to do so. Never adjust based on a feeling that your project is special.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it works</div>
+            <div class="card-row-val">Historical data from completed projects already reflects everything that actually happened to those projects — including the unknown unknowns that could not have been predicted. The reference class is a statistical encoding of all the surprises that actually occurred. When you anchor to it, those surprises are baked into your estimate automatically.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">Daniel Kahneman called this "the single most important piece of advice" for improving forecast accuracy. Independent studies have found it improves accuracy by 30–100+ percentage points over conventional methods. It is now mandatory for major government projects in several countries.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to apply it</div>
+            <div class="card-row-val">Define your project's class broadly. Gather data on what that class of projects actually cost. Use the mean as your anchor. Only adjust if there are specific, data-backed reasons — and even then, adjust minimally. When in doubt, use the mean as-is.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What is the class of projects this belongs to, and what is the historical average actual cost for that class? That is our starting number."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- WHAT'S YOUR LEGO -->
+      <article class="card" id="modularity">
+        <div class="card-header">
+          <div class="card-label">Scaling Framework</div>
+          <div class="card-name">What's Your Lego?</div>
+          <div class="card-tagline">Big is best built from small, repeated things — not from one giant custom thing</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">The most powerful and reliable way to build at scale is to identify the smallest repeatable unit — the "Lego brick" — and multiply it. A solar farm is thousands of identical panels. A container shipping network is millions of identical steel boxes. Each repetition makes the unit cheaper, faster to produce, and more reliable. Bespoke one-off design has the opposite characteristics.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it matters</div>
+            <div class="card-row-val">Solar and wind power have the lowest cost overruns of any infrastructure type in Flyvbjerg's database — and they also happen to be the most modular. Nuclear power has among the highest overruns — and it requires enormous, unique, custom-built facilities. This is not a coincidence. Modularity is the mechanism by which experience is preserved and multiplied.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">Modular projects can be tested at small scale, adjusted, and then scaled. If something goes wrong, only one unit is affected, not the whole. Speed increases as teams learn. Costs decline as procurement improves. The curve bends in the right direction.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to apply it</div>
+            <div class="card-row-val">Ask what the basic repeatable building block of your project is. If there isn't one, ask whether the project could be redesigned around one. If bespoke design is essential, build the bespoke parts as late as possible and surround them with as many standardised components as you can.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What is the standard repeatable unit here, and how do we design the project so it's built from multiples of that, rather than a single custom whole?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SINGLE ORGANISM -->
+      <article class="card" id="single-organism">
+        <div class="card-header">
+          <div class="card-label">Leadership Framework</div>
+          <div class="card-name">A Single, Determined Organism</div>
+          <div class="card-tagline">A project team that doesn't row in the same direction doesn't move forward</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">In delivery, the entire team — from the project leader to the most junior worker — must be oriented toward one thing: getting the project done. Flyvbjerg draws on the example of Heathrow Terminal 5, one of the largest and most complex construction projects in recent history, delivered on time and budget largely because its leader, Andrew Wolstenholme, kept every single decision connected to the outcome on the right.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">What breaks it</div>
+            <div class="card-row-val">Projects fail when subteams optimise for their own metrics, when contractors have incentives misaligned with the project owner, when leaders spend energy managing politics rather than clearing obstacles, and when no one person has the authority and accountability to make final calls quickly.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The payoff</div>
+            <div class="card-row-val">When a team functions as a single organism, problems are surfaced and solved faster, miscommunication is reduced, and morale feeds on itself — progress creates momentum. The negative equivalent also applies: failure creates recrimination, which causes more failure. Getting the organisation into an upward spiral versus a downward one is a leadership function, not an administrative one.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How to apply it</div>
+            <div class="card-row-val">Align all contracts and incentives toward delivery, not toward individual departmental metrics. Create "inchstones" — frequent, specific milestones that make progress immediately visible and ensure accountability is personal and prompt. Celebrate progress loudly; address failures early and without blame-seeking.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Whatever you're doing today — is it directly contributing to the outcome we defined at the start? If not, what would be?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- IRON LAW OF MEGAPROJECTS -->
+      <article class="card" id="iron-law">
+        <div class="card-header">
+          <div class="card-label">Core Concept</div>
+          <div class="card-name">The Iron Law of Megaprojects</div>
+          <div class="card-tagline">Over budget, over time, under benefits, over and over again</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Flyvbjerg's database of 16,000+ projects across 136 countries and 20+ project types reveals a consistent pattern: only 8.5% of projects hit both budget and schedule targets. A mere 0.5% succeed on all three dimensions — cost, time, and benefits. Put the other way: 91.5% go over budget or schedule or both. 99.5% go over budget, over schedule, under benefits, or some combination. This is not occasional failure — it is the near-universal norm.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why "iron"</div>
+            <div class="card-row-val">The word is deliberate. Flyvbjerg is not saying projects often fail. He is saying that failure is so reliable, across so many different project types, countries, and decades, that it operates like a law of physics — not inevitable in any individual case, but a near-certainty in any large sample. Most project management literature ignores this systemic reality and focuses on improving individual project outcomes, missing the structural causes.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The data</div>
+            <div class="card-row-val">Transportation projects between 1910 and 1998 averaged 28% cost overrun. Rail projects averaged 45%. Nuclear power averages 120%. The Olympics average 157%. IT projects have 18% in the fat tail with a mean overrun of 447% in the tail. The numbers worsen further when earlier baseline dates are used or inflation is included. And these figures reflect only the projects that were completed — failed projects that were abandoned are often not counted.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">What it implies</div>
+            <div class="card-row-val">Most project planning treats failure as an exception to be explained away. The Iron Law suggests the opposite: success is the exception to be explained. Any project that delivers as promised should be studied intensively to understand what made it different. The default expectation should be that something will go wrong — not as pessimism but as a baseline for honest risk management.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- WINDOW OF DOOM / BREAK-FIX CYCLE -->
+      <article class="card" id="window-of-doom">
+        <div class="card-header">
+          <div class="card-label">Risk Concept</div>
+          <div class="card-name">The Window of Doom &amp; the Break-Fix Cycle</div>
+          <div class="card-tagline">Delivery is a window left open for catastrophe. The longer it is open, the more can fly in.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">The window of doom</div>
+            <div class="card-row-val">Think of project delivery as an open window. While it is open — while the project is ongoing — anything can crash through: a pandemic, an election, a financial crisis, a key person leaving, a flood, an unexpected geological discovery, a supply chain disruption. The longer delivery takes, the longer the window is open. Even trivial events can cascade through a long delivery phase into catastrophic outcomes: Flyvbjerg's example is the Ever Given container ship, whose grounding was caused by gusts of wind in the Egyptian desert but halted $10 billion per day in global trade.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The break-fix cycle</div>
+            <div class="card-row-val">Rushed or superficial planning means problems overlooked in planning will surface during delivery. Fixing them while real money is being spent creates new problems. Each problem attracts management attention but generates delays, which cause cost overruns, which generate pressure to cut corners, which cause more problems. The project gets stuck in a self-reinforcing downward spiral: one problem creates another, each one harder to address than the last. "Projects don't go wrong," Flyvbjerg writes. "They start wrong."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The solution</div>
+            <div class="card-row-val">Close the window as quickly as possible by speeding up delivery — not by rushing planning, but by doing planning so thoroughly that delivery can proceed quickly and smoothly. A project that takes 18 months to deliver has a 18-month window. A project that takes 18 years has an 18-year window. Everything Flyvbjerg recommends — Pixar planning, reference-class forecasting, experienced teams, modular design — ultimately aims at making delivery faster, thereby closing the window sooner.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Every month this project remains in delivery, it is exposed to another month of potential black swans. What are we doing to ensure delivery is as short as possible?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- FROZEN EXPERIENCE -->
+      <article class="card" id="frozen-experience">
+        <div class="card-header">
+          <div class="card-label">Core Concept</div>
+          <div class="card-name">Frozen Experience</div>
+          <div class="card-tagline">Technology is not a neutral tool — it embodies all the experience that made it</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">The philosopher Friedrich von Schelling called architecture "frozen music." Flyvbjerg adapts this: technology is "frozen experience." Every proven design, standard component, and tested process embodies the accumulated learning of everyone who ever designed, built, and refined it. When you use proven off-the-shelf technology rather than bespoke custom design, you are drawing on that experience. When you insist on something novel, bespoke, or "first-ever," you are starting from zero experience — even if the people involved are experienced professionals.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why "new" is usually a red flag</div>
+            <div class="card-row-val">People treat novelty as a selling point for big projects — "unique," "first-ever," "custom-designed" are phrases meant to inspire confidence. Flyvbjerg argues they should inspire alarm. Novel technology is inexperienced technology. Seattle's SR-99 tunnel illustrates this: to build the world's biggest tunnel-boring machine, a one-of-a-kind machine was custom-ordered, broke down after 1,000 feet of a 9,000-foot tunnel, and cost $143 million to extract and repair. An off-the-shelf machine would have had decades of reliability behind it.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The first-mover advantage myth</div>
+            <div class="card-row-val">Private sector projects often argue that being first justifies the cost of inexperienced technology. Research contradicts this. Studies of pioneer vs settler companies across 500 brands in 50 categories found that nearly half of pioneers failed; only 8% of settlers did. Surviving pioneers captured 10% of their market on average; settlers captured 28%. The "first-mover advantage" is real in theory but routinely overwhelmed in practice by the advantage of learning from predecessors. Apple followed BlackBerry into smartphones and became the dominant player.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The prescription</div>
+            <div class="card-row-val">Use proven technology wherever possible. Remove the words "custom," "bespoke," and "unique" from your project vocabulary unless the project's core purpose absolutely requires them. The Empire State Building was built using proven technologies, keeping variety minimal, so workers could repeat and learn. The result was a story-per-day pace that has never been matched.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What technology for this is the most proven? How many times has it been used? Let's start from the most experienced option and move toward novel only if we must."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ANCHORING AND ADJUSTMENT -->
+      <article class="card" id="anchoring">
+        <div class="card-header">
+          <div class="card-label">Forecasting Concept</div>
+          <div class="card-name">Anchoring &amp; Adjustment</div>
+          <div class="card-tagline">Every estimate starts with a number — the anchor. The quality of the anchor determines the quality of the forecast.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Anchoring and adjustment is the mechanism by which almost all estimates are made. You start with some initial number — the "anchor" — and adjust up or down based on how your situation seems to differ from it. The problem: research shows that final estimates are reliably biased toward the anchor regardless of how irrelevant it is. In a famous Kahneman-Tversky experiment, a spinning wheel of fortune that landed on 10 caused people to estimate 25% of UN members are African; landing on 65 produced a median estimate of 45%. The wheel was obviously irrelevant, but it changed the estimate dramatically.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How bad anchors cause project failures</div>
+            <div class="card-row-val">When Flyvbjerg investigated why Hong Kong's XRL high-speed rail project failed to meet its schedule, he traced the root cause to a bad anchor: MTR's planners used their experience with ordinary urban rail as the reference point for a first-ever underground high-speed cross-border rail system. The result was a schedule that was structurally impossible to meet. Everyone who fell behind was blamed for the problem that the anchor had created before the first shovel moved. Robert Caro's seven-year biography estimated to take one year is the same error on an individual scale.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The fix</div>
+            <div class="card-row-val">Reference-class forecasting is, at its core, a method for choosing the right anchor. Instead of anchoring to your immediate experience, your gut feel, or whatever number first came to mind, you anchor to the historical mean actual cost of comparable completed projects. This is the best available proxy for what your project will actually cost — because it reflects everything that actually happened to those projects, including the unknowns.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"Where did this estimate start — what was the first number that came to mind, and why? Is that the right anchor, or should we be anchoring to the reference class instead?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- BLACK SWAN MANAGEMENT -->
+      <article class="card" id="black-swan-mgmt">
+        <div class="card-header">
+          <div class="card-label">Risk Framework</div>
+          <div class="card-name">Black Swan Management</div>
+          <div class="card-tagline">You cannot predict exactly how a project will blow up. You can identify the conditions that lead to blowups and remove them.</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">For fat-tailed projects, conventional contingency budgeting is not enough. A 20% contingency means nothing when the tail contains outcomes that are 200–700% over budget. Instead of trying to forecast the specific disaster, Flyvbjerg recommends studying the tail of the reference class — the projects that went catastrophically wrong — to identify the conditions that produced those outcomes, and then systematically eliminating or mitigating those conditions before delivery begins.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The HS2 example</div>
+            <div class="card-row-val">When Flyvbjerg's team studied the fat tail of high-speed rail projects for the UK's HS2 project (a £100 billion-plus rail line from London to northern England), they identified the conditions that had caused black swan blowouts in comparable projects. The causes were surprisingly ordinary: not terrorism or disasters, but compound effects of standard risks — archaeology discoveries, early delays, contractor failures, late design changes — piling onto an already-stressed project. The team developed specific mitigations for each and for their interactions.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The archaeology example</div>
+            <div class="card-row-val">In England, construction projects routinely uncover historic artefacts, which legally require work to stop until archaeologists can survey the site. On most projects, one such discovery is manageable. But on a large linear project like HS2 that cuts through miles of countryside and towns, multiple simultaneous discoveries can gridlock the project because there simply aren't enough archaeologists. The mitigation: put every qualified archaeologist in England on retainer before construction starts. Expensive, but far cheaper than halting a multi-billion-pound project.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The Formula 1 principle</div>
+            <div class="card-row-val">Flyvbjerg uses F1 pit stops as a model: every component that could fail has a spare, every engineer has a specific role, everything is rehearsed. When an XRL boring machine broke down, MTR waited for engineers and parts from the manufacturer. Flyvbjerg told them that time was as important to them as to an F1 team spending a hundred times less money — and they should have engineers and parts on hand rather than waiting. Black swan management is fundamentally about not waiting until disaster to realise you needed a Plan B.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"What conditions cause projects like ours to go truly catastrophically wrong — not just over budget, but fatally over budget? Can we eliminate any of those conditions now, before we start?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PSYCHOLOGICAL SAFETY -->
+      <article class="card" id="psych-safety">
+        <div class="card-header">
+          <div class="card-label">Team Concept</div>
+          <div class="card-name">Psychological Safety</div>
+          <div class="card-tagline">Bad news must travel fast — and that only happens when people feel safe to deliver it</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What it means</div>
+            <div class="card-row-val">Harvard professor Amy Edmondson's concept of psychological safety — the shared belief that a team is a safe place to speak up, raise concerns, and admit mistakes — was central to the success of Heathrow Terminal 5. BAA created an environment where every worker, from executives to labourers, felt backed up by the organisation if they raised a problem. This had a direct operational consequence: "bad news travelled fast," in Andrew Wolstenholme's words, meaning problems were caught and fixed before they compounded.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why its absence is catastrophic</div>
+            <div class="card-row-val">When people fear punishment for raising problems, they stay quiet. Problems that could have been fixed cheaply early in the project are hidden until they become too large to hide — at which point fixing them is catastrophically expensive. Jeff Bezos's Amazon Fire Phone failed in part for this reason: many employees had serious doubts about it, but "no one had been brave or clever enough to take a stand" against their leader. The result was hundreds of millions of dollars written off.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How T5 created it</div>
+            <div class="card-row-val">BAA made the conditions real, not aspirational. Toilets and showers on-site were the best anyone on the project had seen. Broken PPE was replaced immediately, no questions asked. When a worker's idea was adopted, it was adopted publicly. The workers felt the organisation meant what it said — and within a week of arriving, most had converted from the default cynicism of experienced construction workers to genuine commitment to the project.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Example phrase</div>
+            <div class="card-row-val">"When was the last time someone on this project raised a problem that the team didn't already know about? If that's not happening, bad news isn't travelling fast — and that's a risk."</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── CASE STUDIES ────────────────────────────────────── -->
+  <section>
+    <h2>Case Studies</h2>
+    <p>Flyvbjerg's arguments are grounded in data from thousands of projects, but his most instructive illustrations come from a handful of specific cases that demonstrate the principles in vivid, memorable ways.</p>
+
+    <div class="cards-grid">
+
+      <!-- EMPIRE STATE BUILDING -->
+      <article class="card" id="case-empire-state">
+        <div class="card-header">
+          <div class="card-label">Success Case</div>
+          <div class="card-name">The Empire State Building</div>
+          <div class="card-tagline">A global landmark built in 18 months, 17% under budget, on a fixed deadline</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">In 1929, Al Smith and financier John Raskob decided to build the world's tallest skyscraper in Manhattan. The total budget including demolition of the existing building: $50 million. Fixed opening date: May 1, 1931. Before construction started, the architects knew the precise count of every beam, rivet, limestone block, and window in the building. They built it entirely on paper first. The physical build was executed like a vertical assembly line, with teams learning and accelerating as they went — at peak, they completed a full storey of steel, concrete, and stone every single day.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The result</div>
+            <div class="card-row-val">Opened on schedule. Actual cost: $41 million — 17% under the $50 million budget. The building was also widely praised as architecturally beautiful, receiving the 1931 Medal of Honor from the New York chapter of the American Institute of Architects. Flyvbjerg uses it as the definitive example of Think Slow, Act Fast.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">Extreme thoroughness in planning makes delivery almost mechanical. The "vertical assembly line" metaphor is telling: the building was, in effect, a modular project with highly repeatable floors, executed by a team that got better with every repetition. Efficiency creates beauty as a byproduct.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SYDNEY OPERA HOUSE -->
+      <article class="card" id="case-sydney-opera">
+        <div class="card-header">
+          <div class="card-label">Cautionary Case</div>
+          <div class="card-name">The Sydney Opera House</div>
+          <div class="card-tagline">A transcendent architectural achievement that was also a catastrophic project failure — simultaneously</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">Jørn Utzon's design for the Sydney Opera House won an international competition in 1957. The building was expected to cost around $7 million and be completed in four years. It actually cost $102 million and took 14 years — a cost overrun of more than 1,400%. Part of the reason: Utzon began construction before the structural engineering was solved. The famous roof shells were designed without knowing how to build them. Months of concrete work had to be demolished and restarted when the engineering was finally figured out.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The twist</div>
+            <div class="card-row-val">Flyvbjerg uses this case with genuine ambivalence. The building is a masterpiece — a UNESCO World Heritage site, one of the most beloved buildings on Earth. But as a project, it was a disaster. His point: this outcome — accidental greatness paid for by catastrophic overruns — is not something you can plan for, replicate, or justify as a model. The Sydney Opera House succeeded despite its project management, not because of it.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">Committing to construction before the means are understood is "Think Fast, Act Slow" in action. The work that should have been done on paper was instead done in concrete and steel, at enormous cost. The lesson is not that creative projects should be avoided, but that creativity belongs in the planning phase — not in delivery.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- GUGGENHEIM BILBAO -->
+      <article class="card" id="case-guggenheim">
+        <div class="card-header">
+          <div class="card-label">Success Case</div>
+          <div class="card-name">Guggenheim Museum Bilbao</div>
+          <div class="card-tagline">One of the greatest buildings of the 20th century, delivered on time and budget — by a masterbuilder</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">Frank Gehry designed the Guggenheim Bilbao in the early 1990s. Unlike the Sydney Opera House, Gehry's process was obsessively iterative before construction began: detailed physical models, repeated revisions, thorough structural engineering worked out in parallel with the design. He used digital modelling software borrowed from the aerospace industry to resolve complex geometric forms before they were built. Construction began only when the design was fully resolved. The building was completed on time and on budget — a remarkable achievement for a project of this architectural complexity.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The contrast</div>
+            <div class="card-row-val">Both the Sydney Opera House and the Guggenheim Bilbao are considered among the greatest buildings of their era. One was a project disaster; one was a project success. The difference was entirely in the planning process — specifically, whether the hard creative and engineering problems were solved on paper or in construction.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">Ambition and creativity are not incompatible with rigorous planning. Gehry is Flyvbjerg's model of the masterbuilder: someone who brings both vision and the practical wisdom to test and refine that vision until it is buildable, before the first shovel moves.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- NEPAL SCHOOLS -->
+      <article class="card" id="case-nepal">
+        <div class="card-header">
+          <div class="card-label">Success Case</div>
+          <div class="card-name">Nepal Schools Project</div>
+          <div class="card-tagline">Twenty thousand schools, remote Himalayan terrain, delivered eight years ahead of schedule</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">In 1992, a Danish-led foreign aid consortium set out to build 20,000 schools and classrooms in Nepal's poorest and most remote regions. The project was expected to take 20 years. Bent Flyvbjerg was the planner. It finished on budget in 2004 — eight years early. The schools were earthquake-proof: when a massive earthquake struck Nepal in 2015, they stood while many other buildings collapsed. The project became a reference case for the Bill &amp; Melinda Gates Foundation.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it worked</div>
+            <div class="card-row-val">Flyvbjerg is candid that at the time he didn't think much of it — they just did what they said they would do. But looking back, the key factors were clear goal definition, a modular approach (repeatable school designs), experienced teams, and careful planning before delivery. It was also, crucially, a project without political incentives to misrepresent costs.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">The project was a genuine outlier — a big project that delivered as promised. But it was not a miracle. It was what happens when the basics are done right: a clear goal, modular design, honest forecasting, and experienced execution. The remarkable thing is how rarely this happens at scale.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SOLAR AND WIND / ORSTED -->
+      <article class="card" id="case-solar">
+        <div class="card-header">
+          <div class="card-label">Pattern Case</div>
+          <div class="card-name">Solar &amp; Wind Power — and the Ørsted Story</div>
+          <div class="card-tagline">The most reliable infrastructure projects in the world, because they are the most modular — and Denmark's transformation proves what scale looks like</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What the data show</div>
+            <div class="card-row-val">Solar power has an average cost overrun of 1% and wind power 13% — the lowest of any infrastructure category in Flyvbjerg's database. Nuclear power averages 120% overrun. Hydroelectric dams 75%. IT projects 73%. The pattern is direct: the more modular the technology, the better the outcomes. Solar and wind are also the only project types whose distribution curves are thin-tailed — meaning catastrophic overruns are structurally unlikely, not just uncommon.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it works</div>
+            <div class="card-row-val">A solar panel is the same whether it is the tenth or the ten-millionth produced. Every installation adds experience; every repetition improves procurement, logistics, and process. There are no unknown unknowns because the same unit has been installed millions of times before. Wind farms are assembled from four factory-built components — base, tower, nacelle, blades — clicked together on-site. Each string of turbines can start generating electricity the moment it is connected. Scaling up is adding more of the same.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The Ørsted transformation</div>
+            <div class="card-row-val">In 2009, Anders Eldrup, CEO of DONG Energy (a Danish fossil fuel company), announced at the UN Copenhagen climate conference that his company — then 85% fossil and 15% renewable — would reverse those numbers within a generation. Most observers thought it was impossible; the technology was immature and too expensive. Within ten years, the company had achieved its "85/15 plan" — fifteen years ahead of schedule. It renamed itself Ørsted (after the Danish physicist who discovered electromagnetism) and is now a global leader in offshore wind. Over the same decade, Denmark's electricity supply went from 72% fossil fuels and 18% wind to 24% fossil fuels and 56% wind. Some days, Danish turbines produce more electricity than the country can use.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How costs fell</div>
+            <div class="card-row-val">The target was a 35-40% cost reduction in offshore wind over seven years. It happened in four, with a 60% reduction. Turbines grew from roughly the height of the Statue of Liberty (powering 1,500 homes) to nearly double that height (powering 7,100 homes). The Hornsea offshore wind farm off England's coast, completed in 2020, covers an area larger than New York City's five boroughs. Economies that took solar and wind seriously early are now exporters of expertise. Jutland, Denmark — where people first tinkered with turbines in garages in the 1970s — is now the Silicon Valley of wind energy.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The climate implication</div>
+            <div class="card-row-val">Flyvbjerg argues that the climate crisis is an argument about project delivery, not just policy. Getting to net zero by 2050 requires wind power to grow elevenfold and solar twentyfold by that date, with investment in renewables tripling by 2030. This scale of deployment is only possible with modular, repeatable technologies that can be assembled fast, cheaply, and reliably. Nuclear and hydroelectric projects are too slow to help by 2030. The choice of project delivery model is, at this scale, a civilisational decision.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- THE PENTAGON -->
+      <article class="card" id="case-pentagon">
+        <div class="card-header">
+          <div class="card-label">Cautionary Case</div>
+          <div class="card-name">The Pentagon — Somervell's Rush</div>
+          <div class="card-tagline">The world's most famous office building nearly ended up in the worst possible place — because of a one-week planning process</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">In July 1941, with World War II approaching and the War Department needing new headquarters urgently, Brigadier General Brehon Somervell gave his staff a Thursday evening briefing: design a 500,000 square-foot building by Monday morning. His staff found a site at Arlington Farm, noted it had an irregular five-sided shape due to surrounding roads, and designed the building to fit — producing what they called a "misshapen pentagon." On Monday, Somervell took the plan to the Secretary of War, then to a Congressional subcommittee, then to the Cabinet including the President. All approved within one week. No alternatives were considered.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The problem</div>
+            <div class="card-row-val">The Arlington Farm site was directly adjacent to Arlington National Cemetery, with sweeping views of Washington's most iconic monuments. Building a massive, ugly flat-roofed office complex there would have destroyed one of America's most sacred and beautiful vistas. An editorial called it "an act of vandalism." A better site — the Quartermaster Depot, just half a mile away — met all technical requirements and left the cemetery vista intact. No one had looked for it because no one had been asked to look.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The resolution</div>
+            <div class="card-row-val">A determined group of critics eventually forced the issue to the President. In a car with Roosevelt, Somervell still argued for the original site. "My dear general," Roosevelt said, "I'm still commander-in-chief of the Army." The project moved to the Quartermaster Depot site, where the Pentagon stands today. A happy outcome — but only because a critic happened to be the President's uncle, a coincidence that does not occur in most projects.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">Somervell, Roosevelt, the Secretary of War, and a Congressional subcommittee were all accomplished people making an obviously poor decision. They weren't incompetent — they were operating with System 1 under urgency, not looking for alternatives because none had been offered. "Here was another example of acting before thinking," wrote Roosevelt's Secretary of the Interior in his diary. Words that apply with depressing frequency to big projects.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- BROOKLYN RENOVATION -->
+      <article class="card" id="case-brooklyn">
+        <div class="card-header">
+          <div class="card-label">Cautionary Case</div>
+          <div class="card-name">David and Deborah's Brooklyn Renovation</div>
+          <div class="card-tagline">A $170,000 kitchen renovation that became an $800,000 whole-building catastrophe — caused by starting without a real goal</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">David and Deborah owned the bottom two floors of a 19th-century Brooklyn townhouse. They decided to renovate their tiny kitchen for $170,000. They hired an experienced architect who produced detailed drawings. Construction started. The contractor found the floor had no structural support and had to install steel beams. Since the floor was coming out anyway, why not replace the ugly floorboards throughout? And since workers were already there, why not fix the fireplace too? And move the powder room? Each change was reasonable. Each led logically to the next. Total final cost: approximately $800,000, with 18 months of displacement instead of 3.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The root cause</div>
+            <div class="card-row-val">They started with an answer — "renovate the kitchen" — rather than a question: "what do we actually want to achieve in this home, and what is the most efficient way to get there?" If they had asked that question at the start, the logic of a whole-apartment renovation would have surfaced in a conversation, not in a construction zone. One plan, one filing with the city, work done in the most efficient order. Instead, they discovered their real project one expensive discovery at a time, always with workers already on site.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The postscript</div>
+            <div class="card-row-val">The neighbours upstairs — who had watched the whole nightmare — then decided to renovate their floors the same way, with the same contractor. Same approach, same results: two more agonising years. At one point David spent three months in the dark because plywood covered his windows while the upstairs work continued. Work done in his apartment had to be torn out and redone to accommodate the upstairs renovation. Total spent by both households on a house that should have been renovated once, together, from the start: approaching $1 million each.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The lesson</div>
+            <div class="card-row-val">The architect's work was detailed, careful, and painstaking — but it was too narrowly focused. Starting with the right question ("why are you doing this, and what exactly do you want when it's done?") costs nothing and saves everything. "It was only a small kitchen renovation, after all. What could go wrong?"</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HEATHROW TERMINAL 5 -->
+      <article class="card" id="case-t5">
+        <div class="card-header">
+          <div class="card-label">Success Case</div>
+          <div class="card-name">Heathrow Terminal 5</div>
+          <div class="card-tagline">The largest freestanding structure in the UK, opened on time and budget by creating a project identity that united thousands of workers</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">The challenge</div>
+            <div class="card-row-val">In 2001, the British Airports Authority (BAA) announced it would build Terminal 5 at Heathrow — 3.8 million square feet, 53 gates, multiple support buildings, a new rail connection, and an air traffic control tower, all built between two runways without shutting the airport for a minute. Opening date declared publicly in 2001: March 30, 2008, at 4:00 A.M. BAA's own reference-class analysis showed that typical performance would mean a one-year delay and $1 billion overrun — an overrun that could sink the company.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How they did it — planning</div>
+            <div class="card-row-val">T5 was planned using detailed digital simulations before any construction. The approach was "design for manufacture and assembly" — components were manufactured to precise digital specifications in factories, then shipped to the site and assembled rather than built. This was closer to an assembly operation than a traditional construction site, reducing on-site complexity dramatically.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">How they did it — team</div>
+            <div class="card-row-val">Project leader Andrew Wolstenholme led a deliberate campaign to make every worker — from executives to the person sweeping the runway — feel they were part of one team. The message: "Take off your cap badge and throw it away. You work for T5." BAA assumed financial risk rather than pushing it to contractors, aligning everyone's incentives with delivery rather than self-protection. On-site facilities were the best workers had ever seen — toilets, showers, PPE replacement — treating respect for workers as a project management tool, not a perk.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The result</div>
+            <div class="card-row-val">T5 opened three days early, on budget, at 4:00 A.M. March 27, 2008. The coffee was hot. The terminal has since been voted one of the world's best airports six times in its first eleven years. Workers wore T5 gear in the pub after work — not because they were asked to, but because they wanted to. Thirteen years later, a supervisor interviewed for the book still had wistfulness in his voice. "I loved it."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The contrast</div>
+            <div class="card-row-val">Simultaneously, the new Wembley Stadium — a project that should have inspired equally strong national pride — was plagued with conflict, work stoppages, and worker resentment. It opened years late and doubled in cost. Same industry, same country, same era, radically different outcomes. The difference was in how people were treated and what they were united around.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HONG KONG XRL -->
+      <article class="card" id="case-xrl">
+        <div class="card-header">
+          <div class="card-label">Recovery Case</div>
+          <div class="card-name">Hong Kong XRL — Reference Class in Action</div>
+          <div class="card-tagline">A failed project rescued by diagnosing the real problem: not bad delivery, but a bad forecast</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">The failure</div>
+            <div class="card-row-val">In 2011, Hong Kong's Mass Transit Railway (MTR) began construction on XRL — the world's first fully underground high-speed cross-border rail line, including the largest underground high-speed station on earth. By 2015 (the projected completion year), less than half the work was done with more than half the budget spent. A tunnel-boring machine had flooded. The CEO and project director resigned. Flyvbjerg was called in.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The diagnosis</div>
+            <div class="card-row-val">The obvious diagnosis — bad delivery — was wrong. Flyvbjerg's team traced the failure to an event years before construction started: the forecasting. MTR had anchored its schedule and budget to its experience with ordinary urban rail, not to the class of projects XRL actually belonged to. The result was a schedule that was structurally impossible to meet from day one. Workers and managers were blamed for failures caused by an impossible target. "The project was doomed by a large underestimate. And the underestimate was caused by a bad anchor."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The fix</div>
+            <div class="card-row-val">Flyvbjerg's team built a reference-class forecast using 189 comparable projects — high-speed rail, tunnelling, and urban rail worldwide — that statistical tests confirmed were comparable to XRL. The new forecast showed that what MTR tried to do in four years should take six. The team then worked on risk mitigation (archaeology protocols, procurement escalation paths, CEO-to-CEO supplier communication) and invented "inchstones" — sub-milestone checkpoints so fine-grained that delays were visible immediately and accountability was personal and specific.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The outcome</div>
+            <div class="card-row-val">On September 22, 2018, the first bullet train slipped quietly into a tunnel and raced to mainland China. The project was completed on budget and three months ahead of the revised schedule. The turnaround from crisis to delivery took 90 intense days and nights of work.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ELECTRIC LADY STUDIOS -->
+      <article class="card" id="case-electric-lady">
+        <div class="card-header">
+          <div class="card-label">Chaos Case — Studied</div>
+          <div class="card-name">Electric Lady Studios</div>
+          <div class="card-tagline">The studio Jimi Hendrix built with two kids, no budget, and no plan — which became legendary and proves almost nothing about how to run a project</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">In 1969, Jimi Hendrix decided to convert a Greenwich Village nightclub into a private recording studio. He hired a 22-year-old architect — John Storyk — who had never been inside a recording studio. The entire studio was built from six drawings on tracing paper and "a lot of pointing." There was no budget and no schedule. Financing came from literal bags of cash from concert fees, shutting the site down when the money ran out and restarting when Hendrix went back on the road. The project took a year, cost over $1 million, and encountered an underground river, acoustic improvisation, and constant crisis.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it worked</div>
+            <div class="card-row-val">It produced one of the most acoustically perfect and beloved recording studios in the world. Stevie Wonder recorded there. Then Led Zeppelin, John Lennon, David Bowie, the Rolling Stones, AC/DC, and decades of others. It is still operating today. The improvised plaster ceiling — whipped with commercial eggbeaters to add air — turned out to be a stroke of acoustic genius. Hendrix died less than a month after the opening party.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">What it proves — and doesn't</div>
+            <div class="card-row-val">Flyvbjerg includes this case precisely because it is a genuine exception — a leap in the dark that produced something wonderful. He uses it to steelman the best possible case against his approach. But his data show that the typical project that proceeds this way fails. For every Electric Lady, there are dozens of chaotic studio projects that produced nothing notable and are now forgotten. The lesson from Electric Lady is not "ignore planning" — it is "this is what 20% probability looks like in vivid narrative form."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The punchline</div>
+            <div class="card-row-val">John Storyk, who built Electric Lady, is now one of the world's premier acoustic designers. He has designed studios in Lincoln Center, the Swiss Parliament, and the National Museum of Qatar. And today? "What I'm constantly trying to do is slow things down," he says. "If you slow things down and take a second and third look, you end up making fewer mistakes. And that means faster." The person who won his career through chaos now practices Think Slow, Act Fast.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MONTREAL OLYMPICS -->
+      <article class="card" id="case-montreal">
+        <div class="card-header">
+          <div class="card-label">Cautionary Case</div>
+          <div class="card-name">Montreal 1976 Olympics</div>
+          <div class="card-tagline">720% over budget — the unofficial Olympic record that no city wants to break</div>
+        </div>
+        <div class="card-rows">
+          <div class="card-row">
+            <div class="card-row-key">What happened</div>
+            <div class="card-row-val">Mayor Jean Drapeau of Montreal promised the 1976 Olympic Games "can no more have a deficit than a man can have a baby." The Games went 720% over budget. A cartoonist drew a heavily pregnant Mayor Drapeau. The main stadium — designed by Roger Taillibert, the mayor's personal favourite — was an unprecedented clamshell design with a retractable roof hung from a dramatically leaning tower. Nothing like it had ever been built. That should have triggered alarm bells. Instead, it was the main selling point. Taillibert's plans showed "little regard for mere practicalities," as reviewing engineers later noted — including no provision for the interior scaffolding workers would need to build the structure.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The result</div>
+            <div class="card-row-val">The Games barely opened on time — without the roof. The tower was still an "ugly stub." The retractable roof was finally installed a decade after the Games ended. The stadium was plagued with malfunctions and roof failures for decades. Roger Taillibert's obituary in the Montreal Gazette opened by noting it took 30 years to pay off the stadium. "More than four decades later, it is still plagued by a roof that does not work." The stadium's nickname — "the Big O" — quickly became "the Big Owe."</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">Why it matters</div>
+            <div class="card-row-val">Montreal is Flyvbjerg's archetypal combination of every failure mode: strategic misrepresentation ("no deficit"), political vanity ("the most dramatic stadium ever built"), bespoke technology (nothing like it had been done), and the Eternal Beginner Syndrome (a host city with no experience of hosting Games, taking on the world's most complex event). The result is not remarkable. It is entirely predictable from the structure of the decisions made.</div>
+          </div>
+          <div class="card-row">
+            <div class="card-row-key">The bigger context</div>
+            <div class="card-row-val">Every Olympic Games since 1960 for which data exists has gone over budget. Montreal holds the record — for now. The fat-tailed nature of Olympic cost distributions means that a future host city will statistically go even further over. Flyvbjerg's prescription: a permanent or small rotating host would accumulate experience and break the Eternal Beginner cycle. The IOC prefers the current model. Cities keep paying.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── SUPPLEMENTARY FRAMEWORKS ───────────────────────── -->
+  <section>
+    <h2>Frameworks from Related Thinkers</h2>
+    <p>Flyvbjerg draws heavily on the work of other researchers. These are the ideas most directly relevant to understanding his arguments.</p>
+
+    <div id="kahneman" class="supp-card">
+      <h4>Kahneman &amp; Tversky: The Inside View vs. The Outside View</h4>
+      <p>Daniel Kahneman and Amos Tversky identified two fundamentally different ways of looking at a problem. The <strong>inside view</strong> focuses on the specific situation at hand — its particular features, its unique circumstances, its individual characteristics. The <strong>outside view</strong> treats the situation as a member of a class of similar situations, and asks: what happened to others in this class? Kahneman's key insight for Flyvbjerg's purposes is that people default almost entirely to the inside view, rarely seeking the outside view — even when the outside view is far more informative. The inside view is intuitive and immediate; the outside view requires deliberate effort. Flyvbjerg's reference-class forecasting is, essentially, a systematic method for forcing the outside view into the room. Kahneman himself described RCF as "the single most important piece of advice" for improving forecast accuracy — while also admitting he fell for uniqueness bias on his own textbook, estimating one year when it took eight.</p>
+    </div>
+
+    <div id="taleb" class="supp-card">
+      <h4>Nassim Taleb: Black Swans &amp; Fat-Tailed Distributions</h4>
+      <p>Nassim Taleb's concept of the "black swan" — a rare, high-impact, hard-to-predict event — is useful for understanding tail risk in projects. Flyvbjerg's application of Taleb differs from the popular interpretation in an important way. Where Taleb emphasises that black swans cannot be predicted, Flyvbjerg argues that you can — and must — mitigate them even without predicting them. You don't need to know exactly how an ignition system will fail; you need to know that ignition systems can fail and have a backup ready. The correct response to fat-tailed risk is not passive acceptance but active mitigation of the conditions that lead to tail outcomes. The Great Chicago Fire Festival failed not because Jim Lasko couldn't predict the ignition failure — but because he never studied how similar live events typically fail, and therefore never considered that ignition systems might not work and needed a backup.</p>
+    </div>
+
+    <div id="phronesis" class="supp-card">
+      <h4>Aristotle: Phronesis (Practical Wisdom)</h4>
+      <p>Aristotle described <em>phronesis</em> as the ability to discern what is good for people and to actually bring about those good things in practice. It is not theoretical knowledge (knowing what is right in the abstract) nor technical skill (knowing how to do a specific thing), but the integration of both with good judgment in real-world conditions. Flyvbjerg uses this concept to describe the most important quality a project leader can have: the combination of deep expertise, sound values, and the practical ability to navigate complex situations and competing interests toward the right outcome. It is the quality that separates the masterbuilder from the merely competent manager. Philosopher Michael Polanyi's concept of tacit knowledge — "we know more than we can tell" — is closely related: the practical wisdom of the expert architect, the seasoned project manager, the experienced construction supervisor cannot be fully written down. It is embedded in judgment developed through years of doing, failing, and adjusting. This is the deeper reason why experience matters so much: it is not just about knowing facts but about having developed the reflexes, intuitions, and calibrated judgment that come only with time in the field.</p>
+    </div>
+
+    <div id="amazon-pr-faq" class="supp-card">
+      <h4>Amazon's PR/FAQ Process: Right-to-Left at Organisational Scale</h4>
+      <p>Jeff Bezos institutionalised right-to-left thinking at Amazon through a process Flyvbjerg cites approvingly. To pitch any new project at Amazon, you must first write two documents: a short press release (PR) describing what the product or service is and why it matters to customers, and a "frequently asked questions" (FAQ) document with details about cost and functionality. The crucial feature: these are written in plain, jargon-free language — what one executive called "Oprah-speak." Plain language makes fuzzy thinking visible. These documents are read in silence at the start of a one-hour meeting; no PowerPoint, no presentations. The writer then defends the documents line by line against hard questions. The process is iterated until the concept is genuinely clear and coherent to everyone in the room. The goal, as described by former Amazon executives Colin Bryar and Bill Carr, is to ensure that everyone — from the person proposing the project to the CEO — shares an equally clear understanding of the end state from the very beginning. It is a forcing function for System 2 thinking before any commitment is made. The Fire Phone failure — where employees had doubts but no one could take a stand against Bezos — shows the limits of even a good process when psychological safety is absent.</p>
+    </div>
+
+    <div id="lean-startup" class="supp-card">
+      <h4>Eric Ries: The Lean Startup Model — and How It Relates</h4>
+      <p>Silicon Valley's standard approach for startups — release a "minimum viable product" quickly, then iterate based on real customer feedback — appears to contradict Flyvbjerg's emphasis on thorough planning before delivery. Flyvbjerg argues the contradiction is illusory. The lean startup model is, in his framework, a planning method: you are testing the riskiest assumption (whether customers want this product) at the smallest possible scale before committing to full production. It is experiri — try, learn, again — applied to the question of product-market fit. The only real difference between lean startup and Pixar planning is the mechanism of testing. Lean startup uses real customers; Pixar uses storyboards and rough-cut videos. Both are iterative, both happen before full-scale commitment, and both aim to discover what doesn't work while the cost of changing course is still low. Where Ries and Flyvbjerg do diverge: Ries's "move fast and break things" ethos, when applied beyond reversible software decisions to irreversible physical, social, or safety-critical systems, is exactly the mistake Flyvbjerg's entire book is written to prevent.</p>
+    </div>
+  </section>
+
+  <!-- ── ELEVEN HEURISTICS ───────────────────────────────── -->
+  <section id="eleven-heuristics">
+    <h2>The Author's Prescription: Eleven Heuristics</h2>
+    <p>At the end of the book, Flyvbjerg distills everything into eleven rules he recommends for any project leader. These are not corporate platitudes — each one is a direct countermeasure to a specific failure mode documented in the research.</p>
+
+    <ol class="heuristic-list">
+      <li>
+        <span><strong>Hire a masterbuilder.</strong> The single greatest asset a project can have is a leader who combines deep technical knowledge, management skill, and phronesis — practical wisdom. If you can get the masterbuilder's team too, do that as well.</span>
+      </li>
+      <li>
+        <span><strong>Get your team right, and keep it right.</strong> High-performing teams that have worked together before are dramatically more effective than newly assembled ones. Protect team continuity. Personnel changes mid-project are a major and underappreciated source of delay and error.</span>
+      </li>
+      <li>
+        <span><strong>Ask "why?"</strong> Begin every project by defining the specific outcome you want in the box on the right. Keep asking why until the answer is concrete, agreed upon, and unambiguous. Every decision in delivery should be traceable back to this outcome.</span>
+      </li>
+      <li>
+        <span><strong>Build with Lego.</strong> Design your project around a basic, repeatable unit wherever possible. Modularity reduces unknown unknowns, accelerates learning, enables incremental scaling, and dramatically improves the odds of on-time, on-budget delivery.</span>
+      </li>
+      <li>
+        <span><strong>Think slow, act fast.</strong> Invest generously in planning. Settle every major decision on paper. Then move through delivery quickly. The planning phase is cheap; the delivery phase is expensive. Your goal is to keep delivery as brief as possible.</span>
+      </li>
+      <li>
+        <span><strong>Take the outside view.</strong> Your project is not unique. It belongs to a class of projects. Find out what that class of projects actually cost, how long they actually took, and how often they failed — and use those numbers as your starting anchor for forecasts and risk assessment.</span>
+      </li>
+      <li>
+        <span><strong>Watch your downside.</strong> Risk can kill your project; no upside can compensate for that. For fat-tailed risks, skip forecasting and go directly to mitigation: identify the conditions that produce tail outcomes and eliminate them before delivery begins.</span>
+      </li>
+      <li>
+        <span><strong>Say no and walk away.</strong> Every addition to scope reduces focus. Before starting, ask whether the project has the people and budget — including contingency — to succeed. If not, walk away. During delivery, say no to anything that doesn't directly contribute to the outcome on the right.</span>
+      </li>
+      <li>
+        <span><strong>Make friends and keep them friendly.</strong> Projects are embedded in relationships. If something goes wrong — and something always does — the project's survival depends on the goodwill of stakeholders, suppliers, regulators, and funders. Build those relationships before you need them, not during a crisis.</span>
+      </li>
+      <li>
+        <span><strong>Build climate mitigation into your project.</strong> No challenge is more urgent or consequential than the climate crisis. The principles of good project management — modularity, iteration, speed, focus — are exactly the principles needed to deploy renewable infrastructure at the pace the moment demands. Apply them.</span>
+      </li>
+      <li>
+        <span><strong>Know that your biggest risk is you.</strong> The most dangerous threats to a project are not external — they are the cognitive biases and psychological tendencies of the people running it. Optimism bias, uniqueness bias, and the sunk-cost fallacy live in your own head. That is where the work of risk management must begin.</span>
+      </li>
+    </ol>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="retell" id="retell">
+    <h2>Situational Index — Find the Right Concept Fast</h2>
+    <p style="color:#a89880; font-size:0.88rem; margin-bottom:1.5rem;">Real situations and the concepts that apply to them. Each entry links to the relevant card.</p>
+
+    <div class="retell-item">
+      <strong>Your project estimate has been approved but seems very tight.</strong> Start with <a href="#rcf" style="color:var(--gold-light)">Reference-Class Forecasting</a> — find out what similar completed projects actually cost. If you haven't done this, the estimate is probably a best-case scenario, not a realistic one. See also <a href="#planning-fallacy" style="color:var(--gold-light)">Planning Fallacy</a> for why this happens, and <a href="#anchoring" style="color:var(--gold-light)">Anchoring &amp; Adjustment</a> for how to fix the anchor.
+    </div>
+
+    <div class="retell-item">
+      <strong>Someone is pushing to start construction / delivery before planning is complete.</strong> This is the <a href="#commitment-fallacy" style="color:var(--gold-light)">Commitment Fallacy</a> and the <a href="#window-of-doom" style="color:var(--gold-light)">Break-Fix Cycle</a> in action. Apply the <a href="#think-slow-act-fast" style="color:var(--gold-light)">Think Slow, Act Fast</a> argument. Every month of planning saved is likely to cost many months of delivery delay.
+    </div>
+
+    <div class="retell-item">
+      <strong>A project is massively over budget and over time but everyone says it's too late to stop.</strong> This is <a href="#lock-in" style="color:var(--gold-light)">Lock-In and Escalation of Commitment</a> reinforced by the <a href="#sunk-cost" style="color:var(--gold-light)">Sunk-Cost Trap</a>. California High-Speed Rail is the canonical example. The question to force is: if we were starting fresh today, with what we now know, would we approve this project at the remaining cost? If no, that is the answer — regardless of what has been spent.
+    </div>
+
+    <div class="retell-item">
+      <strong>Someone argues that your project is different from all previous failed projects in this category.</strong> This is <a href="#uniqueness-bias" style="color:var(--gold-light)">Uniqueness Bias</a>. Every project in history has been argued to be unique. The response is the outside view: define the class broadly, gather the data, let the reference class speak. Even Daniel Kahneman — the world's foremost authority on cognitive bias — couldn't escape uniqueness bias on his own textbook.
+    </div>
+
+    <div class="retell-item">
+      <strong>You're starting a project and don't know where to begin.</strong> Begin with <a href="#right-to-left" style="color:var(--gold-light)">Right-to-Left Thinking</a>. Ask Frank Gehry's question: "Why are you doing this project?" Don't start with a solution. Fill the box on the right — what specific outcome do you want, precisely defined — before you discuss any means. Robert Caro pins his book's theme to the wall; Jeff Bezos writes the press release first.
+    </div>
+
+    <div class="retell-item">
+      <strong>Your project involves a large, complex, one-of-a-kind deliverable and it keeps growing in scope and cost.</strong> Consider whether <a href="#modularity" style="color:var(--gold-light)">modularity</a> is possible. Can the project be broken into repeatable units? Resisting bespoke design for standard components? The nuclear power plant vs solar farm comparison is the sharpest illustration: identical approach to energy generation, radically different outcomes based entirely on whether the technology is repeatable or unique.
+    </div>
+
+    <div class="retell-item">
+      <strong>You're worried about black swan risks — things going catastrophically wrong.</strong> Stop trying to forecast exactly what will go wrong and start with <a href="#black-swan-mgmt" style="color:var(--gold-light)">Black Swan Management</a>: study the tail of the reference class, identify the conditions that cause projects like yours to blow up, and eliminate those conditions before delivery starts. You don't need to predict the ignition failure — you just need to have a backup ignition system.
+    </div>
+
+    <div class="retell-item">
+      <strong>The team is fragmented, contractors are blaming each other, and progress is slowing.</strong> This is the opposite of the <a href="#single-organism" style="color:var(--gold-light)">Single Organism</a>. Apply the Terminal 5 approach: align incentives toward delivery rather than self-protection, create shared identity and purpose, make psychological safety real through actions not words. The Wembley Stadium and T5 were built at the same time in the same country — the difference in outcome was almost entirely in how people were united.
+    </div>
+
+    <div class="retell-item">
+      <strong>An inexperienced team or technology is being proposed to save money or for political reasons.</strong> This is experience being marginalised — one of the most consistent predictors of project failure. Apply the argument from <a href="#frozen-experience" style="color:var(--gold-light)">Frozen Experience</a> and the cost of <a href="#eternal-beginner" style="color:var(--gold-light)">Eternal Beginner Syndrome</a>. The cheapest option at the tender stage is often the most expensive option by project completion.
+    </div>
+
+    <div class="retell-item">
+      <strong>Someone is using a famous success story — Jaws, the Sydney Opera House, a startup legend — to argue that planning kills creativity.</strong> This is <a href="#survivorship-bias" style="color:var(--gold-light)">Survivorship Bias</a> and <a href="#hiding-hand" style="color:var(--gold-light)">Hirschman's Hiding Hand</a>. Ask for the base rate: how many projects took the same approach and failed? Flyvbjerg's data shows 80% of such projects produce worse outcomes than expected, not better. The stories we remember are the 20%.
+    </div>
+
+    <div class="retell-item">
+      <strong>People are making confident decisions quickly without looking at historical data or asking hard questions.</strong> This is <a href="#system1-system2" style="color:var(--gold-light)">System 1</a> working unopposed, reinforced by <a href="#wysiati" style="color:var(--gold-light)">WYSIATI</a>. The decision process needs to force System 2: structured questioning, independent review, and external data. The Pentagon site was chosen in a week by accomplished people who simply never asked if there were better options.
+    </div>
+
+    <div class="retell-item">
+      <strong>The iron law of megaprojects in plain terms:</strong> Only 8.5% of projects hit budget and schedule. Only 0.5% hit budget, schedule, and benefits. Across 16,000 projects, 20+ project types, 136 countries. This is not a story about occasional failure — it is the baseline. Success is the statistical outlier requiring explanation. See <a href="#iron-law" style="color:var(--gold-light)">The Iron Law</a>.
+    </div>
+
+    <div class="retell-item">
+      <strong>"If people knew the real cost from the start, nothing would ever be approved."</strong> A retired San Francisco politician said this publicly about public infrastructure. Engineers have said the same in private. The implication: the standard first budget for a major project is not an estimate — it is a deliberate underestimate designed to get the project approved. The real number comes later, when it is too late to say no. This is <a href="#strategic-misrep" style="color:var(--gold-light)">Strategic Misrepresentation</a>, and it is not occasional dishonesty. It is the standard operating procedure.
+    </div>
+
+    <div class="retell-item">
+      <strong>Your biggest risk is you.</strong> Not the weather, not the contractor, not the government — you. The biases that kill projects — optimism, uniqueness-thinking, sunk-cost reasoning, System 1 snap judgments — are hardwired into human cognition. Even Kahneman couldn't escape them on his own textbook. The only protection is a process specifically designed to override them. See <a href="#optimism-bias" style="color:var(--gold-light)">Optimism Bias</a>, <a href="#uniqueness-bias" style="color:var(--gold-light)">Uniqueness Bias</a>, <a href="#sunk-cost" style="color:var(--gold-light)">Sunk-Cost Trap</a>.
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer id="footer">
+  <strong>Source:</strong> <em>How Big Things Get Done: The Surprising Factors Behind Every Successful Project, from Home Renovations to Space Exploration</em> — Bent Flyvbjerg with Dan Gardner. First published 2023 by Currency (Penguin Random House, New York) and Macmillan (London). &copy; Connaught Street Inc. and Bent Flyvbjerg, 2023.<br><br>
+  Bent Flyvbjerg is a professor at the University of Oxford and IT University of Copenhagen, and widely considered the world's leading expert on megaproject management. He has consulted on over one hundred projects costing more than $1 billion each. Dan Gardner is a journalist and co-author of <em>Superforecasting</em> (with Philip Tetlock).<br><br>
+  This guide is a learning reference compiled for personal educational use and does not reproduce substantial portions of the original text.
+</footer>
+
+<!-- ═══ SCROLL SPY + NAVIGATION JS ═══════════════════════ -->
+<script>
+  // Mobile toggle
+  const mobileToggle = document.getElementById('mobile-nav-toggle');
+  const siteNav = document.getElementById('site-nav');
+
+  mobileToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('mobile-open');
+    mobileToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Group toggles
+  document.querySelectorAll('.nav-group-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.nav-group');
+      const isOpen = group.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+  });
+
+  // Scroll spy
+  const allLinks = document.querySelectorAll('.nav-link');
+  const allSections = [];
+
+  allLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const target = document.querySelector(href);
+      if (target) allSections.push({ el: target, link });
+    }
+  });
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY + 120;
+        let current = null;
+        allSections.forEach(({ el }) => {
+          if (el.getBoundingClientRect().top + window.scrollY <= scrollY) {
+            current = el;
+          }
+        });
+        allLinks.forEach(l => l.classList.remove('active'));
+        if (current) {
+          const match = allSections.find(s => s.el === current);
+          if (match) {
+            match.link.classList.add('active');
+            // Open the group containing it
+            const group = match.link.closest('.nav-group');
+            if (group && !group.classList.contains('open')) {
+              group.classList.add('open');
+            }
+          }
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Operations — A Comprehensive Learning Reference Guide</title>
+    <style>
+        :root {
+            --page-bg: #faf8f5;
+            --card-bg: #ffffff;
+            --accent-bg: #f3efe9;
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a4a4a;
+            --muted-text: #7a7a7a;
+            --border-divider: #e6e0d6;
+            --gold-accent: #b8893f;
+            --gold-soft: #d9b97a;
+            --red-warning: #a8492e;
+            --green-positive: #4a7a4a;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+            --serif-body: 'Georgia', 'Times New Roman', 'Palatino Linotype', 'Book Antiqua', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            color: var(--primary-text);
+            font-family: var(--serif-body);
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            position: relative;
+        }
+
+        /* Hero Header */
+        .hero-header {
+            text-align: center;
+            padding: 3rem 1rem 2.5rem;
+            border-bottom: 1px solid var(--border-divider);
+            margin-bottom: 2.5rem;
+        }
+        .hero-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--primary-text);
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+        .hero-header .author {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+        .hero-header .tagline {
+            font-size: 1rem;
+            color: var(--muted-text);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Section headings */
+        h2 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid var(--gold-soft);
+            letter-spacing: -0.01em;
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary-text);
+            margin: 2rem 0 0.75rem;
+            letter-spacing: -0.005em;
+        }
+        h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            margin: 1.5rem 0 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Core Theory prose */
+        .theory-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-divider);
+            border-radius: 6px;
+            padding: 2rem 2rem 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+        .theory-section p {
+            margin-bottom: 1.1rem;
+            color: var(--secondary-text);
+        }
+        .theory-section .subsection {
+            margin-top: 1.8rem;
+        }
+        .theory-section .subsection h3 {
+            margin-top: 0;
+            color: var(--primary-text);
+        }
+
+        /* Orientation paragraph */
+        .orientation-para {
+            background: var(--accent-bg);
+            border-left: 3px solid var(--gold-accent);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0 1.5rem;
+            font-style: italic;
+            color: var(--secondary-text);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Inline TOC */
+        .inline-toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border-divider);
+            border-radius: 6px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+        }
+        .inline-toc h4 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .inline-toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .inline-toc ul li {
+            padding: 0.2rem 0;
+        }
+        .inline-toc ul li a {
+            color: var(--gold-accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .inline-toc ul li a:hover {
+            text-decoration: underline;
+            color: var(--red-warning);
+        }
+        .inline-toc .toc-category {
+            font-weight: 700;
+            color: var(--secondary-text);
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-divider);
+            border-radius: 6px;
+            padding: 1.5rem 1.75rem;
+            margin: 1.25rem 0;
+            box-shadow: var(--card-shadow);
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .card .card-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gold-accent);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .card .card-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.01em;
+        }
+        .card .card-tagline {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .card .card-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            border-top: 1px solid var(--border-divider);
+            padding-top: 0.5rem;
+        }
+        .card .card-row .row-label {
+            font-weight: 700;
+            color: var(--secondary-text);
+            min-width: 160px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            padding-right: 0.5rem;
+        }
+        .card .card-row .row-content {
+            color: var(--primary-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .card .watch-out {
+            background: #fef6f3;
+            border-left: 3px solid var(--red-warning);
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
+            color: #5c2d1e;
+        }
+        .card .dependency {
+            background: #f8f6f0;
+            border-left: 3px solid var(--gold-soft);
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
+            color: #5c4a2e;
+        }
+        .card .success-marker {
+            background: #f4f8f4;
+            border-left: 3px solid var(--green-positive);
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
+            color: #2e4a2e;
+        }
+        .card .example-phrase {
+            background: var(--accent-bg);
+            padding: 0.6rem 1rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            color: var(--secondary-text);
+        }
+
+        /* Situational Index */
+        .situational-index {
+            background: var(--card-bg);
+            border: 1px solid var(--border-divider);
+            border-radius: 6px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+        }
+        .situational-index h3 {
+            margin-top: 0;
+        }
+        .situational-index .situation-entry {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--border-divider);
+            font-size: 0.95rem;
+        }
+        .situational-index .situation-entry:last-child {
+            border-bottom: none;
+        }
+        .situational-index .situation-desc {
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+        .situational-index .situation-link {
+            color: var(--gold-accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .situational-index .situation-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border-divider);
+            margin-top: 3rem;
+            color: var(--muted-text);
+            font-size: 0.85rem;
+        }
+        .footer strong {
+            color: var(--secondary-text);
+        }
+
+        /* Navigator */
+        #nav-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #fdfcf9;
+            border-left: 1px solid var(--border-divider);
+            overflow-y: auto;
+            padding: 1rem 0.75rem;
+            z-index: 100;
+            font-size: 0.8rem;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.03);
+        }
+        #nav-panel .nav-title {
+            font-weight: 700;
+            color: var(--gold-accent);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+            padding: 0 0.5rem;
+        }
+        #nav-panel .nav-category {
+            margin-bottom: 0.3rem;
+        }
+        #nav-panel .nav-cat-toggle {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--secondary-text);
+            padding: 0.25rem 0.5rem;
+            display: block;
+            font-size: 0.78rem;
+            border-radius: 3px;
+            user-select: none;
+        }
+        #nav-panel .nav-cat-toggle:hover {
+            background: var(--accent-bg);
+        }
+        #nav-panel .nav-cat-items {
+            list-style: none;
+            padding-left: 0.8rem;
+            display: none;
+        }
+        #nav-panel .nav-cat-items.open {
+            display: block;
+        }
+        #nav-panel .nav-cat-items li a {
+            color: var(--muted-text);
+            text-decoration: none;
+            display: block;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 3px;
+        }
+        #nav-panel .nav-cat-items li a:hover,
+        #nav-panel .nav-cat-items li a.active {
+            color: var(--gold-accent);
+            background: var(--accent-bg);
+        }
+        #nav-mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 101;
+            background: #fdfcf9;
+            border-bottom: 1px solid var(--border-divider);
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--gold-accent);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                max-width: 100%;
+                padding: 1rem 0.75rem 3rem;
+                font-size: 16px;
+            }
+            #nav-panel {
+                display: none;
+                position: fixed;
+                top: 44px;
+                right: 0;
+                width: 100%;
+                height: auto;
+                max-height: 55vh;
+                border-left: none;
+                border-bottom: 1px solid var(--border-divider);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                z-index: 99;
+            }
+            #nav-panel.open-mobile {
+                display: block;
+            }
+            #nav-mobile-toggle {
+                display: block;
+            }
+            .card .card-row {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            .card .card-row .row-label {
+                min-width: auto;
+                padding-right: 0;
+            }
+            .hero-header h1 {
+                font-size: 1.5rem;
+            }
+            .theory-section {
+                padding: 1.25rem 1rem;
+            }
+            .card {
+                padding: 1rem 1.1rem;
+            }
+            .inline-toc {
+                padding: 1rem 1.25rem;
+            }
+        }
+        @media (min-width: 721px) {
+            body {
+                padding-right: 280px;
+            }
+            #nav-mobile-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mobile Nav Toggle -->
+    <div id="nav-mobile-toggle">☰ Navigate Sections ▾</div>
+
+    <!-- Navigator Panel -->
+    <nav id="nav-panel">
+        <div class="nav-title">Navigate</div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-fundamentals">▸ Revenue Operations Fundamentals</span>
+            <ul class="nav-cat-items" id="nav-sec-fundamentals">
+                <li><a href="#hero">Top</a></li>
+                <li><a href="#core-theory">Core Theory</a></li>
+                <li><a href="#toc">Table of Contents</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-mgmt">▸ Management System (Six Pillars)</span>
+            <ul class="nav-cat-items" id="nav-sec-mgmt">
+                <li><a href="#card-commercial-leadership">Commercial Leadership</a></li>
+                <li><a href="#card-commercial-operations">Commercial Operations</a></li>
+                <li><a href="#card-commercial-architecture">Commercial Architecture</a></li>
+                <li><a href="#card-commercial-insights">Commercial Insights</a></li>
+                <li><a href="#card-commercial-enablement">Commercial Enablement</a></li>
+                <li><a href="#card-commercial-asset-mgmt">Commercial Asset Management</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-os">▸ Operating System (Nine Building Blocks)</span>
+            <ul class="nav-cat-items" id="nav-sec-os">
+                <li><a href="#card-revenue-enablement">Revenue Enablement</a></li>
+                <li><a href="#card-channel-optimization">Channel Optimization</a></li>
+                <li><a href="#card-customer-facing-tech">Customer-Facing Technology</a></li>
+                <li><a href="#card-revenue-intelligence">Revenue Intelligence</a></li>
+                <li><a href="#card-engagement-data-hub">Engagement Data Hub</a></li>
+                <li><a href="#card-customer-intelligence">Customer Intelligence</a></li>
+                <li><a href="#card-talent-development">Talent Development</a></li>
+                <li><a href="#card-resource-optimization">Resource Optimization</a></li>
+                <li><a href="#card-revenue-enhancement">Revenue Enhancement</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-leadership">▸ Leadership Models</span>
+            <ul class="nav-cat-items" id="nav-sec-leadership">
+                <li><a href="#card-tsar-model">The Tsar</a></li>
+                <li><a href="#card-federation-model">The Federation</a></li>
+                <li><a href="#card-chief-of-staff-model">The Chief of Staff</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-smart">▸ Smart Actions</span>
+            <ul class="nav-cat-items" id="nav-sec-smart">
+                <li><a href="#card-smart-visibility">Better Visibility into Revenue Cycle</a></li>
+                <li><a href="#card-smart-simplify">Simplify Selling Workflow</a></li>
+                <li><a href="#card-smart-abm">Share Marketing Insights (ABM)</a></li>
+                <li><a href="#card-smart-talent">Develop & Retain Talent</a></li>
+                <li><a href="#card-smart-channels">Effective Selling Channels</a></li>
+                <li><a href="#card-smart-content">Streamline Content Supply Chain</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-frameworks">▸ Frameworks & Tools</span>
+            <ul class="nav-cat-items" id="nav-sec-frameworks">
+                <li><a href="#card-revenue-value-chain">Revenue Value Chain</a></li>
+                <li><a href="#card-maturity-assessment">Maturity Assessment</a></li>
+                <li><a href="#card-financial-value">Eight Ways RevOps Creates Financial Value</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-cases">▸ Case Studies</span>
+            <ul class="nav-cat-items" id="nav-sec-cases">
+                <li><a href="#card-case-avaya">Avaya</a></li>
+                <li><a href="#card-case-juniper">Juniper Networks</a></li>
+                <li><a href="#card-case-ciena">Ciena</a></li>
+                <li><a href="#card-case-hitachi">Hitachi Vantara</a></li>
+                <li><a href="#card-case-ghx">GHX</a></li>
+                <li><a href="#card-case-pandora">Pandora Personalization</a></li>
+            </ul>
+        </div>
+        <div class="nav-category">
+            <span class="nav-cat-toggle" data-target="nav-sec-close">▸ Closing</span>
+            <ul class="nav-cat-items" id="nav-sec-close">
+                <li><a href="#prescription">Author's Prescription</a></li>
+                <li><a href="#situational-index">Situational Index</a></li>
+                <li><a href="#footer">Attribution</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero-header" id="hero">
+        <h1>Revenue Operations</h1>
+        <div class="author">Stephen G. Diorio &amp; Chris K. Hummel</div>
+        <p class="tagline">A comprehensive learning reference guide to aligning sales &amp; marketing, monetizing data, and igniting growth — covering every concept, framework, tactic, case study, and insight from the definitive book on Revenue Operations.</p>
+    </header>
+
+    <!-- Core Theory -->
+    <section class="theory-section" id="core-theory">
+        <h2>Core Theory: What Revenue Operations Is and Why It Matters</h2>
+        <p>Revenue Operations represents a bold new commercial model for the twenty-first century. Its goal is to create sustainable and scalable business growth. As Diorio and Hummel define it, Revenue Operations comprises two component systems. The first is the <strong>management system</strong> — which might be thought of as the EQ of the organisation — that aligns the people in your revenue teams. The second is the <strong>operating system</strong> — the IQ — that combines technology, processes, and data assets to generate more sustainable and scalable growth. Revenue Operations weaves these two together to grow revenues, profits, and firm value.</p>
+        <p>The fundamental problem Revenue Operations solves is that most businesses approach growth as a disjointed, episodic activity. Every other primary function in a business — procurement, manufacturing, shipping, HR, finance — has an established system refined over decades. But when it comes to generating the revenue and profit growth they forecast to investors, few executives can clearly describe any kind of connected approach, system, or model. The core revenue-facing functions — Marketing, Sales, and Service — all operate in silos. Each function tries to do its individual job and maximise the impact of its activities on customers and revenue. Coordination between the three is episodic, temporary, and heavily influenced by the personalities involved. There is no system to generate consistent, scalable, and profitable growth. Revenue Operations changes that.</p>
+
+        <div class="subsection" id="theory-financial-link">
+            <h3>The Financial Link Between Firm Value and Growth</h3>
+            <p>An organisation's ability to grow revenues has become more tied to firm value than at any time in recent business history. An analysis of total shareholder return of the S&P 500 over a twenty-year span found that 58% of value creation is attributed to organic growth. The capital markets reward predictable, scalable, and profitable growth disproportionately. A hyper-growth business like HubSpot commands price/earnings ratios in the hundreds while not yet showing a profit. Salesforce.com, with double-digit growth rates and recurring revenue streams, has a valuation in excess of 60 times its earnings — more than triple the S&P 500 average. The average business in the S&P 500 grows top-line revenues at 4% annually and is valued at 18 times earnings. A firm that grows at double that pace is worth almost twice as much. Businesses that master scalable growth — by creating systems for growing revenues faster than the resources needed to generate those revenues — are even more valuable.</p>
+            <p>Private equity investors have recognised this relationship. Over two-thirds of private equity firms are pushing their portfolio companies to grow at faster than 10% a year to justify historic purchase price premiums. As Jim Howland, an Operating Partner at Morgan Stanley Private Equity, puts it: "What you do with an asset is as or more important as getting that asset at the right price."</p>
+        </div>
+
+        <div class="subsection" id="theory-intangible-assets">
+            <h3>Intangible Assets as the Foundation for Growth</h3>
+            <p>The capital stock of the economy has changed. Although the economy might once have been built upon railroad tracks, canals, and factories, today it is driven by intellectual property, software code, learning data sets, digital customer experiences, design, branding, and process know-how. Investment in intangibles exceeds investments in hard assets. They also explain over 80% of changes in firm value today — far more than they did in 1950. Growth assets like brand preference, customer loyalty, and perceptions of innovation are valuable because they make customers choose your product more and pay higher prices to buy it. Yet these business assets cannot be found on a financial ledger. There is no proven formula for creating, growing, protecting, and monetising them. The executives running marketing, sales, and service are the often unwitting caretakers of what may be their company's most valuable asset: its customer data. For example, United Airlines and American Airlines both secured multibillion-dollar loans by collateralising their MileagePlus and AAdvantage customer loyalty programs. Third-party appraisals valued United's customer data at $20 billion while its market cap at the time was about $9 billion. American's data was valued at a minimum of $19.5 billion and up to $31.5 billion, whereas its own market cap was less than $8 billion.</p>
+        </div>
+
+        <div class="subsection" id="theory-megatrends">
+            <h3>The Megatrends That Changed the Growth Formula</h3>
+            <p>Several forces have fundamentally altered how revenue growth is generated. <strong>Changing buyer behaviour</strong> has elevated the customer experience and made it the primary competitive battleground. Over 80% of customers now prefer to communicate via text, mobile, and online chat in service interactions. Millennial buyers, raised on Google search and digital channels, expect to do all or most of their buying 100% online; 55% of millennial B2B customers would prefer to buy a complex solution without engaging a sales rep at all. <strong>Selling has become more capital intensive.</strong> The commercial technology portfolio — the sales and marketing technology stack — has grown to represent a large component of the growth investment mix. Worldwide spending on customer experience and CRM software grew 15.6% in the year studied. The average enterprise now has invested in over 20 selling tools; smaller cloud-based businesses use over 30 on average. For the first time, more of the operating budget is being spent on owned digital channel infrastructure than on paid media. <strong>Selling is more data driven.</strong> Advances in AI and a growing portfolio of AI-enabled selling tools are making data-driven selling possible. <strong>Growth has become a team sport.</strong> There are 18 strategic levers that grow revenues, profits, and firm value, distributed across sales, marketing, customer success, product management, and sometimes IT. No single organisation or leader controls all of them. Teamwork across functions has become fundamental.</p>
+        </div>
+    </section>
+
+    <!-- Inline Table of Contents -->
+    <section class="inline-toc" id="toc">
+        <h4>Table of Contents</h4>
+        <div class="toc-category">Management System (Six Pillars)</div>
+        <ul>
+            <li><a href="#card-commercial-leadership">Commercial Leadership</a></li>
+            <li><a href="#card-commercial-operations">Commercial Operations</a></li>
+            <li><a href="#card-commercial-architecture">Commercial Architecture</a></li>
+            <li><a href="#card-commercial-insights">Commercial Insights</a></li>
+            <li><a href="#card-commercial-enablement">Commercial Enablement</a></li>
+            <li><a href="#card-commercial-asset-mgmt">Commercial Asset Management</a></li>
+        </ul>
+        <div class="toc-category">Operating System (Nine Building Blocks)</div>
+        <ul>
+            <li><a href="#card-revenue-enablement">Revenue Enablement</a></li>
+            <li><a href="#card-channel-optimization">Channel Optimization</a></li>
+            <li><a href="#card-customer-facing-tech">Customer-Facing Technology</a></li>
+            <li><a href="#card-revenue-intelligence">Revenue Intelligence</a></li>
+            <li><a href="#card-engagement-data-hub">Engagement Data Hub</a></li>
+            <li><a href="#card-customer-intelligence">Customer Intelligence</a></li>
+            <li><a href="#card-talent-development">Talent Development</a></li>
+            <li><a href="#card-resource-optimization">Resource Optimization</a></li>
+            <li><a href="#card-revenue-enhancement">Revenue Enhancement</a></li>
+        </ul>
+        <div class="toc-category">Leadership Models</div>
+        <ul>
+            <li><a href="#card-tsar-model">The Tsar</a></li>
+            <li><a href="#card-federation-model">The Federation</a></li>
+            <li><a href="#card-chief-of-staff-model">The Chief of Staff</a></li>
+        </ul>
+        <div class="toc-category">Smart Actions</div>
+        <ul>
+            <li><a href="#card-smart-visibility">Better Visibility into the Revenue Cycle</a></li>
+            <li><a href="#card-smart-simplify">Simplify the Selling Workflow</a></li>
+            <li><a href="#card-smart-abm">Share Marketing Insights with Frontline Sellers (ABM)</a></li>
+            <li><a href="#card-smart-talent">Develop and Retain High-Performing Selling Talent</a></li>
+            <li><a href="#card-smart-channels">Make Selling Channels More Effective</a></li>
+            <li><a href="#card-smart-content">Streamline and Personalize the Selling Content Supply Chain</a></li>
+        </ul>
+        <div class="toc-category">Frameworks & Tools</div>
+        <ul>
+            <li><a href="#card-revenue-value-chain">Revenue Value Chain</a></li>
+            <li><a href="#card-maturity-assessment">Revenue Operations Maturity Assessment</a></li>
+            <li><a href="#card-financial-value">Eight Ways Revenue Operations Creates Financial Value</a></li>
+        </ul>
+        <div class="toc-category">Case Studies</div>
+        <ul>
+            <li><a href="#card-case-avaya">Avaya — Business Model Transformation</a></li>
+            <li><a href="#card-case-juniper">Juniper Networks — Federation Leadership</a></li>
+            <li><a href="#card-case-ciena">Ciena — Federation Leadership &amp; QOE Metrics</a></li>
+            <li><a href="#card-case-hitachi">Hitachi Vantara — Digital Selling Platform</a></li>
+            <li><a href="#card-case-ghx">GHX — Culture of Continuous Improvement</a></li>
+            <li><a href="#card-case-pandora">Pandora — AI-Enabled Personalization at Scale</a></li>
+        </ul>
+    </section>
+
+    <!-- MANAGEMENT SYSTEM: Six Pillars -->
+    <h2 id="mgmt-system">The Management System: Six Pillars to Align Your Revenue Teams</h2>
+    <p class="orientation-para">You are under pressure to grow — from your board, your investors, your own targets. But your sales, marketing, and service teams are not coordinated. Handoffs leak revenue. Marketing generates leads that sales ignores. Service is an afterthought. You need a leadership framework to get these functions working as one revenue team with a common purpose. The Six Pillars give you that framework.</p>
+
+    <!-- 1. Commercial Leadership -->
+    <div class="card" id="card-commercial-leadership">
+        <div class="card-label">PILLAR 1</div>
+        <div class="card-name">Commercial Leadership That Unifies Marketing, Sales, and Service</div>
+        <div class="card-tagline">Top-down leadership models to empower and endorse the transformation of the commercial model.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Revenue teams operate in silos because no single executive below the CEO controls more than 40% of the 18 identified growth levers. The CEO gets dragged into tactical coordination. Commercial transformation stalls because it requires change management — and change scares risk-averse managers. Only top-down leadership from the CEO on down can unify sales, marketing, and service into one revenue team.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">A new generation of growth leader — called a CXO — emerges with a broad span of control over all revenue teams. This leader has the mandate to foster a culture of growth, set aggressive targets, and make the organisation more accountable, data driven, and customer focused. At Avaya, the CEO brought in a Chief Revenue Officer with hard-line authority over marketing, sales, delivery, customer success, professional services, and all channel partners globally.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Simpler organisation with single point of accountability. Culture of teamwork and trust. Resources allocated to the greatest opportunities rather than along historical organisational lines. Common purpose across all customer-facing employees.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Warning signals include: CEO dragged into nitty-gritty of cross-functional coordination; marketing and sales blaming each other for missed targets; growth investments stuck in budget silos; no single person can describe the end-to-end customer journey.</span></div>
+        <div class="card-row"><span class="row-label">How to counter if used against you:</span><span class="row-content">If a competitor unifies their revenue teams under a CXO, they will out-execute you on speed and consistency. Your counter is to demand CEO-level sponsorship for aligning your own revenue functions — even if that means starting with a Federation model rather than full structural change.</span></div>
+        <div class="success-marker">Success looks like: A CXO with hard-line reports across sales, marketing, and service; shared goals and incentives for all customer-facing employees; the CEO freed from daily cross-functional coordination; measurable improvements in customer lifetime value and revenue growth.</div>
+        <div class="example-phrase">"I view my role as CEO as being the firm's Chief Engagement Officer. My job is orchestrating the customer experience across many touchpoints and functions." — Steve Lucas, CEO of iCIMS</div>
+    </div>
+
+    <!-- 2. Commercial Operations -->
+    <div class="card" id="card-commercial-operations">
+        <div class="card-label">PILLAR 2</div>
+        <div class="card-name">Commercial Operations That Support All Growth-Related Functions</div>
+        <div class="card-tagline">Reconfigure the operations that support growth to provide end-to-end coherent management of all customer-facing assets, investments, and the customer journey.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Today, one in four members of the revenue team are in operations and enablement roles that don't directly face the customer. Yet most organisations deploy these critical operational capabilities across four to sometimes eight different organisations. An incremental investment in enablement has a huge multiplier effect — it makes dozens or hundreds of sellers more effective — but fragmented management of commercial assets like customer data, content, and the growth technology portfolio prevents organisations from unlocking the full growth potential of analytics and enablement technology.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Large companies like Ciena and hyper-growth businesses like Rev.com are integrating all Revenue Operations, enablement, and analytical functions with solid-line reporting to a central operations function. Pentair established a Commercial Excellence program that identified ways to improve the prospect-to-cash process. AT&T created Total Billed Revenue as a common measure of account and pipeline health for all customer-facing employees.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">End-to-end coherent management of the customer journey. One "throat to choke" for the performance of all commercial support functions. Faster information flow. Better leveraging of customer insights across the enterprise.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales operations, marketing operations, sales enablement, training & development, and deal desk all report to different executives. No single person can describe the full technology stack. Customer data lives in many different systems that don't talk to each other.</span></div>
+        <div class="dependency">Dependency: Requires top-down leadership (Pillar 1) to break through the political resistance of consolidating operations functions that have historically lived in different silos.</div>
+    </div>
+
+    <!-- 3. Commercial Architecture -->
+    <div class="card" id="card-commercial-architecture">
+        <div class="card-label">PILLAR 3</div>
+        <div class="card-name">Commercial Architecture That Maximizes the Return on Selling Assets</div>
+        <div class="card-tagline">Systematic and data-driven ways to design and optimise the many variables in the commercial architecture to maximise return on selling assets in terms of speed, visibility, productivity, and engagement at lower cost to sell.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The commercial architecture — your go-to-market strategy, sales force design, territory definitions, quota assignments, and incentives — was likely built on assumptions from a different era. Geographic-based territories, face-to-face calling patterns, and labour-intensive coverage models no longer reflect how customers buy or how technology can enable sellers. A properly designed and optimised commercial architecture can contribute five to ten points of profit contribution to the bottom line in the short term, according to Corey Torrence of Blue Ridge Partners.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Avaya reconfigured all aspects of their commercial architecture — refocusing commercial operations on growing customer lifetime value and aligning goals and incentives with a subscription model. Pitney Bowes refocused their go-to-market resources on new products, transaction types, and stages of the customer journey. AT&T shifted to science-based territory definition within their vertical structure, using analytics to constantly rebalance resources based on industry data.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Greater market coverage with existing resources. More sellers achieving quota. Lower cost to sell. Improved speed of response and customer engagement.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Territory plans haven't changed in years. Quotas are set using simple extrapolations of historical performance. The sales force design doesn't reflect the shift to digital channels. Customer success managers don't exist or are an afterthought.</span></div>
+        <div class="watch-out">Watch out for: Letting perfect get in the way of profitable. The goal is not an ideal architecture on paper — it's incremental improvements that generate measurable results. Many organisations fail because they try to redesign everything at once.</div>
+    </div>
+
+    <!-- 4. Commercial Insights -->
+    <div class="card" id="card-commercial-insights">
+        <div class="card-label">PILLAR 4</div>
+        <div class="card-name">Commercial Insights Built on Customer Engagement and Seller Activity Data</div>
+        <div class="card-tagline">Turn your customer engagement and seller activity data into commercial insights that create value and inform decisions, actions, and conversations at the key points of leverage in the revenue lifecycle.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The emergence of advanced analytics, AI, and Machine Learning — and massive new sales engagement data sets — represents the most significant opportunity to accelerate sales growth since the scale adoption of call centres, CRM, and digital channels. The ability to capture and unify customer data and convert it into commercial insights is critical. The value increases when insights inform decisions, actions, and conversations at the moments that matter in the selling process. Yet most organisations are not data driven. The majority of CMOs surveyed by Forbes don't support decision-making or measure results with the first-party data within their own CRM and marketing automation platforms.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Ciena Networks created a dashboard — described as an "EKG for selling" — that gives leadership a dynamic picture of what is going on in each account. iCIMS defined a customer engagement score on a scale of 1-10 and paid 20% higher commissions when reps engaged ideal customers. DHL used advanced customer engagement analytics to create measures of customer engagement quality.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Better allocation of selling time and resources. More accurate sales forecasts. Higher conversion rates. Improved account penetration and customer lifetime value.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales managers rely on gut feeling rather than data to set account priorities. Only a third of sales reps are using analytics to prioritise and qualify leads. Marketers cannot demonstrate the contribution of marketing to firm sales and profits with the data they have.</span></div>
+    </div>
+
+    <!-- 5. Commercial Enablement -->
+    <div class="card" id="card-commercial-enablement">
+        <div class="card-label">PILLAR 5</div>
+        <div class="card-name">Commercial Enablement Capabilities That Turn Your Technology into a "Force Multiplier"</div>
+        <div class="card-tagline">Deploy scalable enablement technologies that multiply the effect of your salespeople to generate more profitable revenue growth with fewer resources.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Thousands of point solutions exist to save sellers time and make them more productive. But these are deployed in silos. CRM is disconnected from digital asset management, which is disconnected from training systems. Most organisations have not realised the immense promise of sales technology because of the lack of focus on the seller experience and usability. A two-fold increase in adoption of existing tools will yield a five to ten-fold return on existing technology, content, and data assets.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Hitachi Vantara conducted a technology stack assessment, identified the top five to six "hot spots" in the seller workflow, rationalised their portfolio, filled critical gaps with best-in-class tools, and leveraged digital adoption solutions to multiply utilisation. ChowNow connected the dots across different systems to automate manual work, create best-practices libraries, and enable one-to-one coaching at scale — ramping reps to productivity 60% faster.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Higher seller productivity with lower selling costs. Faster ramp time for new reps. Reduced rep churn. Improved adoption of sales methodology and tools.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales reps spend most of their time not talking to customers. CRM adoption is low and data entry is a constant complaint. Sales enablement tools are purchased but rarely used. Training and playbooks are disconnected from actual selling situations.</span></div>
+        <div class="dependency">Dependency: Depends on Pillar 1 (Commercial Leadership) to insist on making the simplified seller experience a primary strategic goal. Also depends on Pillar 2 (Commercial Operations) to coordinate across the functions that own different pieces of the technology portfolio.</div>
+    </div>
+
+    <!-- 6. Commercial Asset Management -->
+    <div class="card" id="card-commercial-asset-mgmt">
+        <div class="card-label">PILLAR 6</div>
+        <div class="card-name">Commercial Practices That Maximize Return from Customer Data, Technology, Content, and Intellectual Property Assets</div>
+        <div class="card-tagline">Strategic management of the data, technology, content, and "selling IP" assets to maximise their utilisation, impact, and contribution to revenue and profit growth outcomes.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Most organisations don't need more technology — they need higher returns on their existing commercial technology and customer data assets. These assets are among the most valuable but underperforming assets in a business. Customer data in the airline industry can account for 100% or more of an airline's profitability and value, yet it does not show up on any balance sheet. Accountants don't measure, report, or manage these assets as closely as physical assets like inventory or real estate, even though they are far larger and more strategic.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Rev.com established a single Revenue Operations team to consolidate data and technology management so the revenue team uses the same data from a single source of truth. Hitachi Vantara conducted a top-down assessment that identified and eliminated many tools that were redundant, not being used, or not supporting sales. WalkMe focused on treating selling content as a strategic asset, using reuse, templatisation, and intelligence to manage the growing cost and complexity of creating content.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Higher returns on technology investments. Reduced waste from redundant or unused tools. Better data integrity. More effective selling content that is actually used by reps.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">No single person is responsible for measuring or managing the return on the sales and marketing technology portfolio. Customer data lives in dozens of different systems. Selling content is created at great expense but utilisation by sales is extremely low. The company cannot say what any of these assets are actually worth.</span></div>
+    </div>
+
+    <!-- OPERATING SYSTEM: Nine Building Blocks -->
+    <h2 id="os-system">The Operating System: Nine Building Blocks of Revenue Operations</h2>
+    <p class="orientation-para">You have invested heavily in CRM, digital marketing infrastructure, content, and sales enablement tools. But these assets underperform. Sellers don't adopt the tools. Data is siloed. Content isn't used. You need a practical blueprint for connecting technology, data, processes, and teams into a coherent operating system that generates consistent and scalable growth. The Nine Building Blocks provide that blueprint.</p>
+
+    <!-- Revenue Enablement -->
+    <div class="card" id="card-revenue-enablement">
+        <div class="card-label">BUILDING BLOCK #1</div>
+        <div class="card-name">Revenue Enablement — CRM, Content, and Learning Technologies That Support Selling</div>
+        <div class="card-tagline">The commercial technology assets, capabilities, and systems that support sellers — CRM, sales enablement, engagement, content management, and readiness systems.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Most organisations already have 20 or more tools in house. CRM platforms too often serve only as systems of record rather than actually helping sellers sell. Key measures of sales productivity — time spent with customers (34% of rep time) and quota attainment (42% of all reps) — have not moved materially over the last few decades. Sales enablement, readiness, and engagement software are converging. Connecting them revitalises legacy investments in CRM, sales enablement, digital asset management, training software, and customer data.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Rationalise the revenue enablement stack. Simplify the day-to-day seller workflow. Automatically enrich and update CRM with real-time customer engagement data. Align sales enablement, digital asset management, and sales readiness into a single selling motion. Equip sellers with prescriptive insights — what content or offer to present, which stakeholders to engage, how to respond to customer questions in real time.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Higher adoption of selling tools. Reduced tool fatigue. More time spent selling. Better data integrity in CRM. Improved ramp time for new sellers.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales reps complain about too many tools and panes of glass. CRM data is stale because no one updates it. Sales enablement tools are purchased but utilisation is low. Training systems are disconnected from actual selling situations.</span></div>
+        <div class="dependency">Dependency: Requires Pillar 5 (Commercial Enablement) and Pillar 6 (Commercial Asset Management) to be in place for the reconfiguration to be managed coherently.</div>
+    </div>
+
+    <!-- Channel Optimization -->
+    <div class="card" id="card-channel-optimization">
+        <div class="card-label">BUILDING BLOCK #2</div>
+        <div class="card-name">Channel Optimization — Selling Channels That Maximize Effective and Efficient Interactions</div>
+        <div class="card-tagline">The systems, processes, and capabilities that improve the engagement, productivity, cadence, intersection, and coverage of selling channels — both digital and human.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The emergence of 4D selling channel systems — digitally enabled, displaced geographically, data-driven, and dynamic — has had a dramatic impact. B2B selling organisations learned during the pandemic that they can get 50% higher engagement, speed of response, and productivity from their sales reps at lower costs by incorporating virtual selling channels into their commercial model. Technology can optimise channels through three mechanisms: migration (moving interactions to lower-cost channels), automation (removing low-value tasks), and augmentation (helping sellers add more value during customer interactions).</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Ryder System moved 35% of used vehicle sales to an inside sales team, raising customer retention from 50% to 72%, improving customer satisfaction by 400 basis points, and cutting costs in half. HPE combined sales force automation, analytics, and AI-enabled coaching with legacy Salesforce.com and call centre technology, generating 400% more sales opportunities in calls. Cvent increased SDR productivity by over 20% without sacrificing call quality using conversational intelligence.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Lower cost to sell. Higher engagement and productivity per rep. Better customer experience. More selling time freed from administrative tasks.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">The sales force is still organised around geographic territories with face-to-face calling patterns. Virtual selling is treated as a temporary bandage rather than a permanent channel redesign. Specialists and overlay roles are absent. No structured approach to migrating interactions to lower-cost channels exists.</span></div>
+    </div>
+
+    <!-- Customer-Facing Technology -->
+    <div class="card" id="card-customer-facing-tech">
+        <div class="card-label">BUILDING BLOCK #3</div>
+        <div class="card-name">Customer-Facing Technology — The Owned Digital Selling Infrastructure</div>
+        <div class="card-tagline">Your websites, blogs, mobile apps, e-commerce platforms, marketing automation, contactless selling, and social media solutions — where the company controls 100% of the message.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">This digital selling infrastructure requires a large capital and operating investment that commands most of your growth resources, yet rarely shows up as a discrete budget item. It collects enormous amounts of first-party customer engagement data — but over 95% of inbound digital marketing interactions are anonymous. The real value is realised when an organisation has a system for identifying more of the leads coming in digitally and getting that information to a human who can convert it into value.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Account-Based Marketing (ABM) programs that connect digital marketing signals to account structures in CRM and notify sales reps when key stakeholders engage. 6sense uses AI to analyse buyer engagement data from many sources, map it around account structures, and integrate it with CRM profiles. This helps account teams develop, cross-sell, upsell, and penetrate their best customers.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Higher return on investment in digital marketing infrastructure. Identification of more anonymous buyers. Richer account intelligence for sales teams. Better targeting of marketing spend.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Marketing controls the website and digital channels but the data generated doesn't flow to sales. Sales reps have no visibility into whether their key accounts are engaging with the company's digital content. Budget for owned digital infrastructure is fragmented across many line items and no one adds it up.</span></div>
+    </div>
+
+    <!-- Revenue Intelligence -->
+    <div class="card" id="card-revenue-intelligence">
+        <div class="card-label">BUILDING BLOCK #4</div>
+        <div class="card-name">Revenue Intelligence — Manage and Measure Financial Value</div>
+        <div class="card-tagline">The analytics and information technologies that help growth leaders manage and measure the financial return on growth strategies, investments, and programs.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Visibility into opportunity potential, account health, seller performance, and pipeline activity are regarded as the four most important insights managers need. Yet only about a third of sales leaders have intelligent forecasting. Companies that align their metrics and incentives with customer buying behaviour gain a significant advantage — they make much better decisions about how to allocate people, technology, data, and content resources based on contribution to the top line, bottom line, and firm value.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">iCIMS created a customer engagement quality score on a scale of 1-10 and tied financial incentives to it. AT&T developed measures based on customer growth, profitability, and Net Promoter Scores. Ciena created Quality of Engagement measurements. DHL used analytics to create measures of customer engagement quality. All of these replace outdated waterfall metrics (MQL, SQL) with data-driven metrics that quantify account profitability, pipeline health, and seller performance.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">More accurate sales forecasts. Better resource allocation. Common incentives that foster teamwork. Clear visibility into what is working and what is not.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales and marketing argue about lead quality and attribution. Forecast accuracy is poor. Metrics are based on the demand unit waterfall model. No one can quantify the health of key accounts.</span></div>
+        <div class="watch-out">Watch out for: Traditional demand unit waterfall metrics — Marketing-sourced pipeline, MQLs, SQLs — are fundamentally flawed for modern selling. They do not foster teamwork, do not address current customer behaviour, and waste energy on documenting who gets credit instead of improving account profitability.</div>
+    </div>
+
+    <!-- Engagement Data Hub -->
+    <div class="card" id="card-engagement-data-hub">
+        <div class="card-label">BUILDING BLOCK #5</div>
+        <div class="card-name">Engagement Data Hub — Leverage Advanced Analytics to Connect Growth Assets to Value</div>
+        <div class="card-tagline">The technology and capabilities that aggregate, transform, and monetise all customer, revenue, and seller activity data — serving as the central nervous system of the Revenue Operating System.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Customer data is one of the most valuable assets a company has. Finding ways to harvest the first-party customer engagement data your company already owns is an obvious way to grow sales with no incremental investment. Unfortunately, only 38% of CMOs believe their investments in analysts, data, and analysis fully support their decision-making process. Sales systems are transforming into Customer Data Platforms that are faster, more prescriptive, predictive, and actionable. This represents a material shift in the centre of gravity — away from CRM as the organising hub, toward platforms that aggregate and orchestrate customer engagement data.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Fortive integrates customer engagement, sales activity, product usage, and telemetry data to support coaching and guidance of revenue teams. Ryder uses product telemetry data from vehicles they rent to inform programs that help sellers sell value at higher prices. Pitney Bowes partnered with a customer data platform (Snowflake) to organise customer information for better campaigns and customer actions.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">A single source of truth for all customer engagement data. Richer customer profiles. Faster insights for frontline sellers. Better targeting and prioritisation.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Customer data exists in many different systems that don't talk to each other. Sales, marketing, and service each have their own version of customer truth. You cannot identify which of your best customers are engaging with your digital channels.</span></div>
+    </div>
+
+    <!-- Customer Intelligence -->
+    <div class="card" id="card-customer-intelligence">
+        <div class="card-label">BUILDING BLOCK #6</div>
+        <div class="card-name">Customer Intelligence — Use Customer Data to Inform Decisions, Actions, and Conversations</div>
+        <div class="card-tagline">The software applications, capabilities, and processes that convert customer data into actionable insights — answering critical day-to-day selling questions.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Digitally enabled customers want answers that are faster, better, and relevant. The speed of selling has gotten so fast that revenue teams often need selling insights in real time to compete. As Howard Brown, CEO of Revenue.io, puts it: "The revenue team doesn't want big data — they want guidance, recommendations, and prioritisation on what to do next." The need for actionable insights places a premium on systems that unify and interpret data from many customer engagement systems to answer questions like: What content or offers to present? Which stakeholders to engage? How to respond to customer questions quickly and compliantly?</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Sales engagement platforms like Xant.ai prioritise daily tasks using real-time buyer intelligence from billions of sales interactions. Solutions like RFPIO use AI to analyse question-and-answer interactions across the organisation to provide highly personalised responses to complex inquiries. Highspot's AI pushes specific content based on customer preferences, past success, and client need. Revenue.io combines conversation data with marketing automation data, external intent data, and CRM opportunity data to prescribe who sellers should contact and what actions they should take.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Sellers get actionable guidance rather than data dumps. Faster response to customer inquiries. Better content recommendations. More effective sales conversations.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales reps spend 7% of their time just prioritising leads. They spend almost 10% of their time on call planning and content preparation. Only 37% of sales reps get algorithmic suggested next steps on an opportunity. The organisation has rich customer data but it never reaches the frontline seller in time to affect a conversation.</span></div>
+    </div>
+
+    <!-- Talent Development -->
+    <div class="card" id="card-talent-development">
+        <div class="card-label">BUILDING BLOCK #7</div>
+        <div class="card-name">Talent Development — Attract, Develop, and Retain Commercial Talent</div>
+        <div class="card-tagline">All the technology, processes, assets, and capabilities used to attract, develop, and retain selling talent across all functions.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">A 5% increase in sales rep attrition can increase selling costs 4-6% and reduce total revenue attainment by 2-3% overall. The difference between a 5% attrition rate and one of 25% means that overall cost to sell increases by more than 50% and revenue drops by 20%. Yet most organisations manage sales talent in a fragmented way — learning management systems are disconnected from sales enablement systems where sales playbooks reside, and sales analytics are not linked to readiness and training. No single person is responsible for measuring, managing, or improving the performance of the talent pipeline.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">ChowNow unified their sales and marketing technology portfolio to ramp reps to productivity 60% faster, promote them sooner, and reduce rep attrition by 75%. Equity Trust Company combined sales readiness, engagement, and conversational AI into a closed feedback loop that doubled the manager-to-rep ratio from 1:6 to 1:12 while improving conversion and rep satisfaction. GHX built a system to streamline targeting and customisation of training with an environment for teams to practice, get feedback, and improve.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Faster ramp time for new sellers. Lower rep churn. Better adoption of sales methodology. Managers coaching more reps more effectively.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Sales rep tenure is under two years. Training is classroom-based and episodic. Managers cannot monitor or coach more than a handful of reps. There is no connection between training, what actually happens on sales calls, and performance measurement.</span></div>
+    </div>
+
+    <!-- Resource Optimization -->
+    <div class="card" id="card-resource-optimization">
+        <div class="card-label">BUILDING BLOCK #8</div>
+        <div class="card-name">Resource Optimization — Allocate People, Time, and Effort Against Opportunities</div>
+        <div class="card-tagline">The technology, processes, and capabilities that optimally allocate people, time, and effort against customers and markets.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Most organisations tend to target too many customers and develop too few of them. The customer curve remains too long and sellers continue to chase tail accounts that are unprofitable to pursue. Only 36% of sales executives say they are effective at territory design. Most organisations use spreadsheets to manage territory and quota planning — and as a result, two-thirds fail to finish planning before the sales period starts. Companies that digitise their territory alignment process increase revenue up to 15% through better resource allocation.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Using data-derived propensity-to-buy models instead of sales team estimates to assign accounts — which typically yields 20% or more improvement in conversion and quota attainment. Digitising territory and quota planning to shrink planning cycles from 60 to 35 days. Using automated workflow processes that achieve efficiency gains of two to three times compared to manual or spreadsheet-driven processes.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Better quota attainment. Reduced wasted effort on low-potential accounts. Faster planning cycles. More accurate and fair territory assignments.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Territory plans are still managed on spreadsheets. Planning cycles take 60-70 days and still aren't done before the sales period starts. The 80/20 rule is acknowledged but not applied — resources are spread too evenly across accounts regardless of potential.</span></div>
+        <div class="dependency">Dependency: Depends on Building Block #4 (Revenue Intelligence) to provide the data-driven inputs — customer scoring, propensity to buy, workload estimates — needed for algorithmic resource allocation.</div>
+    </div>
+
+    <!-- Revenue Enhancement -->
+    <div class="card" id="card-revenue-enhancement">
+        <div class="card-label">BUILDING BLOCK #9</div>
+        <div class="card-name">Revenue Enhancement — Increase Revenue Yield with Better Packaging, Pricing, and Personalizing Offers</div>
+        <div class="card-tagline">The technology and processes that help sellers generate more margin, revenue, and value in their interactions with customers.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Pricing is the most efficient way to improve a firm's profitability. A 1% effective price increase without changing anything else normally increases profitability by over 10%. Your organisation can get two to five times the profit leverage from top-line price optimisation than from efforts aimed at reducing costs. Yet most organisations lack disciplined pricing governance — revenue and margin leak through unauthorised discounting and inconsistent pricing. Advanced analytics can improve all aspects of pricing, proposal development, and solution packaging through personalisation, automation, configuration, and optimisation.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Pandora uses AI and ML to understand customer behaviour and personalise offers at scale — determining the right subjects, topics, best artists for each person, and even the right timing and channel for upsell offers. CPQ solutions like DealHub and Apptus help revenue teams deliver dynamic personalised presentations and proposals. Pricing optimisation solutions like PROS, Zilliant, and Vendavo blend customer engagement data with CRM information to create more optimal pricing.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Margin expansion of 3-10% with existing resources. Better price realisation. More effective proposals. Higher win rates on competitive deals.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise it early:</span><span class="row-content">Pricing is set by gut feel or historical precedent. Discounting is ad hoc and ungoverned. Proposals are assembled manually. The organisation cannot measure price leakage. Only 37% of sales reps use CPQ solutions.</span></div>
+        <div class="watch-out">Watch out for: Pricing is culturally sensitive — sales teams may resist disciplined pricing if they perceive it as limiting their ability to close deals. The business case needs to demonstrate that better pricing discipline increases margin without necessarily reducing volume.</div>
+    </div>
+
+    <!-- LEADERSHIP MODELS -->
+    <h2 id="leadership-models">Three Leadership Models for Revenue Operations</h2>
+    <p class="orientation-para">You know you need to align your revenue teams, but you are not sure what structural approach will work in your organisation. Do you consolidate everything under one leader and risk cultural resistance? Do you build alliances across functions and risk slow decision-making? Or do you empower operations teams from below and risk insufficient authority? The three archetypes — Tsar, Federation, and Chief of Staff — give you a menu of proven approaches.</p>
+
+    <!-- The Tsar -->
+    <div class="card" id="card-tsar-model">
+        <div class="card-label">LEADERSHIP MODEL</div>
+        <div class="card-name">The Tsar: Putting a "CXO" in Charge of Revenue Teams</div>
+        <div class="card-tagline">Use institutional authority to align all revenue teams — consolidating decision-making and operational control under one leader with hard reporting lines and budgetary oversight.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The company creates structural change by putting marketing, sales, and service under one common leader — a CXO (Chief Revenue Officer, Chief Growth Officer, Chief Customer Officer). The traditional functions may still exist as separate entities, but they all report to one person. This leader holds full management discretion: hard reporting lines, budgetary oversight, and incentive setting. The clarity of this model is its greatest strength — one throat to choke, one person accountable, one common purpose cascading from the top.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Avaya's CEO brought in a Chief Revenue Officer with hard-line authority over marketing, sales, delivery, customer success, professional services, and all channel partners globally. Splunk established a President and Chief Growth Officer to sit on top of the growth functions. Cisco named an EVP-level Chief Customer and Partner Officer responsible for worldwide sales and marketing, field operations, and partnerships.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Simpler organisation. Single point of accountability. Clear alignment of all revenue resources around a common growth strategy. Faster decision-making on cross-functional resource allocation.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise when this is needed:</span><span class="row-content">The CEO is spending too much time mediating between sales and marketing. Revenue targets are missed and functions blame each other. Growth requires coordination across too many silos that no single executive below the CEO can control. A business model transformation (e.g., to subscriptions) demands aligned incentives across the entire revenue team.</span></div>
+        <div class="watch-out">Watch out for: A title alone is not enough. Merely anointing someone with a CXO title without a strong mandate, clear scope, and measurable KPIs is a weak solution that will not drive results. The CEO must actively champion and empower the role.</div>
+        <div class="example-phrase">"The CRO is the accountable party for marketing, sales, delivery, customer success, professional services, and all channel partners. These are hard line reports." — Jim Chirico, CEO of Avaya</div>
+    </div>
+
+    <!-- The Federation -->
+    <div class="card" id="card-federation-model">
+        <div class="card-label">LEADERSHIP MODEL</div>
+        <div class="card-name">The Federation: An Alliance Among Leadership Functions</div>
+        <div class="card-tagline">Use processes outside the organisational structure to foster teamwork — rules of engagement, steering committees, and service-level agreements among growth leaders.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Rather than changing reporting structures, the Federation creates a matrix overlay that establishes joint accountability and common purpose without making any official changes to the org chart. This is the least disruptive to the status quo. It emphasises teamwork while still allowing functions to build domain expertise. However, it relies heavily on trust — which is notoriously absent in most corporate teams — and requires time to build consensus.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">At Juniper Networks, the CMO and CRO treat growth investment as a "fungible budget" between them and run a small steering committee to decide where to allocate money for the greatest growth. At insightsoftware, the COO and CMO refer to themselves as "the wonder twins" — collaborating closely on sales force design, go-to-market strategy, and managing commercial teams. At Ciena, the heads of sales and marketing forged a tight partnership over four years, contributing to over $1 billion in new growth. Oracle and SAP both used Demand Generation Boards — quarterly meetings where sales and marketing leaders reviewed data, agreed on go-to-market plays, and prioritised resource allocation.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Less disruptive to implement. Preserves functional expertise. Builds trust and collaboration muscle. Can be a stepping stone toward more structural integration later.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise when this is needed:</span><span class="row-content">The organisation has strong functional leaders who work well together but lack a formal mechanism for joint planning. Political resistance to structural change is high. The business is performing reasonably well but coordination could be better. The CEO wants to foster collaboration without a disruptive reorganisation.</span></div>
+        <div class="watch-out">Watch out for: The Federation can degenerate into meetings without decisions if not backed by clear OKRs, shared metrics, and genuine commitment from the CEO. It requires leaders who genuinely trust each other — which cannot be mandated.</div>
+        <div class="example-phrase">"Mike and I look at the increases in growth investment as a fungible budget between ourselves. We run a small steering committee to figure out where we should put this money." — Marcus Jewell, CRO of Juniper Networks</div>
+    </div>
+
+    <!-- The Chief of Staff -->
+    <div class="card" id="card-chief-of-staff-model">
+        <div class="card-label">LEADERSHIP MODEL</div>
+        <div class="card-name">The Chief of Staff: A Revenue Operations "Rock Star"</div>
+        <div class="card-tagline">Merge sales operations, marketing operations, sales enablement, customer analytics, and training & development into one unit that provides support for the marketing, sales, and service functions.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">In this model, the most visible change from the status quo is the creation of a "new" function on the org chart — often called simply "Revenue Operations." This function changes the authority matrix at its lower but not its top levels. One executive gets the mandate to "connect the dots" across the systems that support marketing, sales, and service. This makes it much easier to collect first-party data from websites (owned by marketing operations), match it to account structures in CRM (owned by sales operations), deliver it to frontline sellers (using tools owned by sales enablement), and report on account health (owned by customer analytics).</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Fast-growing organisations like Splunk, Rev.com, TPx Communications, Avaya, and Sirius XM have put one leader in charge of all revenue-centric operations functions with hard-line reporting relationships — including sales operations, marketing operations, sales enablement, and the deal desk. Rev.com consolidated Revenue Operations so the revenue team uses the same data from a single source of truth. GHX created a Revenue Operations team that includes sales operations, training and development, and key enablement functions into a single organisation.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Better data flow across the revenue cycle. One throat to choke for the performance of all commercial support systems. Faster connection of insights to frontline action. Simplified technology management.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise when this is needed:</span><span class="row-content">The organisation has invested in many tools but they don't work together. Data is siloed across marketing, sales, and service systems. Operations teams are fragmented and report to different functions. Growth is good but could be better if the systems supporting sellers were connected.</span></div>
+        <div class="watch-out">Watch out for: This model can lack the institutional authority to force change at the leadership level. Operations directors and performance professionals lack the remit and influence to get peers in marketing, product, IT, and the geographies to change. The risk is that Revenue Operations becomes an administrative consolidation rather than a strategic transformation driver.</div>
+        <div class="dependency">Dependency: For maximum effectiveness, this model needs a CXO or CEO-level sponsor who can provide air cover and funding for cross-functional initiatives that the Revenue Operations leader cannot mandate on their own.</div>
+    </div>
+
+    <!-- SMART ACTIONS -->
+    <h2 id="smart-actions">Six Proven Smart Actions That Work</h2>
+    <p class="orientation-para">You understand the theory. You've assessed your maturity. Now you need concrete, practical actions that are achievable with existing resources, that connect multiple building blocks of the operating system, that generate short-term financial gains, and that stack together toward larger transformation. Smart Actions meet all four criteria: actionable, connected, accretive, and scalable.</p>
+
+    <!-- Smart Action 1: Visibility -->
+    <div class="card" id="card-smart-visibility">
+        <div class="card-label">SMART ACTION 1</div>
+        <div class="card-name">Get Better Visibility into the Revenue Cycle</div>
+        <div class="card-tagline">Aggregate, analyse, and transform customer engagement data into commercial insights — opportunity potential, account health, seller performance, and pipeline activity.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The seller activity data, customer engagement statistics, product usage data, and financial transaction data required to assemble these metrics already exists in your organisation. The analytic tools and skills have become democratised. This Smart Action connects four parts of the Revenue Operating System: customer activity data from Customer-Facing Technology, seller activity data from Revenue Enablement, an Engagement Data Hub, and Revenue Intelligence dashboards.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Fortive uses customer engagement, product usage, and seller activity data to create insights that help manage customer journeys and allocate sales resources. Ciena created a Quality of Engagement dashboard — an "EKG for selling." AT&T developed measures based on customer growth, profitability, and satisfaction. Pentair is gaining visibility into granular sales activity and voice of the customer data.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Better measurement and management of seller resources. Allocation of resources to the best opportunities. Elimination of wasted time on unprofitable accounts. Active management of customer lifetime value.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">You cannot say with confidence which accounts are healthy and which are at risk. Sales forecasts are unreliable. You suspect sellers are spending too much time on low-potential accounts but cannot prove it. Marketing cannot link its activities to revenue outcomes.</span></div>
+        <div class="dependency">Dependency: Requires first-party data from your digital selling infrastructure and CRM. Also requires analytics capability — but the authors emphasise that you can get an 80% good-enough picture with existing tools and data, and that perfection should not stand in the way of progress.</div>
+    </div>
+
+    <!-- Smart Action 2: Simplify -->
+    <div class="card" id="card-smart-simplify">
+        <div class="card-label">SMART ACTION 2</div>
+        <div class="card-name">Simplify the Selling Workflow</div>
+        <div class="card-tagline">Connect the dots across your revenue enablement technology portfolio to create a Digital Selling Platform that eliminates friction in day-to-day selling.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Organisations have the key assets — CRM, digital asset management, sales enablement tools — but they live in different functional silos. Simplifying and codifying the workflow and enforcing it using digital adoption tools generates significant improvements. This Smart Action requires weaving together CRM, sales enablement, sales readiness, and digital asset management to eliminate key points of failure, friction, and manual labour. Importantly, you don't need all tools fully connected to start — even incremental connections create value.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">Hitachi Vantara conducted a technology stack assessment, identified the top five to six "hot spots" in the seller workflow, rationalised the portfolio, filled gaps, and used digital adoption software to multiply utilisation. Their approach: take a top-down view, identify points of leverage and failure, rationalise and focus the portfolio, fill critical gaps, and leverage digital adoption solutions.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Elimination of waste and redundancy in the technology portfolio. Higher utilisation of existing tools. Better seller experience. Reduced rep churn. A two-fold increase in adoption yielding a five to ten-fold return on existing technology assets.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">Sales reps complain about tool fatigue. CRM data entry is a constant source of friction. You have more than 20 tools in the sales technology portfolio but adoption is low. Reps use multiple panes of glass to do their job.</span></div>
+        <div class="dependency">Dependency: Requires Pillar 5 (Commercial Enablement) and Pillar 6 (Commercial Asset Management) capability. Also requires top-down sponsorship because rationalising tools means making choices that will face resistance from tool owners.</div>
+    </div>
+
+    <!-- Smart Action 3: ABM -->
+    <div class="card" id="card-smart-abm">
+        <div class="card-label">SMART ACTION 3</div>
+        <div class="card-name">Share Marketing Insights with Frontline Sellers (Account-Based Marketing)</div>
+        <div class="card-tagline">Monetise the digital selling infrastructure by connecting marketing signals to CRM and enabling ABM programs that optimise account coverage.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Every organisation spends a big chunk of marketing budgets on owned, earned, and paid digital marketing — but over 95% of inbound digital marketing interactions are anonymous. The real value of ABM is identifying more of the leads coming in digitally and getting that information to a human rep who can convert it into value. ABM is not a technology category — it is a cross-functional program that connects digital marketing signals, digital marketing programs, and CRM to help sellers identify key stakeholders in accounts and optimise account coverage.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">6sense uses AI to analyse buyer engagement data from many sources, map it around account structures, integrate it with CRM profiles, and augment it with third-party data holding buying signals. Juniper Networks is using ABM to deliver personalised service to thousands of stakeholders across thousands of accounts. The most successful ABM programs focus on four keys: scalability as the core objective, evolving measurement from marketing-sourced pipeline to customer engagement metrics, accelerating data sharing, and establishing a common economic purpose for investment.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Higher return on digital marketing investment. Better identification of anonymous buyers. Richer account intelligence. Improved account penetration and cross-selling.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">Marketing generates leads but sales doesn't follow up effectively. Your best customers are engaging with your digital content but no one on the account team knows. Sales and marketing argue about lead quality and attribution.</span></div>
+        <div class="watch-out">Watch out for: Do not let ABM be defined as a technology purchase. A successful ABM program takes a high degree of coordination between sales, marketing, and service. If marketing operations brings in an ABM solution without working with sales, reps will be trained on the wrong platform, money will be wasted, and adoption will be poor.</div>
+    </div>
+
+    <!-- Smart Action 4: Talent -->
+    <div class="card" id="card-smart-talent">
+        <div class="card-label">SMART ACTION 4</div>
+        <div class="card-name">Develop and Retain High-Performing Selling Talent</div>
+        <div class="card-tagline">Integrate learning and development processes — unite sales enablement and readiness platforms into a closed-loop system for education, coaching, reinforcement, and measurement.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Most organisations already have the sales training, playbooks, learning, development, enablement, and analytics technology to put this connected solution together — but they have lived in different functional silos. Learning management systems are disconnected from sales enablement systems where playbooks reside. Sales analytics used to measure activity are not linked to readiness and training. Feedback and reinforcement suffer because very little information is available to sales managers to support grading, coaching, and performance measurement.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">ChowNow unified their technology portfolio, used AI-enabled tools to automate manual work, created best-practices libraries, and enabled one-to-one coaching at scale. They ramped reps 60% faster and reduced attrition by 75%. Equity Trust combined sales readiness, engagement, and conversational AI into a closed feedback loop that doubled the manager-to-rep ratio. GHX built a system with an environment for teams to practice, get feedback, improve, and certify knowledge and skills.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Faster ramp time. Better skill development. Managers coaching more reps. Lower rep churn. Training that measurably translates into better selling outcomes.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">Training is classroom-based and disconnected from actual selling. Managers cannot monitor or coach more than a few reps. New rep ramp time is measured in quarters rather than weeks. You cannot tell whether training is actually changing seller behaviour in customer conversations.</span></div>
+    </div>
+
+    <!-- Smart Action 5: Channels -->
+    <div class="card" id="card-smart-channels">
+        <div class="card-label">SMART ACTION 5</div>
+        <div class="card-name">Make Selling Channels More Effective with Real-Time Data-Driven Selling</div>
+        <div class="card-tagline">Connect sales enablement, CRM, conversational intelligence, and digital marketing systems to provide real-time guidance and coaching to customer-facing employees.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Organisations already have the fundamental customer engagement and seller activity data they need — recorded conversations, content consumption by clients, CRM, and exchange data from email and calendars — to pilot real-time guidance and coaching. Using advanced analytics and sales AI tools, you can get an 80% good-enough picture of buyer engagement and seller activity that provides real-time guidance to reps about the right response, content, action, or sales play. The speed of communication accelerates to keep pace with rapidly changing customer behaviour.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">HPE combined sales force automation, analytics, and AI-enabled coaching from Revenue.io with legacy Salesforce.com and call centre technology — inside reps generated 400% more sales opportunities. Cvent increased SDR productivity by over 20% using conversational intelligence to help managers monitor, coach, and guide reps in real time. ChowNow used conversational AI to give sales managers the ability to listen to calls and provide real-time coaching.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Better conversion rates on sales and service conversations. Higher returns on CRM, marketing data, and conversational intelligence investments. Managers coaching more reps. Faster ramp for new reps.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">Sales calls are not recorded or analysed. Managers do ride-alongs or spot-check calls but cannot systematically coach across the team. Sellers spend too much time on call planning and data entry. The organisation cannot identify which selling behaviours lead to success.</span></div>
+        <div class="dependency">Dependency: Requires a sales engagement solution capable of aggregating engagement data from multiple sources — recorded conversations, CRM, sales enablement, and marketing signals. Also requires integration with CRM as the system of record so data integrity is maintained.</div>
+    </div>
+
+    <!-- Smart Action 6: Content -->
+    <div class="card" id="card-smart-content">
+        <div class="card-label">SMART ACTION 6</div>
+        <div class="card-name">Streamline and Personalize the Selling Content Supply Chain (Intelligent Response Management)</div>
+        <div class="card-tagline">Evolve from content management to Intelligent Response Management — using AI and ML to create a knowledge base built on actual question-and-answer exchanges between customers and sales reps.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Traditional content operations do not scale in a modern selling model. The cost of localising, targeting, and personalising a branded content asset in five market segments is more than 20 times the cost of the original content asset. Add new digital channels and one-to-one segmentation, and the cost curve accelerates dramatically. Intelligent Response Management goes beyond the prevailing content management practices of writing content to spec and creating top-down information hierarchies. It uses AI to learn from actual Q&A exchanges, making aggregate knowledge available to entire revenue teams on demand. This is fundamentally more scalable because it uses AI to fuel a virtuous cycle — the more questions you respond to, the more you learn, the more intelligence you create.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">RFPIO uses AI and ML to analyse question-and-answer interactions across the organisation to provide highly personalised and contextual responses to complex inquiries. A simple query provides the answer a salesperson needs — whether writing a text, email, proposal, presentation, or RFP. The authors describe a mature system where end-to-end response management is enabled across the enterprise, delivering contextually correct and up-to-date content through every touchpoint and channel.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Dramatically increased utilisation of selling content assets. Elimination of waste and redundancy in content creation. Faster response to customer questions. Better compliance and quality control. Content that is available across all channels — sales, service, chatbots, and self-service.</span></div>
+        <div class="card-row"><span class="row-label">How to recognise you need this:</span><span class="row-content">Content is created at great expense but utilisation by sales is extremely low. Reps cannot find the right content for specific selling situations. RFP responses are assembled manually. The cost of creating and personalising content is growing faster than revenue. Different teams are creating similar content independently.</span></div>
+        <div class="dependency">Dependency: Requires Pillar 6 (Commercial Asset Management) to establish operational ownership of selling content across functions. Also requires a common taxonomy and architecture for organising all cross-functional content — readiness, validation, playbook, thought leadership, and product content.</div>
+    </div>
+
+    <!-- FRAMEWORKS & TOOLS -->
+    <h2 id="frameworks-tools">Frameworks and Tools</h2>
+    <p class="orientation-para">You need practical tools to build the business case, prioritise actions, and measure progress. These frameworks — the Revenue Value Chain and the Maturity Assessment — provide the financial rationale and the diagnostic blueprint to get started.</p>
+
+    <!-- Revenue Value Chain -->
+    <div class="card" id="card-revenue-value-chain">
+        <div class="card-label">FRAMEWORK</div>
+        <div class="card-name">The Revenue Value Chain (RVC)</div>
+        <div class="card-tagline">A simple four-step framework that connects growth activities and investments to firm value and financial performance.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">Most organisations struggle to articulate how programs and activities lead to financial results. No action — whether a campaign or a software deployment — creates firm value on its own. An action can only create value if it changes customer behaviour. The RVC model provides a financially sound basis for developing business cases, budgets, and fact-based measurements. It is academically vetted, financially valid, transparent, simple, objective, balanced between short-term impact and long-term value creation, and measurable.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">The four steps are: (1) Growth Activities & Investments → (2) Changes in Customer Behaviour (choose more, pay more, refer more, buy faster, stay longer) → (3) Business Outcomes (revenue growth, margin expansion, share gains) → (4) Firm Value & Financial Performance. The authors describe it as a "walk-crawl-run" approach — start by agreeing on the basic arithmetic of growth, document core assumptions, use those assumptions to build a business case, and then use research and testing to validate and refine the model.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">Credible business cases for cross-functional investments. Common vocabulary for financial executives and growth leaders. Clear documentation of assumptions that can be tested and improved. A framework that avoids the flaws of revenue attribution models and sales funnel metrics.</span></div>
+        <div class="card-row"><span class="row-label">How to deploy:</span><span class="row-content">Get all senior stakeholders in a room and use the RVC to uncover basic facts and beliefs about how growth happens. Document collective assumptions. Build a business case connecting a Smart Action to firm financial performance. Use research, customer insights, and program tests to validate and refine the growth equation over time.</span></div>
+        <div class="watch-out">Watch out for: Don't let the framework become an academic exercise. The goal is not a perfect model — it is a shared understanding of how growth happens that enables better investment decisions. Most budgets are made based on undocumented assumptions, faulty math, or unchallenged institutional belief systems. Even documenting your current assumptions is a significant step forward.</div>
+    </div>
+
+    <!-- Maturity Assessment -->
+    <div class="card" id="card-maturity-assessment">
+        <div class="card-label">TOOL</div>
+        <div class="card-name">The Revenue Operations Maturity Assessment</div>
+        <div class="card-tagline">A CXO blueprint for grading your organisation across 16 dimensions and creating a road map for improvement.</div>
+        <div class="card-row"><span class="row-label">What is actually happening:</span><span class="row-content">The assessment breaks down each of the 16 dimensions into four levels of competency (Begin, Basic, Advanced, Best-in-Class). It covers Commercial Leadership, Commercial Operations, Commercial Architecture, Commercial Insights, Commercial Enablement, and Commercial Asset Management. Each level is described in a way that helps you compare it with the current situation at your company. Once graded, you identify three or four areas where you want to upgrade capability to the next level — creating a rigorous basis for a road map.</span></div>
+        <div class="card-row"><span class="row-label">What it looks like in practice:</span><span class="row-content">For each incremental improvement you consider, ask yourself whether it will: monetise customer data and technology assets; simplify, speed, or reduce the cost of selling tasks; differentiate the customer experience; enable scalable technologies; motivate the revenue team to build customer lifetime value; improve visibility into selling performance; motivate team selling; or turn technology investments into force multipliers. If the answer is yes to any of these, you are on the right path.</span></div>
+        <div class="card-row"><span class="row-label">The payoff:</span><span class="row-content">A systematic way to identify the three or four steps your organisation can take today with the greatest short-term financial impact. A roadmap that sequences and scopes the changes involved in commercial transformation. A basis for discussing measurable value and whether you can get buy-in to fund a proof of concept.</span></div>
+        <div class="example-phrase">"Business transformation and growth do not rely on a single event but rather a series of well-thought-out operational strategies that are adopted and implemented across a company." — Sam Errigo, COO of Konica Minolta</div>
+    </div>
+
+    <!-- Eight Ways RevOps Creates Financial Value -->
+    <div class="card" id="card-financial-value">
+        <div class="card-label">FRAMEWORK</div>
+        <div class="card-name">Eight Ways Revenue Operations Creates Financial Value</div>
+        <div class="card-tagline">The specific financial, operational, and management levers that CXOs need to pull to realise measurable benefits from Revenue Operations.</div>
+        <div class="card-row"><span class="row-label">The eight levers:</span><span class="row-content">(1) Monetise commercial assets — put customer data, digital technology, and channel infrastructure assets to work in ways that create value. (2) Manage the economics of selling — simplify the seller workflow to reduce costs and improve adoption. (3) Differentiate the customer experience — optimise processes, offerings, and incentives around customer experience. (4) Enable scalable growth technologies — centralise stewardship of data, technology, and content to execute programs like one-to-one personalisation and real-time coaching. (5) Support recurring revenues — align the revenue team around customer lifetime value. (6) Improve visibility into selling performance — gain real-time insights into account health, opportunity potential, and seller performance. (7) Motivate team selling — manage, measure, and incentivise all customer-facing employees as one revenue team. (8) Turn technology assets into force multipliers — deploy technology that helps your revenue team punch above their weight.</span></div>
+        <div class="card-row"><span class="row-label">How to use this:</span><span class="row-content">When evaluating any potential Smart Action or improvement, check it against these eight levers. If the action contributes to one or more of them, it is likely to create genuine financial value.</span></div>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <h2 id="case-studies">Case Studies from the Book</h2>
+    <p class="orientation-para">The authors draw on extensive interviews with over 110 growth leaders. These case studies show how real organisations — large and small, across industries — have applied Revenue Operations principles to achieve measurable results.</p>
+
+    <!-- Avaya -->
+    <div class="card" id="card-case-avaya">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">Avaya — Business Model Transformation Through Revenue Operations</div>
+        <div class="card-tagline">How the CEO of Avaya unified all customer-facing functions under a single Chief Revenue Officer to accelerate the shift from an on-premises business to a growing cloud business.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">Avaya, a digital communications company, needed to transform from selling on-premises products to a SaaS/cloud subscription model. This required aligning sales, marketing, delivery, customer success, professional services, and all channel partners around a common purpose of growing customer lifetime value.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">CEO Jim Chirico brought in a Chief Revenue Officer (Stephen Spears) with hard-line authority over the entire go-to-market organisation on a global scale. They aligned incentives across all functions with overall growth objectives. The top 40 executives reviewed incentives in detail every month. They created shared goals and incentives for all customer-facing employees — including non-quota-carrying staff — tied to the same revenue and profit metrics the CEO was measured on.</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Simpler organisation with single point of accountability. Culture of teamwork and trust. All customer-facing employees aligned around common goals. Successful acceleration of the business model transformation.</span></div>
+        <div class="example-phrase">"We want our entire revenue team aligned around common goals, regardless of whether they are quota carrying, non-quota carrying or leadership. I am paid on the same incentives as the employees. We are all in it together. One revenue team." — Jim Chirico, CEO of Avaya</div>
+    </div>
+
+    <!-- Juniper -->
+    <div class="card" id="card-case-juniper">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">Juniper Networks — The Federation Leadership Model in Action</div>
+        <div class="card-tagline">How the CMO and CRO forged a tight partnership, treating growth investment as a fungible budget, to turn Juniper from a margin maximiser into an agile growth enterprise.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">After a decade of profitable but flat growth, Juniper needed to expand into new markets — AI-driven enterprise solutions, cloud-ready data centre solutions, and security. This required tens of millions of dollars more investment in sales and marketing and a new level of collaboration between functions.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">CMO Mike Marcellin and CRO Marcus Jewell treated increases in growth investment as a fungible budget between them. They ran a small steering committee to decide where to allocate money for the greatest growth, setting clear OKRs about the outcomes they wanted. They did not separate the sales and marketing budget when looking at growth engines. They kept the allocation flexible and dynamic.</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Revenue growth reached 8% on a base of almost $5 billion. New market segments grew much faster — AI-driven enterprise solutions (28%), cloud-ready data centre solutions (28%), and security (21%). Record levels of customer satisfaction and new logo sales.</span></div>
+        <div class="example-phrase">"How we allocate that investment is interesting. Mike and I look at the increases in growth investment as a fungible budget between ourselves." — Marcus Jewell, CRO of Juniper Networks</div>
+    </div>
+
+    <!-- Ciena -->
+    <div class="card" id="card-case-ciena">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">Ciena — Federation Leadership and Quality of Engagement Metrics</div>
+        <div class="card-tagline">How the heads of sales and marketing built a partnership contributing to over $1 billion in new growth, using a Quality of Engagement dashboard as their shared scorecard.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">Ciena, a networking systems and software company, needed to get sales and marketing working as one. Traditional demand generation metrics — MQL, SQL — were not effective because of deep customer relationships and long (nine months or more) sales cycles. What mattered was moving the needle within accounts.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">Sales leader Jason Phipps and marketing leader Joe Cumello developed a Quality of Engagement score to measure account teams, reflecting all actions, activity, and engagement that contribute to account health and lifetime value. Marketing operations created a customer engagement dashboard — "an EKG for selling" — that gave a dynamic, digital picture of what was going on in each account. They coordinated marketing operations and sales operations into a common support structure.</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Revenue grew from $2.4 billion to $3.6 billion over five years. The partnership between sales and marketing became a force multiplier. Trust and teamwork became critical components of the business.</span></div>
+        <div class="example-phrase">"Traditional demand generation metrics — MQL, SQL — were not effective or relevant for us. What we really care about is moving the needle within an account." — Joe Cumello, CMO of Ciena</div>
+    </div>
+
+    <!-- Hitachi -->
+    <div class="card" id="card-case-hitachi">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">Hitachi Vantara — Building a Digital Selling Platform</div>
+        <div class="card-tagline">How the sales operations team connected the dots across the sales technology portfolio to simplify the seller experience and earn recognition as Sales Operations Program of the Year.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">Hitachi Vantara had a complex sales technology portfolio with 20+ tools. Sellers faced too many panes of glass. The technology was not effectively supporting the most common points of failure in the day-to-day selling workflow — finding the right content, getting access to competitive information, preparing proposals and pricing.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">Jeff McKittrick and Jim Blum led a five-step process: (1) Take a top-down approach to technology with value creation in mind. (2) Identify key points of leverage and failure via a sales activity analysis. (3) Rationalise and focus the portfolio by eliminating redundant, unused, or unhelpful tools. (4) Fill critical gaps with best-in-class tools. (5) Leverage digital adoption solutions to multiply utilisation — a small increase in adoption yielded a large return on growth assets.</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Simplified seller workflow. Higher adoption of tools. Quick wins in advocacy from the sales team. Very high returns on investment. A systematic way to generate ever-increasing returns through continuous improvement.</span></div>
+        <div class="example-phrase">"Knitting together a highly profitable and productive portfolio of selling technologies is not rocket science. But it does require hard work, teamwork, and leadership. There's definitely a cookbook — and the recipe for success is pretty straightforward." — Jeff McKittrick</div>
+    </div>
+
+    <!-- GHX -->
+    <div class="card" id="card-case-ghx">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">GHX — Enhancing Value Through a Culture of Continuous Improvement</div>
+        <div class="card-tagline">How GHX combined sales, customer success, and Revenue Operations under one leader to instil a culture of collaboration and continuous learning.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">GHX, a SaaS company helping healthcare providers automate supply chain processes, had grown both inorganically through acquisition and organically. The complexity of its products, customers, organisation, and go-to-market approach grew dramatically. Organic growth became a strategic priority because of the big opportunity to create value across the customer network.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">GHX appointed Scott Kelley as SVP of Sales, Customer Success, and Revenue Operations with a remit to align customer-facing revenue teams and commercial operations. Kelley created a Revenue Operations team including sales operations, training and development, and key enablement functions like the deal desk. They built a system to streamline training customisation, create an environment for teams to practice and get feedback, and certify knowledge and skills. They focused on building a culture of continuous improvement and collaboration.</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Aligned teams across customer segments. Continuous learning embedded in the culture. Better customer engagement. Faster ramp for new team members and newly acquired companies.</span></div>
+        <div class="example-phrase">"Continuous learning is critical to keeping up with the rapid evolution of our products, network, and market innovations. I really learned to treat training as a continuous process, similar to other highly skilled professions." — Scott Kelley, GHX</div>
+    </div>
+
+    <!-- Pandora -->
+    <div class="card" id="card-case-pandora">
+        <div class="card-label">CASE STUDY</div>
+        <div class="card-name">Pandora — Advancing the Science of AI-Enabled Personalization at Scale</div>
+        <div class="card-tagline">How Pandora built on the Music Genome Project to develop recommender systems that personalise content and offers for millions of users.</div>
+        <div class="card-row"><span class="row-label">The situation:</span><span class="row-content">Pandora needed to personalise music recommendations and upsell offers for millions of listeners. They started with the Music Genome Project — musicologists annotating over 450 attributes about every track — giving them a "cold start" advantage before they even had customer interaction data.</span></div>
+        <div class="card-row"><span class="row-label">What they did:</span><span class="row-content">They evolved from content-based strategies to combining multiple techniques — user-based strategies (people like you also like this), collaborative filtering (which listeners are similar and which content is similar), and machine listening (models that listen directly to audio of untagged songs). They applied these models to determine who to target for upsell, when to reach them, and in what context — what they call "smart conversations."</span></div>
+        <div class="card-row"><span class="row-label">The outcome:</span><span class="row-content">Algorithmic radio stations drawing from 30 million sources instead of 2 million. Personalised upsell interventions maximised for effectiveness. A flywheel where more data yields more powerful predictive models. Reusable machine learning systems powering recommendations across Sirius XM, Pandora, and other products.</span></div>
+        <div class="card-row"><span class="row-label">Transferable lesson:</span><span class="row-content">Most recommender engine fundamentals that Pandora developed are universally applicable to the personalisation problems every business faces. The learning is transferable to industries without such a great head start. As Professor Kartik Hosanagar puts it: "AI is no longer just for engineers and data scientists. It's for everyone."</span></div>
+    </div>
+
+    <!-- AUTHOR'S PRESCRIPTION -->
+    <h2 id="prescription">The Author's Overall Prescription</h2>
+    <section class="theory-section">
+        <p>Diorio and Hummel want the reader to walk away with a clear, practical path to building a system for growth. Their core message is that Revenue Operations is not a single reorganisation or a technology purchase — it is a <strong>bold new commercial model for the twenty-first century</strong> that combines a management system (aligning people) with an operating system (connecting technology, data, and processes).</p>
+        <p>The prescription is to start small but think big. The authors emphasise that commercial transformation is a process of continuous incremental improvements — similar to the application of Lean Manufacturing, Six Sigma, Kaizen, and Total Quality Management in back-office processes. The path to transformation is a series of individual actions that incrementally improve revenues, costs, or the customer experience. Smart Actions are the vehicle: they are practical to execute, interconnect multiple building blocks, generate short-term financial gains, and stack together toward larger transformation.</p>
+        <p>They are clear about where leadership must come from: <strong>transformation starts at the top.</strong> Delegating change management too far down in the organisation will inhibit or stall efforts. The CEO must actively champion and empower the CXO role. They are also clear that <strong>the cost of not changing is greater than the pain of change.</strong> Maintaining the status quo leads to diminished competitive differentiation, unrealised market opportunities, higher selling costs, seller attrition, and account churn.</p>
+        <p>The practical starting point they recommend is to use the Maturity Assessment to grade your organisation across the 16 dimensions, identify three or four areas to improve, build a business case using the Revenue Value Chain, and execute Smart Actions that are achievable with existing resources but that connect the building blocks of your operating system in ways that generate measurable financial returns. The goal is not perfection — it is progress. As Kirsten Paust of Fortive puts it: "When it comes to analytics, our philosophy is making progress over perfection."</p>
+    </section>
+
+    <!-- SITUATIONAL INDEX -->
+    <section class="situational-index" id="situational-index">
+        <h3>Situational Index — Find the Right Concept Fast</h3>
+        <div class="situation-entry"><span class="situation-desc">"My sales and marketing teams are constantly blaming each other for missed targets."</span> → <a class="situation-link" href="#card-commercial-leadership">Commercial Leadership (Pillar 1)</a> and <a class="situation-link" href="#card-tsar-model">The Tsar Leadership Model</a></div>
+        <div class="situation-entry"><span class="situation-desc">"We have invested in dozens of sales tools but adoption is terrible and reps complain constantly."</span> → <a class="situation-link" href="#card-revenue-enablement">Revenue Enablement (Building Block #1)</a> and <a class="situation-link" href="#card-smart-simplify">Smart Action: Simplify the Selling Workflow</a></div>
+        <div class="situation-entry"><span class="situation-desc">"I cannot tell you which of our accounts are healthy and which are about to churn."</span> → <a class="situation-link" href="#card-revenue-intelligence">Revenue Intelligence (Building Block #4)</a> and <a class="situation-link" href="#card-smart-visibility">Smart Action: Better Visibility</a></div>
+        <div class="situation-entry"><span class="situation-desc">"Our marketing generates lots of digital engagement but sales never sees any of that data."</span> → <a class="situation-link" href="#card-customer-facing-tech">Customer-Facing Technology (Building Block #3)</a> and <a class="situation-link" href="#card-smart-abm">Smart Action: ABM</a></div>
+        <div class="situation-entry"><span class="situation-desc">"We need to move from selling products to selling subscriptions but our teams are not aligned around customer lifetime value."</span> → <a class="situation-link" href="#card-commercial-architecture">Commercial Architecture (Pillar 3)</a> and <a class="situation-link" href="#card-case-avaya">Case Study: Avaya</a></div>
+        <div class="situation-entry"><span class="situation-desc">"Our new sales reps take six to nine months to become productive and many leave before their second year."</span> → <a class="situation-link" href="#card-talent-development">Talent Development (Building Block #7)</a> and <a class="situation-link" href="#card-smart-talent">Smart Action: Develop & Retain Talent</a></div>
+        <div class="situation-entry"><span class="situation-desc">"I suspect we are leaking margin through inconsistent pricing and discounting but I cannot prove it."</span> → <a class="situation-link" href="#card-revenue-enhancement">Revenue Enhancement (Building Block #9)</a></div>
+        <div class="situation-entry"><span class="situation-desc">"Our territory plans take 60 days to build on spreadsheets and are obsolete before the sales period starts."</span> → <a class="situation-link" href="#card-resource-optimization">Resource Optimization (Building Block #8)</a></div>
+        <div class="situation-entry"><span class="situation-desc">"We create a ton of content but sales reps can never find the right piece for their conversation."</span> → <a class="situation-link" href="#card-smart-content">Smart Action: Streamline Content Supply Chain</a></div>
+        <div class="situation-entry"><span class="situation-desc">"I need to build a credible business case for a cross-functional growth investment."</span> → <a class="situation-link" href="#card-revenue-value-chain">Revenue Value Chain Framework</a></div>
+        <div class="situation-entry"><span class="situation-desc">"Our CEO is spending too much time mediating between the heads of sales and marketing."</span> → <a class="situation-link" href="#card-tsar-model">The Tsar Leadership Model</a></div>
+        <div class="situation-entry"><span class="situation-desc">"We have strong functional leaders who get along but lack a formal mechanism for joint planning."</span> → <a class="situation-link" href="#card-federation-model">The Federation Leadership Model</a></div>
+        <div class="situation-entry"><span class="situation-desc">"Our operations teams are fragmented across four different functions and nothing connects."</span> → <a class="situation-link" href="#card-chief-of-staff-model">The Chief of Staff Model</a> and <a class="situation-link" href="#card-commercial-operations">Commercial Operations (Pillar 2)</a></div>
+        <div class="situation-entry"><span class="situation-desc">"I don't know where to start — the whole thing feels overwhelming."</span> → <a class="situation-link" href="#card-maturity-assessment">Revenue Operations Maturity Assessment</a> and <a class="situation-link" href="#prescription">Author's Prescription</a></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="footer">
+        <p><strong>Source:</strong> <em>Revenue Operations: A New Way to Align Sales &amp; Marketing, Monetize Data, and Ignite Growth</em> by Stephen G. Diorio and Chris K. Hummel. Published by John Wiley &amp; Sons, Inc., Hoboken, New Jersey, 2022. All rights reserved.</p>
+        <p>This learning reference guide is a comprehensive distillation of the book's concepts, frameworks, tactics, case studies, and insights. It is intended as a permanent working reference — detailed enough to reconstruct any concept without returning to the source, structured so any item can be found in under thirty seconds. No external content has been added beyond parenthetical explanations for proper nouns a general reader might not recognise.</p>
+        <p>Research contributors include leaders from Analytics@Wharton at the Wharton School of Business, the Marketing Accountability Standards Board, the Sales Management Association, the Association of National Advertisers, Blue Ridge Partners, and over 110 interviewed growth leaders from companies including Avaya, Juniper Networks, Ciena, AT&T, Splunk, Cisco, Honeywell, Pandora, and many others.</p>
+    </footer>
+
+    <script>
+        (function() {
+            // Navigator toggle for mobile
+            const mobileToggle = document.getElementById('nav-mobile-toggle');
+            const navPanel = document.getElementById('nav-panel');
+            if (mobileToggle && navPanel) {
+                mobileToggle.addEventListener('click', function() {
+                    navPanel.classList.toggle('open-mobile');
+                });
+            }
+
+            // Category toggles
+            const catToggles = document.querySelectorAll('.nav-cat-toggle');
+            catToggles.forEach(function(toggle) {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.classList.toggle('open');
+                        // Update triangle
+                        if (target.classList.contains('open')) {
+                            this.textContent = this.textContent.replace('▸', '▾');
+                        } else {
+                            this.textContent = this.textContent.replace('▾', '▸');
+                        }
+                    }
+                });
+            });
+
+            // Scroll spy
+            const allNavLinks = document.querySelectorAll('#nav-panel .nav-cat-items li a');
+            const allHeadings = [];
+            allNavLinks.forEach(function(link) {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.getElementById(href.substring(1));
+                    if (target) {
+                        allHeadings.push({ link: link, target: target, id: href.substring(1) });
+                    }
+                }
+            });
+
+            function updateActiveLink() {
+                let currentId = null;
+                const scrollPos = window.scrollY + 120;
+                allHeadings.forEach(function(item) {
+                    if (item.target.offsetTop <= scrollPos) {
+                        currentId = item.id;
+                    }
+                });
+                allNavLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                if (currentId) {
+                    const activeLink = document.querySelector('#nav-panel .nav-cat-items li a[href="#' + currentId +
+                        '"]');
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        // Expand parent category
+                        const parentList = activeLink.closest('.nav-cat-items');
+                        if (parentList && !parentList.classList.contains('open')) {
+                            parentList.classList.add('open');
+                            const parentToggle = parentList.parentElement.querySelector('.nav-cat-toggle');
+                            if (parentToggle) {
+                                parentToggle.textContent = parentToggle.textContent.replace('▸', '▾');
+                            }
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', updateActiveLink, { passive: true });
+            updateActiveLink();
+
+            // Close mobile nav when a link is clicked
+            allNavLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 720 && navPanel) {
+                        navPanel.classList.remove('open-mobile');
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

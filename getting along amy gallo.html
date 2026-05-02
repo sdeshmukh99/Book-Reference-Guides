@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Along — Learning Reference Guide</title>
+    <style>
+        :root {
+            --bg: #faf8f5;
+            --card-bg: #ffffff;
+            --accent-bg: #f3efe9;
+            --text: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #7a7a7a;
+            --border: #e6e0d6;
+            --gold: #b8893f;
+            --gold-soft: #d9b97a;
+            --red: #a8492e;
+            --green: #4a7a4a;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 20px;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Georgia', 'Times New Roman', 'Palatino Linotype', 'Book Antiqua', serif;
+            font-size: 17px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .layout {
+            display: flex;
+            max-width: 1300px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px 48px 80px 48px;
+            max-width: 880px;
+            min-width: 0;
+        }
+        .hero {
+            text-align: left;
+            padding: 48px 0 32px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .hero .author {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .hero .tagline {
+            font-size: 1em;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        h2 {
+            font-size: 1.6em;
+            margin: 40px 0 16px 0;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+        h3 {
+            font-size: 1.25em;
+            margin: 28px 0 10px 0;
+            color: var(--text);
+        }
+        h4 {
+            font-size: 1.05em;
+            margin: 20px 0 8px 0;
+            color: var(--text-secondary);
+        }
+        p {
+            margin: 0 0 14px 0;
+            color: var(--text);
+        }
+        .orientation {
+            background: var(--accent-bg);
+            padding: 16px 20px;
+            border-left: 4px solid var(--gold);
+            margin: 16px 0 24px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            border-radius: 0 4px 4px 0;
+        }
+        .toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin: 20px 0 32px 0;
+            box-shadow: var(--card-shadow);
+        }
+        .toc h4 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            columns: 2;
+        }
+        .toc li {
+            margin-bottom: 6px;
+            break-inside: avoid;
+        }
+        .toc a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .toc .toc-cat {
+            font-weight: 700;
+            color: var(--text);
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            box-shadow: var(--card-shadow);
+        }
+        .card .card-label {
+            display: inline-block;
+            background: var(--accent-bg);
+            color: var(--text-secondary);
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+        .card .card-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+        .card .card-tagline {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+        .card-row {
+            display: flex;
+            border-top: 1px solid var(--border);
+            padding: 8px 0;
+            gap: 12px;
+        }
+        .card-row .row-label {
+            font-weight: 700;
+            color: var(--text-secondary);
+            min-width: 140px;
+            flex-shrink: 0;
+            font-size: 0.9em;
+            padding-top: 2px;
+        }
+        .card-row .row-content {
+            color: var(--text);
+            font-size: 0.95em;
+            flex: 1;
+        }
+        .card .paired-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .card .paired-link:hover {
+            text-decoration: underline;
+        }
+        .situational-index {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            box-shadow: var(--card-shadow);
+        }
+        .situational-index .si-entry {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95em;
+        }
+        .situational-index .si-entry:last-child {
+            border-bottom: none;
+        }
+        .situational-index .si-situation {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .situational-index .si-ref {
+            color: var(--gold);
+        }
+        .footer {
+            border-top: 2px solid var(--border);
+            margin-top: 48px;
+            padding-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
+        /* Navigator */
+        .nav-panel {
+            width: 260px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 24px 16px 24px 8px;
+            border-left: 1px solid var(--border);
+            background: var(--bg);
+            font-size: 0.82em;
+            z-index: 10;
+        }
+        .nav-panel h4 {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+        .nav-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-panel li {
+            margin: 2px 0;
+        }
+        .nav-panel a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            transition: background 0.15s;
+        }
+        .nav-panel a:hover,
+        .nav-panel a.active {
+            background: var(--accent-bg);
+            color: var(--text);
+        }
+        .nav-panel a.active {
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .nav-cat {
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+            border-radius: 3px;
+        }
+        .nav-cat:hover {
+            background: var(--accent-bg);
+        }
+        .nav-cat .toggle {
+            font-size: 0.7em;
+            transition: transform 0.2s;
+            display: inline-block;
+            width: 12px;
+        }
+        .nav-cat.expanded .toggle {
+            transform: rotate(0deg);
+        }
+        .nav-sub {
+            padding-left: 16px;
+            display: none;
+        }
+        .nav-sub.open {
+            display: block;
+        }
+        .mobile-nav-toggle {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9em;
+            color: var(--text);
+            border-radius: 4px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 12px;
+        }
+        .mobile-nav-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+            font-size: 0.85em;
+            box-shadow: var(--card-shadow);
+        }
+        .mobile-nav-panel.open {
+            display: block;
+        }
+        .mobile-nav-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+        .mobile-nav-panel a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+        .mobile-nav-panel a:hover {
+            background: var(--accent-bg);
+        }
+        .mobile-nav-panel .nav-cat {
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            padding: 5px 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .mobile-nav-panel .nav-sub {
+            padding-left: 16px;
+            display: none;
+        }
+        .mobile-nav-panel .nav-sub.open {
+            display: block;
+        }
+        .theory-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .theory-grid .theory-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: var(--card-shadow);
+        }
+        .theory-item h4 {
+            margin-top: 0;
+        }
+        @media (max-width: 720px) {
+            .layout {
+                flex-direction: column;
+            }
+            .main-content {
+                padding: 16px 16px 48px 16px;
+                max-width: 100%;
+            }
+            .nav-panel {
+                display: none;
+            }
+            .mobile-nav-toggle {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .card-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .card-row .row-label {
+                min-width: auto;
+            }
+            .toc ul {
+                columns: 1;
+            }
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <div class="main-content" id="main-content">
+            <!-- Mobile Nav Toggle -->
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-expanded="false">☰ Navigate This Guide</button>
+            <div class="mobile-nav-panel" id="mobile-nav-panel"></div>
+
+            <!-- Hero -->
+            <header class="hero" id="hero">
+                <h1>Getting Along</h1>
+                <div class="author">Amy Gallo</div>
+                <div class="tagline">A comprehensive learning reference guide to working with anyone — even difficult people — drawn from the full text of the book.</div>
+            </header>
+
+            <!-- Inline TOC -->
+            <div class="toc" id="toc">
+                <h4>Contents</h4>
+                <ul>
+                    <li><a href="#core-theory">Core Theory</a></li>
+                    <li><a href="#archetype-insecure">The Insecure Boss</a></li>
+                    <li><a href="#archetype-pessimist">The Pessimist</a></li>
+                    <li><a href="#archetype-victim">The Victim</a></li>
+                    <li><a href="#archetype-passive-aggressive">The Passive-Aggressive Peer</a></li>
+                    <li><a href="#archetype-know-it-all">The Know-It-All</a></li>
+                    <li><a href="#archetype-tormentor">The Tormentor</a></li>
+                    <li><a href="#archetype-biased">The Biased Coworker</a></li>
+                    <li><a href="#archetype-political">The Political Operator</a></li>
+                    <li><a href="#principles">Nine Principles for Getting Along</a></li>
+                    <li><a href="#protecting">Protecting Yourself</a></li>
+                    <li><a href="#situational-index">Situational Index</a></li>
+                </ul>
+            </div>
+
+            <!-- CORE THEORY -->
+            <h2 id="core-theory">Core Theory: Why Relationships at Work Matter &amp; How Our Brains React</h2>
+            <p>Gallo opens with two foundational chapters. The first makes the case that work relationships are not peripheral — they are central to well-being, performance, and career longevity. The second explains the neuroscience of conflict: why negative interactions consume so much mental space and how to regain control. Together, these chapters form the groundwork for every tactic that follows.</p>
+
+            <h3 id="why-relationships-matter">Why Work Relationships Are Worth the Trouble</h3>
+            <p>Most employed adults spend more hours with coworkers than with family or non-work friends. The average U.S. workweek has lengthened, and technology has blurred the boundary between work and home. Relationships at work are not optional — they shape our identity, self-worth, and sense of belonging. Research shows that having a best friend at work makes people seven times more likely to be engaged. Positive relationships increase resilience: in one study, students carrying heavy backpacks perceived a hill as less steep when accompanied by a friend. Conversely, negative relationships have a disproportionate impact — four to seven times greater than positive ones on well-being. Ambivalent relationships (the "frenemy" dynamic) can be even more physiologically harmful than purely negative ones. Gallo's core argument: we cannot opt out of workplace relationships, so we must learn to tend them.</p>
+
+            <h3 id="brain-on-conflict">Your Brain on Conflict</h3>
+            <p>When we perceive a threat in a relationship — a snarky email, an eye-roll from a boss — the amygdala triggers a fight-or-flight response. Stress hormones like cortisol and adrenaline surge. This is <em>amygdala hijack</em>, a term Gallo borrows from Daniel Goleman (psychologist and author of <em>Emotional Intelligence</em>). During a hijack, our prefrontal cognitive abilities diminish; we make poorer decisions and react impulsively. Compounding this is <em>negativity bias</em>: we pay more attention to negative events than positive ones. A single critical sentence in a performance review can outweigh pages of praise. The brain also experiences social exclusion in regions that process physical pain — rejection literally hurts. On top of this, we engage in <em>premature cognitive commitment</em>, constructing stories about why someone acted badly, and then treating those stories as truth. Gallo prescribes a sequence to regain control: observe your reactions, reappraise the situation, monitor your overall stress, and give yourself time. She invokes Viktor Frankl's (Austrian psychiatrist and Holocaust survivor) insight: "Between stimulus and response there is a space. In that space is our power to choose our response."</p>
+
+            <div class="orientation">You are caught in a loop — replaying a tense exchange, waking at 3 a.m. rehearsing comebacks, or feeling your heart race when a certain name appears in your inbox. You want to stop ruminating but your brain keeps pulling you back. This core theory explains what is happening neurologically and how to create the mental space to choose a productive response instead of an impulsive one.</div>
+
+            <!-- Core Theory Cards -->
+            <div class="card" id="card-amygdala-hijack">
+                <span class="card-label">Core Concept</span>
+                <div class="card-name">Amygdala Hijack</div>
+                <div class="card-tagline">When your brain's threat-detection system overrides your rational mind.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">The amygdala — two almond-shaped clusters behind the optical nerves — detects a perceived threat (a sharp email, a public slight) and signals the release of cortisol and adrenaline. This "hijack" dominates executive functions, putting you into fight-or-flight mode. You are not making deliberate choices; your body is on autopilot.</div></div>
+                <div class="card-row"><div class="row-label">What it looks like</div><div class="row-content">Elevated heart rate, shallow breathing, tingling at the back of the head, shoulders creeping up, jaw clenching, sweaty palms. Mentally: rapid-fire thoughts, composing pithy retorts, or complete shutdown.</div></div>
+                <div class="card-row"><div class="row-label">Warning signals</div><div class="row-content">You notice yourself about to snap back, raise your voice, send an email you know you will regret, or withdraw entirely — before you have consciously decided to do any of those things.</div></div>
+                <div class="card-row"><div class="row-label">How to counter</div><div class="row-content">Create space between stimulus and response. Observe your physical reactions. Ask: Am I hydrated? Hungry? Sleep-deprived? What else am I worried about? Reappraise the situation — is there a more generous interpretation? Give it time; emotions often extinguish themselves as you gather more information.</div></div>
+                <div class="card-row"><div class="row-label">Success looks like</div><div class="row-content">You notice the bodily signals early, pause, and choose a response aligned with your values rather than reacting impulsively.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "I'm in amygdala hijack right now. I need a few minutes before I respond to that email."</div></div>
+            </div>
+
+            <div class="card" id="card-negativity-bias">
+                <span class="card-label">Core Concept</span>
+                <div class="card-name">Negativity Bias</div>
+                <div class="card-tagline">The brain's tendency to pay more attention to negative events than positive ones.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Evolutionarily, our brains are wired to prioritize threats over rewards. A single negative interaction can dominate your memory of an otherwise fine day. This bias operates automatically — you do not choose to dwell on the criticism; your brain holds onto it.</div></div>
+                <div class="card-row"><div class="row-label">What it looks like</div><div class="row-content">You can recite a nasty email word-for-word but have no memory of who else wrote to you that day. You recall two negative sentences from a performance review twenty years ago but cannot remember a single positive comment from the same evaluation.</div></div>
+                <div class="card-row"><div class="row-label">How to counter</div><div class="row-content">Actively seek disconfirming evidence. Keep a compliments folder. Ask yourself: "What positive interactions happened today that I am glossing over?" Deliberately reframe: "This one interaction was a fraction of my day."</div></div>
+                <div class="card-row"><div class="row-label">Success looks like</div><div class="row-content">You can acknowledge a negative moment without letting it define your entire experience of a person, meeting, or day.</div></div>
+            </div>
+
+            <div class="card" id="card-premature-cognitive-commitment">
+                <span class="card-label">Core Concept</span>
+                <div class="card-name">Premature Cognitive Commitment</div>
+                <div class="card-tagline">The snap judgments your brain makes to conserve energy — and the stories you then treat as truth.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">To conserve resources, your brain rapidly constructs a narrative about what is occurring, why, and what will happen next. These stories feel true even when they are based on assumptions rather than facts. Gallo describes a colleague who muted himself and looked off-screen during a Zoom call; she assumed he was rudely checking email, but he was actually receiving pancakes from his teenage son.</div></div>
+                <div class="card-row"><div class="row-label">Warning signals</div><div class="row-content">You find yourself thinking in absolutes: "He always...", "She never...", "They are clearly trying to..." — without having verified the facts.</div></div>
+                <div class="card-row"><div class="row-label">How to counter</div><div class="row-content">Separate observation from interpretation. Ask: "What do I know for certain? What am I assuming?" Use hypothesis testing — respectfully ask about what is going on rather than acting on your assumption.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I noticed [specific behavior], and the story I'm telling myself is [interpretation]. Is that accurate?"</div></div>
+            </div>
+
+            <div class="card" id="card-reappraisal">
+                <span class="card-label">Core Technique</span>
+                <div class="card-name">Reappraisal</div>
+                <div class="card-tagline">Reassessing an emotional situation in a more positive or neutral light to regain focus and make better decisions.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Psychologists have found that consciously reframing an event — from threat to challenge, or from personal attack to misunderstanding — helps people focus and make more considered decisions. It is not about sugarcoating; it is about finding alternative interpretations.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You stop the cascade of negative storytelling. You can engage productively with the colleague instead of shutting down. Your physiological stress response diminishes.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"What's another way of seeing this? What if they didn't intend harm? What can I learn from this?"</div></div>
+                <div class="card-row"><div class="row-label">Dependencies</div><div class="row-content">Requires that you first notice you are in amygdala hijack or caught in a negative story. Works best after a brief pause (deep breaths, a walk, a good night's sleep).</div></div>
+            </div>
+
+            <div class="card" id="card-cleaning-up-your-side">
+                <span class="card-label">Core Principle</span>
+                <div class="card-name">Cleaning Up Your Side of the Street</div>
+                <div class="card-tagline">Acknowledging and attending to your own part in a conflict before confronting the other person.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Gallo borrows this phrase from recovery communities. In any tense dynamic, you can only control your own thoughts, actions, and reactions. Even if the other person is mostly to blame, your own behavior — optimism that triggers their pessimism, avoidance that invites passive-aggression — may be contributing. Examining your role is not about self-blame; it clears the path for resolution.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You approach the situation with less emotional clutter. You are less likely to escalate. You model accountability, which can invite reciprocity.</div></div>
+                <div class="card-row"><div class="row-label">What success looks like</div><div class="row-content">Before engaging the difficult colleague, you can honestly say: "Here is what I may be bringing to this dynamic, and here is what I can change on my own."</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I've been thinking about our dynamic. I realize I may have contributed by [specific action]. I'd like to try a different approach."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: INSECURE BOSS -->
+            <h2 id="archetype-insecure">The Insecure Boss</h2>
+            <div class="orientation">You work for someone who nitpicks every decision, changes direction based on who spoke to them last, takes credit for your work, and seems perpetually worried about how others perceive them. Your confidence is eroding, and you feel like you are walking on eggshells. You cannot quit right now, but you need a way to manage up without feeding their anxiety.</div>
+
+            <div class="card" id="card-insecure-position-as-ally">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Position Yourself as an Ally, Not a Rival</div>
+                <div class="card-tagline">Make your insecure boss see you as a trusted partner rather than a threat.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Insecure bosses often feel threatened by competent direct reports. Research by Nathanael Fast and Serena Chen shows that when powerful people feel incompetent, they act more aggressively. By framing your work as a joint effort and sharing credit, you reduce their defensiveness.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">Your boss stops undermining you in front of clients or colleagues. They begin to trust you with more responsibility. Your own stress decreases because you are no longer a target.</div></div>
+                <div class="card-row"><div class="row-label">Warning signals</div><div class="row-content">Your boss asks "Why are they coming to you instead of me?" or seems irritated when others seek your input. They question your data or decisions in public.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I know we both want the team to look good here. Let me share my two cents so you can make the final decision." Use "we" frequently: "We've got this."</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Do not downplay your own talents so much that others in the organization stop seeing your value. The goal is to be seen as a trustworthy partner, not to disappear.</div></div>
+            </div>
+
+            <div class="card" id="card-insecure-genuine-praise">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Offer Genuine Compliments and Gratitude</div>
+                <div class="card-tagline">Calm your boss's ego with authentic, specific appreciation.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research by Nathanael Fast shows that insecure managers are "hungry for evidence that they're doing OK." A sincere thank-you or acknowledgment — especially in front of people whose opinions they value — positively influences how they evaluate you and reduces their need to assert dominance.</div></div>
+                <div class="card-row"><div class="row-label">What it looks like</div><div class="row-content">After a meeting: "I appreciated what you said in there. It changed my thinking." Or privately: "Thank you for giving me the chance to work on that high-profile project."</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Empty flattery will backfire. The compliment must be genuine and specific. Do not praise a micromanaging tendency you actually resent.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"You have a unique perspective on this. I'd love to hear your thoughts before we proceed."</div></div>
+            </div>
+
+            <div class="card" id="card-insecure-restore-control">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Restore Their Sense of Control</div>
+                <div class="card-tagline">Reduce micromanaging by proactively sharing information and inviting decisions.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Insecure managers are terrified of being out of the loop. By over-communicating — regular check-ins, transparency about who you are talking to and what you are working on — you preempt their need to meddle. Asking questions (instead of providing answers) also boosts their feeling of control.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">Less hovering, fewer last-minute demands, and a boss who feels secure enough to let you work independently.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"Do you feel like you're getting enough information from me? It's important to me to keep you in the loop." Or: "What we do here is ultimately up to you."</div></div>
+            </div>
+
+            <div class="card" id="card-insecure-compliments-folder">
+                <span class="card-label">Self-Protection</span>
+                <div class="card-name">Keep a Compliments Folder</div>
+                <div class="card-tagline">A repository of positive feedback to bolster your own confidence when an insecure boss erodes it.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Working for an insecure boss can cause your own self-doubt to spike — what Gallo calls "catching" their insecurity. A compliments folder (in your email or a physical file) stores notes of praise, recognition, and positive impact. Even knowing it exists can improve your confidence.</div></div>
+                <div class="card-row"><div class="row-label">How to use</div><div class="row-content">Create the folder now. Every time you receive a compliment — even a minor one — save it. Review it after tough interactions with your manager. Gallo admits she does not open hers often, but "just knowing it's there improves my confidence."</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself, before a difficult meeting) "I have evidence that I am good at my job. This person's insecurity does not define my competence."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: PESSIMIST -->
+            <h2 id="archetype-pessimist">The Pessimist</h2>
+            <div class="orientation">Every idea you propose is met with "That will never work" or "We already tried that." Your colleague seems to find something negative to say even when news is good. You feel your enthusiasm draining and the team's momentum stalling. You are starting to dread meetings.</div>
+
+            <div class="card" id="card-pessimist-disagreer-in-chief">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Make Them "Disagreer-in-Chief"</div>
+                <div class="card-tagline">Give the pessimist a formal role pointing out risks — channeling their negativity into productive vigilance.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research shows that appointing a devil's advocate improves group decision-making. Pessimists are naturally good at spotting risks. By making this part of their formal role, you recast them as a valuable team member rather than a drag. It also prevents the group from vilifying them.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The pessimist feels valued for their unique contribution. The team benefits from rigorous risk assessment. The pessimist's comments are contained within a defined role rather than poisoning every discussion.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"You're good at identifying the downsides. Could you take the role of pointing out what we might be missing before we finalize this plan?"</div></div>
+            </div>
+
+            <div class="card" id="card-pessimist-challenge-assumptions">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Challenge Their Assumptions — with Acknowledgment</div>
+                <div class="card-tagline">Engage the pessimist's underlying ideas without dismissing them, using a "hard AND possible" frame.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Heidi Grant (social psychologist) told Gallo that the magic combination is conveying "I believe it's going to be hard AND I believe we can be successful." If you act like it will be easy, the pessimist dismisses you. Acknowledging their concern while asking for alternatives or clarifications nudges them toward agency.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The pessimist feels heard rather than dismissed. They may shift from "This will fail" to "Here is what would need to be true for us to succeed."</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I hear your concerns, and I share some of them. Tell me more about what led you to that conclusion. What would need to be true for us to succeed?"</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Do not try to drown them in positivity. As Grant says, "Many pessimists think optimists are idiots." Pushing too hard can entrench them further.</div></div>
+            </div>
+
+            <div class="card" id="card-pessimist-positive-peer-pressure">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Use Positive Peer Pressure</div>
+                <div class="card-tagline">Set team norms that nudge the pessimist toward constructive contributions.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Eileen Chou's (University of Virginia) research shows that groups tend to move toward an outlier to appease them. By setting explicit norms — "Before speaking, ask: will this comment be helpful?" or "Criticism must be accompanied by a suggestion" — you counter this tendency collectively.</div></div>
+                <div class="card-row"><div class="row-label">What it looks like</div><div class="row-content">Start meetings with a positive prompt: "What's one way a colleague made your life easier this week?" Agree as a group that decisions will not be driven by one person's perspective alone.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"Let's agree as a team that when we raise a concern, we also offer at least one potential solution."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: VICTIM -->
+            <h2 id="archetype-victim">The Victim</h2>
+            <div class="orientation">Your colleague believes the world is against them specifically. Nothing is ever their fault. When you give constructive feedback, they respond with a litany of excuses or a "poor me" attitude. You are exhausted from the emotional weight of their complaints and the extra work you pick up because they deflect responsibility.</div>
+
+            <div class="card" id="card-victim-validation">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Offer Validation — at the Right Time</div>
+                <div class="card-tagline">Provide genuine appreciation when they are NOT complaining to break the validation-complaint cycle.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Victims often complain because it is the only way they know to get attention or validation. If you only validate them when they gripe, you reinforce the behavior. Gallo shares the story of her daughter, who learned to compliment a friend <em>before</em> he sought reassurance, disrupting the cycle.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The victim feels seen without needing to complain. The exhausting cycle of "I feel like no one likes me" followed by a litany of reassurances stops.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(Unsolicited) "I really appreciated how you handled that client question yesterday. You have a knack for staying calm under pressure."</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Any compliment must be genuine. False praise will be detected and will damage trust further.</div></div>
+            </div>
+
+            <div class="card" id="card-victim-agency">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Increase Their Sense of Agency</div>
+                <div class="card-tagline">Help a victim move from "nothing I can do" to identifying concrete steps they can take.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">The victim's core belief is that bad things happen <em>to them</em> and they are powerless. Instead of arguing ("Yes you can!"), ask what they would do if they had authority. Help them make a list of steps. Ask: "How would someone known for getting what they want handle this?" — prompting perspective-taking.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The victim begins to see a path forward. They take small actions that build momentum and a sense of control.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I understand you feel like leadership isn't giving you the resources you need. If you were the decision-maker, what would you do differently? What's one step you could take this week?"</div></div>
+            </div>
+
+            <div class="card" id="card-victim-responsibility">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Encourage Responsibility — with Shared Ownership</div>
+                <div class="card-tagline">Frame accountability as a team effort to reduce defensiveness.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Victims deflect blame because they fear being singled out. By framing responsibility as shared — "The entire team is on the hook for this, including you and me" — you reduce the threat. Gallo shares the story of Carlotta, who told Gerald, her struggling store manager, that whenever he brought a problem he must also present at least one potential solution. Over time, he stopped adding caveats.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"While no single person will be blamed if we fail, we all need to take responsibility for pushing things forward. I see this as partly your responsibility — let's talk about why you may see it differently."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: PASSIVE-AGGRESSIVE -->
+            <h2 id="archetype-passive-aggressive">The Passive-Aggressive Peer</h2>
+            <div class="orientation">Your colleague says "fine" when they are clearly not fine. They agree to deadlines and then miss them. They promise an email that never arrives. When you confront them, they deny anything is wrong and suggest you are imagining things. You are questioning your own perception and spending hours following up on tasks they should have completed.</div>
+
+            <div class="card" id="card-passive-focus-content">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Focus on the Content, Not the Delivery</div>
+                <div class="card-tagline">Ignore the snark and address the underlying message they are trying to convey.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Passive-aggressive people use indirect methods because they fear conflict, failure, or rejection. Rather than calling out the tone (which they will deny), extract the core concern. Gallo shares the example of Meena, who realized her colleague Victor was undermining her presentations because he resented her being positioned as the expert. She began appealing to his expertise in planning sessions, and the sabotage stopped.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You address the actual problem rather than getting stuck in a "You're mad" / "No I'm not" loop. The colleague may become more direct over time because you have demonstrated it is safe.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"What I heard you say was [summary]. Did I get that right? Is there something else you meant?"</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Do not label their emotions: "You seem angry." Research by Lindred Greer (University of Michigan) shows that mislabeling emotions backfires. The chances of choosing the right emotion are small, and you will frustrate them further.</div></div>
+            </div>
+
+            <div class="card" id="card-passive-direct-requests">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Make Direct Requests — Stick to Facts</div>
+                <div class="card-tagline">State the observable behavior, its impact, and a clear request — without accusation.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Passive-aggressive peers thrive in ambiguity. By being specific and factual — "You said you would help and you haven't joined the three meetings we've had" — you close the loopholes they use to deflect. Follow with the impact on you and a straightforward request.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">They cannot claim misunderstanding. You have documented the pattern. Even if they push back, you have signaled that you are a straight shooter who will not let them get away with it.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"You said you wanted to help with this project. You haven't attended the three meetings we've had so far, and you didn't respond to the email I sent last week. I'm disappointed because I can't do all the work myself. If you're still interested, I'd like you to attend the meetings. If not, I need to know now so I can find an alternative."</div></div>
+            </div>
+
+            <div class="card" id="card-passive-team-accountability">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Use Team Accountability</div>
+                <div class="card-tagline">Enlist the group to hold a passive-aggressive colleague to their commitments.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">It is harder to deflect when multiple people witness agreements. Gallo shares the story of Mitch, who worked with his boss to have someone publicly volunteer to take notes at every meeting, document who would do what by when, and circulate the list afterward. This created public accountability that his passive-aggressive colleague Alicia could not escape.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The extra effort of documentation is less than the time spent fuming and picking up unfinished tasks. The team becomes more productive overall.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"Let's all make sure we're clear on next steps. Does someone want to recap who is doing what? I'll take notes to send around afterward."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: KNOW-IT-ALL -->
+            <h2 id="archetype-know-it-all">The Know-It-All</h2>
+            <div class="orientation">Someone on your team monopolizes meetings, interrupts constantly, and speaks in a condescending tone. They act as if their ideas are superior and rarely ask questions. You feel silenced and small. Meetings that should take an hour stretch to two because this person will not stop talking.</div>
+
+            <div class="card" id="card-knowitall-preempt-interruptions">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Preempt Interruptions</div>
+                <div class="card-tagline">Set clear expectations for when you will take questions — before you begin speaking.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Know-it-alls often interrupt because they believe their contribution is more important. By stating upfront how much time you need and asking people to hold comments until you are done, you create a structure they are more likely to respect. Gallo uses this tactic with both her mother and her husband, two chronic interrupters.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"Please hold any comments or questions until I'm done. I'll need about five minutes, and then I'd love to hear what you have to say." Or simply: "Interruptions break my concentration, so I'd appreciate it if you'd let me finish."</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">This may not be culturally appropriate in every setting. Gallo recounts a meeting in South Korea where a senior client was culturally expected to hold the floor; her attempt to assert herself resulted in tears and twelve turns around the block.</div></div>
+            </div>
+
+            <div class="card" id="card-knowitall-address-interruptions" data-paired="card-knowitall-preempt-interruptions">
+                <span class="card-label">Tactic (Paired with above)</span>
+                <div class="card-name">Tactfully Address Interruptions When They Happen</div>
+                <div class="card-tagline">Respond to being cut off without escalating a power struggle.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Raising your voice creates a competition the know-it-all will try to win. Instead, calmly assert your right to finish. Gallo references Kamala Harris's (U.S. Vice President) debate line: "I'm speaking."</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I'm going to finish my point, and then I'd love to hear what you have to say." Or enlist an ally: "I don't think Madison was finished with her point."</div></div>
+                <a class="paired-link" href="#card-knowitall-preempt-interruptions">↗ Paired with: Preempt Interruptions</a>
+            </div>
+
+            <div class="card" id="card-knowitall-ask-for-data">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Ask for Facts and Data</div>
+                <div class="card-tagline">Gently challenge sweeping declarations by requesting evidence.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Know-it-alls often make bold claims without backing. By respectfully asking for sources or suggesting the group gather data, you create a fact-based discussion that limits posturing. Over time, they may think twice before making unsubstantiated statements.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I'm not sure we're working with the same assumptions. Let's step back and look at the data before we proceed." Or: "Tell me a little about where your insights are coming from."</div></div>
+            </div>
+
+            <div class="card" id="card-knowitall-model-humility">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Model Humility and an Open Mind</div>
+                <div class="card-tagline">Demonstrate that saying "I don't know" is safe — and even valued.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Many know-it-alls act that way because projecting confidence has been rewarded in your organization or culture. By openly admitting uncertainty and asking curious questions, you provide an alternative model. Gallo shares the story of Kwame, who modeled asking questions in meetings until his insecure colleague Amara felt safe enough to admit what she did not know.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I don't have that information right now; let me get back to you." Or: "Let me tell you what I do know and what I don't know." Or: "We're all still learning about this topic."</div></div>
+            </div>
+
+            <!-- ARCHETYPE: TORMENTOR -->
+            <h2 id="archetype-tormentor">The Tormentor</h2>
+            <div class="orientation">A senior person — often your boss — sets impossible standards, questions your commitment, and proudly shares stories of the sacrifices they made coming up. They seem to believe that because they suffered, you should too. They may deny you time off, assign meaningless busywork, or attribute your struggles to your generation. You are burning out and questioning whether you belong in this field.</div>
+
+            <div class="card" id="card-tormentor-empathy">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Encourage Their Empathy — Find Common Ground</div>
+                <div class="card-tagline">Show them you are alike — equally ambitious, equally willing to sacrifice — to reduce their need to distance themselves from you.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Tormentors often lack empathy because they underestimate how painful their own past struggles were (research by Kellogg and Wharton professors). They may also be experiencing "downward envy" or "social identity threat" — fearing association with an underrepresented group. Rosalind Chow (Carnegie Mellon) suggests asking for their advice: approaching them as a mentor boosts their ego and makes them invested in your success.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The tormentor begins to see you as a protégé rather than a threat. Their harshness softens when they recognize shared ambition.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I respect what it took for you to achieve this level of success. I imagine it wasn't easy. I'd love to hear more about what you learned along the way."</div></div>
+                <div class="card-row"><div class="row-label">Dependencies</div><div class="row-content">Works best when you can genuinely demonstrate your own drive and willingness to work hard. If they perceive you as entitled, this approach may backfire.</div></div>
+            </div>
+
+            <div class="card" id="card-tormentor-shared-goal">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Focus on a Shared Goal</div>
+                <div class="card-tagline">Align yourselves around a common objective to shift from competitors to collaborators.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Using "we" language and emphasizing mutual interests — "We both want this project done on time" — decreases the sense of competition. Is there a project you can tackle together? A problem you can help them solve? Teaming up, even on a small scale, channels energy in a positive direction.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I know we both care about getting this done on time. Can we talk about how to work together to make that happen?" Or: "We can both make our department look good here."</div></div>
+            </div>
+
+            <div class="card" id="card-tormentor-shift-power">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Change the Balance of Power</div>
+                <div class="card-tagline">Increase their dependence on you by developing a skill or knowledge they cannot easily replace.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research shows that increasing a tormentor's dependence on you can temper their negative treatment. Identify what they care about most — perhaps staying on top of new technology or maintaining a key client relationship — and become indispensable in that area. The message is: "You need me more than you think, so take better care of me."</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The tormentor treats you better because mistreating you would cost them something they value.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(In action) Develop expertise in a critical area, share it strategically, and let your value become self-evident. No single phrase — this is a longer-term positioning strategy.</div></div>
+            </div>
+
+            <!-- ARCHETYPE: BIASED COWORKER -->
+            <h2 id="archetype-biased">The Biased Coworker</h2>
+            <div class="orientation">A colleague makes comments that feel off — telling you to "smile more," asking "where are you really from," or claiming they "don't see color." You are unsure whether to speak up, worried about being labeled oversensitive, and aware that the burden of addressing bias should not fall on you — but you have to work with this person every day.</div>
+
+            <div class="card" id="card-biased-ask-question">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Respond with a Question</div>
+                <div class="card-tagline">Use genuine curiosity to make a biased colleague examine their own words.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Dolly Chugh (NYU professor, author of <em>The Person You Mean to Be</em>) calls this "being clueless." Asking "What did you mean by that?" or "What led you to say that?" — with genuine curiosity, not accusation — forces the person to explain themselves. It makes it harder to hide behind veiled bias. Use "what" instead of "why," which sounds less challenging.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The biased colleague may realize the implication of their words without feeling attacked. It buys you time to assess intent and decide how to proceed.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"What did you mean by that comment?" Or: "What led you to associate her name with that?" Or: "Can you clarify what you meant when you said that?"</div></div>
+            </div>
+
+            <div class="card" id="card-biased-sbi-feedback">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Use the Situation-Behavior-Impact (SBI) Feedback Model</div>
+                <div class="card-tagline">A structured way to call out biased comments without labeling the person.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">SBI provides a clear, non-accusatory framework. <strong>Situation:</strong> "During our Zoom meeting on Monday..." <strong>Behavior:</strong> "I heard you say you were concerned our client wouldn't take Alan seriously..." <strong>Impact:</strong> "...and it made me uncomfortable because it seemed like you were implying that because Alan is older, he will be perceived as out of touch." This reduces defensiveness because it focuses on specific, observable behavior.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"When you said [X] in [Y situation], the impact on me was [Z]. I'm raising this because I want us to be able to communicate, even about sensitive issues."</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Avoid "you" statements that label the person as bigoted. As Gallo notes, "When people feel ashamed, attacked, or mislabeled, they're less likely to hear you or change their behavior."</div></div>
+            </div>
+
+            <div class="card" id="card-biased-growth-mindset">
+                <span class="card-label">Mindset</span>
+                <div class="card-name">Adopt a Growth Mindset About Bias</div>
+                <div class="card-tagline">Believe that people can learn and change — it increases your motivation to speak up.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research by Aneeta Rattan (London Business School) shows that people who hold a growth mindset about others' capacity to change are more likely to confront bias. They also retain a stronger sense of workplace belonging afterward. Gallo shares the story of Daniel, who told himself about his biased client Carol: "I don't want to make assumptions about her moral character. My parents make similar comments sometimes."</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You are more likely to speak up, and when you do, you are less likely to be consumed by resentment. The biased colleague is more likely to change if you approach them as someone capable of growth.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "I want to understand how they came to believe this. They are capable of learning."</div></div>
+            </div>
+
+            <div class="card" id="card-biased-coalition">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Form a Coalition</div>
+                <div class="card-tagline">Join forces with others to address bias collectively — it is safer and more effective.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research shows that speaking up as a group is harder to dismiss than a single "disgruntled employee." Gallo references the amplification strategy used by women in the Obama White House: when one woman made a key point, another would repeat it and attribute it to the original speaker, preventing credit-stealing and ensuring the idea was heard. A coalition also provides a sounding board to determine whether an ambiguous comment warrants action.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You feel safer raising issues. The biased colleague cannot easily dismiss complaints. Coworkers from underrepresented backgrounds have allies they can turn to.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To an ally) "I noticed what happened in that meeting. Did it land the same way for you? If it happens again, would you be willing to back me up if I say something?"</div></div>
+            </div>
+
+            <!-- ARCHETYPE: POLITICAL OPERATOR -->
+            <h2 id="archetype-political">The Political Operator</h2>
+            <div class="orientation">You have a colleague who seems to treat every interaction as a transaction. They take credit for your work, curry favor with powerful people, spread rumors, and push their own agenda at the expense of team goals. You feel like you need to watch your back constantly, and you are tempted to play their game — but you do not want to become them.</div>
+
+            <div class="card" id="card-political-dont-get-dragged">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Don't Get Dragged In</div>
+                <div class="card-tagline">Resist the temptation to retaliate or play the political operator's game.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Engaging in unhealthy competition or gossiping — even about a gossiper — reflects badly on you. Gallo shares the story of Akila, whose attempts to "get back" at her boss Rajeev by ignoring his messages backfired and made her look irresponsible. Instead, Akila focused on emotional distance: when things went south, she would go somewhere quiet, let out her emotions, and return composed.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You preserve your reputation and values. You avoid escalating a conflict that the political operator is likely better equipped to win.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "I will not stoop to their level. My reputation matters more than winning this round."</div></div>
+            </div>
+
+            <div class="card" id="card-political-make-work-known">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Make Your Good Work Known — Ethically</div>
+                <div class="card-tagline">Ensure decision-makers know about your contributions without bragging.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Political operators thrive in information vacuums. By keeping your manager updated, volunteering to present at all-staff meetings, or asking a trusted colleague to speak on your behalf, you reduce the space for credit-stealing. Gallo notes that women are often penalized for self-promotion, so peer advocacy — "I worked really hard on this; would you mind asking me a question at the meeting so I can share the takeaways?" — is especially useful.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">Your contributions are known and documented, making it harder for someone else to claim them. You build a reputation for substance over politics.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I've been fortunate to have some input into the decisions so far." Or (to a trusted peer): "I'd appreciate it if you asked me questions at the meeting so I can talk about the key takeaways from the report."</div></div>
+            </div>
+
+            <div class="card" id="card-political-ask-advice">
+                <span class="card-label">Tactic</span>
+                <div class="card-name">Ask for Advice</div>
+                <div class="card-tagline">Disarm a political operator by seeking their counsel — it signals cooperation, not competition.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research on negotiations shows that asking for advice makes you seem cooperative and can win someone over. If you take their advice, they feel invested in your success. It also nudges them to see things from your perspective. Akila used this with Rajeev: whenever she anticipated snags, she alerted him and asked for his thoughts, which made him friendlier.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">The political operator begins to see you as an ally rather than a rival. They may even become a champion for your ideas.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"What would you do if you were in my shoes? I'd really value your perspective on how to handle this."</div></div>
+            </div>
+
+            <div class="card" id="card-political-credit-stealing">
+                <span class="card-label">Tactic (Specific Ploy)</span>
+                <div class="card-name">Counter Credit-Stealing</div>
+                <div class="card-tagline">Address it directly with questions, then set up-front agreements for future projects.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Ask: "I noticed you said 'I' instead of 'we' when talking about the project. Was that intentional?" This shifts the burden of proof. If they acknowledge the mistake, refocus on making it right — perhaps sending a group email clarifying contributions. Going forward, agree in writing on who will present what, and send the agreement to everyone involved.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I noticed that when you talked about our project, you said 'I' instead of 'we.' Was that intentional? How can we make sure everyone gets the credit they deserve going forward?"</div></div>
+            </div>
+
+            <!-- NINE PRINCIPLES -->
+            <h2 id="principles">Nine Principles for Getting Along with Anyone</h2>
+            <div class="orientation">You have identified which archetype you are dealing with and selected some tactics. Before you act, ground yourself in these nine principles. They apply across every archetype and every situation, and they form the foundation of what Gallo calls "interpersonal resilience" — the ability to bounce back from conflict and thrive despite difficult relationships.</div>
+
+            <div class="card" id="card-principle-1">
+                <span class="card-label">Principle 1</span>
+                <div class="card-name">Focus on What You Can Control</div>
+                <div class="card-tagline">You cannot make someone change; you can only change your own response.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Few people alter their behavior because someone else wants them to. If getting along depends entirely on convincing your colleague to become a different person, you are taking a big risk. Gallo quotes Adam Grant (Wharton professor, author of <em>Think Again</em>): "I no longer believe it's my place to change anyone's mind. All I can do is try to understand their thinking and ask if they're open to some rethinking."</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You stop wasting energy on futile persuasion. You feel empowered because you are taking action on things within your sphere of influence.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "I can't control how they act, but I can control how I respond. What is one thing I can do differently today?"</div></div>
+            </div>
+
+            <div class="card" id="card-principle-2">
+                <span class="card-label">Principle 2</span>
+                <div class="card-name">Your Perspective Is Just One Perspective</div>
+                <div class="card-tagline">Naive realism makes us believe we see the world objectively; we don't.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content"><em>Naive realism</em> is the tendency to believe our view is objective and anyone who disagrees is uninformed, irrational, or biased. <em>Fundamental attribution error</em> compounds this: we attribute others' behavior to their character, but our own behavior to circumstances. Gallo describes a project estimate dispute where she thought her colleague was "out of her mind" — until she acknowledged the colleague's perspective was equally valid. They found a compromise without agreeing on the "truth."</div></div>
+                <div class="card-row"><div class="row-label">How to counter</div><div class="row-content">Ask yourself: "What if I'm wrong? What assumptions have I made? How would someone with different values and experiences see this?" The answers matter less than the exercise of asking.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I'm seeing this one way, and I realize you may be seeing it differently. Can we focus on finding a path forward rather than agreeing on who is right?"</div></div>
+            </div>
+
+            <div class="card" id="card-principle-3">
+                <span class="card-label">Principle 3</span>
+                <div class="card-name">Be Aware of Your Biases</div>
+                <div class="card-tagline">Affinity bias and confirmation bias shape how you interpret your colleague's behavior.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content"><em>Affinity bias</em> makes us gravitate toward people like us and away from those who are different. <em>Confirmation bias</em> means we interpret evidence as confirming our existing beliefs — if we already think someone is a jerk, we see "jerk-like" behavior everywhere. Gallo shares a personal example: she hesitated to push back on a Black female client because she unconsciously feared the client would get angry, falling prey to the "angry Black woman" trope. The client had never shown anger; the bias was entirely Gallo's.</div></div>
+                <div class="card-row"><div class="row-label">How to counter</div><div class="row-content">Take an implicit bias quiz (e.g., Project Implicit). Ask a trusted colleague: "What role might my biases be playing here?" Use "flip it to test it": if your colleague were a different gender, race, or orientation, would you make the same assumptions?</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "Would I interpret this behavior the same way if they were a white man? Am I confirming a story I already want to believe?"</div></div>
+            </div>
+
+            <div class="card" id="card-principle-4">
+                <span class="card-label">Principle 4</span>
+                <div class="card-name">Don't Make It "Me Against Them"</div>
+                <div class="card-tagline">See three entities: you, your colleague, and the dynamic between you — then work on the dynamic together.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Thinking in terms of "me versus you" is polarizing. It creates a victim-villain narrative that feels comforting but is rarely accurate. Gallo recommends visualizing yourself and the other person on the same side of a table, working on the problem — your unhealthy relationship — together. She shares the story of Andre, who pictured the dynamic with his pessimistic colleague Emilia as a seesaw they were both choosing to balance, which shifted his attitude from adversary to collaborator.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You approach conversations with curiosity rather than combativeness. The other person senses the shift and may reciprocate.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "There are three things here: me, them, and the dynamic. We can work on the dynamic together."</div></div>
+            </div>
+
+            <div class="card" id="card-principle-5">
+                <span class="card-label">Principle 5</span>
+                <div class="card-name">Rely on Empathy to See Things Differently</div>
+                <div class="card-tagline">Assume the most generous interpretation of their behavior — even if it may not be 100% true.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Research by Gabrielle Adams (University of Virginia) shows that we overestimate how much a wrongdoer intended to harm us — and they overestimate how much harm they caused. Giving your colleague the benefit of the doubt (even if slightly generous) de-escalates feelings of threat and creates space to respond thoughtfully. Gallo's daughter once suggested that speeding motorcyclists without helmets might be "on their way to buy helmets." Probably not true — but the generous interpretation softened the whole conversation.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You avoid wallowing, revenge fantasies, and other unproductive responses. You become more effective at problem-solving.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"What is the most generous interpretation of their behavior? What else might be going on for them — at work or at home?"</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Empathy is cognitively demanding. Start by giving yourself a dose of self-compassion first; do not get so focused on their shoes that you neglect your own needs.</div></div>
+            </div>
+
+            <div class="card" id="card-principle-6">
+                <span class="card-label">Principle 6</span>
+                <div class="card-name">Know Your Goal</div>
+                <div class="card-tagline">Be explicit about what you want — and write it down.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Without a clear goal, you get pulled into drama. Gallo recommends listing your goals, circling the top one to three, and writing them on paper. Research shows that people who vividly describe their goals are 1.2 to 1.4 times more likely to accomplish them. A minimal goal like "Don't think about this person during dinner with my family" is perfectly valid. Be honest about your hidden agendas — wanting them to "pay" — and set them aside; they will sabotage your stated goals.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"My goal for this relationship is to have a functional working dynamic where I am not losing sleep. I will measure success by whether I can interact with them without my skin crawling."</div></div>
+            </div>
+
+            <div class="card" id="card-principle-7">
+                <span class="card-label">Principle 7</span>
+                <div class="card-name">Avoid Gossip — Mostly</div>
+                <div class="card-tagline">Gossip can bond, inform, and deter bad behavior — but it also entrenches negative narratives and damages your reputation.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Workplace gossip serves functions: bonding, information-sharing, validation. Research even shows it can deter selfish behavior — people behave better when they know others might talk. But gossip also fuels confirmation bias, turning "Michael can be difficult" into a self-fulfilling prophecy. And it often reflects poorly on the gossiper. Gallo's advice: before sharing, ask whether gossip will help or hurt your stated goal.</div></div>
+                <div class="card-row"><div class="row-label">How to do it right</div><div class="row-content">Choose who you talk to carefully. Seek out people who are constructive, will challenge your perspective when they disagree, and exercise discretion.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To a trusted colleague) "I need to reality-check something about an interaction I had. Can I run it by you — and will you push back if you think I'm off base?"</div></div>
+            </div>
+
+            <div class="card" id="card-principle-8">
+                <span class="card-label">Principle 8</span>
+                <div class="card-name">Experiment to Find What Works</div>
+                <div class="card-tagline">There is no one right answer. Design small experiments, learn, and adjust.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Improving a relationship is overwhelming if you try to solve it all at once. Gallo recommends picking two or three tactics, setting a time period (e.g., two weeks), and treating it as a test. Small actions can have a big impact. If an experiment fails, do not repeat it expecting different results. Try something the other person would not expect — what conflict expert Jennifer Goldman-Wetzler calls a "constructive, pattern-breaking action."</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You learn what works in your specific context. The process feels manageable rather than overwhelming. You build confidence through iteration.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">(To yourself) "For the next two weeks, I'm going to try [specific tactic]. I'll note what happens and adjust from there. This is an experiment, not a final answer."</div></div>
+            </div>
+
+            <div class="card" id="card-principle-9">
+                <span class="card-label">Principle 9</span>
+                <div class="card-name">Be — and Stay — Curious</div>
+                <div class="card-tagline">Adopt a growth mindset. The dynamic is not set in stone.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Curiosity helps you avoid confirmation bias and stereotyping. It keeps you out of amygdala hijack by shifting your brain from defensiveness to exploration. Gallo quotes Argentinian therapist Salvador Minuchin: "Certainty is the enemy of change." Instead of thinking "Here we go again with Isabel's naysaying," ask "What's going on with her? What have I missed in the past?" Look for disconfirming evidence — times when the person acted differently than you expected.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You stay open to unexpected solutions. The relationship feels less fixed. You model a mindset that can be contagious.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I'm curious — what's driving this? What am I not seeing? When have they shown up differently?"</div></div>
+            </div>
+
+            <!-- PROTECTING YOURSELF -->
+            <h2 id="protecting">Protecting Yourself</h2>
+            <div class="orientation">You have tried the tactics. You have applied the principles. Things are not improving — or they are improving too slowly, and the cost to your well-being is too high. This section covers what to do when all else fails, which approaches to avoid, and how to prioritize your own health.</div>
+
+            <h3 id="when-all-else-fails">When All Else Fails</h3>
+
+            <div class="card" id="card-boundaries">
+                <span class="card-label">Last Resort</span>
+                <div class="card-name">Establish Boundaries and Limit Exposure</div>
+                <div class="card-tagline">Reduce interaction with the difficult colleague to the absolute minimum required.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">If interacting with your problem colleague is stressful, interact with them less. Gallo cites Nedra Glover Tawwab (therapist, author of <em>Set Boundaries, Find Peace</em>): "People treat you according to your boundaries." Use the "two-minute drill" from happiness researcher Michelle Gielan: ask what exactly you need from them and what is the least amount of time it will take to get it. Use "job crafting" — proactively redesigning your role to minimize reliance on them and maximize collaboration with energizing colleagues.</div></div>
+                <div class="card-row"><div class="row-label">What it looks like</div><div class="row-content">Building a relationship with a different contact in the same department. Applying for jobs in other teams if your boss is the problem. Having exit phrases ready: "I need to get ready for my next meeting." Choosing email over phone if that is less draining.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I prefer that we figure this out over email." Or: "I promised I'd respond to this by end of day — let me get back to my desk."</div></div>
+            </div>
+
+            <div class="card" id="card-documentation">
+                <span class="card-label">Last Resort</span>
+                <div class="card-name">Document Their Transgressions and Your Successes</div>
+                <div class="card-tagline">Keep a record of bad behavior and your own achievements to protect your career.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">If you need to escalate, leaders will want to see a pattern. For every offense, note the time, place, what was said or done, who was present, and how you responded. Separately, document your own wins — projects, ideas, positive feedback — so your contributions are not diminished by the conflict. Share these regularly with your boss.</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You have evidence if you need to make a formal case. You are prepared for performance reviews. You counter any false narratives your colleague may be spreading.</div></div>
+            </div>
+
+            <div class="card" id="card-escalation">
+                <span class="card-label">Last Resort</span>
+                <div class="card-name">Escalate to Someone with Power</div>
+                <div class="card-tagline">Go to a manager or HR — but only after weighing the risks and preparing your case.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Escalation is risky. Will it make you look bad? Will your colleague retaliate? Gallo quotes Bob Sutton (Stanford professor, author of <em>The No Asshole Rule</em>): "In most companies, HR is not there to be your friend. They are there to protect the institution." Before escalating, confirm that others have witnessed the behavior and are willing to stand with you. Tie the problem to concrete business results. Explain what you have already tried.</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">If HR has not helped in similar past situations, they probably will not help now. Appeal to someone who knows both you and the other party, and who has a track record of following through.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"I want to make our working relationship productive. I've tried [X, Y, Z]. The impact on the team's performance has been [specific metrics]. I'd appreciate your advice on how to proceed — or your help in addressing this directly."</div></div>
+            </div>
+
+            <div class="card" id="card-quitting">
+                <span class="card-label">Last Resort</span>
+                <div class="card-name">Consider Quitting — Strategically</div>
+                <div class="card-tagline">Leaving is an underrated option, but do not do it impulsively.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">About one in eight people who report being treated poorly leave their job because of it. Bob Sutton told Gallo: "Grit is overrated when it comes to working with toxic people." But he also warns that the grass is not always greener — he once left Stanford for Berkeley, only to return a year later at a 30% pay cut. Gallo recommends: if quitting is feasible, leave <em>for</em> something rather than running <em>from</em> a bad situation. Set parameters: "I'll stick it out for four months, and if these three things don't change, I'll start sending out my résumé."</div></div>
+                <div class="card-row"><div class="row-label">Payoff</div><div class="row-content">You escape a toxic environment. You preserve your mental and physical health. You make a deliberate career move rather than a panicked exit.</div></div>
+                <div class="card-row"><div class="row-label">Watch out for</div><div class="row-content">Do not quit impulsively. Give yourself time to spruce up your résumé, expand your network, and line up options. But do not stay so long that you suffer lasting consequences.</div></div>
+            </div>
+
+            <h3 id="approaches-that-rarely-work">Approaches That Rarely Work</h3>
+            <div class="card" id="card-avoid-suppression">
+                <span class="card-label">Avoid</span>
+                <div class="card-name">Suppressing Your Emotions</div>
+                <div class="card-tagline">"Just ignore it" usually backfires — your feelings leak out elsewhere.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Susan David (author of <em>Emotional Agility</em>) explains that suppressed emotions show up in unintended places — you snap at your spouse after a frustrating day at work, or you become passive-aggressive. Research shows that hiding anger or frustration raises the blood pressure of those around you, even if they do not know exactly what you are feeling.</div></div>
+                <div class="card-row"><div class="row-label">What to do instead</div><div class="row-content">Acknowledge the emotion. Vent productively (to a trusted person or in a journal). Address the issue directly when you are calm.</div></div>
+            </div>
+
+            <div class="card" id="card-avoid-retaliation">
+                <span class="card-label">Avoid</span>
+                <div class="card-name">Retaliating</div>
+                <div class="card-tagline">Fighting fire with fire intensifies the conflict and violates your values.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Stooping to their level entrenches the "me against them" dynamic. It often makes you look bad to observers. Gallo recommends writing down your core values and checking proposed tactics against them before acting.</div></div>
+                <div class="card-row"><div class="row-label">What to do instead</div><div class="row-content">Consult the universal values framework by social psychologist Shalom Schwartz (self-direction, stimulation, hedonism, achievement, power, security, tradition, benevolence, universalism). Align your actions with the values that matter most to you.</div></div>
+            </div>
+
+            <div class="card" id="card-avoid-shaming">
+                <span class="card-label">Avoid</span>
+                <div class="card-name">Shaming</div>
+                <div class="card-tagline">Calling someone a jerk or a racist may feel satisfying but rarely produces change.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Bob Sutton: "Calling people an asshole is one of the most reliable ways to turn someone into an asshole — or make them hate you." Brené Brown (research professor, author) distinguishes shame ("I am bad") from guilt ("I did something bad"). Shame is more likely to produce destructive behavior than change.</div></div>
+                <div class="card-row"><div class="row-label">What to do instead</div><div class="row-content">Address the specific behavior and its impact. Use "I" or "it" statements rather than "you" accusations. Focus on the action, not the person's character.</div></div>
+            </div>
+
+            <!-- TAKING CARE -->
+            <h3 id="taking-care">Taking Care of Yourself</h3>
+            <div class="card" id="card-self-care-control">
+                <span class="card-label">Self-Care</span>
+                <div class="card-name">Control the Controllables</div>
+                <div class="card-tagline">Build up your defenses through basics: sleep, exercise, time outside, and small actions that restore agency.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Gallo shares the story of a friend who launched a "coffee date offensive" — thirty-seven coffee meetings over a year — while stuck under an insecure boss. The meetings gave her a sense of control, expanded her network, and eventually led to a new job. Gallo herself keeps a sticky note with a mantra borrowed from a friend's daughter's school: "My body is calm. My heart is kind. I am the boss of my brain and my mind."</div></div>
+            </div>
+
+            <div class="card" id="card-self-care-microculture">
+                <span class="card-label">Self-Care</span>
+                <div class="card-name">Build a Microculture</div>
+                <div class="card-tagline">Create a small coalition of positive, supportive colleagues to counterbalance one toxic relationship.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Emotional intelligence expert Annie McKee describes this as creating a "resonant microculture" where you have the greatest chance of succeeding. One interviewee told Gallo: "I vowed to protect the people who reported to me. Rather than dreading my interactions with my boss, I looked forward to seeing my team."</div></div>
+            </div>
+
+            <div class="card" id="card-self-care-compassion">
+                <span class="card-label">Self-Care</span>
+                <div class="card-name">Practice Self-Compassion</div>
+                <div class="card-tagline">Direct empathy inward — it builds resilience and makes you more compassionate toward others.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Kristen Neff (University of Texas), a leading researcher on self-compassion, defines three elements: awareness of negative emotions ("This is hard right now"), a sense of common humanity ("I'm not the only one dealing with this"), and kindness to yourself ("What do I need right now?"). Research shows self-compassion leads to higher emotional intelligence, deeper resilience, and a stronger desire to grow.</div></div>
+                <div class="card-row"><div class="row-label">Example phrase</div><div class="row-content">"It's OK to feel hurt by this. Who I am is not shaped by this person's beliefs. I am not alone in facing challenging relationships."</div></div>
+            </div>
+
+            <div class="card" id="card-self-care-disengage">
+                <span class="card-label">Self-Care</span>
+                <div class="card-name">Emotionally Disengage — Strategically</div>
+                <div class="card-tagline">Care less about the dynamic without suppressing your feelings.</div>
+                <div class="card-row"><div class="row-label">What's happening</div><div class="row-content">Set a timer for ten minutes to ruminate, then shift focus. Use mantras: "This isn't about me," "This will pass," "Stay focused on what matters, and this doesn't matter." Before tough interactions, look at your compliments folder or pictures of loved ones. Afterward, text a friend, walk, or listen to music. Gallo admits to one less-nice tactic: "I remind myself that every morning my challenging coworker has to wake up as themselves — the unpleasant, likely unhappy person. And I get to wake up as me."</div></div>
+            </div>
+
+            <!-- SITUATIONAL INDEX -->
+            <h2 id="situational-index">Situational Index</h2>
+            <div class="situational-index">
+                <p style="margin-bottom:16px;color:var(--text-secondary);">A reverse lookup — find the concept or tactic that applies to your immediate situation.</p>
+                <div class="si-entry"><span class="si-situation">I wake up at 3 a.m. replaying a tense exchange and cannot fall back asleep.</span> → See <a class="si-ref" href="#card-amygdala-hijack">Amygdala Hijack</a> and <a class="si-ref" href="#card-reappraisal">Reappraisal</a></div>
+                <div class="si-entry"><span class="si-situation">My boss takes credit for my work and questions my competence in front of others.</span> → See <a class="si-ref" href="#card-insecure-position-as-ally">Position Yourself as an Ally</a> and <a class="si-ref" href="#card-insecure-compliments-folder">Compliments Folder</a></div>
+                <div class="si-entry"><span class="si-situation">Every idea I propose is shot down with "That will never work."</span> → See <a class="si-ref" href="#card-pessimist-disagreer-in-chief">Disagreer-in-Chief</a> and <a class="si-ref" href="#card-pessimist-challenge-assumptions">Challenge Their Assumptions</a></div>
+                <div class="si-entry"><span class="si-situation">My colleague says "Fine" but clearly is not fine, and later denies anything is wrong.</span> → See <a class="si-ref" href="#card-passive-focus-content">Focus on Content, Not Delivery</a> and <a class="si-ref" href="#card-passive-direct-requests">Make Direct Requests</a></div>
+                <div class="si-entry"><span class="si-situation">Someone on my team monopolizes every meeting and interrupts constantly.</span> → See <a class="si-ref" href="#card-knowitall-preempt-interruptions">Preempt Interruptions</a> and <a class="si-ref" href="#card-knowitall-address-interruptions">Address Interruptions</a></div>
+                <div class="si-entry"><span class="si-situation">A senior colleague tells me I should suffer because they suffered when they were coming up.</span> → See <a class="si-ref" href="#card-tormentor-empathy">Encourage Their Empathy</a> and <a class="si-ref" href="#card-tormentor-shared-goal">Focus on a Shared Goal</a></div>
+                <div class="si-entry"><span class="si-situation">A coworker makes a comment that feels racist or sexist but I am not sure if I am overreacting.</span> → See <a class="si-ref" href="#card-biased-ask-question">Respond with a Question</a> and <a class="si-ref" href="#card-biased-sbi-feedback">SBI Feedback Model</a></div>
+                <div class="si-entry"><span class="si-situation">I found out a colleague took credit for work I did.</span> → See <a class="si-ref" href="#card-political-credit-stealing">Counter Credit-Stealing</a> and <a class="si-ref" href="#card-political-make-work-known">Make Your Work Known</a></div>
+                <div class="si-entry"><span class="si-situation">I am tempted to gossip about a difficult coworker to blow off steam.</span> → See <a class="si-ref" href="#card-principle-7">Principle 7: Avoid Gossip — Mostly</a></div>
+                <div class="si-entry"><span class="si-situation">I have tried everything and nothing is working — I am losing sleep and dreading work.</span> → See <a class="si-ref" href="#card-boundaries">Establish Boundaries</a>, <a class="si-ref" href="#card-documentation">Document Everything</a>, and <a class="si-ref" href="#card-quitting">Consider Quitting</a></div>
+                <div class="si-entry"><span class="si-situation">I keep telling myself "it's just work" but I cannot stop thinking about the conflict.</span> → See <a class="si-ref" href="#why-relationships-matter">Why Work Relationships Matter</a> and <a class="si-ref" href="#card-negativity-bias">Negativity Bias</a></div>
+                <div class="si-entry"><span class="si-situation">My colleague blames everyone else when things go wrong and never takes responsibility.</span> → See <a class="si-ref" href="#card-victim-responsibility">Encourage Responsibility</a> and <a class="si-ref" href="#card-victim-agency">Increase Agency</a></div>
+                <div class="si-entry"><span class="si-situation">I want to send a blistering email telling my coworker exactly what I think of them.</span> → See <a class="si-ref" href="#card-avoid-retaliation">Avoid Retaliating</a> and <a class="si-ref" href="#card-avoid-shaming">Avoid Shaming</a></div>
+                <div class="si-entry"><span class="si-situation">I am not sure which archetype my difficult colleague fits.</span> → Refer to the <a class="si-ref" href="#toc">table of contents</a> — review the orientation paragraph for each archetype to find the closest match; many people span multiple categories.</div>
+                <div class="si-entry"><span class="si-situation">I am a manager and one of my team members is acting passive-aggressively.</span> → See <a class="si-ref" href="#card-passive-team-accountability">Team Accountability</a> and set clear norms that make dissent safe and direct.</div>
+                <div class="si-entry"><span class="si-situation">I need a quick mantra to get through a difficult conversation.</span> → "My body is calm. My heart is kind. I am the boss of my brain and my mind." Or: "Sometimes people are going to be mad at you… and that's OK." (See <a class="si-ref" href="#taking-care">Taking Care</a>)</div>
+            </div>
+
+            <!-- AUTHOR'S PRESCRIPTION -->
+            <h2 id="prescription">What Amy Gallo Wants You to Walk Away Doing Differently</h2>
+            <p>Gallo's overarching message is that we can all have stronger, healthier relationships at work — but it requires commitment, self-awareness, and empathy. Her prescription rests on several shifts in how you approach difficult colleagues:</p>
+            <p><strong>First, stop hoping the other person will change.</strong> You have little say over whether and how much someone else is willing to change. What you can control is your own attitude, reactions, and approach. This is not resignation — it is empowerment.</p>
+            <p><strong>Second, clean up your side of the street before you act.</strong> In every tense dynamic, you are part of the equation. Examine your own biases, your own reactivity, and the stories you are telling yourself. The tools in this book will not work unless you acknowledge your part.</p>
+            <p><strong>Third, treat archetypes as a starting point, not a final label.</strong> The eight archetypes help you assess the situation, but the real work begins when you move beyond them. Pigeonholing a colleague as a "passive-aggressive jerk" cements the negative dynamic. Leave room for the possibility that you have misinterpreted their behavior — or that you yourself have acted like a know-it-all or a victim on occasion.</p>
+            <p><strong>Fourth, experiment persistently.</strong> There is no universal script. Try a tactic, observe what happens, adjust. Small changes can shift the dynamic. When progress stalls, return to the nine principles — they are your foundation.</p>
+            <p><strong>Fifth, prioritize your own well-being.</strong> No relationship at work is worth your mental or physical health. If you have genuinely tried and the situation remains toxic, protect yourself — through boundaries, documentation, escalation, or leaving. The goal is not to win; the goal is to free up your time and mental capacity for the things that really matter.</p>
+            <p><strong>Finally, remember why this matters.</strong> Work is where we form our identities, seek belonging, and spend the majority of our waking hours. The ability to navigate friction with confidence and compassion is not just a career skill — it is a life skill. As Gallo writes: "We can all have stronger and healthier relationships at work. Let's begin."</p>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <p><strong>Source:</strong> Gallo, Amy. <em>Getting Along: How to Work with Anyone (Even Difficult People)</em>. Boston, Massachusetts: Harvard Business Review Press, 2022. ISBN: 978-1-64782-106-7.</p>
+                <p>This learning reference guide was built from the complete text of the book. All examples, stories, and proper names are the author's own. Parenthetical explanations for proper nouns were added for general readers. No content was invented or substituted.</p>
+            </div>
+        </div>
+
+        <!-- Desktop Navigator -->
+        <nav class="nav-panel" id="nav-panel">
+            <h4>Navigate This Guide</h4>
+            <ul id="nav-list">
+                <li><a href="#hero">Title &amp; Overview</a></li>
+                <li><a href="#toc">Contents</a></li>
+                <li><div class="nav-cat" data-target="nav-core"><span class="toggle">▸</span> Core Theory</div>
+                    <ul class="nav-sub" id="nav-core">
+                        <li><a href="#why-relationships-matter">Why Relationships Matter</a></li>
+                        <li><a href="#brain-on-conflict">Your Brain on Conflict</a></li>
+                        <li><a href="#card-amygdala-hijack">Amygdala Hijack</a></li>
+                        <li><a href="#card-negativity-bias">Negativity Bias</a></li>
+                        <li><a href="#card-premature-cognitive-commitment">Premature Cognitive Commitment</a></li>
+                        <li><a href="#card-reappraisal">Reappraisal</a></li>
+                        <li><a href="#card-cleaning-up-your-side">Cleaning Up Your Side</a></li>
+                    </ul>
+                </li>
+                <li><div class="nav-cat" data-target="nav-archetypes"><span class="toggle">▸</span> Archetypes</div>
+                    <ul class="nav-sub" id="nav-archetypes">
+                        <li><a href="#archetype-insecure">Insecure Boss</a></li>
+                        <li><a href="#archetype-pessimist">Pessimist</a></li>
+                        <li><a href="#archetype-victim">Victim</a></li>
+                        <li><a href="#archetype-passive-aggressive">Passive-Aggressive Peer</a></li>
+                        <li><a href="#archetype-know-it-all">Know-It-All</a></li>
+                        <li><a href="#archetype-tormentor">Tormentor</a></li>
+                        <li><a href="#archetype-biased">Biased Coworker</a></li>
+                        <li><a href="#archetype-political">Political Operator</a></li>
+                    </ul>
+                </li>
+                <li><div class="nav-cat" data-target="nav-principles"><span class="toggle">▸</span> Nine Principles</div>
+                    <ul class="nav-sub" id="nav-principles">
+                        <li><a href="#principles">Overview</a></li>
+                        <li><a href="#card-principle-1">1: Control What You Can</a></li>
+                        <li><a href="#card-principle-2">2: One Perspective</a></li>
+                        <li><a href="#card-principle-3">3: Be Aware of Biases</a></li>
+                        <li><a href="#card-principle-4">4: Not Me Against Them</a></li>
+                        <li><a href="#card-principle-5">5: Rely on Empathy</a></li>
+                        <li><a href="#card-principle-6">6: Know Your Goal</a></li>
+                        <li><a href="#card-principle-7">7: Avoid Gossip</a></li>
+                        <li><a href="#card-principle-8">8: Experiment</a></li>
+                        <li><a href="#card-principle-9">9: Stay Curious</a></li>
+                    </ul>
+                </li>
+                <li><div class="nav-cat" data-target="nav-protecting"><span class="toggle">▸</span> Protecting Yourself</div>
+                    <ul class="nav-sub" id="nav-protecting">
+                        <li><a href="#when-all-else-fails">When All Else Fails</a></li>
+                        <li><a href="#card-boundaries">Boundaries</a></li>
+                        <li><a href="#card-documentation">Documentation</a></li>
+                        <li><a href="#card-escalation">Escalation</a></li>
+                        <li><a href="#card-quitting">Quitting</a></li>
+                        <li><a href="#approaches-that-rarely-work">Approaches to Avoid</a></li>
+                        <li><a href="#taking-care">Taking Care</a></li>
+                    </ul>
+                </li>
+                <li><a href="#situational-index">Situational Index</a></li>
+                <li><a href="#prescription">Author's Prescription</a></li>
+                <li><a href="#footer">Source Attribution</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        (function() {
+            // Mobile nav
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            const mobilePanel = document.getElementById('mobile-nav-panel');
+            const navPanel = document.getElementById('nav-panel');
+
+            function buildMobileNav() {
+                const desktopNav = navPanel.cloneNode(true);
+                desktopNav.querySelector('h4')?.remove();
+                desktopNav.style.display = 'block';
+                desktopNav.style.maxHeight = 'none';
+                desktopNav.style.overflowY = 'visible';
+                desktopNav.style.border = 'none';
+                desktopNav.style.padding = '0';
+                mobilePanel.innerHTML = '';
+                mobilePanel.appendChild(desktopNav);
+                // Re-bind category toggles
+                mobilePanel.querySelectorAll('.nav-cat').forEach(cat => {
+                    cat.addEventListener('click', function() {
+                        const targetId = this.getAttribute('data-target');
+                        const sub = document.getElementById(targetId);
+                        if (sub) {
+                            sub.classList.toggle('open');
+                            this.classList.toggle('expanded');
+                            const toggle = this.querySelector('.toggle');
+                            if (toggle) toggle.textContent = sub.classList.contains(
+                                'open') ? '▾' : '▸';
+                        }
+                    });
+                });
+                // Close mobile nav on link click
+                mobilePanel.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobilePanel.classList.remove('open');
+                        if (mobileToggle) mobileToggle.setAttribute(
+                        'aria-expanded', 'false');
+                    });
+                });
+            }
+            buildMobileNav();
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    const isOpen = mobilePanel.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen);
+                });
+            }
+
+            // Desktop nav category toggles
+            document.querySelectorAll('#nav-panel .nav-cat').forEach(cat => {
+                cat.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const sub = document.getElementById(targetId);
+                    if (sub) {
+                        sub.classList.toggle('open');
+                        this.classList.toggle('expanded');
+                        const toggle = this.querySelector('.toggle');
+                        if (toggle) toggle.textContent = sub.classList.contains('open') ?
+                            '▾' : '▸';
+                    }
+                });
+            });
+
+            // Scroll spy
+            const allHeadings = document.querySelectorAll('h2[id], h3[id]');
+            const allNavLinks = document.querySelectorAll('#nav-panel a, #mobile-nav-panel a');
+            const allNavCats = document.querySelectorAll('#nav-panel .nav-cat, #mobile-nav-panel .nav-cat');
+
+            function updateScrollSpy() {
+                let currentId = null;
+                const scrollY = window.scrollY + 80;
+                allHeadings.forEach(heading => {
+                    if (heading.offsetTop <= scrollY) {
+                        currentId = heading.id;
+                    }
+                });
+                allNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + currentId) {
+                        link.classList.add('active');
+                    }
+                });
+                // Auto-expand categories containing active link
+                allNavCats.forEach(cat => {
+                    const targetId = cat.getAttribute('data-target');
+                    const sub = document.getElementById(targetId);
+                    if (sub) {
+                        const hasActive = sub.querySelector('a.active');
+                        if (hasActive && !sub.classList.contains('open')) {
+                            sub.classList.add('open');
+                            cat.classList.add('expanded');
+                            const toggle = cat.querySelector('.toggle');
+                            if (toggle) toggle.textContent = '▾';
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateScrollSpy, { passive: true });
+            updateScrollSpy();
+        })();
+    </script>
+</body>
+</html>
