@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Reference Guides</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+  line-height: 1.6;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 700px;
+  padding: 80px 32px;
+  position: relative;
+}
+
+.header {
+  margin-bottom: 80px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+h1 {
+  font-size: 2.8em;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  margin-bottom: 32px;
+  color: #0a0a0a;
+}
+
+.description {
+  font-size: 0.95em;
+  line-height: 1.9;
+  color: #525252;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+.category-section {
+  margin-bottom: 72px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.category-section:nth-child(2) { animation-delay: 0.4s; }
+.category-section:nth-child(3) { animation-delay: 0.6s; }
+.category-section:nth-child(4) { animation-delay: 0.8s; }
+
+.category-title {
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  margin-bottom: 24px;
+  padding-left: 2px;
+}
+
+.guide-list {
+  list-style: none;
+}
+
+.guide-item {
+  margin-bottom: 4px;
+}
+
+.guide-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 14px 2px;
+  transition: all 0.2s ease;
+  position: relative;
+  gap: 24px;
+}
+
+.guide-link::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #1a1a1a;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.guide-link:hover::before {
+  transform: scaleY(1);
+}
+
+.guide-link:hover {
+  padding-left: 12px;
+}
+
+.guide-link:hover .guide-title {
+  color: #0a0a0a;
+}
+
+.guide-link:hover .guide-author {
+  color: #1a1a1a;
+}
+
+.guide-title {
+  font-size: 1.1em;
+  font-weight: 400;
+  color: #262626;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+}
+
+.guide-author {
+  font-size: 0.85em;
+  color: #737373;
+  font-weight: 300;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid #e5e5e5;
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.2s forwards;
+}
+
+.footer-text {
+  font-size: 0.75em;
+  color: #a3a3a3;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 48px 24px;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+  }
+  
+  .header {
+    margin-bottom: 56px;
+  }
+  
+  .category-section {
+    margin-bottom: 56px;
+  }
+  
+  .guide-link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 2px;
+  }
+  
+  .guide-author {
+    white-space: normal;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Reference Guides</h1>
+    <p class="description">
+      Comprehensive learning references based on personal reading. I recommend using these guides along with the actual book. These guides alone won't give you the feel of the actual text—you may miss out on memorable quotes, the author's style, and the richness of their full argument. Use this only for easy navigation through the book. Consider it your personal notes post-reading.
+    </p>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">How the World Works</div>
+    <ul class="guide-list">
+      <li class="guide-item">
+        <a href="prisoners-of-geography.html" class="guide-link">
+          <div class="guide-title">Prisoners of Geography</div>
+          <div class="guide-author">Tim Marshall</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">Business</div>
+    <ul class="guide-list">
+      <li class="guide-item">
+        <a href="building-dynamic-business-communities.html" class="guide-link">
+          <div class="guide-title">Building Dynamic Business Communities</div>
+          <div class="guide-author">Alan Weiss</div>
+        </a>
+      </li>
+      <li class="guide-item">
+        <a href="revenue-operations.html" class="guide-link">
+          <div class="guide-title">Revenue Operations</div>
+          <div class="guide-author">Stephen Diorio & Chris Hummel</div>
+        </a>
+      </li>
+      <li class="guide-item">
+        <a href="how-big-things-get-done-guide.html" class="guide-link">
+          <div class="guide-title">How Big Things Get Done</div>
+          <div class="guide-author">Bent Flyvbjerg & Dan Gardner</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="category-section">
+    <div class="category-title">Self Help</div>
+    <ul class="guide-list">
+      <li class="guide-item">
+        <a href="how-to-win-friends.html" class="guide-link">
+          <div class="guide-title">How to Win Friends and Influence People</div>
+          <div class="guide-author">Dale Carnegie</div>
+        </a>
+      </li>
+      <li class="guide-item">
+        <a href="getting-along-amy-gallo.html" class="guide-link">
+          <div class="guide-title">Getting Along</div>
+          <div class="guide-author">Amy Gallo</div>
+        </a>
+      </li>
+      <li class="guide-item">
+        <a href="games-people-play.html" class="guide-link">
+          <div class="guide-title">Games People Play</div>
+          <div class="guide-author">Eric Berne</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Reading Notes</div>
+  </div>
+</div>
+
+</body>
+</html>
