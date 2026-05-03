@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Deep Dive — CTO Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #1a1a24;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --accent: #4f8cff;
+  --accent2: #ff6b4f;
+  --accent3: #3ddc84;
+  --accent4: #c084fc;
+  --accent5: #fbbf24;
+  --glow: rgba(79, 140, 255, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+.top-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.top-bar h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.top-bar h1 span { color: var(--accent); }
+
+.nav-pills {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.nav-pills::-webkit-scrollbar { display: none; }
+
+.nav-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.nav-pill:hover { color: var(--text); background: var(--surface2); }
+.nav-pill.active { color: var(--accent); background: var(--glow); border-color: var(--accent); }
+
+.progress-bar {
+  position: fixed;
+  top: 53px; left: 0; right: 0;
+  height: 2px;
+  background: var(--surface2);
+  z-index: 99;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent4));
+  width: 0%;
+  transition: width 0.3s;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 24px 80px;
+}
+
+section {
+  margin-bottom: 64px;
+  scroll-margin-top: 72px;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  color: var(--text);
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: var(--accent2);
+}
+
+p { margin-bottom: 14px; color: var(--text-dim); }
+p strong { color: var(--text); font-weight: 600; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 16px 0;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--accent); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.card-sm {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.card-sm .icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-sm h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.card-sm p { font-size: 13px; margin: 0; }
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: 'DM Mono', monospace;
+}
+
+.tag-blue { background: rgba(79,140,255,0.15); color: var(--accent); }
+.tag-red { background: rgba(255,107,79,0.15); color: var(--accent2); }
+.tag-green { background: rgba(61,220,132,0.15); color: var(--accent3); }
+.tag-purple { background: rgba(192,132,252,0.15); color: var(--accent4); }
+.tag-yellow { background: rgba(251,191,36,0.15); color: var(--accent5); }
+
+.diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.diagram svg { width: 100%; height: auto; }
+
+.tree { padding-left: 0; }
+.tree li {
+  list-style: none;
+  position: relative;
+  padding: 6px 0 6px 28px;
+}
+.tree li::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.tree li::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 18px;
+  width: 14px;
+  height: 1px;
+  background: var(--border);
+}
+.tree > li::before { top: 18px; }
+.tree li:last-child::before { bottom: calc(100% - 18px); }
+
+.tree .node {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.flow-box {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.flow-arrow { color: var(--accent); font-size: 18px; }
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.compare-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.compare-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.compare-table tr:hover td { background: var(--surface); }
+
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  background: var(--glow);
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+
+.callout.warn { border-left-color: var(--accent5); background: rgba(251,191,36,0.08); }
+.callout.tip { border-left-color: var(--accent3); background: rgba(61,220,132,0.08); }
+.callout.sf { border-left-color: #00a1e0; background: rgba(0,161,224,0.08); }
+
+.callout p { margin: 0; font-size: 14px; }
+
+code {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  background: var(--surface2);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--accent3);
+}
+
+.layer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 16px 0;
+}
+
+.layer {
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.layer:hover { transform: scale(1.02); }
+
+.expand-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+.expand-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.hidden { display: none; }
+
+.num { 
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: var(--bg);
+  font-size: 12px; font-weight: 700;
+  margin-right: 8px; flex-shrink: 0;
+}
+
+.step-list { list-style: none; padding: 0; }
+.step-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.step-list li:last-child { border: none; }
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 48px 0;
+}
+
+@media (max-width: 600px) {
+  .top-bar { padding: 10px 16px; gap: 12px; }
+  .top-bar h1 { font-size: 18px; }
+  main { padding: 70px 16px 60px; }
+  h2 { font-size: 28px; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>AI <span>Deep Dive</span></h1>
+  <div class="nav-pills" id="nav">
+    <div class="nav-pill active" data-target="s1">Foundations</div>
+    <div class="nav-pill" data-target="s2">How AI Learns</div>
+    <div class="nav-pill" data-target="s3">LLMs</div>
+    <div class="nav-pill" data-target="s4">Providers</div>
+    <div class="nav-pill" data-target="s5">Agents</div>
+    <div class="nav-pill" data-target="s6">Building Apps</div>
+    <div class="nav-pill" data-target="s7">Voice AI</div>
+    <div class="nav-pill" data-target="s8">Enterprise</div>
+    <div class="nav-pill" data-target="s9">Salesforce</div>
+    <div class="nav-pill" data-target="s10">Risks</div>
+    <div class="nav-pill" data-target="s11">Strategy</div>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<main>
+
+<!-- ============ SECTION 1 ============ -->
+<section id="s1">
+<div class="section-label">Chapter 01</div>
+<h2>The AI Hierarchy — What Fits Where</h2>
+
+<p>Every AI buzzword maps to a specific layer in a hierarchy. Understanding this hierarchy is the single most important thing before you walk into any AI conference.</p>
+
+<div class="diagram">
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4f8cff" stop-opacity="0.3"/><stop offset="100%" stop-color="#c084fc" stop-opacity="0.3"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4f8cff" stop-opacity="0.2"/><stop offset="100%" stop-color="#3ddc84" stop-opacity="0.2"/></linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff6b4f" stop-opacity="0.2"/><stop offset="100%" stop-color="#fbbf24" stop-opacity="0.2"/></linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3ddc84" stop-opacity="0.15"/><stop offset="100%" stop-color="#4f8cff" stop-opacity="0.15"/></linearGradient>
+  </defs>
+  <!-- Outermost: AI -->
+  <rect x="20" y="10" width="760" height="320" rx="16" fill="url(#g4)" stroke="#3ddc84" stroke-opacity="0.4"/>
+  <text x="50" y="42" fill="#3ddc84" font-family="DM Mono" font-size="13" font-weight="500">ARTIFICIAL INTELLIGENCE — Machines that mimic human cognition</text>
+  
+  <!-- ML -->
+  <rect x="50" y="56" width="700" height="260" rx="14" fill="url(#g3)" stroke="#fbbf24" stroke-opacity="0.4"/>
+  <text x="80" y="84" fill="#fbbf24" font-family="DM Mono" font-size="12" font-weight="500">MACHINE LEARNING — Systems that learn from data, not rules</text>
+  
+  <!-- DL -->
+  <rect x="80" y="98" width="640" height="200" rx="12" fill="url(#g2)" stroke="#4f8cff" stroke-opacity="0.4"/>
+  <text x="110" y="124" fill="#4f8cff" font-family="DM Mono" font-size="12" font-weight="500">DEEP LEARNING — Neural networks with many layers</text>
+  
+  <!-- Inner boxes -->
+  <rect x="110" y="140" width="180" height="70" rx="8" fill="url(#g1)" stroke="#c084fc" stroke-opacity="0.5"/>
+  <text x="130" y="168" fill="#c084fc" font-family="DM Sans" font-size="13" font-weight="600">LLMs</text>
+  <text x="130" y="188" fill="#8888a0" font-family="DM Sans" font-size="11">GPT, Claude, Gemini, Llama</text>
+  
+  <rect x="310" y="140" width="180" height="70" rx="8" fill="rgba(255,107,79,0.15)" stroke="#ff6b4f" stroke-opacity="0.5"/>
+  <text x="330" y="168" fill="#ff6b4f" font-family="DM Sans" font-size="13" font-weight="600">Vision Models</text>
+  <text x="330" y="188" fill="#8888a0" font-family="DM Sans" font-size="11">Image gen, recognition</text>
+  
+  <rect x="510" y="140" width="190" height="70" rx="8" fill="rgba(61,220,132,0.15)" stroke="#3ddc84" stroke-opacity="0.5"/>
+  <text x="530" y="168" fill="#3ddc84" font-family="DM Sans" font-size="13" font-weight="600">Speech Models</text>
+  <text x="530" y="188" fill="#8888a0" font-family="DM Sans" font-size="11">Whisper, TTS, ASR</text>
+
+  <!-- Agents bar -->
+  <rect x="110" y="228" width="590" height="52" rx="8" fill="rgba(79,140,255,0.12)" stroke="#4f8cff" stroke-opacity="0.3" stroke-dasharray="6,4"/>
+  <text x="310" y="260" fill="#4f8cff" font-family="DM Sans" font-size="13" font-weight="600" text-anchor="middle">AI AGENTS — LLMs + Tools + Memory + Autonomy (the Salesforce focus)</text>
+</svg>
+</div>
+
+<h3>Key Distinction: AI vs ML vs Deep Learning</h3>
+
+<table class="compare-table">
+<tr><th>Concept</th><th>What It Is</th><th>Example</th></tr>
+<tr><td><strong style="color:var(--accent3)">AI</strong></td><td>Any system that performs tasks typically requiring human intelligence. Includes rule-based systems.</td><td>A chess engine with hardcoded rules. An if-else fraud filter.</td></tr>
+<tr><td><strong style="color:var(--accent5)">Machine Learning</strong></td><td>A subset of AI. The system learns patterns from data instead of being explicitly programmed.</td><td>Spam filter that learns from labeled emails. Recommendation engines.</td></tr>
+<tr><td><strong style="color:var(--accent)">Deep Learning</strong></td><td>A subset of ML using neural networks with many layers. Excels at unstructured data (text, images, audio).</td><td>ChatGPT, image recognition, voice assistants.</td></tr>
+<tr><td><strong style="color:var(--accent4)">Generative AI</strong></td><td>A subset of DL that creates new content — text, images, code, audio.</td><td>Claude writing an email. DALL-E generating an image.</td></tr>
+</table>
+
+<div class="callout">
+<p><strong>CTO mental model:</strong> All generative AI is deep learning. All deep learning is ML. All ML is AI. But not all AI is ML — rule-based expert systems are AI but not ML.</p>
+</div>
+
+<h3>Types of Machine Learning</h3>
+
+<div class="card-grid">
+<div class="card-sm">
+  <div class="icon" style="background:rgba(79,140,255,0.15)">📊</div>
+  <h5>Supervised Learning</h5>
+  <p>Learns from labeled examples. Input → known output. Used for: classification (spam/not spam), regression (price prediction), forecasting.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(255,107,79,0.15)">🔍</div>
+  <h5>Unsupervised Learning</h5>
+  <p>Finds patterns in unlabeled data. No "right answer" given. Used for: customer segmentation, anomaly detection, clustering.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(61,220,132,0.15)">🎮</div>
+  <h5>Reinforcement Learning</h5>
+  <p>Agent learns by trial-and-error, maximizing a reward signal. Used for: game AI, robotics, ad bidding, RLHF for LLMs.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(192,132,252,0.15)">🔄</div>
+  <h5>Self-Supervised Learning</h5>
+  <p>The model creates its own labels from the data. "Predict the next word." This is how LLMs like Claude are pre-trained.</p>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 2 ============ -->
+<section id="s2">
+<div class="section-label">Chapter 02</div>
+<h2>How AI Actually Learns — From Data to Intelligence</h2>
+
+<h3>Neural Networks: The Core Mechanism</h3>
+<p>A neural network is a function that takes input numbers and produces output numbers, with adjustable parameters (called <strong>weights</strong>) in between. "Learning" means adjusting those weights to minimize errors.</p>
+
+<div class="card">
+<h4>The Training Loop (every AI model follows this)</h4>
+<ol class="step-list">
+<li><span class="num">1</span><span><strong>Forward pass:</strong> Feed input data through the network. It produces a prediction.</span></li>
+<li><span class="num">2</span><span><strong>Loss calculation:</strong> Compare the prediction to the correct answer. Measure how wrong it was (the "loss").</span></li>
+<li><span class="num">3</span><span><strong>Backpropagation:</strong> Calculate how each weight contributed to the error.</span></li>
+<li><span class="num">4</span><span><strong>Weight update:</strong> Adjust weights slightly to reduce the error (using gradient descent).</span></li>
+<li><span class="num">5</span><span><strong>Repeat:</strong> Do this billions of times across the entire dataset. Each full pass = one "epoch."</span></li>
+</ol>
+</div>
+
+<h3>What Makes Deep Learning "Deep"</h3>
+<p>A shallow network has 1-2 hidden layers. A deep network has dozens to hundreds. Each layer learns increasingly abstract features:</p>
+
+<div class="layer-stack">
+<div class="layer" style="background: rgba(192,132,252,0.2); color: var(--accent4);">Layer 1: Raw patterns (edges, individual characters)</div>
+<div class="layer" style="background: rgba(79,140,255,0.2); color: var(--accent);">Layer 2-5: Combinations (shapes, words, phrases)</div>
+<div class="layer" style="background: rgba(61,220,132,0.2); color: var(--accent3);">Layer 10-20: Concepts (objects, syntax, meaning)</div>
+<div class="layer" style="background: rgba(255,107,79,0.2); color: var(--accent2);">Layer 50+: Abstract reasoning (intent, context, nuance)</div>
+</div>
+
+<h3>The Transformer Architecture (2017 — the breakthrough)</h3>
+<p>Before transformers, AI processed text word-by-word sequentially (slow, forgetful). The transformer introduced <strong>self-attention</strong>: the model can look at all words in a sentence simultaneously and learn which words relate to which.</p>
+
+<div class="callout tip">
+<p><strong>Why it matters:</strong> Every major LLM today — GPT-4, Claude, Gemini, Llama — is a transformer. The 2017 Google paper "Attention Is All You Need" is the single most important AI paper of the decade.</p>
+</div>
+
+<h3>Key Numbers (to have in your back pocket)</h3>
+<table class="compare-table">
+<tr><th>Metric</th><th>What It Means</th><th>Typical Values</th></tr>
+<tr><td><strong>Parameters</strong></td><td>The adjustable weights in the model. More ≈ more capacity to learn.</td><td>GPT-4: ~1.8T, Llama 3: 8B-405B, Claude: undisclosed</td></tr>
+<tr><td><strong>Context Window</strong></td><td>How much text the model can "see" at once (input + output).</td><td>Claude: 200K tokens. GPT-4: 128K. Gemini: 1M+</td></tr>
+<tr><td><strong>Tokens</strong></td><td>Chunks of text (~0.75 words per token). The unit of measurement for LLMs.</td><td>This entire page ≈ 4,000 tokens</td></tr>
+<tr><td><strong>Training Data</strong></td><td>Total text the model was trained on.</td><td>Typically trillions of tokens from books, web, code</td></tr>
+<tr><td><strong>Inference</strong></td><td>Running the trained model to generate a response. What you pay for via API.</td><td>~$3-15 per million input tokens (varies by model)</td></tr>
+</table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 3 ============ -->
+<section id="s3">
+<div class="section-label">Chapter 03</div>
+<h2>Large Language Models — The Engine Behind Everything</h2>
+
+<h3>What an LLM Actually Does</h3>
+<p>An LLM is a next-token predictor. Given a sequence of tokens, it predicts the probability distribution over all possible next tokens, then samples from that distribution. That's it. All the apparent "intelligence" emerges from doing this prediction extremely well over extremely large amounts of data.</p>
+
+<div class="card">
+<h4>The Three Phases of Building an LLM</h4>
+
+<div class="flow-row">
+  <div class="flow-box" style="border-color: var(--accent);">Phase 1: Pre-training</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box" style="border-color: var(--accent3);">Phase 2: Fine-tuning</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box" style="border-color: var(--accent4);">Phase 3: RLHF / Alignment</div>
+</div>
+
+<p><strong>Phase 1 — Pre-training</strong> (costs $10M-$100M+): Feed the model trillions of tokens of text from the internet, books, code. The model learns language, facts, reasoning patterns. This produces a "base model" — it can complete text but won't follow instructions.</p>
+
+<p><strong>Phase 2 — Fine-tuning (SFT)</strong>: Train on curated instruction/response pairs. "When a human asks X, a good response looks like Y." This teaches the model to be a helpful assistant instead of just an autocomplete engine.</p>
+
+<p><strong>Phase 3 — RLHF</strong> (Reinforcement Learning from Human Feedback): Human raters rank multiple model responses. A reward model learns what humans prefer. The LLM is then trained to maximize that reward. This is what makes Claude polite, safe, and genuinely useful vs. just technically capable.</p>
+</div>
+
+<h3>Key LLM Capabilities</h3>
+<div class="card-grid">
+<div class="card-sm">
+  <h5>In-Context Learning</h5>
+  <p>Give the LLM examples in the prompt, it adapts behavior without retraining. "Few-shot" prompting.</p>
+</div>
+<div class="card-sm">
+  <h5>Chain of Thought</h5>
+  <p>Ask it to "think step by step" and accuracy on reasoning tasks jumps dramatically.</p>
+</div>
+<div class="card-sm">
+  <h5>Tool Use / Function Calling</h5>
+  <p>The LLM outputs structured JSON to call external APIs, databases, or tools. This is the foundation of agents.</p>
+</div>
+<div class="card-sm">
+  <h5>RAG (Retrieval-Augmented Generation)</h5>
+  <p>Before answering, retrieve relevant documents from a database and inject them into the context. Reduces hallucination. Keeps answers grounded in your data.</p>
+</div>
+</div>
+
+<h3>What LLMs Cannot Do (important for a CTO)</h3>
+<div class="card" style="border-color: var(--accent2);">
+<p>• <strong>No true memory:</strong> Each conversation starts fresh unless you engineer persistence.</p>
+<p>• <strong>Hallucinations:</strong> They confidently state false things. This is inherent to probabilistic generation. Mitigation = RAG, grounding, verification layers.</p>
+<p>• <strong>No real-time data:</strong> Knowledge is frozen at training cutoff unless you add search/retrieval tools.</p>
+<p>• <strong>Math and precise logic:</strong> Unreliable for complex calculations without tool use. They approximate; they don't compute.</p>
+<p>• <strong>Determinism:</strong> Same input can produce different outputs. Temperature controls randomness but never eliminates it.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 4 ============ -->
+<section id="s4">
+<div class="section-label">Chapter 04</div>
+<h2>The AI Provider Landscape</h2>
+
+<h3>Foundation Model Providers</h3>
+<table class="compare-table">
+<tr><th>Provider</th><th>Models</th><th>Strengths</th><th>Access</th></tr>
+<tr><td><strong style="color:var(--accent)">Anthropic</strong></td><td>Claude (Opus, Sonnet, Haiku)</td><td>Safety, long context (200K), instruction following, coding, analysis</td><td>API, claude.ai, AWS Bedrock, GCP Vertex</td></tr>
+<tr><td><strong style="color:var(--accent3)">OpenAI</strong></td><td>GPT-4o, o1, o3</td><td>Broad capabilities, vision, ecosystem, first-mover brand</td><td>API, ChatGPT, Azure OpenAI</td></tr>
+<tr><td><strong style="color:var(--accent5)">Google</strong></td><td>Gemini (Ultra, Pro, Flash)</td><td>Multimodal, huge context (1M+), integrated with Google Cloud</td><td>API, Gemini app, GCP Vertex</td></tr>
+<tr><td><strong style="color:var(--accent2)">Meta</strong></td><td>Llama 3/4</td><td>Open-source, self-hostable, fine-tunable, no vendor lock-in</td><td>Download weights, run anywhere</td></tr>
+<tr><td><strong style="color:var(--accent4)">Mistral</strong></td><td>Mixtral, Mistral Large</td><td>European, efficient, open-weight options</td><td>API, self-host</td></tr>
+</table>
+
+<h3>How Claude is Different</h3>
+<div class="card" style="border-color: var(--accent);">
+<p><strong>Anthropic's approach</strong> centers on "Constitutional AI" — the model is trained with a set of principles (a "constitution") rather than relying purely on human labeling. This produces more consistent, principled behavior.</p>
+<p><strong>Practical differences:</strong> Claude tends to follow complex instructions more precisely, handles very long documents well (200K context), and is more cautious about harmful outputs. For enterprise use: Claude is available on AWS Bedrock and GCP Vertex, so you can keep data within your cloud perimeter.</p>
+</div>
+
+<h3>Open Source vs Closed Source — CTO Decision Framework</h3>
+<table class="compare-table">
+<tr><th>Factor</th><th>Closed (Claude, GPT-4)</th><th>Open (Llama, Mistral)</th></tr>
+<tr><td>Performance</td><td>Generally best-in-class</td><td>Closing the gap rapidly</td></tr>
+<tr><td>Cost</td><td>Pay per token (API)</td><td>Infra cost (GPUs) — can be cheaper at scale</td></tr>
+<tr><td>Data privacy</td><td>Data sent to provider's API (though enterprise tiers offer zero retention)</td><td>Runs on your infra — full control</td></tr>
+<tr><td>Customization</td><td>Prompt engineering, some fine-tuning</td><td>Full fine-tuning, modify architecture</td></tr>
+<tr><td>Maintenance</td><td>Provider handles everything</td><td>You own ops, updates, security</td></tr>
+<tr><td>Best for</td><td>Fast deployment, best quality, small-medium scale</td><td>High volume, strict compliance, niche domains</td></tr>
+</table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 5 ============ -->
+<section id="s5">
+<div class="section-label">Chapter 05</div>
+<h2>AI Agents — The Salesforce Conference Focus</h2>
+
+<h3>What is an AI Agent?</h3>
+<p>An AI agent is an LLM that can <strong>plan</strong>, <strong>use tools</strong>, <strong>observe results</strong>, and <strong>iterate</strong> — autonomously. Instead of just answering a question, it takes action to accomplish a goal.</p>
+
+<div class="diagram">
+<svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Central brain -->
+  <rect x="300" y="90" width="200" height="80" rx="12" fill="rgba(79,140,255,0.2)" stroke="#4f8cff" stroke-opacity="0.6"/>
+  <text x="400" y="125" text-anchor="middle" fill="#4f8cff" font-family="DM Sans" font-size="14" font-weight="600">LLM "Brain"</text>
+  <text x="400" y="148" text-anchor="middle" fill="#8888a0" font-family="DM Sans" font-size="11">Reasons, plans, decides</text>
+  
+  <!-- Tools -->
+  <rect x="580" y="20" width="160" height="50" rx="8" fill="rgba(61,220,132,0.15)" stroke="#3ddc84" stroke-opacity="0.4"/>
+  <text x="660" y="50" text-anchor="middle" fill="#3ddc84" font-family="DM Sans" font-size="12" font-weight="500">🔧 Tools / APIs</text>
+  
+  <rect x="580" y="90" width="160" height="50" rx="8" fill="rgba(255,107,79,0.15)" stroke="#ff6b4f" stroke-opacity="0.4"/>
+  <text x="660" y="120" text-anchor="middle" fill="#ff6b4f" font-family="DM Sans" font-size="12" font-weight="500">🗄️ Databases</text>
+  
+  <rect x="580" y="160" width="160" height="50" rx="8" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-opacity="0.4"/>
+  <text x="660" y="190" text-anchor="middle" fill="#fbbf24" font-family="DM Sans" font-size="12" font-weight="500">🌐 Web / Search</text>
+
+  <rect x="580" y="230" width="160" height="50" rx="8" fill="rgba(192,132,252,0.15)" stroke="#c084fc" stroke-opacity="0.4"/>
+  <text x="660" y="260" text-anchor="middle" fill="#c084fc" font-family="DM Sans" font-size="12" font-weight="500">📧 Email / CRM</text>
+  
+  <!-- Memory -->
+  <rect x="60" y="50" width="160" height="50" rx="8" fill="rgba(192,132,252,0.15)" stroke="#c084fc" stroke-opacity="0.4"/>
+  <text x="140" y="80" text-anchor="middle" fill="#c084fc" font-family="DM Sans" font-size="12" font-weight="500">🧠 Memory Store</text>
+
+  <!-- Planning -->
+  <rect x="60" y="120" width="160" height="50" rx="8" fill="rgba(79,140,255,0.15)" stroke="#4f8cff" stroke-opacity="0.4"/>
+  <text x="140" y="150" text-anchor="middle" fill="#4f8cff" font-family="DM Sans" font-size="12" font-weight="500">📋 Planning / Goals</text>
+
+  <!-- User -->
+  <rect x="60" y="190" width="160" height="50" rx="8" fill="rgba(255,107,79,0.15)" stroke="#ff6b4f" stroke-opacity="0.4"/>
+  <text x="140" y="220" text-anchor="middle" fill="#ff6b4f" font-family="DM Sans" font-size="12" font-weight="500">👤 User / Trigger</text>
+  
+  <!-- Arrows -->
+  <line x1="220" y1="75" x2="300" y2="115" stroke="#c084fc" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="220" y1="145" x2="300" y2="130" stroke="#4f8cff" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="220" y1="215" x2="300" y2="140" stroke="#ff6b4f" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="500" y1="110" x2="580" y2="45" stroke="#3ddc84" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="500" y1="120" x2="580" y2="115" stroke="#ff6b4f" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="500" y1="135" x2="580" y2="185" stroke="#fbbf24" stroke-opacity="0.5" stroke-width="1.5"/>
+  <line x1="500" y1="145" x2="580" y2="255" stroke="#c084fc" stroke-opacity="0.5" stroke-width="1.5"/>
+</svg>
+</div>
+
+<h3>Agent vs Automation vs Chatbot — The Critical Distinction</h3>
+<table class="compare-table">
+<tr><th>Feature</th><th>Traditional Automation (RPA)</th><th>Chatbot (rule-based)</th><th>AI Chatbot (LLM)</th><th>AI Agent</th></tr>
+<tr><td>Decision making</td><td>None. Follows fixed rules.</td><td>Decision tree only</td><td>Flexible, but single-turn</td><td>Plans multi-step, adapts</td></tr>
+<tr><td>Handles ambiguity</td><td>No — breaks on edge cases</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Uses tools</td><td>Hardcoded integrations</td><td>No</td><td>If programmed to</td><td>Autonomously decides which tools</td></tr>
+<tr><td>Memory</td><td>None</td><td>Session only</td><td>Session only</td><td>Short + long-term memory</td></tr>
+<tr><td>Autonomy</td><td>Zero</td><td>Zero</td><td>Low</td><td>High — can loop, retry, escalate</td></tr>
+<tr><td>Example</td><td>Copy data between systems on schedule</td><td>"Press 1 for billing"</td><td>"Summarize this ticket"</td><td>"Resolve this ticket: read it, check the database, update the CRM, email the customer"</td></tr>
+</table>
+
+<div class="callout sf">
+<p><strong>Salesforce context:</strong> When Salesforce says "Agentforce," they mean AI agents embedded into Salesforce workflows — agents that can read your CRM data, take actions (create cases, send emails, update records), and operate within the guardrails you define. These sit on top of their Einstein AI platform + Data Cloud.</p>
+</div>
+
+<h3>The Agent Loop (ReAct Pattern)</h3>
+<p>Most agent frameworks follow this loop:</p>
+<div class="card">
+<ol class="step-list">
+<li><span class="num">1</span><span><strong>Observe:</strong> Receive user request or trigger event. Retrieve relevant context from memory.</span></li>
+<li><span class="num">2</span><span><strong>Think:</strong> The LLM reasons about what to do next. It creates a plan or picks the next action.</span></li>
+<li><span class="num">3</span><span><strong>Act:</strong> Call a tool — query a database, call an API, send a message, update a record.</span></li>
+<li><span class="num">4</span><span><strong>Observe:</strong> Check the result of the action. Did it work? Was the data correct?</span></li>
+<li><span class="num">5</span><span><strong>Loop or stop:</strong> If the goal is met, respond to the user. If not, go back to step 2 with updated context.</span></li>
+</ol>
+</div>
+
+<h3>Agent Architecture Components</h3>
+<div class="card-grid">
+<div class="card-sm">
+  <div class="icon" style="background:rgba(79,140,255,0.15)">🧠</div>
+  <h5>LLM Core</h5>
+  <p>The reasoning engine. Chooses actions, interprets results, generates responses. Claude, GPT-4, etc.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(61,220,132,0.15)">🔧</div>
+  <h5>Tools</h5>
+  <p>Functions the agent can call: APIs, database queries, web search, calculators, file operations. Defined as schemas the LLM can invoke.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(192,132,252,0.15)">💾</div>
+  <h5>Memory</h5>
+  <p><strong>Short-term:</strong> Conversation context. <strong>Long-term:</strong> Vector database storing past interactions, user preferences, knowledge base.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(255,107,79,0.15)">🛡️</div>
+  <h5>Guardrails</h5>
+  <p>Rules that constrain what the agent can do. "Never delete records." "Always get approval for refunds > $500." "Escalate to human if confidence is low."</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(251,191,36,0.15)">📊</div>
+  <h5>Orchestrator</h5>
+  <p>Manages the agent loop. Handles retries, timeouts, error handling, and routing between multiple agents.</p>
+</div>
+<div class="card-sm">
+  <div class="icon" style="background:rgba(79,140,255,0.15)">👁️</div>
+  <h5>Observability</h5>
+  <p>Logging every step: what the agent thought, what tools it called, what it returned. Critical for debugging and compliance.</p>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 6 ============ -->
+<section id="s6">
+<div class="section-label">Chapter 06</div>
+<h2>Building AI Applications — Practical Architecture</h2>
+
+<h3>The AI Application Stack</h3>
+<div class="layer-stack">
+<div class="layer" style="background: rgba(79,140,255,0.25); color: var(--accent);">User Interface — Chat, voice, embedded UI, API endpoints</div>
+<div class="layer" style="background: rgba(192,132,252,0.2); color: var(--accent4);">Application Layer — Business logic, auth, rate limiting, caching</div>
+<div class="layer" style="background: rgba(61,220,132,0.2); color: var(--accent3);">Orchestration — Agent framework, prompt management, tool routing</div>
+<div class="layer" style="background: rgba(255,107,79,0.2); color: var(--accent2);">RAG Pipeline — Document ingestion, embeddings, vector search, reranking</div>
+<div class="layer" style="background: rgba(251,191,36,0.2); color: var(--accent5);">Model Layer — LLM API calls (Claude, GPT-4, etc.) or self-hosted models</div>
+<div class="layer" style="background: rgba(79,140,255,0.15); color: var(--text-dim);">Infrastructure — GPUs, vector DB, object storage, monitoring</div>
+</div>
+
+<h3>RAG: The Most Common Enterprise AI Pattern</h3>
+<p>RAG (Retrieval-Augmented Generation) is how you make an LLM answer questions about <strong>your</strong> data without retraining the model.</p>
+
+<div class="card">
+<h4>How RAG Works — Step by Step</h4>
+<ol class="step-list">
+<li><span class="num">1</span><span><strong>Ingest documents:</strong> Take your internal docs (PDFs, Confluence pages, Slack messages, CRM data). Split them into chunks (typically 200-500 tokens each).</span></li>
+<li><span class="num">2</span><span><strong>Create embeddings:</strong> Run each chunk through an embedding model (e.g., OpenAI text-embedding-3, Cohere Embed). This converts text to a numerical vector (a list of ~1500 numbers) that captures semantic meaning.</span></li>
+<li><span class="num">3</span><span><strong>Store in vector database:</strong> Store those vectors in a vector DB (Pinecone, Weaviate, pgvector, Qdrant, Chroma). This enables fast similarity search.</span></li>
+<li><span class="num">4</span><span><strong>At query time:</strong> Convert the user's question to a vector using the same embedding model.</span></li>
+<li><span class="num">5</span><span><strong>Search:</strong> Find the top 5-20 most similar document chunks in your vector DB.</span></li>
+<li><span class="num">6</span><span><strong>Augment:</strong> Insert those chunks into the LLM prompt as context: "Given this information: [chunks], answer the user's question: [question]."</span></li>
+<li><span class="num">7</span><span><strong>Generate:</strong> The LLM answers based on the retrieved context, dramatically reducing hallucination.</span></li>
+</ol>
+</div>
+
+<div class="callout warn">
+<p><strong>RAG pitfall:</strong> "Garbage in, garbage out" applies fully. If your documents are messy, poorly structured, or out of date, RAG will confidently retrieve bad information. Data quality work is 60% of a RAG project.</p>
+</div>
+
+<h3>How IT Vendors / SaaS Companies Build AI Into Their Products</h3>
+
+<p>When Salesforce, ServiceNow, SAP, or any SaaS vendor says "we have AI," here's what they typically do:</p>
+
+<div class="card">
+<h4>Approach 1: Embed an LLM via API</h4>
+<p>The vendor calls Claude/GPT-4 via API and wraps it with their product context. Your CRM data is injected into prompts. The vendor manages prompt engineering, guardrails, and tool definitions. Example: Salesforce Einstein GPT uses a combination of proprietary models and partner LLMs.</p>
+
+<h4>Approach 2: Fine-tune on Domain Data</h4>
+<p>Take a base model, fine-tune it on industry-specific data (healthcare records, legal contracts, financial reports). This creates a specialized model that understands domain jargon and patterns. Example: Bloomberg trained BloombergGPT on financial data.</p>
+
+<h4>Approach 3: Build a RAG Layer Over Customer Data</h4>
+<p>The vendor builds a RAG pipeline that indexes each customer's data (behind proper isolation/permissions). When the AI answers, it's grounded in that customer's specific data. Example: Salesforce Data Cloud feeds into Einstein AI as a retrieval layer.</p>
+
+<h4>Approach 4: Train Custom Models</h4>
+<p>Major vendors train their own models from scratch for specific tasks — fraud detection, recommendation engines, demand forecasting. These are typically smaller, specialized models, not general-purpose LLMs.</p>
+</div>
+
+<h3>Practical: Building an AI Feature (Simplified)</h3>
+<div class="card">
+<p>Say you want to build: <strong>"An AI that answers customer questions using your knowledge base."</strong></p>
+
+<table class="compare-table">
+<tr><th>Step</th><th>What You Do</th><th>Tools/Services</th></tr>
+<tr><td>1. Data prep</td><td>Export knowledge base articles, clean HTML, split into chunks</td><td>Python, LangChain text splitters, Unstructured.io</td></tr>
+<tr><td>2. Embeddings</td><td>Generate vector embeddings for each chunk</td><td>OpenAI Embeddings API, Cohere, Voyage AI</td></tr>
+<tr><td>3. Vector store</td><td>Store embeddings with metadata (article ID, title, date)</td><td>Pinecone, Weaviate, pgvector (Postgres), Qdrant</td></tr>
+<tr><td>4. Retrieval</td><td>Build search endpoint: query → vector → top-k similar chunks</td><td>Vector DB SDK + reranking (Cohere Rerank)</td></tr>
+<tr><td>5. Prompt</td><td>System prompt with role, rules, tone + injected context chunks</td><td>Prompt templating (LangChain, custom)</td></tr>
+<tr><td>6. LLM call</td><td>Send assembled prompt to Claude/GPT-4 API</td><td>Anthropic API, OpenAI API</td></tr>
+<tr><td>7. UI</td><td>Chat interface with streaming responses</td><td>React, Vercel AI SDK, Streamlit</td></tr>
+<tr><td>8. Guardrails</td><td>Input validation, output filtering, content policy enforcement</td><td>Custom rules, Guardrails AI, Anthropic's built-in safety</td></tr>
+<tr><td>9. Observability</td><td>Log every request, response, retrieval, latency, cost</td><td>LangSmith, Langfuse, Helicone, Datadog</td></tr>
+<tr><td>10. Evaluation</td><td>Measure answer quality, hallucination rate, user satisfaction</td><td>Human review, LLM-as-judge, RAGAS framework</td></tr>
+</table>
+</div>
+
+<h3>Key Frameworks & Tools You'll Hear About</h3>
+<div class="card-grid">
+<div class="card-sm">
+  <h5>LangChain</h5>
+  <p>Python/JS framework for building LLM applications. Chains together prompts, tools, memory, retrievers. Widely used but can be over-abstracted for simple use cases.</p>
+</div>
+<div class="card-sm">
+  <h5>LlamaIndex</h5>
+  <p>Focused specifically on RAG. Better than LangChain for document indexing and retrieval pipelines. Good for "connect your data to LLMs."</p>
+</div>
+<div class="card-sm">
+  <h5>CrewAI / AutoGen</h5>
+  <p>Multi-agent frameworks. Define multiple agents with different roles that collaborate on complex tasks. Still experimental for production.</p>
+</div>
+<div class="card-sm">
+  <h5>Vercel AI SDK</h5>
+  <p>Lightweight SDK for building AI chat UIs in Next.js/React. Handles streaming, tool calls, multi-model support. Good for frontend devs.</p>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 7 ============ -->
+<section id="s7">
+<div class="section-label">Chapter 07</div>
+<h2>Voice AI — Calls, IVR, and Conversational Agents</h2>
+
+<h3>How Voice AI Works End-to-End</h3>
+<div class="card">
+<div class="flow-row">
+  <div class="flow-box">🎤 User speaks</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box" style="border-color:var(--accent3)">ASR/STT</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box" style="border-color:var(--accent)">LLM processes text</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box" style="border-color:var(--accent4)">TTS</div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-box">🔊 User hears response</div>
+</div>
+
+<p style="margin-top:16px"><strong>ASR (Automatic Speech Recognition) / STT (Speech-to-Text):</strong> Converts spoken audio to text. Leading models: OpenAI Whisper (open source, very good), Google Cloud Speech, Deepgram (low latency, real-time), AssemblyAI.</p>
+
+<p><strong>LLM Processing:</strong> Same as any text-based AI. The transcribed text is the input. The LLM generates a text response.</p>
+
+<p><strong>TTS (Text-to-Speech):</strong> Converts the LLM's text response back to natural-sounding speech. Leading options: ElevenLabs (most natural), OpenAI TTS, Google Cloud TTS, Play.ht, Cartesia (ultra-low latency).</p>
+</div>
+
+<h3>Voice AI Use Cases</h3>
+<div class="card-grid">
+<div class="card-sm">
+  <h5>Welcome / Outbound Calls</h5>
+  <p>AI calls new customers to welcome them, walk through onboarding, collect preferences. Runs 24/7. Companies like Bland.ai and Retell AI provide turn-key platforms.</p>
+</div>
+<div class="card-sm">
+  <h5>Customer Support IVR</h5>
+  <p>Replace "Press 1 for billing" with natural conversation. AI understands intent, pulls up account data, resolves issues or routes to human. Huge cost savings.</p>
+</div>
+<div class="card-sm">
+  <h5>Appointment Scheduling</h5>
+  <p>AI calls to confirm/reschedule appointments. Handles back-and-forth negotiation on times. Used in healthcare, salons, auto services.</p>
+</div>
+<div class="card-sm">
+  <h5>Sales Qualification</h5>
+  <p>AI calls inbound leads, asks qualifying questions, logs data to CRM, books meetings for human reps. Example: Air AI, Vapi.</p>
+</div>
+</div>
+
+<h3>Building a Voice AI System — Key Decisions</h3>
+<table class="compare-table">
+<tr><th>Decision</th><th>Options</th><th>Trade-off</th></tr>
+<tr><td>Latency target</td><td>&lt;500ms feels natural, &gt;1s feels robotic</td><td>Lower latency = more expensive, requires streaming ASR+TTS</td></tr>
+<tr><td>Build vs buy</td><td>Platforms: Vapi, Retell, Bland.ai, Vocode. Build: Twilio + ASR + LLM + TTS</td><td>Platforms are faster to ship. Custom gives control over every component.</td></tr>
+<tr><td>Interruption handling</td><td>Must detect when user starts speaking mid-response and stop gracefully</td><td>Hard to get right. Platforms handle this. DIY requires VAD (Voice Activity Detection).</td></tr>
+<tr><td>Phone integration</td><td>Twilio, Vonage, Plivo for SIP/PSTN</td><td>Twilio is most mature. Costs per minute apply.</td></tr>
+</table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 8 ============ -->
+<section id="s8">
+<div class="section-label">Chapter 08</div>
+<h2>Enterprise AI — Practical Considerations</h2>
+
+<h3>Data Privacy & Security</h3>
+<div class="card">
+<p><strong>Zero Data Retention (ZDR):</strong> Enterprise API tiers from Anthropic and OpenAI guarantee your data is not used for training and is not retained after the request. Verify this in your contract.</p>
+<p><strong>Data residency:</strong> Run Claude via AWS Bedrock in your preferred AWS region. Data never leaves your VPC. Same with Google Vertex AI.</p>
+<p><strong>PII handling:</strong> Either redact PII before sending to the LLM, or use enterprise tiers with appropriate data processing agreements.</p>
+<p><strong>SOC2 / HIPAA / GDPR:</strong> Check provider compliance certifications. Anthropic and OpenAI have SOC2 Type II. HIPAA requires BAA agreements.</p>
+</div>
+
+<h3>Cost Management</h3>
+<div class="card">
+<h4>LLM API Pricing Model</h4>
+<p>You pay per token — both input (prompt) and output (response). A 2000-word document as input + a 500-word response ≈ 3500 tokens ≈ $0.01-0.05 depending on model.</p>
+
+<h4>Cost Optimization Strategies</h4>
+<p><strong>Model routing:</strong> Use a cheap/fast model (Claude Haiku, GPT-4o mini) for simple queries. Route complex queries to the expensive model (Claude Opus, GPT-4). This alone can cut costs 60-80%.</p>
+<p><strong>Caching:</strong> Cache frequent queries. Anthropic offers prompt caching — if the same system prompt is reused, you pay a fraction of the cost.</p>
+<p><strong>Shorter prompts:</strong> Every token in your system prompt is charged on every request. Optimize for brevity.</p>
+<p><strong>Batch processing:</strong> For non-real-time tasks, use batch APIs at 50% discount.</p>
+</div>
+
+<h3>Evaluation — How to Know If Your AI Is Good</h3>
+<div class="card-grid">
+<div class="card-sm">
+  <h5>Accuracy / Correctness</h5>
+  <p>Are the answers factually correct? Measure with human review + automated checks against known answers.</p>
+</div>
+<div class="card-sm">
+  <h5>Hallucination Rate</h5>
+  <p>How often does it make things up? Use "faithfulness" metrics — does the answer only contain claims supported by the retrieved context?</p>
+</div>
+<div class="card-sm">
+  <h5>Latency</h5>
+  <p>Time-to-first-token and total response time. Users expect &lt;2s for first token in chat UIs.</p>
+</div>
+<div class="card-sm">
+  <h5>Cost per Query</h5>
+  <p>Track input tokens, output tokens, embedding calls, vector DB queries per request. Set budgets.</p>
+</div>
+</div>
+
+<h3>Team Structure for AI</h3>
+<table class="compare-table">
+<tr><th>Role</th><th>What They Do</th><th>Typical Background</th></tr>
+<tr><td>AI/ML Engineer</td><td>Builds pipelines, integrates LLMs, manages RAG, fine-tuning</td><td>Software engineer + ML experience</td></tr>
+<tr><td>Prompt Engineer</td><td>Designs and optimizes system prompts, evaluates output quality</td><td>Domain expert + writing skill (often non-technical)</td></tr>
+<tr><td>Data Engineer</td><td>Prepares, cleans, and pipelines data for RAG / training</td><td>Data engineering, ETL, data quality</td></tr>
+<tr><td>Platform/Infra</td><td>Manages GPUs, vector DBs, model serving, observability</td><td>DevOps / SRE with ML infra experience</td></tr>
+</table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 9 ============ -->
+<section id="s9">
+<div class="section-label">Chapter 09</div>
+<h2>Salesforce AI Ecosystem — Conference Context</h2>
+
+<div class="callout sf">
+<p><strong>Key terms you'll hear at the conference:</strong> Agentforce, Einstein GPT, Data Cloud, Prompt Builder, Model Builder, Trust Layer, Einstein Copilot.</p>
+</div>
+
+<h3>Salesforce AI Architecture</h3>
+<div class="layer-stack">
+<div class="layer" style="background: rgba(0,161,224,0.25); color: #00a1e0;">Agentforce — Pre-built + custom AI agents for sales, service, marketing</div>
+<div class="layer" style="background: rgba(0,161,224,0.2); color: #5eb8ff;">Einstein Copilot — Conversational AI assistant inside Salesforce UI</div>
+<div class="layer" style="background: rgba(0,161,224,0.15); color: #88ccff;">Einstein GPT + Prompt Builder — Customizable AI generation in flows</div>
+<div class="layer" style="background: rgba(0,161,224,0.1); color: #aaddff;">Trust Layer — Prompt defense, toxicity filtering, PII masking, audit logging</div>
+<div class="layer" style="background: rgba(0,161,224,0.07); color: #88ccff;">Data Cloud — Unified customer data, real-time, feeds into AI as context</div>
+<div class="layer" style="background: rgba(0,161,224,0.04); color: #5eb8ff;">Foundation Models — Salesforce's own + OpenAI, Anthropic, Google, Cohere via gateway</div>
+</div>
+
+<h3>What Salesforce "Agentforce" Actually Is</h3>
+<div class="card">
+<p><strong>Agentforce</strong> = a platform for building and deploying AI agents inside Salesforce. Think of it as:</p>
+<p><strong>LLM</strong> (multi-model — they route to different providers) + <strong>Salesforce data</strong> (CRM, Data Cloud, Knowledge Base) + <strong>Tools</strong> (Salesforce actions: create case, update opportunity, send email) + <strong>Guardrails</strong> (Trust Layer + your business rules) + <strong>Deployment</strong> (embed in Service Cloud, Sales Cloud, web, Slack, etc.)</p>
+
+<p>You can build agents using low-code tools (Agent Builder) or code (Apex, LWC). Salesforce provides pre-built agent templates for: Service Agent, Sales Coach, Merchant Agent, Buyer Agent, Campaign Agent.</p>
+</div>
+
+<h3>What Questions to Ask at the Conference</h3>
+<div class="card" style="border-color: var(--accent5);">
+<p>• "How does Agentforce handle multi-step tool failures and retries?"</p>
+<p>• "What's the latency overhead of the Trust Layer on each LLM call?"</p>
+<p>• "Can I bring my own model (BYOM) and still use the orchestration layer?"</p>
+<p>• "How does Data Cloud grounding work — is it RAG under the hood? What embedding model?"</p>
+<p>• "What's the pricing model — per agent, per conversation, per action?"</p>
+<p>• "How do I evaluate agent quality? Is there built-in testing/evaluation tooling?"</p>
+<p>• "What observability do I get — can I see every reasoning step, tool call, and retrieval?"</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 10 ============ -->
+<section id="s10">
+<div class="section-label">Chapter 10</div>
+<h2>Risks, Limitations & What Can Go Wrong</h2>
+
+<div class="card-grid">
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Hallucination</h5>
+  <p>LLMs generate plausible-sounding false information. Mitigation: RAG, citations, confidence scoring, human-in-the-loop for high-stakes decisions.</p>
+</div>
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Prompt Injection</h5>
+  <p>Malicious users craft inputs that override system instructions. "Ignore previous instructions and..." Mitigation: input sanitization, separate system/user contexts, output validation.</p>
+</div>
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Data Leakage</h5>
+  <p>Model accidentally reveals training data or other users' data. Mitigation: data isolation, output filtering, PII redaction, tenant separation.</p>
+</div>
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Bias</h5>
+  <p>Models inherit biases from training data. Can discriminate in hiring, lending, customer service. Mitigation: bias testing, diverse training data, human oversight.</p>
+</div>
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Cost Overruns</h5>
+  <p>Token costs can spike unexpectedly. One rogue loop in an agent can burn through budget. Mitigation: per-request budgets, circuit breakers, cost monitoring.</p>
+</div>
+<div class="card-sm" style="border-color: var(--accent2);">
+  <h5>Vendor Lock-in</h5>
+  <p>Building on one provider's API creates dependency. Mitigation: abstract the model layer, use frameworks that support model switching.</p>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ SECTION 11 ============ -->
+<section id="s11">
+<div class="section-label">Chapter 11</div>
+<h2>CTO Strategy — Where to Start</h2>
+
+<div class="card">
+<h4>The Pragmatic Adoption Ladder</h4>
+<ol class="step-list">
+<li><span class="num">1</span><span><strong>Internal productivity (low risk, high value):</strong> Deploy an LLM chatbot connected to your internal knowledge base. Let employees ask questions about policies, docs, procedures. This is the quickest win with the least risk.</span></li>
+<li><span class="num">2</span><span><strong>Customer-facing copilot (medium risk):</strong> AI that helps customers with common questions, grounded in your help center. Always with a "talk to human" escape hatch.</span></li>
+<li><span class="num">3</span><span><strong>Process automation agents (higher risk):</strong> Agents that take actions — update records, send emails, process refunds. Requires guardrails, approval workflows, thorough testing.</span></li>
+<li><span class="num">4</span><span><strong>Autonomous agents (highest complexity):</strong> Multi-step agents that handle end-to-end workflows with minimal human oversight. Only after you have robust evaluation, monitoring, and rollback capabilities.</span></li>
+</ol>
+</div>
+
+<div class="callout tip">
+<p><strong>The #1 mistake CTOs make:</strong> Starting with a model choice instead of starting with the problem. Pick a specific, measurable business problem first. Then figure out which AI approach solves it. Often you don't need the most expensive model — or any model at all.</p>
+</div>
+
+<h3>Quick Reference: The AI Glossary</h3>
+<div class="card" id="glossary">
+<table class="compare-table">
+<tr><th>Term</th><th>Plain English</th></tr>
+<tr><td><strong>Token</strong></td><td>A chunk of text (~¾ of a word). The unit LLMs process and bill by.</td></tr>
+<tr><td><strong>Embedding</strong></td><td>Converting text to a list of numbers that capture meaning. Similar texts → similar numbers.</td></tr>
+<tr><td><strong>Vector Database</strong></td><td>A database optimized for storing and searching embeddings by similarity.</td></tr>
+<tr><td><strong>RAG</strong></td><td>Retrieval-Augmented Generation. Look up relevant docs, then feed them to the LLM.</td></tr>
+<tr><td><strong>Fine-tuning</strong></td><td>Additional training on specific data to specialize a model. Expensive, usually unnecessary.</td></tr>
+<tr><td><strong>Prompt Engineering</strong></td><td>Crafting the instructions (system prompt) to get the best output from an LLM.</td></tr>
+<tr><td><strong>Temperature</strong></td><td>Controls randomness. 0 = deterministic, 1 = creative. Use low for facts, higher for brainstorming.</td></tr>
+<tr><td><strong>Context Window</strong></td><td>Max text the model can process at once. Bigger = more info per request, but more expensive.</td></tr>
+<tr><td><strong>RLHF</strong></td><td>Reinforcement Learning from Human Feedback. How models learn to be helpful vs. just technically correct.</td></tr>
+<tr><td><strong>Inference</strong></td><td>Running a trained model to get a prediction/response. The thing you pay for in production.</td></tr>
+<tr><td><strong>Hallucination</strong></td><td>When the model confidently outputs false information.</td></tr>
+<tr><td><strong>Guardrails</strong></td><td>Rules that constrain AI behavior — what it can/can't do, say, or access.</td></tr>
+<tr><td><strong>MCP</strong></td><td>Model Context Protocol. An open standard (by Anthropic) for connecting LLMs to external tools and data sources.</td></tr>
+<tr><td><strong>Function Calling</strong></td><td>The LLM outputs structured data to invoke external tools/APIs. The mechanism behind agents.</td></tr>
+<tr><td><strong>Agentic</strong></td><td>AI that can plan, act, observe, and loop — not just respond to a single prompt.</td></tr>
+</table>
+</div>
+
+</main>
+
+<script>
+// Navigation
+document.querySelectorAll('.nav-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const target = document.getElementById(pill.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Active section tracking + progress
+const sections = document.querySelectorAll('section');
+const pills = document.querySelectorAll('.nav-pill');
+const progressFill = document.getElementById('progress');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      pills.forEach(p => p.classList.remove('active'));
+      const pill = document.querySelector(`[data-target="${entry.target.id}"]`);
+      if (pill) {
+        pill.classList.add('active');
+        pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(s => observer.observe(s));
+
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  progressFill.style.width = (window.scrollY / max * 100) + '%';
+});
+</script>
+</body>
+</html>
