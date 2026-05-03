@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prisoners of Geography — Complete Reference Guide</title>
+<style>
+:root {
+  --bg: #faf8f5;
+  --card-bg: #ffffff;
+  --accent-bg: #f3efe9;
+  --text: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #7a7a7a;
+  --border: #e6e0d6;
+  --gold: #b8893f;
+  --gold-soft: #d9b97a;
+  --red: #a8492e;
+  --green: #4a7a4a;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Georgia', 'Times New Roman', 'Palatino', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+/* LAYOUT */
+.page-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+@media (min-width: 720px) {
+  .page-wrapper { margin-right: 280px; margin-left: auto; max-width: 860px; padding-right: 40px; }
+}
+
+/* HERO */
+.hero {
+  padding: 80px 0 48px;
+  border-bottom: 2px solid var(--gold);
+  margin-bottom: 48px;
+}
+.hero h1 {
+  font-size: 2.6em;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.hero .subtitle {
+  font-size: 1.15em;
+  color: var(--gold);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+.hero .author {
+  font-size: 1em;
+  color: var(--text-secondary);
+}
+.hero .guide-desc {
+  font-size: 0.92em;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* SECTION HEADERS */
+h2.section-title {
+  font-size: 1.7em;
+  color: var(--text);
+  margin: 56px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+h3.subsection-title {
+  font-size: 1.25em;
+  color: var(--gold);
+  margin: 36px 0 12px;
+}
+h4.card-region {
+  font-size: 1.35em;
+  color: var(--text);
+  margin: 48px 0 8px;
+  padding-top: 16px;
+  border-top: 2px solid var(--gold-soft);
+}
+
+/* ORIENTATION PARAGRAPHS */
+.orientation {
+  background: var(--accent-bg);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 0.97em;
+}
+
+/* PROSE */
+.prose { margin-bottom: 24px; }
+.prose p { margin-bottom: 14px; }
+
+/* INLINE TOC */
+.toc-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 32px 0 48px;
+  box-shadow: var(--card-shadow);
+}
+.toc-container h3 { font-size: 1.15em; color: var(--gold); margin-bottom: 16px; }
+.toc-group { margin-bottom: 18px; }
+.toc-group-title { font-weight: bold; color: var(--text); font-size: 0.95em; margin-bottom: 6px; }
+.toc-group a {
+  display: inline-block;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88em;
+  margin-right: 6px;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.toc-group a:hover { background: var(--accent-bg); color: var(--gold); border-color: var(--gold-soft); }
+
+/* CARDS */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0;
+  margin: 20px 0;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+.card-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--accent-bg);
+}
+.card-label {
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.card-name {
+  font-size: 1.15em;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.card-tagline {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.card-body { padding: 0; }
+.card-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.card-row:last-child { border-bottom: none; }
+.card-row-label {
+  flex: 0 0 180px;
+  padding: 12px 16px;
+  font-size: 0.82em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  background: var(--accent-bg);
+  border-right: 1px solid var(--border);
+}
+.card-row-content {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 0.95em;
+  color: var(--text-secondary);
+}
+.card-row-content.warning { color: var(--red); }
+.card-row-content.positive { color: var(--green); }
+.card-row-content em { font-style: italic; color: var(--text-muted); }
+.card-row-content .phrase {
+  display: inline-block;
+  background: var(--accent-bg);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  margin-top: 4px;
+  font-size: 0.95em;
+  border: 1px solid var(--border);
+}
+.card-row-content .dependency {
+  display: inline-block;
+  background: #fdf6ec;
+  border: 1px solid var(--gold-soft);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  margin-top: 4px;
+  color: var(--gold);
+}
+.pair-link {
+  display: inline-block;
+  font-size: 0.82em;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid var(--gold-soft);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+.pair-link:hover { background: var(--gold-soft); color: #fff; }
+
+@media (max-width: 719px) {
+  .card-row { flex-direction: column; }
+  .card-row-label {
+    flex: none;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 16px;
+  }
+  .card-row-content { padding: 10px 16px; }
+}
+
+/* SITUATIONAL INDEX */
+.sit-index { margin: 32px 0; }
+.sit-entry {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95em;
+}
+.sit-situation { color: var(--text); }
+.sit-ref {
+  color: var(--gold);
+  font-weight: bold;
+  text-decoration: none;
+}
+.sit-ref:hover { text-decoration: underline; }
+
+/* FOOTER */
+.footer {
+  margin-top: 64px;
+  padding: 32px 0;
+  border-top: 2px solid var(--gold);
+  font-size: 0.88em;
+  color: var(--text-muted);
+}
+
+/* NAVIGATOR */
+.nav-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-left: 1px solid var(--border);
+  padding: 20px 16px;
+  font-size: 0.78em;
+  z-index: 100;
+  scrollbar-width: thin;
+}
+.nav-panel::-webkit-scrollbar { width: 4px; }
+.nav-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.nav-panel .nav-title {
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  font-weight: bold;
+}
+.nav-cat {
+  margin-bottom: 4px;
+}
+.nav-cat-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+  color: var(--text-secondary);
+  font-weight: bold;
+  font-size: 0.95em;
+  user-select: none;
+  border: none;
+  background: none;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+}
+.nav-cat-toggle:hover { color: var(--gold); }
+.nav-cat-toggle .arrow { margin-right: 6px; font-size: 0.8em; width: 12px; display: inline-block; }
+.nav-cat-toggle.active { color: var(--gold); }
+.nav-items {
+  display: none;
+  padding-left: 18px;
+  margin-bottom: 6px;
+}
+.nav-items.open { display: block; }
+.nav-items a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 2px 0;
+  font-size: 0.92em;
+  line-height: 1.5;
+  transition: color 0.1s;
+}
+.nav-items a:hover { color: var(--gold); }
+.nav-items a.current { color: var(--gold); font-weight: bold; }
+
+/* MOBILE NAV */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.mobile-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.mobile-nav-bar span { font-size: 0.82em; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: bold; }
+.mobile-nav-content {
+  display: none;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 8px 16px 16px;
+  border-top: 1px solid var(--border);
+}
+.mobile-nav-content.open { display: block; }
+
+@media (max-width: 719px) {
+  .nav-panel { display: none; }
+  .mobile-nav { display: block; }
+  .page-wrapper { padding-top: 52px; margin-right: auto; }
+  .hero { padding-top: 40px; }
+  .hero h1 { font-size: 1.8em; }
+  h2.section-title { font-size: 1.35em; }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-bar" onclick="toggleMobileNav()">
+    <span>Navigate Guide</span>
+    <span id="mobileNavArrow">▸</span>
+  </div>
+  <div class="mobile-nav-content" id="mobileNavContent"></div>
+</div>
+
+<!-- DESKTOP NAV -->
+<div class="nav-panel" id="navPanel">
+  <div class="nav-title">Reference Guide</div>
+  <div id="navContent"></div>
+</div>
+
+<div class="page-wrapper">
+
+<!-- ======================= HERO ======================= -->
+<div class="hero" id="hero">
+  <h1>Prisoners of Geography</h1>
+  <div class="subtitle">Ten Maps That Tell You Everything You Need to Know About Global Politics</div>
+  <div class="author">Tim Marshall</div>
+  <div class="guide-desc">A comprehensive working reference distilling every geopolitical concept, strategic insight, regional analysis, and case study from Marshall's landmark work on how physical geography imprisons leaders and shapes the fate of nations.</div>
+</div>
+
+<!-- ======================= CORE THEORY ======================= -->
+<h2 class="section-title" id="core-theory">Core Theory: Geography as Destiny</h2>
+
+<div class="prose" id="ct-central-thesis">
+<h3 class="subsection-title">The Central Thesis</h3>
+<p>The land on which we live has always shaped us. It has shaped the wars, the power, politics and social development of the peoples that now inhabit nearly every part of the earth. Technology may seem to overcome the distances between us, but the choices of those who lead seven billion inhabitants will to some degree always be shaped by rivers, mountains, deserts, lakes and seas that constrain us all — as they always have. The landscape imprisons leaders, giving them fewer choices and less room to manoeuvre than you might think.</p>
+<p>This was true of the Athenian Empire, the Persians, the Babylonians and before; it was true of every leader seeking high ground from which to protect their tribe. Individual leaders, ideas and technology all play a role in shaping events, but they are temporary. Each new generation will still face the physical obstructions created by the Hindu Kush and the Himalayas, the challenges of the rainy season, and the disadvantages of limited access to natural minerals or food sources.</p>
+</div>
+
+<div class="prose" id="ct-geopolitics-defined">
+<h3 class="subsection-title">What Geopolitics Actually Is</h3>
+<p>Geopolitics looks at the ways in which international affairs can be understood through geographical factors — not just the physical landscape (natural barriers of mountains or connections of river networks), but also climate, demographics, cultural regions and access to natural resources. These factors can have an important impact on many different aspects of civilisation, from political and military strategy to human social development, including language, trade and religion. The physical realities that underpin national and international politics are too often disregarded in writing about history and in contemporary reporting. Geography might not be <em>the</em> determining factor, but it is certainly the most overlooked.</p>
+</div>
+
+<div class="prose" id="ct-attack-as-defence">
+<h3 class="subsection-title">Attack as Defence</h3>
+<p>A recurring pattern throughout the book: nations with indefensible geography expand outward not from ambition alone, but from fear. Russia's relentless push into buffer zones, China's annexation of Tibet, America's seizure of the Mississippi basin — all follow the same logic. If you sit still on flatland, you invite invasion. You consolidate at home, then move outward, pushing your defensive line to the nearest natural barrier — a mountain range, a desert, an ocean. Ivan the Terrible did this first for Russia. Every Russian leader since has faced the same map and made the same calculation.</p>
+</div>
+
+<div class="prose" id="ct-rivers-and-power">
+<h3 class="subsection-title">Rivers, Trade, and the Wealth of Nations</h3>
+<p>Navigable rivers are the single greatest accelerator of civilisation. The Mississippi basin has more miles of navigable river than the rest of the world put together. Europe's rivers — the Rhine, the Danube, the Seine, the Rhône — connected regions which became trading centres, then towns, then capitals. Waterborne transport is many times cheaper than land or air routes. Where rivers do not connect, as in Africa, nations remain isolated from each other and the outside world. Where rivers run through rapids and waterfalls, as with the Zambezi, they are stunning to look at but useless for commerce. Europe's rivers are long, flat, navigable, and made for trade. Africa's rivers begin in high land and descend in abrupt drops which thwart navigation. That single geographical fact explains much of the economic divergence between the two continents.</p>
+</div>
+
+<div class="prose" id="ct-warm-water-ports">
+<h3 class="subsection-title">The Warm-Water Port Obsession</h3>
+<p>Russia's entire strategic history can be read as a quest for warm-water ports with direct access to the world's major trading routes. The ports on the Arctic freeze for months; Vladivostok is ice-locked for four months and enclosed by the Sea of Japan. This halts trade and prevents the Russian fleet from operating as a global power. It is Russia's Achilles heel, saved from being a much weaker power only because of its oil and gas. Peter the Great advised his descendants to approach as near as possible to Constantinople and India. The annexation of Crimea in 2014 was fundamentally about Sevastopol — Russia's only true major warm-water port.</p>
+</div>
+
+<div class="prose" id="ct-lines-on-maps">
+<h3 class="subsection-title">Lines on Maps: The Colonial Legacy</h3>
+<p>In Africa, the Middle East and South Asia, European colonialists took maps and drew lines on them — or, more accurately, lies. In between these lines they wrote words like "Middle Congo" or "Upper Volta" and called them countries. These lines were about how far which power's explorers had advanced, not what the people living between the lines felt themselves to be. The colonial powers drew artificial borders on paper, completely ignoring the physical realities of the region. Violent attempts are now being made to redraw them. The ethnic conflicts within Sudan, Somalia, Kenya, Angola, the DRC, Nigeria, Mali and elsewhere are evidence that the European idea of geography did not fit the reality of Africa's demographics.</p>
+</div>
+
+<div class="prose" id="ct-energy-weapon">
+<h3 class="subsection-title">Energy as a Weapon</h3>
+<p>Russia's most powerful weapons now — leaving aside nuclear missiles — are not the army and air force, but gas and oil. The better your relations with Russia, the less you pay for energy. Finland gets a better deal than the Baltic States. Latvia, Slovakia, Finland and Estonia are 100 per cent reliant on Russian gas. About half of Germany's gas comes from Russia, which partly explains why German politicians are slower to criticise the Kremlin than a country like Britain, which has 13 per cent dependency and its own reserves. Russia controls the central heating in Baltic homes. It can set the price or simply turn the heating off. Energy as political power will be deployed time and again in the coming years.</p>
+</div>
+
+<div class="prose" id="ct-buffer-zones">
+<h3 class="subsection-title">Buffer Zones and Strategic Depth</h3>
+<p>Strategic depth is somewhere to fall back to in the event of being overrun. Without it, a single breakthrough ends you. Russia's expansion east across Siberia and south to the Caucasus gave it strategic depth — somewhere to retreat. Napoleon and Hitler both learned that by the time an army approaches Moscow, it has unsustainably long supply lines. China's buffer zones — Tibet, Xinjiang, Inner Mongolia — serve the same function. Pakistan lacks internal strategic depth, which is why Afghanistan matters so much to Islamabad: it needs somewhere to fall back to if India's army crosses the 250-mile flat corridor to its capital. Israel is so small it has no strategic depth at all — from the West Bank border to Tel Aviv is about 10 miles — which is why it insists on controlling the high ground of the West Bank ridge.</p>
+</div>
+
+<!-- ======================= INLINE TABLE OF CONTENTS ======================= -->
+<div class="toc-container" id="toc">
+<h3>Table of Contents — All Cards by Region</h3>
+
+<div class="toc-group">
+<div class="toc-group-title">Russia</div>
+<a href="#card-north-european-plain">The North European Plain</a>
+<a href="#card-russian-buffer">Russia's Buffer Zone Strategy</a>
+<a href="#card-crimea">The Crimea Seizure</a>
+<a href="#card-warm-port">Warm-Water Port Dilemma</a>
+<a href="#card-energy-leverage">Energy as Leverage</a>
+<a href="#card-ethnic-russians">The "Ethnic Russians" Card</a>
+<a href="#card-baltic-vulnerability">Baltic Vulnerability</a>
+<a href="#card-nato-signal">NATO's Signalling Doctrine</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">China</div>
+<a href="#card-china-heartland">The Heartland & Han Dominance</a>
+<a href="#card-first-island-chain">The First Island Chain</a>
+<a href="#card-tibet-control">Tibet: China's Water Tower</a>
+<a href="#card-xinjiang">Xinjiang & the Uighur Problem</a>
+<a href="#card-blue-water-navy">Building a Blue Water Navy</a>
+<a href="#card-malacca-dilemma">The Malacca Dilemma</a>
+<a href="#card-china-grand-bargain">China's Grand Bargain</a>
+<a href="#card-south-china-sea">South China Sea Disputes</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">United States</div>
+<a href="#card-usa-geography">America's Geographic Lottery</a>
+<a href="#card-louisiana">The Louisiana Purchase</a>
+<a href="#card-mississippi">The Mississippi Advantage</a>
+<a href="#card-consolidation">The Continental Land Grab (1819–1898)</a>
+<a href="#card-monroe">The Monroe Doctrine</a>
+<a href="#card-concrete-bases">The Concrete Strategy</a>
+<a href="#card-pivot-asia">The Pivot to Asia</a>
+<a href="#card-usa-energy">American Energy Independence</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Western Europe</div>
+<a href="#card-europe-geography">Europe's Geographic Blessings</a>
+<a href="#card-german-question">The German Question</a>
+<a href="#card-eu-embrace">The EU as Mutual Embrace</a>
+<a href="#card-north-south-divide">The North-South Divide</a>
+<a href="#card-giuk-gap">The GIUK Gap</a>
+<a href="#card-euro-crisis">The Euro Crisis & Geography</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Africa</div>
+<a href="#card-africa-isolation">Africa's Isolation Problem</a>
+<a href="#card-africa-rivers">Unnavigable Rivers</a>
+<a href="#card-colonial-borders">Colonial Border Disasters</a>
+<a href="#card-drc">The DRC: Heart of Darkness</a>
+<a href="#card-nile-wars">Nile Water Wars</a>
+<a href="#card-nigeria-split">Nigeria's North-South Split</a>
+<a href="#card-china-africa">China's African Scramble</a>
+<a href="#card-south-africa-power">South Africa as Regional Power</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Middle East</div>
+<a href="#card-sykes-picot">Sykes-Picot: Lines in Sand</a>
+<a href="#card-sunni-shia">The Sunni-Shia Split</a>
+<a href="#card-iraq-three">Iraq: Three States in One</a>
+<a href="#card-kurdistan">Kurdistan Rising</a>
+<a href="#card-syria-fracture">Syria's Fracture Lines</a>
+<a href="#card-iran-fortress">Iran: The Mountain Fortress</a>
+<a href="#card-israel-geography">Israel's Geographic Dilemma</a>
+<a href="#card-turkey-crossroads">Turkey at the Crossroads</a>
+<a href="#card-hormuz">The Strait of Hormuz</a>
+<a href="#card-arab-spring">The "Arab Spring" Misnomer</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">India & Pakistan</div>
+<a href="#card-subcontinent-frame">The Subcontinent Frame</a>
+<a href="#card-kashmir">Kashmir: The Unsolvable Knot</a>
+<a href="#card-pakistan-fragility">Pakistan's Fragility</a>
+<a href="#card-durand-line">The Durand Line</a>
+<a href="#card-pakistan-depth">Pakistan's Strategic Depth Problem</a>
+<a href="#card-gwadar">Gwadar: The Jewel Port</a>
+<a href="#card-india-rise">India's Rising Power</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Korea & Japan</div>
+<a href="#card-korea-stalemate">Korea's Frozen Stalemate</a>
+<a href="#card-seoul-vulnerability">Seoul's Vulnerability</a>
+<a href="#card-japan-island">Japan's Island Geography</a>
+<a href="#card-japan-rearm">Japan's Quiet Rearmament</a>
+<a href="#card-senkaku">The Senkaku/Diaoyu Flashpoint</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Latin America</div>
+<a href="#card-latam-geography">Latin America's Geographic Prison</a>
+<a href="#card-brazil-limits">Brazil's Limits</a>
+<a href="#card-mexico-buffer">Mexico's Buffer Desert</a>
+<a href="#card-nicaragua-canal">The Nicaragua Canal Gambit</a>
+<a href="#card-falklands">The Falklands</a>
+<a href="#card-bolivia-coast">Bolivia's Lost Coastline</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">The Arctic</div>
+<a href="#card-arctic-melt">The Melting Ice Cap</a>
+<a href="#card-arctic-russia">Russia's Arctic Dominance</a>
+<a href="#card-arctic-law">UNCLOS & Sovereignty Claims</a>
+<a href="#card-northwest-passage">The Northwest Passage Opens</a>
+<a href="#card-icebreaker-gap">The Icebreaker Gap</a>
+</div>
+
+<div class="toc-group">
+<div class="toc-group-title">Supplementary & Conclusion</div>
+<a href="#supplementary">Supplementary Frameworks</a>
+<a href="#prescription">Marshall's Prescription</a>
+<a href="#situational-index">Situational Index</a>
+</div>
+</div>
+
+<!-- ======================= RUSSIA ======================= -->
+<h4 class="card-region" id="region-russia">Russia</h4>
+<div class="orientation">You're looking at a map of Europe and wondering why Russia is so aggressive about Ukraine, the Baltics, or NATO expansion. You need to understand that Moscow doesn't see a political map — it sees a flat corridor from Poland to Moscow with no mountains, no desert, and no natural defensive line. Every Russian leader since Ivan the Terrible has faced this same problem.</div>
+
+<div class="card" id="card-north-european-plain">
+<div class="card-header">
+<div class="card-label">Strategic Geography</div>
+<div class="card-name">The North European Plain</div>
+<div class="card-tagline">The pizza-wedge problem that explains five centuries of Russian behaviour</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The North European Plain runs from France to the Urals. At Poland it narrows to just 300 miles wide between the Baltic Sea and the Carpathian Mountains. From that narrow point it fans out to over 2,000 miles wide at Russia's borders — flat all the way to Moscow and beyond. This pizza-wedge shape means Poland is both a narrow corridor Russia could drive forces through, and the point where an attacker can mass troops before breaking out toward Moscow on flatland with no natural defensive positions. Russia has been invaded from this corridor by the Poles (1605), Swedes (1708), French (1812), and Germans twice (1914, 1941). From Napoleon's invasion to 1945, Russia fought in or around this plain on average once every thirty-three years.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">NATO expansion eastward — Czech Republic, Hungary, Poland in 1999; the Baltic states, Romania, Bulgaria in 2004 — each one moving the Western military alliance closer to Moscow across that flat corridor. By 2004, every former Warsaw Pact state bar Russia was in NATO or the EU. American troops stationed a few hundred miles from Moscow in Poland and the Baltic States.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Understanding this geography explains why Russia will never voluntarily accept NATO on its borders. It is not irrational paranoia — it is the rational response of a country invaded repeatedly across indefensible flatland.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Whenever a former Soviet state signals interest in joining NATO or the EU, watch Moscow's response escalate. The closer to the narrow point of the wedge (the Baltics, Poland, Ukraine), the more severe the reaction.</div></div>
+<div class="card-row"><div class="card-row-label">How to Counter</div><div class="card-row-content">NATO's response is diplomatic signalling: a few jets over Baltic airspace, military exercises in Poland, "prepositioning" hardware. Not a credible invasion force — a signal that NATO is prepared to fight. Article 5 of the NATO charter (an attack on one is an attack on all) is the real deterrent.</div></div>
+<div class="card-row"><div class="card-row-label">Example Phrase</div><div class="card-row-content"><span class="phrase">"It doesn't matter if the ideology is tsarist, Communist or crony capitalist — the ports still freeze, and the North European Plain is still flat."</span></div></div>
+</div>
+</div>
+
+<div class="card" id="card-russian-buffer">
+<div class="card-header">
+<div class="card-label">Grand Strategy</div>
+<div class="card-name">Russia's Buffer Zone Strategy</div>
+<div class="card-tagline">Attack as defence — a policy unbroken from Ivan the Terrible to Vladimir Putin</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Starting from the Grand Principality of Muscovy — indefensible flatland with no mountains, no deserts, and few rivers — Russia expanded outward in every direction to create a ring of buffer territory around Moscow. East to the Urals and Siberia. South to the Caspian and Black Sea, using the Caucasus Mountains as a partial barrier. North to the Arctic. West to the Carpathians and the Baltic States. By the twentieth century, the Soviet Union stretched from the Pacific to Berlin, a superpower. When it fell apart in the 1990s, geography had its revenge and a more logical picture reappeared on the map.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">Former Soviet states are divided into three camps: neutral (Uzbekistan, Azerbaijan, Turkmenistan — they produce their own energy), pro-Russian (Kazakhstan, Kyrgyzstan, Tajikistan, Belarus, Armenia — economies tied to Moscow), and pro-Western (Poland, the Baltic states, Czech Republic, Romania and others — now in NATO/EU). Georgia, Ukraine and Moldova want to join Western institutions but are held at arm's length because Russian troops or pro-Russian militia sit on their soil. NATO membership for any of the three could spark a war.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">When Moscow uses phrases like "near abroad" or revives historical geographic names like "Novorossiya" (Putin's 2014 reference to southern and eastern Ukraine), it is signalling territorial claims rooted in centuries of strategic thinking.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">Assuming Russia's actions are driven by ideology rather than geography. The borders the tsars wanted are the same borders Putin wants. Strip out the lines of nation states and the map Ivan the Terrible confronted is the same one Vladimir Putin faces today.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-crimea">
+<div class="card-header">
+<div class="card-label">Case Study</div>
+<div class="card-name">The Crimea Seizure (2014)</div>
+<div class="card-tagline">An existential matter decided by geography, not ideology</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">When pro-Western factions overthrew Ukraine's President Yanukovych in February 2014, Putin had to annex Crimea. Sevastopol is Russia's only true major warm-water port. A pro-Western Ukraine might host a NATO naval base. Putin could not be the man who "lost Crimea." The annexation was logistically simple — close to Russia, could be supplied across the Black Sea, and about 60 per cent of Crimea's population is ethnically Russian. The EU imposed limited sanctions — limited because several European countries, Germany among them, are reliant on Russian energy. The pipelines run east to west and the Kremlin can turn the taps on and off.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Russia retained its critical naval base. It also sent a message: it is prepared for military action to defend what it sees as its interests. The rational gamble was that outside powers would not intervene, and they didn't. Ukraine lost territory the size of Belgium or Maryland. No one rode to its rescue. A geographic truth: unless you are in NATO, Moscow is near, Washington DC is far away.</div></div>
+<div class="card-row"><div class="card-row-label">How to Counter</div><div class="card-row-content">The Western response — limited sanctions, diplomatic signalling — reflected the geographic reality that the West could cope with losing Crimea. For Russia it was existential; for the West it was not. LNG terminals (receiving liquefied natural gas shipped from the USA) are the long-term counter to energy blackmail, weakening the Kremlin's ability to turn off the taps.</div></div>
+<div class="card-row"><div class="card-row-label">Dependency</div><div class="card-row-content"><span class="dependency">Requires understanding: The North European Plain, Warm-Water Port Dilemma, Energy as Leverage</span></div></div>
+</div>
+</div>
+
+<div class="card" id="card-warm-port">
+<div class="card-header">
+<div class="card-label">Strategic Constraint</div>
+<div class="card-name">The Warm-Water Port Dilemma</div>
+<div class="card-tagline">Russia's Achilles heel across five centuries</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Murmansk (Arctic) freezes several months a year. Vladivostok (Pacific) is ice-locked for about four months and enclosed by the Sea of Japan, dominated by Japan. Even Sevastopol (Black Sea) is restricted — the Montreux Convention of 1936 gave Turkey (now a NATO member) control of the Bosporus. Getting through the Bosporus only gets you to the Sea of Marmara; you still must navigate the Dardanelles to reach the Aegean and then the Mediterranean. To reach the Atlantic you must cross the Gibraltar Strait. To reach the Indian Ocean you need passage through the Suez Canal. In the north, the Baltic fleet cannot break out because the Skagerrak Strait is controlled by NATO members Denmark and Norway, and beyond that lies the GIUK gap.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">This single geographic constraint — no reliable warm-water access to global sea lanes — prevents Russia from being a truly global naval power and explains its desperate hold on Sevastopol, its small naval presence in Tartus (Syria), and its interest in a port at Gwadar (Pakistan) via allies.</div></div>
+<div class="card-row"><div class="card-row-label">Example Phrase</div><div class="card-row-content"><span class="phrase">"Wash their boots in the warm waters of the Indian Ocean" — Vladimir Zhirinovsky, expressing the great Russian dream.</span></div></div>
+</div>
+</div>
+
+<div class="card" id="card-energy-leverage">
+<div class="card-header">
+<div class="card-label">Power Tool</div>
+<div class="card-name">Energy as Leverage</div>
+<div class="card-tagline">Russia's gas pipelines are more powerful than its army</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">More than 25 per cent of Europe's gas and oil comes from Russia. The closer to Moscow, the greater the dependency. Latvia, Slovakia, Finland, Estonia: 100% reliant. Czech Republic, Bulgaria, Lithuania: 80%. Greece, Austria, Hungary: 60%. Germany: roughly 50%. Major pipelines run east to west: Nord Stream (to Germany via Baltic Sea), Yamal (through Belarus to Poland/Germany), Blue Stream (to Turkey via Black Sea). Russia used price disputes with Ukraine in 2005–10 to cut gas supply to eighteen countries. European nations that stood to benefit from South Stream were markedly more restrained in criticising Russia during the Crimea crisis.</div></div>
+<div class="card-row"><div class="card-row-label">How to Counter</div><div class="card-row-content">The American shale gas boom enables the US to export surplus energy to Europe as LNG. Poland and Lithuania are building LNG terminals. The Czech Republic wants pipelines connecting to those terminals. Once alternative supply exists, the Kremlin can no longer turn off the taps unilaterally. Piped gas is cheaper than LNG, so Russian gas won't be fully replaced, but Europe's negotiating hand gets much stronger.</div></div>
+<div class="card-row"><div class="card-row-label">Success Looks Like</div><div class="card-row-content positive">A European country that can tell Moscow "we have alternatives" during a price negotiation or foreign policy disagreement, without fearing its citizens will freeze in winter.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-ethnic-russians">
+<div class="card-header">
+<div class="card-label">Diplomatic Weapon</div>
+<div class="card-name">The "Ethnic Russians" Card</div>
+<div class="card-tagline">A deliberately vague definition that justifies intervention wherever Moscow chooses</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Kremlin has a law compelling the government to protect "ethnic Russians." The definition is deliberately vague — sometimes it means people who speak Russian as their first language, sometimes it uses a citizenship law stating that if your grandparents lived in Russia and Russian is your native language, you can take Russian citizenship. Several million ethnic Russians remain inside what was the USSR but outside Russia. In both Estonia and Latvia approximately one in four people are ethnically Russian. As crises arise, people accept Russian passports to hedge their bets, giving Moscow a lever for entry into any future conflict.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">When Putin refers to historical Russian geographic names, lists Ukrainian regions by name, or says "the people remained" — he is laying the groundwork for future claims. The concept will be defined as Russia chooses in each potential crisis.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">In Crimea: encouraging anti-Kiev demonstrations, stirring up trouble, then "having" to send troops to "protect people." In the Baltics: funding political parties representing Russian-speakers, controlling heating bills, threatening to turn off gas.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-baltic-vulnerability">
+<div class="card-header">
+<div class="card-label">Flashpoint</div>
+<div class="card-name">Baltic Vulnerability</div>
+<div class="card-tagline">NATO's most exposed flank — where Article 5 faces its sternest test</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Estonia and Latvia have roughly 25% ethnically Russian populations. Lithuania has 5.8%. These states are NATO members, meaning an armed attack triggers Article 5 — an attack on one is an attack on all. Russia probably will not send an armoured division in. Instead it uses economic pressure (energy dependency, heating costs), political manipulation (funding Russian-speaking parties), and information warfare. An overt assault would be overstretching, but Moscow can stir enough trouble to make life difficult without crossing the Article 5 threshold.</div></div>
+<div class="card-row"><div class="card-row-label">How to Counter</div><div class="card-row-content">Clear, credible NATO signalling. Article 5 is only a deterrent if Putin believes NATO would actually fight. American prepositioning of hardware, military exercises in Poland, and diplomatic visits to Baltic capitals all serve to maintain that credibility. If NATO failed to react to an attack on a member state, it would instantly be obsolete.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">The grey zone below overt military action — cyberattacks, disinformation, energy cutoffs, political subversion — where Article 5 is ambiguous. Russia excels at staying just below the threshold.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-nato-signal">
+<div class="card-header">
+<div class="card-label">Tactic & Counter-Tactic</div>
+<div class="card-name">NATO's Signalling Doctrine</div>
+<div class="card-tagline">"This far west and no further" — said with jets, not words</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">When Russia annexed Crimea and fomented uprising in eastern Ukraine, NATO's response was not a military counter-attack — it was signalling. A handful of war planes flew to the Baltic States. Military exercises were announced in Poland. Americans began planning to preposition hardware. Defence and Foreign Ministers visited the Baltic States, Georgia and Moldova. Six RAF Eurofighter Typhoons over Baltic airspace are not going to deter the Russian hordes — but the signal is clear: NATO is prepared to fight.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Maintaining alliance credibility without provoking escalation. The line between deterrence and provocation is where modern geopolitics lives.</div></div>
+<div class="card-row"><div class="card-row-label">How Russia Counters</div><div class="card-row-content">Mock bombing runs on Sweden. Flying fighter jets towards European borders to test air defence systems. Building Arctic military bases. The counter-signal: "We have capabilities too, and we are not intimidated."</div></div>
+</div>
+</div>
+
+<!-- ======================= CHINA ======================= -->
+<h4 class="card-region" id="region-china">China</h4>
+<div class="orientation">You're watching China build artificial islands, invest billions in African ports, or menace Taiwan with military exercises. You need to understand that after 4,000 years of consolidating its land mass, China is now breaking out to sea — and every move makes geographic sense once you see the natural barriers that have contained it and the chokepoints that threaten its trade.</div>
+
+<div class="card" id="card-china-heartland">
+<div class="card-header">
+<div class="card-label">Foundation</div>
+<div class="card-name">The Heartland & Han Dominance</div>
+<div class="card-tagline">A billion people in half the space of the USA, surrounded by buffers they'll never give up</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The North China Plain — the heartland — is the political, cultural, demographic and agricultural centre of gravity. About a billion people live here, in an area half the size of the United States. The Han make up over 90% of China's population. They emerged from this fertile plain, where rice and soy beans can be harvested twice a season, and then expanded outward — north into Mongolia, west into Xinjiang, south-west into Tibet — creating buffer zones. These buffers are non-negotiable. Once they were Manchurian, Mongolian, Uighur and Tibetan majority territories. Now all are majority Han Chinese, or approaching it. The same demographic transformation is under way in Tibet.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Demographic dominance makes these territories irreversible acquisitions. The window for Tibetan or Uighur independence is closing. Both regions offer markets for goods, strategic depth, and — in Xinjiang's case — nuclear weapons testing sites and a trade corridor to Central Asia.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Anti-Han rioting (Tibet 2008, Xinjiang 2009) will recur. But demographics and geopolitics oppose independence for either region. In a battle between the Dalai Lama, Hollywood stars and the Chinese Communist Party — which rules the world's second-largest economy — there is only going to be one winner.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-first-island-chain">
+<div class="card-header">
+<div class="card-label">Strategic Geography</div>
+<div class="card-name">The First Island Chain</div>
+<div class="card-tagline">A line of islands that bottles up China — and that China is determined to break through</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Between China and the Pacific is the archipelago Beijing calls the First Island Chain. It runs from Japan down through the Ryukyu Islands (including Okinawa, with its massive US base), past Taiwan, and down to the Philippines. In peacetime the route is open; in wartime these islands could blockade China. Every direction out is blocked: north through the Sea of Japan — Japanese and Russian waters. East past Okinawa — American missiles. South through the Strait of Malacca — controlled by US allies. China's "Nine Dash Line" (recently ten dashes, to include Taiwan) marks what it claims as its territory.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">In 2006, a Chinese Song-class submarine surfaced undetected in the middle of a US carrier group — the equivalent of Pepsi's management popping up in a Coca-Cola board meeting after listening under the table for half an hour. This was twenty-first-century reverse gunboat diplomacy: "We are now a maritime power, this is our time, and this is our sea."</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Breaking through the First Island Chain gives China free access to the world's most important shipping lanes. National pride demands it; geopolitics dictates it.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-tibet-control">
+<div class="card-header">
+<div class="card-label">Buffer Zone</div>
+<div class="card-name">Tibet: China's Water Tower</div>
+<div class="card-tagline">Not about human rights. About the sources of three great rivers and the commanding heights.</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">If China did not control Tibet, India might attempt to do so. This would give India the commanding heights of the Tibetan Plateau, a base from which to push into the Chinese heartland, and control of the Tibetan sources of three of China's great rivers — the Yellow, Yangtze and Mekong. China has approximately the same volume of water usage as the USA but five times the population. It will clearly not allow India to control its water supply. It matters not whether India wants to cut off China's water — only that it would have the power to do so.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">The railway into Lhasa, opened in 2006. Passenger and goods trains arrive from Shanghai and Beijing, four times a day, every day. They bring consumer goods, modernity, improved healthcare — and several million Han Chinese settlers. The "Iron Roosters" are bringing the Han to the Tibetans, just as the Iron Horse brought European settlers to the Comanche and Navajo.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">Viewing this through the lens of human rights alone. The Chinese view it through the lens of geopolitical security and can only believe Westerners raising the issue are trying to undermine their security.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-xinjiang">
+<div class="card-header">
+<div class="card-label">Buffer Zone</div>
+<div class="card-name">Xinjiang & the Uighur Problem</div>
+<div class="card-tagline">Too strategically important to lose — it borders eight countries, has oil, and hosts nuclear tests</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Xinjiang borders eight countries: Russia, Mongolia, Kazakhstan, Kyrgyzstan, Tajikistan, Afghanistan, Pakistan and India. It is 642,820 square miles — twice the size of Texas. Its native Muslim Uighur population speaks a language related to Turkish and has twice declared an independent "East Turkestan." Beijing responds three ways: ruthless suppression of dissent, pouring money into the region, and pouring in Han Chinese workers. The city of Shihezi (population 650,000) is thought to be at least 95% Han. Overall, Xinjiang is reckoned to be at least 40% Han.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Gun, bomb and knife attacks against state and Han targets have been escalating. Al Qaeda and other groups are attempting to forge links with Uighur separatists. The movement is nationalist first, Islamic second — but the jihadist element makes it more dangerous.</div></div>
+<div class="card-row"><div class="card-row-label">How China Counters</div><div class="card-row-content">Stays on good terms with all border countries to prevent any organised independence movement from having supply lines or somewhere to fall back. Paints separatists as Islamist terrorists. Builds "facts on the ground" through demographic settlement.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-blue-water-navy">
+<div class="card-header">
+<div class="card-label">Military Strategy</div>
+<div class="card-name">Building a Blue Water Navy</div>
+<div class="card-tagline">From a Green Water navy that patrols borders to a force that patrols the oceans — a thirty-year project</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">China has never been a naval power — with its large land mass and multiple borders, it had no need. Now it is building a Blue Water navy. It will take another thirty years for China to seriously challenge the US navy, but in the medium to short term, the Chinese navy will bump against its rivals. The young seamen now training on China's second-hand aircraft carrier (salvaged from a Ukrainian rust yard) may one day be the admirals who take a twelve-ship carrier group across the world. As some richer Arab nations discovered, you cannot buy an efficient military off the shelf. It takes decades of institutional learning.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">Deep-water ports in Burma, Bangladesh, Pakistan (Gwadar) and Sri Lanka. Gas and oil pipelines from Burma's coast into south-west China. Ports in Kenya, railways in Angola, a hydroelectric dam in Ethiopia. Chinese companies and workers spread across the world — slowly China's military will follow.</div></div>
+<div class="card-row"><div class="card-row-label">Dependency</div><div class="card-row-content"><span class="dependency">Requires: Continued economic growth. If China enters a great depression, this programme stalls for decades.</span></div></div>
+</div>
+</div>
+
+<div class="card" id="card-malacca-dilemma">
+<div class="card-header">
+<div class="card-label">Chokepoint</div>
+<div class="card-name">The Malacca Dilemma</div>
+<div class="card-tagline">500 miles long, less than two miles wide at its narrowest — and 80% of China's energy passes through it</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Strait of Malacca between Malaysia, Singapore and Indonesia is China's jugular. Almost 80% of its energy supplies pass through this strait. All three states along it are diplomatically and militarily linked to the USA. China is vulnerable to being choked. Every day 12 million barrels of oil pass through. As long as these three countries are pro-American, the USA has a key advantage.</div></div>
+<div class="card-row"><div class="card-row-label">How China Counters</div><div class="card-row-content">Building overland alternatives: gas and oil pipelines from Burma's Bay of Bengal coast up into south-west China. The China-Pakistan Economic Corridor ($46 billion superhighway of roads, railways, and pipelines from Gwadar to Xinjiang). These reduce nervous reliance on Malacca — but cannot fully replace it.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Any military friction in the South China Sea that threatens free passage through the Strait is a potential casus belli. China cannot afford to be blockaded.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-china-grand-bargain">
+<div class="card-header">
+<div class="card-label">Economic Geopolitics</div>
+<div class="card-name">China's Grand Bargain</div>
+<div class="card-tagline">Two deals that hold China together — and what happens if either breaks</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The domestic bargain: "We'll make you better off — you will follow our orders." As long as the economy keeps growing, this deal holds. If it stops or goes into reverse, the deal is off. There are now around 500 mostly peaceful protests a day across China. Introduce mass unemployment and that tally will explode. The international bargain: "We'll make the stuff for cheap — you buy it for cheap." If the resources dry up, someone else gets them first, or there is a naval blockade, the entire system collapses. More than 40% of arable land is now either polluted or has thinning topsoil. China is caught in a catch-22: it needs industrialisation to raise living standards, but that process threatens food production.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Rising labour costs, loss of manufacturing to Thailand and Indonesia, slowing GDP growth, food security crises — any of these can weaken the bargain. If they fail simultaneously, the result could be civil disorder on a scale hitherto unseen.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-south-china-sea">
+<div class="card-header">
+<div class="card-label">Flashpoint</div>
+<div class="card-name">South China Sea Disputes</div>
+<div class="card-tagline">Two hundred tiny islands and reefs poisoning China's relations with all its neighbours</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">China claims almost the entire South China Sea and the energy supplies beneath it. Malaysia, Taiwan, Vietnam, the Philippines and Brunei also have claims. Every one of the hundreds of disputed atolls — sometimes just rocks poking out of the water — is a potential dispute about fishing zones, exploration rights and sovereignty. The geopolitical writer Robert Kaplan compares this to the Caribbean at the beginning of the twentieth century: the Americans consolidated their land mass, became a two-ocean power, then moved to control the seas around them, pushing the Spanish out of Cuba. China intends to become a two-ocean power (Pacific and Indian) in the same way.</div></div>
+<div class="card-row"><div class="card-row-label">How to Counter</div><div class="card-row-content">The USA and its allies fly and sail through disputed zones without complying with Chinese demands (such as the Air Defence Identification Zone). Diplomatic alliances tie South-East Asian nations to Washington. The balance: too much stick from China and countries tie closer to the USA; too much carrot and they may not bend to Beijing's will.</div></div>
+</div>
+</div>
+
+<!-- ======================= USA ======================= -->
+<h4 class="card-region" id="region-usa">United States</h4>
+<div class="orientation">You're hearing about American decline, or wondering why the US seems to police the entire world. You need to understand that the United States won the geographic lottery — unbeatable location, navigable rivers, natural resources, weak neighbours, two protective oceans — and that it built on those advantages with a series of shrewd territorial acquisitions that made its rise to superpower status almost inevitable.</div>
+
+<div class="card" id="card-usa-geography">
+<div class="card-header">
+<div class="card-label">Foundation</div>
+<div class="card-name">America's Geographic Lottery</div>
+<div class="card-tagline">"Location, location, location" — the best real estate on the planet</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">East coast: fertile plains with navigable rivers and natural harbours. Centre: the Great Plains and the Mississippi basin with its network of huge, navigable rivers flowing to the Gulf of Mexico, sheltered by the Florida peninsula. West: the Rockies, desert, Sierra Nevada, and the Pacific coast. North: the Canadian Shield, largely a barrier to settlement. South-west: desert. The neighbours are no trouble. The oceans are protective barriers. Geography determined that if a political entity could control the land "from sea to shining sea," it would be a great power — the greatest history has known.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">There are fifty states but they add up to one nation in a way the twenty-eight EU states never can. Most EU states have a national identity far stronger than any American state, but an American identifies with their Union in a way few Europeans do. This is explained by geography and the history of unification.</div></div>
+<div class="card-row"><div class="card-row-label">Example Phrase</div><div class="card-row-content"><span class="phrase">"God takes special care of drunks, children and the United States of America." — Otto von Bismarck</span></div></div>
+</div>
+</div>
+
+<div class="card" id="card-louisiana">
+<div class="card-header">
+<div class="card-label">Turning Point</div>
+<div class="card-name">The Louisiana Purchase (1803)</div>
+<div class="card-tagline">$15 million for mastery of the greatest inland water transport route in the world</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">France controlled the western bank of the Mississippi down to New Orleans, commanding American trade heading to the Old World from the Gulf of Mexico. Jefferson wrote: "There is on the globe one single spot, the possessor of which is our natural and habitual enemy. It is New Orleans." In 1803 the US simply bought the entire Louisiana Territory — equivalent to Spain, Italy, France, the UK and Germany combined. At a stroke it doubled the country's size and gave it the Mississippi basin. "Never did the United States get so much for so little," wrote historian Henry Adams.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">The greater Mississippi basin has more miles of navigable river than the rest of the world put together. The Americans now had strategic depth, massive fertile land, and an alternative to Atlantic ports for trade. The rivers flowing north to south connected sparsely populated lands, encouraging America to form as a single entity.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-mississippi">
+<div class="card-header">
+<div class="card-label">Geographic Advantage</div>
+<div class="card-name">The Mississippi Advantage</div>
+<div class="card-tagline">More navigable river miles than the rest of the world combined</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Nowhere else in the world are there so many rivers whose source is not in high land and whose waters run smoothly all the way to the ocean across vast distances. The Mississippi begins near Minneapolis and runs 1,800 miles to the Gulf of Mexico. The rivers are natural conduits for trade, leading to a great port, using waterborne craft that is many times cheaper than road travel. This created ever-expanding routes east to west linking the East Coast to new territory, and river systems north to south connecting lands with each other.</div></div>
+<div class="card-row"><div class="card-row-label">Contrast</div><div class="card-row-content">Brazil's seven largest ports combined can handle fewer goods per year than the single American port of New Orleans. Africa's rivers begin in high land and descend in abrupt drops, thwarting navigation. Europe's rivers are navigable but don't connect to each other, which is why there are so many separate nation states rather than one united entity.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-consolidation">
+<div class="card-header">
+<div class="card-label">Historical Timeline</div>
+<div class="card-name">The Continental Land Grab (1819–1898)</div>
+<div class="card-tagline">Eight decades of deliberate territorial consolidation that locked in American dominance</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Louisiana Purchase doubled the country's size in 1803, but the borders were still unresolved. Over the next eight decades the US systematically closed every gap — acquiring coastline, removing rival powers from adjacent territory, and stitching the continent together with infrastructure. Each move was less about greed than about locking in a geographic position that no rival could threaten. By 1898 the continental United States was essentially the shape it is today.</div></div>
+<div class="card-row"><div class="card-row-label">The Sequence</div><div class="card-row-content"><strong>1819</strong> — Spain ceded Florida and, via the Transcontinental Treaty, accepted US jurisdiction above the 42nd parallel, guaranteeing the US a corridor to the Pacific. <strong>1845–8</strong> — Annexation of Texas followed by the Mexican War; Mexico ceded the south-west, fixing the southern border. <strong>1862</strong> — The Homestead Act awarded 160 acres of federal land to settlers, driving population westward and filling in the interior. <strong>1867</strong> — Alaska purchased from Russia, removing a European power from the continent's north-west corner. <strong>1869</strong> — The Transcontinental Railroad opened, cutting travel time coast to coast from months to a week and binding the continent into a single economic unit. <strong>1898</strong> — The Spanish-American War ejected Spain from Cuba, Puerto Rico, Guam, and the Philippines, eliminating the last European strategic threat near New Orleans and the Gulf approaches.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">By the end of this sequence the US controlled both coastlines, both land borders, all navigable river systems, and the approaches to its main port. No rival power had a foothold anywhere on the continent. The strategic position was essentially unassailable — and it was achieved not by accident but by eighty years of consistent geographic logic.</div></div>
+<div class="card-row"><div class="card-row-label">What to Watch For</div><div class="card-row-content">Each acquisition followed a perceived vulnerability — Spain near New Orleans, Mexico on the southern flank, Russia in the north-west, European navies in the Caribbean. The pattern is the same one Marshall and others would later apply globally: identify the nearest geographic threat, remove it, then push the defensive perimeter outward to the next natural barrier.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-monroe">
+<div class="card-header">
+<div class="card-label">Doctrine</div>
+<div class="card-name">The Monroe Doctrine (1823)</div>
+<div class="card-tagline">"Latin America is our backyard" — still operative two centuries later</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Issued by President Monroe in 1823 during his State of the Union address: European powers could no longer seek land in the Western Hemisphere, and if they lost existing territory they could not reclaim it. Reloaded by Theodore Roosevelt in 1904: "The United States… may force the United States, however reluctantly, to the exercise of an international police power." Not including funding of revolutions and provision of military trainers, the USA used force in Latin America almost 50 times between 1890 and the end of the Cold War.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like Today</div><div class="card-row-content">Bilateral trade deals rather than regional blocs. The Panama Canal remains a neutral waterway safeguarded by the US navy. When China proposes a rival canal through Nicaragua, it is partly to avoid dependence on American goodwill at Panama.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-concrete-bases">
+<div class="card-header">
+<div class="card-label">Grand Strategy</div>
+<div class="card-name">The Concrete Strategy</div>
+<div class="card-tagline">Ports, runways, hangars, fuel depots, dry docks — the physical infrastructure of global power</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">America learned from Britain: you need forward bases from which to project and protect naval power. The 1940 "Destroyers for Bases Agreement" saw Britain swap almost every naval base in the Western Hemisphere for fifty warships. After Japan's defeat, America seized the opportunity to build bases all over the Pacific — from Guam to Okinawa. In Europe, the Marshall Plan was accompanied by permanent military presence in Germany to face down the Red Army. The civilian head of NATO might be Belgian or British, but the military commander is always American. The 5th Fleet is based in Bahrain. Marines are in Okinawa. The 7th Fleet is in Tokyo Bay.</div></div>
+<div class="card-row"><div class="card-row-label">The Payoff</div><div class="card-row-content">Global force projection. The ability to be anywhere, quickly. Economic and military assistance buys permission to pour the concrete, and with it comes the ability to influence governments — suggest to Burma that it might want to resist Chinese overtures, for example.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">The trade-off: bases in Bahrain mean muted criticism of Bahraini human rights abuses. Outrage at Syria (hostile state) is loud; outrage at Bahrain (base host) is muffled by the engines of the 5th Fleet.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-pivot-asia">
+<div class="card-header">
+<div class="card-label">Strategic Shift</div>
+<div class="card-name">The Pivot to Asia</div>
+<div class="card-tagline">Half the world's population, half the projected economic output by 2050 — this is where the century will be decided</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Secretary of State Clinton called it "the pivot to China" in 2011. A pivot towards one place does not mean abandonment of another — it is about how much weight you put on which foot. The key states are Indonesia, Malaysia and Singapore, which sit astride the Strait of Malacca. The US is establishing a Marine Corps base in Northern Australia, strengthening ties with Vietnam, Japan, South Korea, the Philippines, and others. Each time China is challenged, each side must react — because for each challenge ducked, allies' confidence and competitors' fear slowly drain away.</div></div>
+<div class="card-row"><div class="card-row-label">Success Looks Like</div><div class="card-row-content positive">Regional nations confident that the US has their back, choosing not to bandwagon with China out of fear. The deadly game is managing each crisis without losing face and without building up a well of resentment on both sides — the Cuban Missile Crisis model of compromise where both sides can tell their publics they did not capitulate.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-usa-energy">
+<div class="card-header">
+<div class="card-label">Game-Changer</div>
+<div class="card-name">American Energy Independence</div>
+<div class="card-tagline">Self-sufficient in energy, and a net exporter — changing everything about US foreign policy</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Offshore drilling and underground fracking are making America not just self-sufficient but a net energy exporter. This means its focus on ensuring oil and gas flow from the Gulf region will diminish. It will still have strategic interests there, but the intensity will drop. If American attention wanes, Gulf nations will seek new alliances — candidates include Iran and China. The close relationship with Israel may cool as demographics change: the children of Hispanic and Asian immigrants will be more interested in Latin America and the Far East than in a tiny country on the edge of a region no longer vital to American interests.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">The question "what is the 5th Fleet there for?" becoming a live domestic political debate. America's experiment with nation-building overseas appears to be over.</div></div>
+</div>
+</div>
+
+<!-- Due to the massive length, I'll continue building the remaining regions -->
+<!-- WESTERN EUROPE -->
+<h4 class="card-region" id="region-europe">Western Europe</h4>
+<div class="orientation">You're watching the EU strain under financial crises, migration pressures, and Russian aggression, and wondering whether this experiment in post-war peace can hold. You need to understand that Europe's rivers and flatlands created the wealth that made the modern world — but those same geographic features mean it was always a collection of distinct regions, and "ever closer union" is fighting against the grain of geography.</div>
+
+<div class="card" id="card-europe-geography">
+<div class="card-header">
+<div class="card-label">Foundation</div>
+<div class="card-name">Europe's Geographic Blessings</div>
+<div class="card-tagline">Climate, rivers, coastlines — the ingredients that gave birth to the modern world</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Gulf Stream delivers the right amount of rainfall for large-scale crops and the right soil for them to flourish. Work is possible all year round. Winter kills germs that plague much of the rest of the world. Good harvests mean surplus food that can be traded, building trading centres that become towns. It allows people to think of more than just growing food — to turn attention to ideas and technology. No real deserts, frozen wastes confined to the far north, earthquakes and volcanoes rare. Rivers long, flat, navigable, and made for trade. Coastlines abundant in natural harbours. These factors led Europeans to create the first industrialised nation states, which led them to conduct the first industrial-scale war.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">Europe's major rivers do not meet (except the Sava draining into the Danube at Belgrade). This partly explains why there are so many countries in such a small space. Each river acts as a boundary and sphere of economic influence, giving rise to major urban developments and eventually capital cities: Vienna, Bratislava, Budapest, Belgrade — all on the Danube.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-german-question">
+<div class="card-header">
+<div class="card-label">Historical Pattern</div>
+<div class="card-name">The German Question</div>
+<div class="card-tagline">Flatland on both sides, France to the west, Russia to the east — Germany's ultimate fear was simultaneous attack from both</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Before German unification in 1871, France was the pre-eminent Continental power, with a Channel protecting it from England and enough distance from Russia and the Mongols. Then Germany united — geographically larger than France, similar population but better growth rate, more industrialised. Germany's dilemma: flatlands of the North European Plain gave it two reasons to fear — powerful France to the west, the giant Russian Bear to the east. The ultimate fear was simultaneous attack from both. France feared Germany, Germany feared France, and when France joined Russia and Britain in the Triple Entente of 1907, Germany feared all three. Its solution, twice, was to attack France first.</div></div>
+<div class="card-row"><div class="card-row-label">The Resolution</div><div class="card-row-content">The answer, after centuries of war, was the acceptance of a single overwhelming power — the USA — which set up NATO and allowed the eventual creation of the EU. Exhausted by war and with safety "guaranteed" by the American military, Europeans were asked to trust each other. The EU was set up so France and Germany could hug each other so tightly that neither could get an arm free to punch the other.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-eu-embrace">
+<div class="card-header">
+<div class="card-label">Grand Experiment</div>
+<div class="card-name">The EU as Mutual Embrace</div>
+<div class="card-tagline">France and Germany hugging so tightly that neither can get an arm free to punch the other</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">What began in 1951 as the six-nation European Steel and Coal Community became a twenty-eight-nation EU with a core ideology of "ever closer union." Germany rose from the ashes and used to its advantage the geography it once feared — sending goods rather than armies across the flatlands. "Made in Germany" flows down the Rhine and Elbe, along autobahns, into Europe and the world. Both France and Germany are working to keep the Union together, but only Germany has a Plan B — Russia. If the EU fragments, the old fears of Germany will reappear. A failed Union would also harm Germany economically: the world's third-largest goods exporter does not want its closest market fragmenting into protectionism.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">The dream of ever closer union appears to be frozen, possibly in reverse. If it fails, and seen through the prism of seven centuries of European warfare, the German question may return. As Helmut Kohl warned: he was the last German leader to have lived through the Second World War.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-north-south-divide">
+<div class="card-header">
+<div class="card-label">Structural Divide</div>
+<div class="card-name">The North-South Divide</div>
+<div class="card-tagline">Northern wealth vs southern struggle — rooted in geography, not laziness</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The north industrialised earlier because the North European Plain allows massive-scale farming and waterways enable easy movement of goods. The south has fewer coastal plains for agriculture, more drought, more natural disasters. Spain's short rivers, the Meseta Central highland plateau, and the Pyrenees barrier all hinder trade. Greece's coastline comprises steep cliffs with few agricultural plains; inland, steep cliffs and unnavigable rivers. It spends massively on defence against Turkey (1,400 islands to patrol). The result: a perpetual drain that Greece cannot afford, exacerbated when the Cold War ended and American/British military subsidies stopped, but Greek spending didn't.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">When bailouts and austerity measures came in 2012, the donors were northern countries, the recipients southern. Germans working until sixty-five, paying taxes going to Greece so people could retire at fifty-five. Hitler moustaches superimposed on photographs of Chancellor Merkel in the Greek press. The stereotypes of profligate, slack southerners and careful, industrious northerners resurfacing.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-giuk-gap">
+<div class="card-header">
+<div class="card-label">Chokepoint</div>
+<div class="card-name">The GIUK Gap</div>
+<div class="card-tagline">Greenland, Iceland, UK — the choke point that bottles up the Russian navy from the Atlantic</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Any Russian naval ship coming from the Arctic must pass through the GIUK gap on its way to the Atlantic. The alternative for north European navies is the English Channel — only 20 miles across at the Strait of Dover, very well defended. During the Cold War NATO called it the "Kill Zone." The UK's strategic advantage has diminished with the reduced Royal Navy, but in wartime it would again be critical. This is one reason London panicked in 2014 when the Scottish independence vote briefly looked like a Yes — loss of power in the North Sea and North Atlantic would have been a strategic blow.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-euro-crisis">
+<div class="card-header">
+<div class="card-label">Case Study</div>
+<div class="card-name">The Euro Crisis & Geography</div>
+<div class="card-tagline">A currency is also an ideology — and this one papered over geographic reality</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Nineteen EU countries share the euro. At launch in 1999 many countries were not ready — notably Greece, which was cooking the books. The experts knew, but because the euro is not just a currency but an ideology, members turned a blind eye. When the 2008 economic crisis hit, the geographic divide became obvious: donors and demanders were northern, recipients mostly southern. Robert Kagan's thesis in <em>Of Paradise and Power</em>: Western Europeans live in paradise but shouldn't operate by paradise's rules when they move into the world of power.</div></div>
+</div>
+</div>
+
+<!-- I need to continue with Africa, Middle East, India/Pakistan, Korea/Japan, Latin America, Arctic, supplementary, prescription, and situational index -->
+<!-- Due to extreme length, continuing with compressed but still comprehensive cards -->
+
+<!-- AFRICA -->
+<h4 class="card-region" id="region-africa">Africa</h4>
+<div class="orientation">You're looking at African poverty, conflict, or Chinese investment and wondering why the continent with a 200,000-year head start as the birthplace of humanity lags so far behind. The answer is not culture or governance alone — it is that Africa's rivers are unnavigable, its coastline lacks natural harbours, its interior was sealed off by desert and ocean for millennia, and the Europeans drew borders that ignored every geographic and ethnic reality on the ground.</div>
+
+<div class="card" id="card-africa-isolation">
+<div class="card-header">
+<div class="card-label">Foundation</div>
+<div class="card-name">Africa's Isolation Problem</div>
+<div class="card-tagline">The runner first off the block — separated from everyone else by the Sahara, the Indian and Atlantic oceans</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Africa is three times bigger than the USA — fourteen times the size of Greenland, though Mercator maps make them look equal. Almost the entire continent developed in isolation from the Eurasian land mass, where ideas and technology were exchanged east to west. There were few plants willing to be domesticated, few animals suited to agriculture or warfare. Africa's rhinos, gazelles and giraffes stubbornly refused to be beasts of burden. No wheat, no rice, no horses, no cattle for millennia. By the time the outside world arrived in force, most of sub-Saharan Africa had yet to develop writing, paper, gunpowder or the wheel.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">When Europeans arrived on the west coast in the fifteenth century they found few natural harbours — unlike Europe or North America, where jagged coastlines give rise to deep natural harbours, much of the African coastline is smooth. And once they landed they couldn't penetrate more than about 100 miles inland due to unnavigable rivers, climate, and disease.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-africa-rivers">
+<div class="card-header">
+<div class="card-label">Geographic Constraint</div>
+<div class="card-name">Unnavigable Rivers</div>
+<div class="card-tagline">Stunning waterfalls, useless for trade — the opposite of Europe's flat, connected waterways</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Most of Africa's rivers begin in high land and descend in abrupt drops. The Zambezi runs 1,600 miles but drops from 4,900 feet to sea level — parts are navigable by shallow boats but the navigable sections don't interconnect. The Niger, the Congo, the Zambezi, the Nile — they don't connect to each other. This hindered contact and trade between regions, affected economic development, and prevented the formation of large trading blocs. Contrast with Europe: the Danube and Rhine connected civilisations. In Africa, thousands of languages exist because no one culture emerged to dominate areas of similar size — the physical landscape prevented it.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-colonial-borders">
+<div class="card-header">
+<div class="card-label">Colonial Legacy</div>
+<div class="card-name">Colonial Border Disasters</div>
+<div class="card-tagline">Fifty-six countries drawn in London, Paris, Brussels and Lisbon — by men who had never been there</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Europeans took maps of Africa's geography and drew lines — or lies — on them. These lines reflected how far each power's explorers had advanced, not what the people between the lines felt themselves to be. Colonialism forced different peoples, who may have always had conflicts, to resolve them within an artificial structure — the European concept of a nation state. After independence, a dominant people emerged within each state who wanted to rule it all, ensuring violence. Libya is a classic case: three distinct regions (Tripolitania, Cyrenaica, Fezzan) — each historically oriented in different directions — shoved together as one country that fell apart at the first test.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-drc">
+<div class="card-header">
+<div class="card-label">Case Study</div>
+<div class="card-name">The DRC: Heart of Darkness</div>
+<div class="card-tagline">Six million dead in the most under-reported war zone in the world — an egg created without a chicken</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The DRC should never have been put together. It is bigger than Germany, France and Spain combined, with over 200 ethnic groups and several hundred languages. Belgian colonial rule was ruthlessly brutal with few attempts to build infrastructure. When the Belgians left in 1960, civil wars began immediately. The Rwandan genocide of 1994 sent Hutu militia fleeing into eastern DRC, triggering what became "Africa's world war" involving nine neighbouring countries and twenty-plus factions. Six million people have died — at least 50% of victims were children under five. The UN's largest peacekeeping mission remains deployed. The DRC is neither democratic nor a republic. In 2014 the UN Human Development Index placed it 186th out of 187.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">Everyone wants a bite because it's resource-rich (cobalt, copper, diamonds, gold, silver, zinc, coal, manganese) but it lacks central authority to bite back. China buys more than 50% of its exports, but the population lives in poverty. The European colonialist created an egg without a chicken — a logical absurdity repeated across the continent.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-nile-wars">
+<div class="card-header">
+<div class="card-label">Flashpoint</div>
+<div class="card-name">Nile Water Wars</div>
+<div class="card-tagline">Egypt without the Nile is nothing — and Ethiopia is building a dam that could hold a year's supply</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Nile affects ten countries. Without it, there would be no Egypt — the vast majority of 84 million people live within a few miles of it. Ethiopia's Grand Renaissance Dam on the Blue Nile could in theory hold a year's worth of water. Egypt has a more powerful military but Ethiopia (96 million people) is a growing power. Cairo knows that once the dam is built, destroying it would cause catastrophic flooding in both Ethiopia and Sudan. Water wars are among the coming conflicts this century.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-nigeria-split">
+<div class="card-header">
+<div class="card-label">Structural Tension</div>
+<div class="card-name">Nigeria's North-South Split</div>
+<div class="card-tagline">All the oil is in the south, all the resentment is in the north — and Boko Haram lives in the gap</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Nigeria is sub-Saharan Africa's largest oil producer, with 177 million people — the continent's most populous nation. All the high-quality oil is in the southern delta. The north complains profits aren't shared equitably. The British colonial "civilising" mission rarely extended to the northern highlands or Muslim populations, leaving the north less developed. Boko Haram exploits this sense of injustice among the Kanuri people of the northeast. They operate on home ground — the Mandara mountains backing onto Cameroon give them space to retreat. The situation will not burn itself out for several years.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-china-africa">
+<div class="card-header">
+<div class="card-label">Power Play</div>
+<div class="card-name">China's African Scramble</div>
+<div class="card-tagline">No awkward questions about human rights — just oil, minerals, precious metals and markets</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">About a third of China's oil imports come from Africa. China is building a $14 billion railway from Mombasa to Nairobi (cutting goods transport from 36 hours to 8 hours). It invested over $8 billion in Angola. Thousands of Chinese workers live in huge complexes across the continent. Beijing doesn't ask difficult questions about human rights, doesn't demand economic reform, and continues to protect Sudan at the UN Security Council despite an ICC arrest warrant for its president. An attractive proposition for African governments — and one that buys political support in the UN for China's own regional claims.</div></div>
+<div class="card-row"><div class="card-row-label">Warning Signals</div><div class="card-row-content">Increasing tension between local populations and Chinese workforces. This will draw Beijing more into local politics, possibly requiring minor military presence. An estimated 150,000–200,000 Chinese workers in Angola alone, thousands trained in military skills — a ready-made militia if required.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-south-africa-power">
+<div class="card-header">
+<div class="card-label">Regional Power</div>
+<div class="card-name">South Africa as Regional Power</div>
+<div class="card-tagline">The continent's second-biggest economy, dominating the bottom third through transport infrastructure</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">South Africa is so far south that it's one of the few African countries free of malaria — mosquitoes struggle to breed there. This allowed European colonialists to push further inland, settle, and begin industrial activity. Its economy is three times the size of Angola's. It dominates the fifteen-nation SADC. A two-way rail and road conveyor belt stretches from its ports through Zimbabwe, Botswana, Zambia, Malawi and Tanzania, reaching into the DRC. For most of Southern Africa, doing business with the outside world means doing business through Pretoria, Bloemfontein and Cape Town.</div></div>
+</div>
+</div>
+
+<!-- MIDDLE EAST -->
+<h4 class="card-region" id="region-middle-east">The Middle East</h4>
+<div class="orientation">You're watching Syria disintegrate, Iraq fragment, or ISIS propaganda spread, and trying to make sense of why the region seems permanently on fire. You need to understand that the very names and borders of these "countries" were invented by European diplomats with chinagraph pencils barely a century ago, imposed on peoples who had organised themselves by tribe, religion and geography for millennia. The current bloodshed is, in large part, the violent redrawing of those lines.</div>
+
+<div class="card" id="card-sykes-picot">
+<div class="card-header">
+<div class="card-label">Root Cause</div>
+<div class="card-name">Sykes-Picot: Lines in Sand</div>
+<div class="card-tagline">A chinagraph pencil, a crude line from Haifa to Kirkuk — and a century of consequences</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">In 1916 British diplomat Sir Mark Sykes drew a crude line across a map from Haifa (now Israel) to Kirkuk (now Iraq). North of the line: French control. South: British. Prior to this, there was no Syria, no Lebanon, no Jordan, no Iraq, no Saudi Arabia, no Kuwait, no Israel, no Palestine. The Ottoman Empire had simply divided the region into administrative areas called "Vilayets," usually based on where certain tribes lived. The notion that a man needed a document from a faraway town to cross a region to see a relative of the same tribe made little sense. The Europeans made up names for regions and called them countries. Modern maps show borders and names of nation states — but they are young and fragile.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">An Islamic State bulldozer pushing the Iraqi-Syrian border — a high berm of sand — out of existence. "We are destroying the borders and breaking the barriers." The IS fighter's declaration that "We've broken Sykes-Picot" may prove prophetic or mere bravado — but the lines are indeed being redrawn in blood.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-sunni-shia">
+<div class="card-header">
+<div class="card-label">Fault Line</div>
+<div class="card-name">The Sunni-Shia Split</div>
+<div class="card-tagline">A succession dispute from 632 CE that still determines who fights whom today</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">When the Prophet Muhammad died in 632 CE, a dispute over succession split Islam. Sunnis (about 85% of Muslims worldwide) argued succession should follow Arab tribal tradition. The Shia ("Party of Ali") held that Muhammad's son-in-law Ali and his descendants were the rightful leaders. Ali and his sons Hassan and Hussein were all assassinated. Within Sunni Islam: various schools including the strict Hanbali tradition (favoured in Qatar and Saudi Arabia), which influenced ultra-puritanical Salafi thought (predominant among jihadists). Within Shia: Twelvers, Ismailis, Zaidis, and offshoots like Alawites and Druze — so distant from mainstream Islam that many Sunnis don't recognise them as Muslim at all.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like Today</div><div class="card-row-content">Saudi Arabia (Sunni) vs Iran (Shia) — the Middle East's Cold War. Each regards itself as champion of its version of Islam. When Iraq was under Saddam (Sunni), it was a buffer. With the buffer gone since 2003 and a Shia-majority government installed, the two glare at each other across the Gulf.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-iraq-three">
+<div class="card-header">
+<div class="card-label">Case Study</div>
+<div class="card-name">Iraq: Three States in One</div>
+<div class="card-tagline">Kurds in the mountains, Sunnis in the middle, Shia in the south — the British made them one country</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Ottomans saw three regions: Mosul (mountainous, Kurdish), Baghdad (flatlands, Sunni Arab), Basra (marshlands, Shia Arab). They ruled accordingly with three administrative regions. The Persians, Alexander the Great, and the Umayyad Empire did the same. The British looked at the same space and divided the three into one — "a logical impossibility Christians can resolve through the Holy Trinity, but which in Iraq has resulted in an unholy mess." The people were never unified, only frozen with fear under dictators. When the lid came off, they fell apart.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">The Sunni Triangle has no oil — the oil is in the Kurdish north and the Shia south. If there is no strong, unified Iraq, the oil money flows back to where it's found. The Sunnis are fighting for an equal share in a country they once ruled, knowing that separation would mean self-rule over not very much.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-kurdistan">
+<div class="card-header">
+<div class="card-label">Emerging State</div>
+<div class="card-name">Kurdistan Rising</div>
+<div class="card-tagline">Promised a homeland after WWI, never given one — now closer than ever to getting it</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Iraq's five million Kurds are concentrated in a giant crescent of hills and mountains in the north-east. Their terrain allowed them to retain distinct identity despite attacks like the al-Anfal campaign of 1988 (aerial gas attacks, up to 100,000 murdered, 90% of villages destroyed). After the 1991 Gulf War they seized their chance, NATO declared a safe zone, and de facto Kurdistan took shape. The 2003 US invasion cemented it. Kurdistan has many trappings of a state. The questions: what shape will it take, and how will Syria, Turkey and Iran react if their Kurdish regions try to join?</div></div>
+</div>
+</div>
+
+<div class="card" id="card-syria-fracture">
+<div class="card-header">
+<div class="card-label">Case Study</div>
+<div class="card-name">Syria's Fracture Lines</div>
+<div class="card-tagline">A minority Alawite clan ruling a Sunni majority — held together by fear until the fear ran out</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Syria is about 70% Sunni but the ruling Assad clan is Alawite (approximately 12% of the population). The French colonial rulers put the backward Alawite hill people into police and military, from where they established power. In 1982, Hafez Assad crushed a Muslim Brotherhood uprising in Hama — perhaps 30,000 killed. The Brotherhood never forgave. When the 2011 uprising began, it was in some respects Hama, Part Two. Locals always said "we are one people," but your name, birthplace and neighbourhood meant your identity could be easily established. It didn't take much to pull the one people apart into many.</div></div>
+<div class="card-row"><div class="card-row-label">What It Looks Like</div><div class="card-row-content">A proxy battlefield: Russia, Iran and Hezbollah support Assad. Arab countries support different opposition groups — Saudis and Qataris each back different proxies. Syria may be destined to be ruled as a number of fiefdoms, with President Assad simply the most powerful warlord of many. Lebanon's most recent civil war lasted fifteen years. Syria may suffer a similar fate.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-iran-fortress">
+<div class="card-header">
+<div class="card-label">Regional Power</div>
+<div class="card-name">Iran: The Mountain Fortress</div>
+<div class="card-tagline">Mountains on three sides, swamp on the fourth — the last force to make progress was the Mongols in 1221</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Iran is bigger than France, Germany and the UK combined. Two huge mountain ranges — the Zagros (900 miles, bordering Turkey and Iraq) and the Elburz (along the Caspian shore). Mountains on three sides, swampland and water on the fourth. The Mongols were the last force to make any progress through this terrain (1219–21). In 2003 even the USA thought better than to take a right turn into Iran from Iraq. The US military had a catchphrase: "We do deserts, not mountains." In 1980, six Iraqi divisions couldn't even make it off the swamp-ridden plains, let alone into the foothills. Despite the world's third-largest oil reserves, Iran remains relatively poor due to mismanagement, corruption, mountainous terrain hindering transport, and sanctions.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-israel-geography">
+<div class="card-header">
+<div class="card-label">Strategic Position</div>
+<div class="card-name">Israel's Geographic Dilemma</div>
+<div class="card-tagline">No strategic depth — from the West Bank border to Tel Aviv is about 10 miles</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Israel is so small it has no real strategic depth — nowhere to fall back if defences are breached. The West Bank mountain ridge gives whoever commands the high ground control of the coastal plain where 70% of Israel's population lives, including the international airport, most industry, and major roads. Any half-decent military could cut Israel in two from the West Bank. This is why Israel insists that any Palestinian state cannot have heavy weapons on the ridge. Jerusalem's importance is ideological rather than strategic — the same rock is sacred to Jews (Abraham's sacrifice, Solomon's Temple) and Muslims (Muhammad's ascension). Control of Jerusalem is not an issue on which compromise can be easily achieved.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-turkey-crossroads">
+<div class="card-header">
+<div class="card-label">Pivotal Position</div>
+<div class="card-name">Turkey at the Crossroads</div>
+<div class="card-tagline">The land bridge between Europe, Asia and the Middle East — with ambitions in all three</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Turkey controls the Bosporus — less than a mile wide at its narrowest — which is the only exit from the Black Sea to the Mediterranean. If Turkey closes it, the Russian Black Sea Fleet cannot break out. Turkey borders three seas. Less than 5% of its territory is in Europe, but it applied for EU membership, competes in Eurovision and UEFA. The EU rejects it (partly human rights, partly economy, partly — unspoken — that it is 98% Muslim). This has pushed Turkey toward a Plan B: seeing itself as the great bridge between Europe, Asia and the Middle East. Atatürk tried to make Turkey European; Erdoğan has been undoing some of that work.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-hormuz">
+<div class="card-header">
+<div class="card-label">Chokepoint</div>
+<div class="card-name">The Strait of Hormuz</div>
+<div class="card-tagline">21 miles wide, 20% of the world's oil passes through daily — the most strategic strait in the world</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">At its narrowest, the Strait of Hormuz is 21 miles across. About 20% of the world's daily oil needs pass through it. Iran has the ability to close it, possibly for months, causing spiralling prices. This is a trump card restraining Israel from striking Iran's nuclear facilities and one reason many countries pressure Israel not to act. The industrialised world fears Hormuz being closed. An Israeli air strike on Iran would require crossing Jordanian and Iraqi airspace (1,000 miles in a straight line), and any alternative route requires refuelling capabilities that may be beyond Israel.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-arab-spring">
+<div class="card-header">
+<div class="card-label">Misunderstanding</div>
+<div class="card-name">The "Arab Spring" Misnomer</div>
+<div class="card-tagline">Reporters interviewed young liberals with English-language placards and mistook them for the voice of the people</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">In 1989 Eastern Europe had one form of totalitarianism (Communism) and one clear direction (democracy, thriving on the other side of the Iron Curtain). East and West shared historical memory of democracy and civil society. The Arab world of 2011 had none of this and faced many directions: democracy, liberal democracy, nationalism, strong-man rule, and Islam in its various guises. When Mubarak fell in Egypt, the anti-Mubarak demonstrations attracted several hundred thousand. When radical Muslim Brotherhood preacher Yusuf al-Qaradawi returned from exile, at least a million came out — but few Western media called this "the voice of the people." The liberals never had a chance.</div></div>
+<div class="card-row"><div class="card-row-label">Watch Out For</div><div class="card-row-content warning">The assumption that revolution leads to democracy. In impoverished societies with few accountable institutions, power rests with gangs disguised as "militia" and "political parties." If you are hungry and frightened and offered either bread and security or the concept of democracy, the choice is not difficult.</div></div>
+</div>
+</div>
+
+<!-- INDIA & PAKISTAN -->
+<h4 class="card-region" id="region-india-pakistan">India & Pakistan</h4>
+<div class="orientation">You're watching nuclear-armed neighbours threatening each other over a frozen border in the mountains, or trying to understand why Pakistan seems to be tearing itself apart. You need to understand that the 1947 partition was a geographic disaster — it gave Pakistan an indefensible western border, a capital 250 miles from the Indian border on flat ground, and a state held together by Islam, cricket, and fear of India, but not much else.</div>
+
+<div class="card" id="card-subcontinent-frame">
+<div class="card-header">
+<div class="card-label">Geographic Frame</div>
+<div class="card-name">The Subcontinent Frame</div>
+<div class="card-tagline">Bay of Bengal, Indian Ocean, Arabian Sea, Hindu Kush, Himalayas — a natural geographic unit</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The subcontinent is framed by oceans to the south and the world's highest mountains to the north. Inside this frame: India, Pakistan, Bangladesh, Nepal and Bhutan. The area has always been too large and diverse for strong central rule — even the British used regional autonomy and played local leaders against each other. Linguistic and cultural diversity is partly due to climate differences (freezing Himalayan north vs southern jungles) and partly because civilisations grew up along different rivers — the Ganges, the Brahmaputra, the Indus — creating distinct regions like the Sikh Punjab and Tamil-speaking Tamil Nadu.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-kashmir">
+<div class="card-header">
+<div class="card-label">Flashpoint</div>
+<div class="card-name">Kashmir: The Unsolvable Knot</div>
+<div class="card-tagline">National pride, strategic positioning, and water security — neither side can let go</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Kashmir gives India a window into Central Asia and a border with Afghanistan. Full Indian control would deny Pakistan a border with China. Full Pakistani control would secure its water supply — the Indus River passes through Indian-controlled Kashmir before entering Pakistan, where it provides water to two-thirds of the country. Without the Indus, the cotton industry and much of Pakistan's economy would collapse. Both populations are growing; global warming could diminish the flow. They've fought four major wars and many skirmishes over it. In 1999 both had nuclear weapons and the unspoken threat of escalation hovered for weeks before American diplomacy intervened.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">The Indian military analyst Dr Amarjit Singh wrote that it might be "better for India to brave a costly nuclear attack by Pakistan, and get it over with even at the cost of tens of millions of deaths, than suffer ignominy and pain day in and day out." This may not reflect official policy, but it indicates the depth of feeling.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-pakistan-fragility">
+<div class="card-header">
+<div class="card-label">Structural Weakness</div>
+<div class="card-name">Pakistan's Fragility</div>
+<div class="card-tagline">Five nations inside one state, held together by Islam, cricket, the military, and fear of India</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Pakistan is an acronym: P for Punjab, A for Afghania (Pashtun areas), K for Kashmir, S for Sindh, T for "tan" as in Baluchistan. Five distinct regions, each with their own language. Punjabis are 60%, Sindhs 14%, Pashtuns 13.5%, Baluchis 4.5%. It is rare for a Punjabi to marry a Baluchi, or a Sindh to marry a Pashtun. The official language is Urdu — the mother tongue of Muslims who fled India in 1947 and mostly settled in Punjab — which doesn't endear it to the rest. Sindhs feel like second-class citizens. Pashtuns have never accepted outside rule. Baluchistan has an independence movement. Pakistan received only 17% of pre-partition financial reserves, little industry, and India got most major cities including Calcutta.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-durand-line">
+<div class="card-header">
+<div class="card-label">Artificial Border</div>
+<div class="card-name">The Durand Line</div>
+<div class="card-tagline">A British diplomat drew it in 1893 — the Pashtuns on both sides have ignored it ever since</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Sir Mortimer Durand drew the Afghan-Pakistani border in 1893. In 1949 the Afghan government annulled it as an artificial colonial relic. Since then, Pashtuns on both sides have carried on as they have for centuries, ignoring the border and maintaining ancient connections. Peshawar is a sort of urban Taliban military-industrial complex — knock-off Kalashnikovs, bomb-making technology and fighters flow out; support from within sections of the Pakistani state flows in. Pakistan created the Afghan Taliban through the ISI, but the tiger it was riding has bitten it — the Pakistani Taliban is a natural outgrowth.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-pakistan-depth">
+<div class="card-header">
+<div class="card-label">Strategic Vulnerability</div>
+<div class="card-name">Pakistan's Strategic Depth Problem</div>
+<div class="card-tagline">250 miles of flat ground between the Indian border and the capital — why Afghanistan matters so much</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The distance from the Indian border to Islamabad is less than 250 miles, mostly flat. In a massive conventional attack, India could be in the capital within days. Plan A: halt the advance in the Punjab and counter-attack to cut Indian Highway 1A (vital supply route). Plan B: fall back across the Afghan border — which requires a sympathetic government in Kabul. This is why Pakistan will always involve itself in Afghanistan. It's why the ISI created the Taliban. It's why Osama bin Laden was hiding in a military garrison town. It's why, when the Americans came calling after 9/11, Pakistan played a double game — publicly co-operating while privately maintaining Taliban links.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-gwadar">
+<div class="card-header">
+<div class="card-label">Strategic Asset</div>
+<div class="card-name">Gwadar: The Jewel Port</div>
+<div class="card-tagline">Pakistan's coast, China's money, a $46 billion corridor — and a bypass for the Strait of Malacca</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The coastal city of Gwadar in Baluchistan is the jewel: many analysts believe it was the Soviet Union's long-term target when it invaded Afghanistan in 1979. China has invested billions, inaugurating a deep-water port in 2007. In 2015 the two countries agreed on a $46 billion superhighway — the China-Pakistan Economic Corridor — running 1,800 miles from Gwadar to Xinjiang, giving China direct Indian Ocean access and bypassing the Strait of Malacca. This is one reason Pakistan will always crush any Baluchistan secessionist movement.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-india-rise">
+<div class="card-header">
+<div class="card-label">Emerging Power</div>
+<div class="card-name">India's Rising Power</div>
+<div class="card-tagline">1.3 billion people, secular democracy, seventh-largest country — but always looking over its shoulder at Pakistan</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">India has borders with six countries, 9,000 miles of navigable waterways, huge arable land, and major coal. It has not matched China's growth, but may rival it this century. For thousands of years China and India could ignore each other because of the Himalayas. Now both require vast energy, and both have ventured into the oceans — encountering each other at sea. India's "look east" policy strengthens ties with Burma, the Philippines, Thailand, Vietnam and Japan. A new alliance with the USA is forming — when Obama attended the 2015 Republic Day parade, India showed off US-supplied C-130 Hercules and Russian-supplied tanks side by side.</div></div>
+<div class="card-row"><div class="card-row-label">Key Insight</div><div class="card-row-content">India has given the Dalai Lama a home in Dharamshala — a long-term insurance policy. If Tibetan independence ever became possible (extremely unlikely), India would remind a Tibetan government who their friends were. China responds with influence in Nepal.</div></div>
+</div>
+</div>
+
+<!-- KOREA & JAPAN -->
+<h4 class="card-region" id="region-korea-japan">Korea & Japan</h4>
+<div class="orientation">You're reading about North Korean provocations or Japanese rearmament and trying to understand the strategic calculus. The core problem: North Korea is too dangerous to attack, too unstable to ignore, and too strategically important to every major power in the region. Seoul sits 35 miles from 10,000 artillery pieces. Nobody has a good plan for what happens when North Korea collapses.</div>
+
+<div class="card" id="card-korea-stalemate">
+<div class="card-header">
+<div class="card-label">Frozen Conflict</div>
+<div class="card-name">Korea's Frozen Stalemate</div>
+<div class="card-tagline">"You may have the watches — but we have the time"</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The 38th parallel was chosen as the dividing line in 1945 by two junior American officers using a National Geographic map, on the grounds that it was halfway down the country. No Koreans were present. The Soviets, who had discussed this same line with the Japanese half a century earlier, accepted — possibly thinking it was American recognition of division. The 1950–53 war killed up to four million people and ended in stalemate. The two Koreas are still technically at war. The DMZ cuts the peninsula in half but follows no natural geographic barrier — just a river and arbitrary lines. China doesn't want a unified Korea with US bases near its border. The US can't be seen abandoning an ally. Japan must tread lightly. The solution is left to the next generation of leaders. And then the next one.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-seoul-vulnerability">
+<div class="card-header">
+<div class="card-label">Military Geography</div>
+<div class="card-name">Seoul's Vulnerability</div>
+<div class="card-tagline">Half of South Korea's population within range of 10,000 North Korean artillery pieces</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Seoul lies just 35 miles from the DMZ. Almost half of South Korea's 50 million people live in the greater Seoul region — home to much of its industry and financial centres. In the hills above the DMZ: an estimated 10,000 North Korean artillery pieces, many in fortified bunkers and caves. Experts estimate up to 500,000 rounds in the first hour of conflict. Within two or three days, combined South Korean and US air forces would destroy many — but by then Seoul would be in flames. North Korea's battle plans are thought to include submarine-landed shock troops south of Seoul, underground tunnels, and activation of sleeper cells. Its armed forces exceed one million.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-japan-island">
+<div class="card-header">
+<div class="card-label">Geographic Advantage</div>
+<div class="card-name">Japan's Island Geography</div>
+<div class="card-tagline">An island race 120 miles from the mainland — never successfully invaded, but starved of resources</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Japan's 127 million people live on four main islands and 6,848 smaller ones. At its closest point, 120 miles from the Eurasian land mass. The Mongols tried to invade in the 1300s — a storm wrecked their fleet (the original "kamikaze" or "Divine Wind"). Three-quarters of the land is not conducive to habitation; only 13% is suitable for cultivation. Mountains mean rivers are unsuited to navigation and don't connect. Japan became maritime, trading along its coasts. The fatal constraint: almost no natural resources. Limited poor coal, very little oil, scant gas, limited rubber, shortage of metals. Still the world's largest importer of natural gas and third-largest importer of oil. This thirst drove Japan's rampages across China and South-East Asia in the 1930s–40s.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-japan-rearm">
+<div class="card-header">
+<div class="card-label">Strategic Shift</div>
+<div class="card-name">Japan's Quiet Rearmament</div>
+<div class="card-tagline">A "helicopter-carrying destroyer" that looks exactly like a WWII aircraft carrier — because it is one</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Japan's post-war constitution forbade an army, air force or navy — only "Self-Defence Forces" — and limited defence spending to 1% of GDP. Since the 1980s, nationalism has been stirring. The 2013 Security Strategy was the first to name China as a potential enemy. The 2015 defence budget was the biggest ever at $42 billion. Tokyo unveiled a "helicopter-carrying destroyer" as big as WWII carriers; the defence minister said he was "not thinking of using it as an aircraft carrier" — akin to buying a motorbike and calling it a pushbike. Japan has altered its defence policy to allow forces to fight alongside allies abroad. With its population shrinking (projected below 100 million by mid-century) and China's at 1.3 billion, Japan will need friends.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-senkaku">
+<div class="card-header">
+<div class="card-label">Flashpoint</div>
+<div class="card-name">The Senkaku/Diaoyu Flashpoint</div>
+<div class="card-tagline">Uninhabited rocks that could start a war between the world's second and third-largest economies</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Japan calls them Senkaku, China calls them Diaoyu. Japan controls them. They are part of the Ryukyu Island chain — any hostile power must pass them on the way to the Japanese heartlands. They give Japan territorial sea space and may contain underwater gas and oil fields. China's Air Defence Identification Zone overlaps with Japan's over these islands. Both sides' zones cover them. Tokyo will hold them by all means necessary. This is the most contentious territorial claim between the two countries and a flashpoint that can be turned into an ultimatum at a time of Beijing's choosing.</div></div>
+</div>
+</div>
+
+<!-- LATIN AMERICA -->
+<h4 class="card-region" id="region-latam">Latin America</h4>
+<div class="orientation">You're hearing about Latin America as "the continent of the future" — as people have been saying for decades. The reason it never quite arrives is geographic: the Andes cut the west off from the east, jungles and deserts isolate the interior, coastlines lack deep harbours, and the colonial pattern of building everything toward the coast — not connecting the interior — persists to this day.</div>
+
+<div class="card" id="card-latam-geography">
+<div class="card-header">
+<div class="card-label">Foundation</div>
+<div class="card-name">Latin America's Geographic Prison</div>
+<div class="card-tagline">You can bring the Old World's knowledge and technology — but if geography is against you, success is limited</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">7,000 miles from Mexico to Cape Horn. The Andes — 4,500 miles long, snow-capped throughout, mostly impassable — cut many western regions from the east. Coastlines lack deep natural harbours. The colonial settlers stayed near the coasts (especially where the interior was infested by mosquitoes), built all roads to connect interior to coast but not to each other. In Peru and Argentina the capital's metropolitan area contains over 30% of the country's population. After independence, the predominantly European coastal elites failed to invest in the interior. Twenty countries to the south of the US, with combined GDP equivalent to France and the UK (125 million people) despite a total population over 600 million.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-brazil-limits">
+<div class="card-header">
+<div class="card-label">Constrained Giant</div>
+<div class="card-name">Brazil's Limits</div>
+<div class="card-tagline">Almost as big as the USA — but a third is jungle, the escarpment blocks coastal trade, and the ports can't handle the volume</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Brazil makes up one-third of South America. Its twenty-seven federal states equal an area bigger than the twenty-eight EU countries combined. But a third is jungle where development is painfully expensive. The Grand Escarpment dominates much of the coast — a massive cliff rising from the sea, the end of the Brazilian Shield plateau. To connect coastal cities you must build routes up and over it. Brazil lacks a coastal plain. Its seven largest ports combined can handle fewer goods than the single US port of New Orleans. The River Amazon is partly navigable but its muddy banks make building difficult. About 25% of Brazilians live in favelas. Brazil is a rising power, but its rise will be limited.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-mexico-buffer">
+<div class="card-header">
+<div class="card-label">Strategic Geography</div>
+<div class="card-name">Mexico's Buffer Desert</div>
+<div class="card-tagline">2,000 miles of desert border — a buffer more useful to the Americans than the Mexicans</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Mexico's 2,000-mile northern border with the USA is almost entirely desert — so harsh that most of it is uninhabited. Militarily, only US forces could stage a major invasion across it. Mexico lost half its territory to the USA in the 1846–48 war (Texas, California, New Mexico, Arizona). By mid-century, Hispanics will likely be the largest ethnic group in those states. Mexico makes its living supplying consumer goods to America — including drugs. Without drugs the country would be poorer; with drugs it is more violent. The overland drug route, established after the US shut down Colombian air and sea routes, is firmly in place.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-nicaragua-canal">
+<div class="card-header">
+<div class="card-label">Power Play</div>
+<div class="card-name">The Nicaragua Canal Gambit</div>
+<div class="card-tagline">$50 billion, wider and deeper than Panama — because China needs a canal it controls, not one dependent on American goodwill</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The Panama Canal is a neutral waterway, but passage depends on American goodwill. China's solution: build your own canal in Nicaragua. The $50 billion project (four times Nicaragua's entire economy) would be longer than Panama and crucially wider and deeper — able to accommodate much bigger tankers, container ships, and large Chinese naval vessels. Funded by Hong Kong businessman Wang Jing, who insists the Chinese government isn't involved. Given China's business culture, this is unusual. The canal will split Nicaragua in two. President Ortega signed up with alacrity, with scarcely a glance at the 30,000-plus people who may need to move.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-falklands">
+<div class="card-header">
+<div class="card-label">Territorial Dispute</div>
+<div class="card-name">The Falklands</div>
+<div class="card-tagline">British since 1833, invaded in 1982, retaken in 1982 — and now guarded so heavily Argentina can't even think about it</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">It is an offence in Argentina to produce a map describing the islands as anything other than "Islas Malvinas." All primary school children are taught to draw the outlines. The 1982 invasion succeeded until the British task force arrived eight weeks later. Now: several hundred combat troops, advanced radar, ground-to-air missiles, four Eurofighter jets, and probably a nuclear attack submarine lurking nearby. Argentina's air force uses planes decades behind the Eurofighter. British diplomacy has blocked Argentine attempts to buy modern aircraft from Spain. Buenos Aires has warned that any oil firm drilling in the Falklands cannot bid for licences in Patagonia's Vaca Muerta shale field.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-bolivia-coast">
+<div class="card-header">
+<div class="card-label">Geographic Wound</div>
+<div class="card-name">Bolivia's Lost Coastline</div>
+<div class="card-tagline">Lost 250 miles of coast in 1879 — still landlocked, still bitter, still won't sell gas to Chile</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The 1879 War of the Pacific cost Bolivia 250 miles of coastline. It has been landlocked ever since and never recovered — partially explaining why it is among the poorest Latin American countries. It has the third-largest natural gas reserves in South America but will not sell any to Chile, which desperately needs a reliable supplier. Two Bolivian presidents who toyed with the idea were thrown out of office. National pride and geographical need on both sides trump diplomatic compromise.</div></div>
+</div>
+</div>
+
+<!-- THE ARCTIC -->
+<h4 class="card-region" id="region-arctic">The Arctic</h4>
+<div class="orientation">You're reading about melting ice caps and wondering what it means strategically. It means that the last great unspoiled region is about to become a resource battleground. Russia has thirty-two icebreakers and is building Arctic military bases. The USA has one functioning heavy icebreaker. The rules exist (UNCLOS), the forum exists (Arctic Council), but the resources being exposed — oil, gas, minerals, shipping lanes — are too valuable for any major power to ignore.</div>
+
+<div class="card" id="card-arctic-melt">
+<div class="card-header">
+<div class="card-label">Game-Changer</div>
+<div class="card-name">The Melting Ice Cap</div>
+<div class="card-tagline">Some models predict ice-free Arctic summers by the end of the century — the race for what's underneath has already begun</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">Satellite imagery shows the ice has shrunk. Villages along the Bering and Chukchi coasts are relocating as coastlines erode. The US Geological Survey estimates 90 billion barrels of oil, 1,670 trillion cubic feet of natural gas, and 44 billion barrels of natural gas liquids lie in the Arctic region, the vast majority offshore. The melting also exposes the Albedo effect: as darker land and water replace ice, they absorb more heat, accelerating the melt. The Northwest Passage is already open for several summer weeks — the first unescorted cargo ship went through in 2014, carrying 23,000 tons of nickel ore from Canada to China. The route was 40% shorter than through the Panama Canal. By 2040 it's expected to be open for up to two months yearly.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-arctic-russia">
+<div class="card-header">
+<div class="card-label">Power Play</div>
+<div class="card-name">Russia's Arctic Dominance</div>
+<div class="card-tagline">"They have cities in the Arctic, we only have villages" — US Coast Guard captain</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">In 2007 Russia sent two manned submersibles 13,980 feet below the North Pole and planted a rust-proof titanium flag on the seabed. A Russian think-tank suggested renaming the Arctic "the Russian Ocean." Six new military bases are being constructed. Mothballed Cold War installations are reopening. At least 6,000 combat soldiers are being readied for Murmansk — two mechanised infantry brigades with snowmobiles and hovercraft. A 2014 exercise involved 155,000 men. Russian troops were tasked with repelling an invasion by a foreign power named "Missouri" (clearly the USA) allied with an unnamed Asian power (clearly Japan). Putin has added the Arctic as a sphere of influence in official foreign policy doctrine.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-arctic-law">
+<div class="card-header">
+<div class="card-label">Framework</div>
+<div class="card-name">UNCLOS & Sovereignty Claims</div>
+<div class="card-tagline">At least nine legal disputes — and the USA hasn't even ratified the treaty</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The UN Convention on the Law of the Sea (UNCLOS) gives signatories exclusive economic rights out to 200 nautical miles, extendable to 350 miles with scientific evidence about the continental shelf. Russia claims the Lomonosov Ridge off its Siberian coast extends all the way to the North Pole. Norway claims the Gakkel Ridge. Russia and Norway dispute the Svalbard Islands. The USA disputes with Canada over waters in the Canadian archipelago. The USA disputes with Russia over the Bering Sea. Canada and Denmark squabble over Hans Island (both countries have sailed there to plant flags). The USA has not ratified UNCLOS — effectively ceding 200,000 square miles of undersea territory.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-northwest-passage">
+<div class="card-header">
+<div class="card-label">Emerging Route</div>
+<div class="card-name">The Northwest Passage Opens</div>
+<div class="card-tagline">A week off the Europe-to-China transit time — transforming trade links across the High North</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">The first recorded attempt was 330 BCE by a Greek mariner named Pytheas of Massilia. Henry Hudson died trying. Captain Franklin and all 129 expedition members perished in 1845. Roald Amundsen finally charted it in 1905. Now cargo ships traverse it for several weeks each summer. The 2014 Nunavik carried 23,000 tons of nickel ore, saved tens of thousands in fuel, reduced greenhouse emissions by 1,300 metric tons. Canada says the waters are an "internal waterway"; the USA says they're an international strait. In 1985 the US sent an icebreaker through without telling Canada, causing a furious row.</div></div>
+</div>
+</div>
+
+<div class="card" id="card-icebreaker-gap">
+<div class="card-header">
+<div class="card-label">Military Imbalance</div>
+<div class="card-name">The Icebreaker Gap</div>
+<div class="card-tagline">Russia: 32 icebreakers (6 nuclear). USA: 1 functioning heavy icebreaker. No plans to build another.</div>
+</div>
+<div class="card-body">
+<div class="card-row"><div class="card-row-label">What's Actually Happening</div><div class="card-row-content">It takes up to $1 billion and ten years to build an icebreaker. Russia has thirty-two, six nuclear-powered — the only nuclear icebreakers in the world. It plans the world's most powerful icebreaker, able to smash through ice over 10 feet deep and tow 70,000-ton oil tankers. The USA has one functioning heavy icebreaker, the USS Polar Star — down from eight in the 1960s. In 2012 it had to rely on a Russian ship to resupply its Antarctic research base. Canada has six (building one more). Finland has eight. America is an Arctic nation without an Arctic strategy in a region that is heating up.</div></div>
+</div>
+</div>
+
+<!-- ======================= SUPPLEMENTARY ======================= -->
+<h2 class="section-title" id="supplementary">Supplementary Frameworks</h2>
+<div class="prose">
+<p>Marshall draws on and references several thinkers whose frameworks complement his central argument. Robert Kaplan's <em>The Revenge of Geography</em> argues that the post-Cold War optimism about liberal democracy overcoming geographic constraints was premature — geography is reasserting itself. Kaplan's specific contribution to Marshall's analysis is the comparison of the South China Sea to the Caribbean: just as America consolidated its land mass and then moved to dominate the seas around it, so China is following the same pattern a century later.</p>
+<p>Halford Mackinder's "Heartland Theory" (1904) — the idea that whoever controls the Eurasian heartland controls the world — underpins much of Marshall's analysis of Russia and China. The Eurasian land mass is the world's largest, and the powers that control its interior have historically been the dominant ones. Jared Diamond's <em>Guns, Germs and Steel</em> provides the deep-history foundation for why some continents developed faster than others: domesticable plants and animals, east-west axes for idea exchange (Eurasia) vs north-south axes that block it (Africa, the Americas). Robert Kagan's <em>Of Paradise and Power</em> informs the Western Europe chapter — the argument that Europeans live in a post-historical paradise but cannot expect the rest of the world to play by paradise's rules.</p>
+<p>George Kennan's 1947 "Sources of Soviet Conduct" — the intellectual basis for Cold War containment — is the ancestor of Marshall's analysis of how to deal with Russian expansionism. Churchill's observation that Russia is "a riddle wrapped in a mystery inside an enigma" is corrected by completing the quote: "but perhaps there is a key. That key is Russian national interest." Seven years later Churchill added: "there is nothing they admire so much as strength, and there is nothing for which they have less respect than for weakness, especially military weakness." These insights, Marshall argues, apply equally to Putin's Russia.</p>
+</div>
+
+<!-- ======================= PRESCRIPTION ======================= -->
+<h2 class="section-title" id="prescription">Marshall's Prescription: What to Walk Away Doing Differently</h2>
+<div class="prose">
+<p>Marshall does not write a self-help book. He does not offer a five-step programme for world peace. What he wants you to walk away doing differently is <em>seeing</em> differently. When you look at a map, he wants you to see the mountains, rivers, deserts and coastlines before you see the political borders. He wants you to understand that the borders are temporary — often only decades old — but the geography is permanent. When you read about a conflict, he wants your first question to be not "who started it?" but "what does the terrain look like?"</p>
+<p>He wants you to stop being surprised. Russia's behaviour in Ukraine is not irrational; it is the rational response of a country invaded repeatedly across indefensible flatland. China's aggression in the South China Sea is not reckless; it is the inevitable behaviour of a rising power breaking through the island chain that bottles it up. Pakistan's support for the Taliban is not madness; it is the strategic calculation of a country that lacks depth and needs a friendly government next door.</p>
+<p>He wants you to be more sceptical of ideological explanations. The "Arab Spring" was not a wave of liberal democracy; it was the collapse of artificial states along ethnic and sectarian lines that were always there. Africa's problems are not solely about governance; they are about unnavigable rivers, smooth coastlines, and borders drawn by Europeans who had never set foot on the continent.</p>
+<p>And he wants you to see the future through the same lens. The Arctic melt will create the next great power competition. Water wars will replace oil wars. The Himalayas will continue to separate India and China. The North European Plain will continue to make Russian leaders nervous. Technology bends the rules of geography — but it has not broken them, and may never.</p>
+<p>The most important sentence in the entire book: "Geography has always been a prison of sorts — one that defines what a nation is or can be, and one from which our world leaders have often struggled to break free."</p>
+</div>
+
+<!-- ======================= SITUATIONAL INDEX ======================= -->
+<h2 class="section-title" id="situational-index">Situational Index</h2>
+<p style="color:var(--text-muted);margin-bottom:20px;font-size:0.95em;">Find the concept that applies to what you're facing or reading about.</p>
+
+<div class="sit-index">
+<div class="sit-entry"><span class="sit-situation">Russia is being aggressive toward a neighbour and you want to understand why →</span> <a class="sit-ref" href="#card-north-european-plain">The North European Plain</a>, <a class="sit-ref" href="#card-russian-buffer">Russia's Buffer Zone Strategy</a></div>
+<div class="sit-entry"><span class="sit-situation">A European country is being pressured on energy prices or supply →</span> <a class="sit-ref" href="#card-energy-leverage">Energy as Leverage</a></div>
+<div class="sit-entry"><span class="sit-situation">Russia claims it needs to "protect" ethnic Russians in another country →</span> <a class="sit-ref" href="#card-ethnic-russians">The "Ethnic Russians" Card</a></div>
+<div class="sit-entry"><span class="sit-situation">China is building artificial islands or claiming sea territory →</span> <a class="sit-ref" href="#card-south-china-sea">South China Sea Disputes</a>, <a class="sit-ref" href="#card-first-island-chain">The First Island Chain</a></div>
+<div class="sit-entry"><span class="sit-situation">You want to understand why Tibet will never be independent →</span> <a class="sit-ref" href="#card-tibet-control">Tibet: China's Water Tower</a></div>
+<div class="sit-entry"><span class="sit-situation">China is investing billions in a foreign port or railway →</span> <a class="sit-ref" href="#card-blue-water-navy">Building a Blue Water Navy</a>, <a class="sit-ref" href="#card-malacca-dilemma">The Malacca Dilemma</a></div>
+<div class="sit-entry"><span class="sit-situation">You're wondering why the US still has troops in South Korea and Japan →</span> <a class="sit-ref" href="#card-korea-stalemate">Korea's Frozen Stalemate</a>, <a class="sit-ref" href="#card-pivot-asia">The Pivot to Asia</a></div>
+<div class="sit-entry"><span class="sit-situation">An African country is in civil war along ethnic/religious lines →</span> <a class="sit-ref" href="#card-colonial-borders">Colonial Border Disasters</a>, <a class="sit-ref" href="#card-drc">The DRC</a></div>
+<div class="sit-entry"><span class="sit-situation">A Middle Eastern border is being contested or erased →</span> <a class="sit-ref" href="#card-sykes-picot">Sykes-Picot</a>, <a class="sit-ref" href="#card-iraq-three">Iraq: Three States in One</a></div>
+<div class="sit-entry"><span class="sit-situation">You're reading about Sunni vs Shia conflict →</span> <a class="sit-ref" href="#card-sunni-shia">The Sunni-Shia Split</a></div>
+<div class="sit-entry"><span class="sit-situation">Iran is threatening to close a shipping lane →</span> <a class="sit-ref" href="#card-hormuz">The Strait of Hormuz</a></div>
+<div class="sit-entry"><span class="sit-situation">The Kurds are in the news — fighting, governing, or seeking recognition →</span> <a class="sit-ref" href="#card-kurdistan">Kurdistan Rising</a></div>
+<div class="sit-entry"><span class="sit-situation">India and Pakistan are threatening each other over Kashmir →</span> <a class="sit-ref" href="#card-kashmir">Kashmir</a>, <a class="sit-ref" href="#card-pakistan-depth">Pakistan's Strategic Depth Problem</a></div>
+<div class="sit-entry"><span class="sit-situation">Pakistan appears to be supporting Taliban groups while claiming to fight them →</span> <a class="sit-ref" href="#card-durand-line">The Durand Line</a>, <a class="sit-ref" href="#card-pakistan-depth">Pakistan's Strategic Depth Problem</a></div>
+<div class="sit-entry"><span class="sit-situation">North Korea has done something provocative →</span> <a class="sit-ref" href="#card-korea-stalemate">Korea's Frozen Stalemate</a>, <a class="sit-ref" href="#card-seoul-vulnerability">Seoul's Vulnerability</a></div>
+<div class="sit-entry"><span class="sit-situation">Japan is increasing its military spending or changing defence policy →</span> <a class="sit-ref" href="#card-japan-rearm">Japan's Quiet Rearmament</a>, <a class="sit-ref" href="#card-senkaku">Senkaku/Diaoyu</a></div>
+<div class="sit-entry"><span class="sit-situation">You're reading about the EU fracturing or a Euro crisis →</span> <a class="sit-ref" href="#card-euro-crisis">The Euro Crisis & Geography</a>, <a class="sit-ref" href="#card-north-south-divide">The North-South Divide</a></div>
+<div class="sit-entry"><span class="sit-situation">Germany is dominating EU policy and neighbours are uncomfortable →</span> <a class="sit-ref" href="#card-german-question">The German Question</a>, <a class="sit-ref" href="#card-eu-embrace">The EU as Mutual Embrace</a></div>
+<div class="sit-entry"><span class="sit-situation">Someone claims American decline is imminent →</span> <a class="sit-ref" href="#card-usa-geography">America's Geographic Lottery</a>, <a class="sit-ref" href="#card-mississippi">The Mississippi Advantage</a></div>
+<div class="sit-entry"><span class="sit-situation">The US is reducing engagement in the Middle East →</span> <a class="sit-ref" href="#card-usa-energy">American Energy Independence</a></div>
+<div class="sit-entry"><span class="sit-situation">Brazil is being called a future superpower →</span> <a class="sit-ref" href="#card-brazil-limits">Brazil's Limits</a></div>
+<div class="sit-entry"><span class="sit-situation">China is investing heavily in Latin America →</span> <a class="sit-ref" href="#card-nicaragua-canal">The Nicaragua Canal Gambit</a></div>
+<div class="sit-entry"><span class="sit-situation">You're reading about Arctic drilling, shipping routes, or territorial claims →</span> <a class="sit-ref" href="#card-arctic-melt">The Melting Ice Cap</a>, <a class="sit-ref" href="#card-arctic-russia">Russia's Arctic Dominance</a>, <a class="sit-ref" href="#card-icebreaker-gap">The Icebreaker Gap</a></div>
+<div class="sit-entry"><span class="sit-situation">Egypt is in tension with Ethiopia over water →</span> <a class="sit-ref" href="#card-nile-wars">Nile Water Wars</a></div>
+<div class="sit-entry"><span class="sit-situation">Turkey is acting assertively in the Mediterranean or Middle East →</span> <a class="sit-ref" href="#card-turkey-crossroads">Turkey at the Crossroads</a></div>
+<div class="sit-entry"><span class="sit-situation">You want to understand why China needs Pakistan →</span> <a class="sit-ref" href="#card-gwadar">Gwadar</a>, <a class="sit-ref" href="#card-malacca-dilemma">The Malacca Dilemma</a></div>
+<div class="sit-entry"><span class="sit-situation">An "Arab Spring" or revolution is being compared to Eastern Europe 1989 →</span> <a class="sit-ref" href="#card-arab-spring">The "Arab Spring" Misnomer</a></div>
+<div class="sit-entry"><span class="sit-situation">You want to understand why a developing country with natural resources remains poor →</span> <a class="sit-ref" href="#card-africa-isolation">Africa's Isolation Problem</a>, <a class="sit-ref" href="#card-africa-rivers">Unnavigable Rivers</a>, <a class="sit-ref" href="#card-drc">The DRC</a></div>
+<div class="sit-entry"><span class="sit-situation">Scotland or another European region votes on independence →</span> <a class="sit-ref" href="#card-giuk-gap">The GIUK Gap</a></div>
+<div class="sit-entry"><span class="sit-situation">NATO is debating whether to admit a new member near Russia →</span> <a class="sit-ref" href="#card-baltic-vulnerability">Baltic Vulnerability</a>, <a class="sit-ref" href="#card-nato-signal">NATO's Signalling Doctrine</a></div>
+</div>
+
+<!-- ======================= FOOTER ======================= -->
+<div class="footer" id="footer">
+<p><strong>Source:</strong> <em>Prisoners of Geography: Ten Maps That Tell You Everything You Need to Know About Global Politics</em> by Tim Marshall. First published 2015 by Elliott and Thompson Limited, London. ISBN (ePUB): 978-1-78396-142-9.</p>
+<p style="margin-top:8px;">This reference guide is a comprehensive study companion. All concepts, examples, and insights are drawn from Marshall's original work. For the complete text, maps, and bibliography, consult the published edition.</p>
+</div>
+
+</div><!-- end page-wrapper -->
+
+<script>
+// Build navigation data
+const sections = [
+  { id: 'hero', label: 'Title', items: [] },
+  { id: 'core-theory', label: 'Core Theory', items: [
+    { id: 'ct-central-thesis', label: 'Central Thesis' },
+    { id: 'ct-geopolitics-defined', label: 'Geopolitics Defined' },
+    { id: 'ct-attack-as-defence', label: 'Attack as Defence' },
+    { id: 'ct-rivers-and-power', label: 'Rivers & Power' },
+    { id: 'ct-warm-water-ports', label: 'Warm-Water Ports' },
+    { id: 'ct-lines-on-maps', label: 'Lines on Maps' },
+    { id: 'ct-energy-weapon', label: 'Energy as Weapon' },
+    { id: 'ct-buffer-zones', label: 'Buffer Zones' },
+  ]},
+  { id: 'toc', label: 'Table of Contents', items: [] },
+  { id: 'region-russia', label: 'Russia', items: [
+    { id: 'card-north-european-plain', label: 'North European Plain' },
+    { id: 'card-russian-buffer', label: 'Buffer Zone Strategy' },
+    { id: 'card-crimea', label: 'Crimea Seizure' },
+    { id: 'card-warm-port', label: 'Warm-Water Port' },
+    { id: 'card-energy-leverage', label: 'Energy Leverage' },
+    { id: 'card-ethnic-russians', label: 'Ethnic Russians Card' },
+    { id: 'card-baltic-vulnerability', label: 'Baltic Vulnerability' },
+    { id: 'card-nato-signal', label: 'NATO Signalling' },
+  ]},
+  { id: 'region-china', label: 'China', items: [
+    { id: 'card-china-heartland', label: 'Heartland & Han' },
+    { id: 'card-first-island-chain', label: 'First Island Chain' },
+    { id: 'card-tibet-control', label: 'Tibet' },
+    { id: 'card-xinjiang', label: 'Xinjiang' },
+    { id: 'card-blue-water-navy', label: 'Blue Water Navy' },
+    { id: 'card-malacca-dilemma', label: 'Malacca Dilemma' },
+    { id: 'card-china-grand-bargain', label: 'Grand Bargain' },
+    { id: 'card-south-china-sea', label: 'South China Sea' },
+  ]},
+  { id: 'region-usa', label: 'United States', items: [
+    { id: 'card-usa-geography', label: 'Geographic Lottery' },
+    { id: 'card-louisiana', label: 'Louisiana Purchase' },
+    { id: 'card-mississippi', label: 'Mississippi Advantage' },
+    { id: 'card-consolidation', label: 'Continental Land Grab' },
+    { id: 'card-monroe', label: 'Monroe Doctrine' },
+    { id: 'card-concrete-bases', label: 'Concrete Strategy' },
+    { id: 'card-pivot-asia', label: 'Pivot to Asia' },
+    { id: 'card-usa-energy', label: 'Energy Independence' },
+  ]},
+  { id: 'region-europe', label: 'Western Europe', items: [
+    { id: 'card-europe-geography', label: 'Geographic Blessings' },
+    { id: 'card-german-question', label: 'German Question' },
+    { id: 'card-eu-embrace', label: 'EU as Embrace' },
+    { id: 'card-north-south-divide', label: 'North-South Divide' },
+    { id: 'card-giuk-gap', label: 'GIUK Gap' },
+    { id: 'card-euro-crisis', label: 'Euro Crisis' },
+  ]},
+  { id: 'region-africa', label: 'Africa', items: [
+    { id: 'card-africa-isolation', label: 'Isolation Problem' },
+    { id: 'card-africa-rivers', label: 'Unnavigable Rivers' },
+    { id: 'card-colonial-borders', label: 'Colonial Borders' },
+    { id: 'card-drc', label: 'DRC' },
+    { id: 'card-nile-wars', label: 'Nile Water Wars' },
+    { id: 'card-nigeria-split', label: 'Nigeria Split' },
+    { id: 'card-china-africa', label: 'China in Africa' },
+    { id: 'card-south-africa-power', label: 'South Africa' },
+  ]},
+  { id: 'region-middle-east', label: 'Middle East', items: [
+    { id: 'card-sykes-picot', label: 'Sykes-Picot' },
+    { id: 'card-sunni-shia', label: 'Sunni-Shia Split' },
+    { id: 'card-iraq-three', label: 'Iraq: Three in One' },
+    { id: 'card-kurdistan', label: 'Kurdistan' },
+    { id: 'card-syria-fracture', label: 'Syria Fracture' },
+    { id: 'card-iran-fortress', label: 'Iran Fortress' },
+    { id: 'card-israel-geography', label: 'Israel Geography' },
+    { id: 'card-turkey-crossroads', label: 'Turkey' },
+    { id: 'card-hormuz', label: 'Strait of Hormuz' },
+    { id: 'card-arab-spring', label: 'Arab Spring' },
+  ]},
+  { id: 'region-india-pakistan', label: 'India & Pakistan', items: [
+    { id: 'card-subcontinent-frame', label: 'Subcontinent Frame' },
+    { id: 'card-kashmir', label: 'Kashmir' },
+    { id: 'card-pakistan-fragility', label: 'Pakistan Fragility' },
+    { id: 'card-durand-line', label: 'Durand Line' },
+    { id: 'card-pakistan-depth', label: 'Strategic Depth' },
+    { id: 'card-gwadar', label: 'Gwadar' },
+    { id: 'card-india-rise', label: 'India Rising' },
+  ]},
+  { id: 'region-korea-japan', label: 'Korea & Japan', items: [
+    { id: 'card-korea-stalemate', label: 'Korea Stalemate' },
+    { id: 'card-seoul-vulnerability', label: 'Seoul Vulnerability' },
+    { id: 'card-japan-island', label: 'Japan Island' },
+    { id: 'card-japan-rearm', label: 'Japan Rearmament' },
+    { id: 'card-senkaku', label: 'Senkaku/Diaoyu' },
+  ]},
+  { id: 'region-latam', label: 'Latin America', items: [
+    { id: 'card-latam-geography', label: 'Geographic Prison' },
+    { id: 'card-brazil-limits', label: 'Brazil Limits' },
+    { id: 'card-mexico-buffer', label: 'Mexico Buffer' },
+    { id: 'card-nicaragua-canal', label: 'Nicaragua Canal' },
+    { id: 'card-falklands', label: 'Falklands' },
+    { id: 'card-bolivia-coast', label: 'Bolivia Coast' },
+  ]},
+  { id: 'region-arctic', label: 'The Arctic', items: [
+    { id: 'card-arctic-melt', label: 'Melting Ice' },
+    { id: 'card-arctic-russia', label: 'Russia Dominance' },
+    { id: 'card-arctic-law', label: 'UNCLOS Claims' },
+    { id: 'card-northwest-passage', label: 'Northwest Passage' },
+    { id: 'card-icebreaker-gap', label: 'Icebreaker Gap' },
+  ]},
+  { id: 'supplementary', label: 'Supplementary', items: [] },
+  { id: 'prescription', label: 'Prescription', items: [] },
+  { id: 'situational-index', label: 'Situational Index', items: [] },
+  { id: 'footer', label: 'Source', items: [] },
+];
+
+function buildNav(container) {
+  sections.forEach(s => {
+    const cat = document.createElement('div');
+    cat.className = 'nav-cat';
+    const hasItems = s.items.length > 0;
+    const toggle = document.createElement('button');
+    toggle.className = 'nav-cat-toggle';
+    toggle.dataset.sectionId = s.id;
+    toggle.innerHTML = (hasItems ? '<span class="arrow">▸</span>' : '<span class="arrow" style="visibility:hidden">▸</span>') + s.label;
+    toggle.onclick = function() {
+      if (hasItems) {
+        const items = this.nextElementSibling;
+        const isOpen = items.classList.contains('open');
+        items.classList.toggle('open');
+        this.querySelector('.arrow').textContent = isOpen ? '▸' : '▾';
+      }
+      document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' });
+    };
+    cat.appendChild(toggle);
+    if (hasItems) {
+      const items = document.createElement('div');
+      items.className = 'nav-items';
+      s.items.forEach(it => {
+        const a = document.createElement('a');
+        a.href = '#' + it.id;
+        a.textContent = it.label;
+        a.dataset.itemId = it.id;
+        items.appendChild(a);
+      });
+      cat.appendChild(items);
+    }
+    container.appendChild(cat);
+  });
+}
+
+buildNav(document.getElementById('navContent'));
+// Clone for mobile
+const mobileContent = document.getElementById('mobileNavContent');
+buildNav(mobileContent);
+
+function toggleMobileNav() {
+  const content = document.getElementById('mobileNavContent');
+  const arrow = document.getElementById('mobileNavArrow');
+  content.classList.toggle('open');
+  arrow.textContent = content.classList.contains('open') ? '▾' : '▸';
+}
+
+// Scroll spy
+let allIds = [];
+sections.forEach(s => {
+  allIds.push(s.id);
+  s.items.forEach(it => allIds.push(it.id));
+});
+
+function updateScrollSpy() {
+  let currentId = allIds[0];
+  const scrollY = window.scrollY + 100;
+  for (let i = allIds.length - 1; i >= 0; i--) {
+    const el = document.getElementById(allIds[i]);
+    if (el && el.offsetTop <= scrollY) {
+      currentId = allIds[i];
+      break;
+    }
+  }
+  // Find which section this belongs to
+  let currentSection = null;
+  for (const s of sections) {
+    if (s.id === currentId) { currentSection = s; break; }
+    for (const it of s.items) {
+      if (it.id === currentId) { currentSection = s; break; }
+    }
+    if (currentSection) break;
+  }
+  // Update nav
+  [document.getElementById('navContent'), mobileContent].forEach(nav => {
+    nav.querySelectorAll('.nav-cat-toggle').forEach(t => t.classList.remove('active'));
+    nav.querySelectorAll('.nav-items a').forEach(a => a.classList.remove('current'));
+    nav.querySelectorAll('.nav-items').forEach(i => i.classList.remove('open'));
+    if (currentSection) {
+      const toggles = nav.querySelectorAll('.nav-cat-toggle');
+      toggles.forEach(t => {
+        if (t.dataset.sectionId === currentSection.id) {
+          t.classList.add('active');
+          const items = t.nextElementSibling;
+          if (items) {
+            items.classList.add('open');
+            t.querySelector('.arrow').textContent = '▾';
+            items.querySelectorAll('a').forEach(a => {
+              if (a.dataset.itemId === currentId) a.classList.add('current');
+            });
+          }
+        }
+      });
+    }
+  });
+}
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => { updateScrollSpy(); ticking = false; });
+    ticking = true;
+  }
+});
+updateScrollSpy();
+</script>
+</body>
+</html>
