@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Reference Guides</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: #faf8f5;
+  color: #1a1a1a;
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #b8893f;
+}
+
+h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.05em;
+  color: #7a7a7a;
+  font-weight: 400;
+}
+
+.guide-list {
+  list-style: none;
+}
+
+.guide-item {
+  background: #ffffff;
+  border: 1px solid #e6e0d6;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.guide-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06);
+  border-color: #b8893f;
+}
+
+.guide-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.guide-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.guide-author {
+  font-size: 0.95em;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
+.footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid #e6e0d6;
+  text-align: center;
+  color: #7a7a7a;
+  font-size: 0.9em;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 24px 16px;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  .guide-item {
+    padding: 20px;
+  }
+  
+  .guide-title {
+    font-size: 1.2em;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Book Reference Guides</h1>
+    <p class="subtitle">Comprehensive learning references — detailed, searchable, permanent</p>
+  </div>
+
+  <ul class="guide-list">
+    <li class="guide-item">
+      <a href="prisoners-of-geography.html" class="guide-link">
+        <div class="guide-title">Prisoners of Geography</div>
+        <div class="guide-author">Tim Marshall</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="how-to-win-friends.html" class="guide-link">
+        <div class="guide-title">How to Win Friends and Influence People</div>
+        <div class="guide-author">Dale Carnegie</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="getting-along-amy-gallo.html" class="guide-link">
+        <div class="guide-title">Getting Along</div>
+        <div class="guide-author">Amy Gallo</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="games-people-play.html" class="guide-link">
+        <div class="guide-title">Games People Play</div>
+        <div class="guide-author">Eric Berne</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="how-big-things-get-done-guide.html" class="guide-link">
+        <div class="guide-title">How Big Things Get Done</div>
+        <div class="guide-author">Bent Flyvbjerg & Dan Gardner</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="building-dynamic-business-communities.html" class="guide-link">
+        <div class="guide-title">Building Dynamic Business Communities</div>
+        <div class="guide-author">Alan Weiss</div>
+      </a>
+    </li>
+
+    <li class="guide-item">
+      <a href="revenue-operations.html" class="guide-link">
+        <div class="guide-title">Revenue Operations</div>
+        <div class="guide-author">Stephen Diorio & Chris Hummel</div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="footer">
+    <p>Book reference guides created for deep learning and quick reference</p>
+  </div>
+</div>
+
+</body>
+</html>
